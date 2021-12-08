@@ -1,0 +1,2304 @@
+openapi: 3.0.0
+info:
+  contact:
+    email: info@theblockchainapi.com
+  description: "# About\n\nOur vision is to make it super easy to interact with the\
+    \ decentralized web. We want you to be able to do this in any coding language\
+    \ and do it easily and quickly. \n\nYou're a key part of our vision. We love feature\
+    \ requests! <a href=\"#section/Feature-Requests\">Make one!</a>\n\n# How to Use\
+    \ the API\n\nTo use the API, you simply need to create an API key pair.\n\nDoing\
+    \ so takes less than a minute. Simply go to <a target=\"_blank\" href=\"https://dashboard.theblockchainapi.com\"\
+    >the dashboard</a>, create an account, and generate a key pair. You can now use\
+    \ this pair to make API requests. You must create your first pair via the dashboard.\n\
+    \n# Feature Requests\n\nGot a feature request? Submit it as an issue on <a target=\"\
+    _blank\" href=\"https://github.com/BL0CK-X/the-blockchain-api/issues/new/choose\"\
+    >our GitHub repo</a> or [email us](mailto:info@theblockchainapi.com).\n\n# Contact\n\
+    \n<figure>\n    <img \n        width=\"40px\"\n        height=\"40px\" \n    \
+    \    src=\"https://theblockchainapi-docs.s3.amazonaws.com/icons/phone.svg\"\n\
+    \    />\n    <figcaption style=\"textAlign:center;\">Text / Call: +1 (415) 888\
+    \ 4745 </figcaption>\n</figure> <a href=\"mailto:info@theblockchainapi.com\" target=\"\
+    _blank\">\n    <figure>\n        <img \n            width=\"40px\"\n         \
+    \   height=\"40px\" \n            src=\"https://theblockchainapi-docs.s3.amazonaws.com/icons/email.svg\"\
+    \n        />\n        <figcaption style=\"textAlign:center;\">Email us: info@theblockchainapi.com</figcaption>\n\
+    \    </figure>\n</a> <a href=\"https://discord.gg/d49yzrZRAF\" target=\"_blank\"\
+    >\n    <figure>\n        <img \n            width=\"40px\"\n            height=\"\
+    40px\" \n            src=\"https://theblockchainapi-docs.s3.amazonaws.com/icons/discord.svg\"\
+    \n        />\n        <figcaption style=\"textAlign:center;\">Join our Discord</figcaption>\n\
+    \    </figure>\n</a> <a href=\"https://twitter.com/_BlockX_\" target=\"_blank\"\
+    >\n    <figure>\n        <img \n            width=\"40px\"\n            height=\"\
+    40px\" \n            src=\"https://theblockchainapi-docs.s3.amazonaws.com/icons/twitter.svg\"\
+    \n        />\n         <figcaption style=\"textAlign:center;\">Follow us on Twitter</figcaption>\n\
+    \    </figure>\n</a> <a href=\"https://github.com/BL0CK-X/the-blockchain-api\"\
+    \ target=\"_blank\">\n    <figure>\n        <img \n            width=\"40px\"\n\
+    \            height=\"40px\" \n            src=\"https://theblockchainapi-docs.s3.amazonaws.com/icons/github.svg\"\
+    \n        />\n        <figcaption style=\"textAlign:center;\">Star us on Github</figcaption>\n\
+    \    </figure>\n</a>\n\n# Security\n\nCommon dogma is to never give out your seed\
+    \ phrase. We agree. It's a matter of security, and anyone who has your seed phrase\
+    \ can irreversibly empty your wallet. \n\n<b>When using an API endpoint that requires\
+    \ a seed phrase, we highly recommend that users use or create a wallet that they\
+    \ do not use as their primary wallet.</b> \n\nHow you make this work depends on\
+    \ what you're doing. If you're minting an NFT for example, we recommend creating\
+    \ a new wallet and then transferring just enough SOL to that wallet to mint the\
+    \ NFT. This is possible on Solana because such transactions cost less than a penny.\
+    \ We will have more tutorials in the future that make it easier for you to be\
+    \ secure when using our API.\n\nWe have easy-to-use endpoints for <a href=\"#tag/Solana-Wallet/paths/~1solana~1wallet~1secret_recovery_phrase/post\"\
+    >creating a new seed phrase</a> and then <a href=\"#tag/Solana-Wallet/paths/~1solana~1wallet~1public_key/post\"\
+    >deriving a public key</a> to enable you to transfer to that new wallet.\n\nLet's\
+    \ have a constructive dialog about this. Feel free to <a href=\"#section/Contact\"\
+    >contact us</a>. I made a video discussing this matter <a target=\"_blank\" href=\"\
+    https://youtu.be/m9unUb8Z9qU\">here</a>.\n\nNote: We have had a couple of individuals\
+    \ harrass and threaten us. These individuals did <b>not</b> try our API or speak\
+    \ to anyone who has used it. They simply saw that we require a seed phrase for\
+    \ certain endpoints and figured that the proper response was to attack us. (I\
+    \ explain why we do <a target=\"_blank\" href=\"https://youtu.be/m9unUb8Z9qU\"\
+    >here</a>.) Such harrassment and threats are not only harmful, but they are also\
+    \ illegal, and we will report offenders. Do not harrass us. Rather, feel free\
+    \ to discuss your concerns with us and we will be more than happy to work with\
+    \ you to come up with a solution.\n\n# Pricing\n\n<b>Each user receives 500 free\
+    \ credits every month.</b>\n\nYou can learn more about our pricing <a href=\"\
+    https://dashboard.theblockchainapi.com/billing\" target=\"_blank\">here</a>. \n\
+    \nWe frequently do custom plans. If our pricing doesn't work for you, <a href=\"\
+    #section/Contact\">contact us</a>.\n\nIf you have questions, concerns, feedback,\
+    \ or ideas, <a href=\"#section/Contact\">contact us</a>.\n\n# SDKs / API Wrappers\n\
+    \nWe have examples using both our <a href=\"https://github.com/BL0CK-X/the-blockchain-api/tree/main/examples\"\
+    \ target=\"_blank\">Python wrapper and our JavaScript wrapper here</a>.\n\nWe\
+    \ have built a custom <a href=\"https://github.com/BL0CK-X/the-blockchain-api-python-wrapper\"\
+    \ target=\"_blank\">Python wrapper</a>.\n\n`pip install theblockchainapi`\n\n\
+    We also have published a <a href=\"https://github.com/BL0CK-X/theblockchainapi-wrappers/tree/main/javascript\"\
+    \ target=\"_blank\">JavaScript Wrapper</a>.\n\n`npm install theblockchainapi`\n\
+    \nWe also have auto-generated wrappers for the following languages:\n- <a href=\"\
+    https://github.com/BL0CK-X/theblockchainapi-wrappers/tree/main/go\" target = \"\
+    _blank\">Go</a>\n- <a href=\"https://github.com/BL0CK-X/theblockchainapi-wrappers/tree/main/java\"\
+    \ target = \"_blank\">Java</a>\n- <a href=\"https://github.com/BL0CK-X/theblockchainapi-wrappers/tree/main/go\"\
+    \ target = \"_blank\">Kotlin</a>\n- <a href=\"https://github.com/BL0CK-X/theblockchainapi-wrappers/tree/main/go\"\
+    \ target = \"_blank\">PHP</a>\n- <a href=\"https://github.com/BL0CK-X/theblockchainapi-wrappers/tree/main/go\"\
+    \ target = \"_blank\">Swift5</a>\n- <a href=\"https://github.com/BL0CK-X/theblockchainapi-wrappers/tree/main/go\"\
+    \ target = \"_blank\">TypeScript</a>\n\nIf you would like a different language\
+    \ as well, submit an issue <a href=\"https://github.com/BL0CK-X/theblockchainapi-wrappers/issues/new\"\
+    \ target=\"_blank\">here</a>.\n\nIf you run into any bugs with the wrappers, submit\
+    \ an issue <a href=\"https://github.com/BL0CK-X/theblockchainapi-wrappers/issues/new\"\
+    \ target=\"_blank\">here</a>."
+  title: The Blockchain API
+  version: "null"
+servers:
+- url: https://api.theblockchainapi.com/v1
+tags:
+- description: |
+    The results of any asynchronous tasks that have been launched. You can poll this endpoint to see when tasks have completed.
+  name: Tasks
+- description: |
+    A wallet consists of two things: a public key and a secret recovery phrase pair. To create a wallet, you must first create a secret recovery phrase. Then, you can generate many public keys from a secret recovery phrase.
+  name: Solana Wallet
+- description: |
+    Easily create a Solana NFT and see related fees for creating an NFT.
+  name: Solana NFT
+- description: |
+    Interact with the Metaplex Candy Machine smart contract on Solana.
+  name: Solana Candy Machine
+- description: |
+    Interact with Solana accounts.
+  name: Solana Account
+- description: |
+    Work with Solana transactions.
+  name: Solana Transaction
+- description: |
+    Upload to IPFS, Arweave, and Filecoin easily. In order to access this endpoint, please sign up for [the waitlist](https://forms.gle/N4KSqcptpSrHQ1427). This waitlist is unique for this endpoint. Feature requests are welcome on our [GitHub repository](https://github.com/BL0CK-X/the-blockchain-api/issues/new).
+  name: Files
+paths:
+  /task/{task_id}:
+    get:
+      description: "<a href=\"https://github.com/BL0CK-X/the-blockchain-api/tree/main/examples/solana-candy-machine/mint-from-candy-machine\"\
+        \ target=\"_blank\">See examples (Python, JavaScript)</a>.\n    \nGet the\
+        \ result of a task. Replace `task_id` with the ID of your task.\n\n`Cost:\
+        \ 1 Credit` (<a href=\"#section/Pricing\">See Pricing</a>)"
+      operationId: getTask
+      parameters:
+      - description: The ID of the task
+        explode: false
+        in: path
+        name: task_id
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Task'
+          description: Task completed. Does *NOT* indicate that the task was successful.
+            Check the response data for details.
+        "202":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Task'
+          description: Task in Progress. Check back again in a bit!
+        "401":
+          description: Invalid API key pair in headers
+        "402":
+          description: Payment required. Occurs when you run out of API requests.
+            Upgrade <a href="https://dashboard.theblockchainapi.com/billing" target="_blank">here</a>.
+        "404":
+          description: Task not found.
+      security:
+      - APIKeyID: []
+        APISecretKey: []
+      summary: Get the result of a task
+      tags:
+      - Task
+      x-codeSamples:
+      - lang: cURL
+        label: CLI
+        source: |
+          curl --request POST \
+          --url 'https://data.apiexample.com/api/example/batch_query/json?format=json' \
+          --header 'content-type: application/octet-stream: ' \
+          --data '{}'
+  /file:
+    post:
+      description: Easily upload a file to any of IPFS, Arweave, and Filecoin. Not
+        publicly available. Please sign up for <a href="https://forms.gle/N4KSqcptpSrHQ1427"
+        target="_blank">the waitlist</a>.
+      operationId: uploadFile
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UploadFileRequest'
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetFileResponse'
+          description: Successful Response
+        "400":
+          description: Bad request (check response message)
+        "402":
+          description: Payment required. Occurs when you run out of API requests.
+            Upgrade <a href="https://dashboard.theblockchainapi.com/billing" target="_blank">here</a>.
+        "403":
+          description: Access denied. Must sign up and be approved for beta. See link
+            for application in the description below the "File Upload" header.
+      security:
+      - APIKeyID: []
+        APISecretKey: []
+      summary: Upload a file
+      tags:
+      - File
+  /solana/account/{network}/{public_key}:
+    get:
+      description: "<a href=\"https://github.com/BL0CK-X/the-blockchain-api/tree/main/examples/solana-account/get-account\"\
+        \ target=\"_blank\">See examples (Python, JavaScript)</a>.\n    \nGet the\
+        \ details of an account on Solana. Learn more about accounts <a href=\"https://docs.solana.com/developing/programming-model/accounts\"\
+        \ target=\"_blank\">here</a>.\n\n`Cost: 1 Credit` (<a href=\"#section/Pricing\"\
+        >See Pricing</a>)"
+      operationId: solanaGetAccount
+      parameters:
+      - description: The network ID (devnet, mainnet-beta)
+        example: mainnet-beta
+        explode: false
+        in: path
+        name: network
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: The public key of the account
+        example: EEr5yQpNXf7Bru6Rt5podx56HGW9CEehXqgRGh2wa71w
+        explode: false
+        in: path
+        name: public_key
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Account'
+          description: Account found. Details in response.
+        "400":
+          description: Invalid input or issue retrieving transaction. See response
+            for details
+        "401":
+          description: Invalid API key pair in headers
+        "402":
+          description: Payment required. Occurs when you run out of API requests.
+            Upgrade <a href="https://dashboard.theblockchainapi.com/billing" target="_blank">here</a>.
+        "404":
+          description: Task not found.
+      security:
+      - APIKeyID: []
+        APISecretKey: []
+      summary: Get the details of an account on Solana
+      tags:
+      - Solana Account
+  /solana/account/{network}/{public_key}/is_nft:
+    get:
+      description: "<a href=\"\" target=\"_blank\">See examples (Python, JavaScript)\
+        \ [COMING SOON]</a>.\n    \nDetermine whether or not a public key is an NFT\
+        \ `mint address`\n\n`Cost: 1 Credit` (<a href=\"#section/Pricing\">See Pricing</a>)"
+      operationId: solanaGetAccountIsNFT
+      parameters:
+      - description: The network ID (devnet, mainnet-beta)
+        example: mainnet-beta
+        explode: false
+        in: path
+        name: network
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: The public key of the account
+        example: EEr5yQpNXf7Bru6Rt5podx56HGW9CEehXqgRGh2wa71w
+        explode: false
+        in: path
+        name: public_key
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccountIsNFT'
+          description: Successful response
+        "400":
+          description: Invalid input or issue retrieving transaction. See response
+            for details
+        "401":
+          description: Invalid API key pair in headers
+        "402":
+          description: Payment required. Occurs when you run out of API requests.
+            Upgrade <a href="https://dashboard.theblockchainapi.com/billing" target="_blank">here</a>.
+        "404":
+          description: Task not found.
+      security:
+      - APIKeyID: []
+        APISecretKey: []
+      summary: Get if account is NFT
+      tags:
+      - Solana Account
+  /solana/account/{network}/{public_key}/is_candy_machine:
+    get:
+      description: "<a href=\"\" target=\"_blank\">See examples (Python, JavaScript)\
+        \ [COMING SOON]</a>.\n    \nDetermine whether or not a public key address\
+        \ corresponds to a candy machine ID or candy machine configuration.\n\n`Cost:\
+        \ 1 Credit` (<a href=\"#section/Pricing\">See Pricing</a>)"
+      operationId: solanaGetAccountIsCandyMachine
+      parameters:
+      - description: The network ID (devnet, mainnet-beta)
+        example: mainnet-beta
+        explode: false
+        in: path
+        name: network
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: The public key of the account
+        example: EEr5yQpNXf7Bru6Rt5podx56HGW9CEehXqgRGh2wa71w
+        explode: false
+        in: path
+        name: public_key
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccountIsCandyMachine'
+          description: Successful response
+        "400":
+          description: Invalid input or issue retrieving transaction. See response
+            for details
+        "401":
+          description: Invalid API key pair in headers
+        "402":
+          description: Payment required. Occurs when you run out of API requests.
+            Upgrade <a href="https://dashboard.theblockchainapi.com/billing" target="_blank">here</a>.
+        "404":
+          description: Task not found.
+      security:
+      - APIKeyID: []
+        APISecretKey: []
+      summary: Get if account is candy machine
+      tags:
+      - Solana Account
+  /solana/transaction/{network}/{tx_signature}:
+    get:
+      description: "<a href=\"https://github.com/BL0CK-X/the-blockchain-api/tree/main/examples/solana-transaction/get-transaction\"\
+        \ target=\"_blank\">See examples (Python, JavaScript)</a>.\n    \nGet the\
+        \ details of a transaction made on Solana.\n\n`Cost: 1 Credit` (<a href=\"\
+        #section/Pricing\">See Pricing</a>)"
+      operationId: solanaGetTransaction
+      parameters:
+      - description: The network ID (devnet, mainnet-beta)
+        example: mainnet-beta
+        explode: false
+        in: path
+        name: network
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: The transaction signature of the transaction
+        example: 5wHu1qwD7q5ifaN5nwdcDqNFo53GJqa7nLp2BeeEpcHCusb4GzARz4GjgzsEHMkBMgCJMGa6GSQ1VG96Exv8kt2W
+        explode: false
+        in: path
+        name: tx_signature
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Transaction'
+          description: Transaction found. Details in response. Click "Expand All"
+            in the documentation sidebar to the right to view an example.
+        "400":
+          description: Invalid input or issue retrieving transaction. See response
+            for details
+        "401":
+          description: Invalid API key pair in headers
+        "402":
+          description: Payment required. Occurs when you run out of API requests.
+            Upgrade <a href="https://dashboard.theblockchainapi.com/billing" target="_blank">here</a>.
+        "404":
+          description: Task not found.
+      security:
+      - APIKeyID: []
+        APISecretKey: []
+      summary: Get the details of a transaction made on Solana
+      tags:
+      - Solana Transaction
+  /solana/wallet/secret_recovery_phrase:
+    post:
+      description: |-
+        <a href="https://github.com/BL0CK-X/the-blockchain-api/tree/main/examples/solana-wallet/generate-secret-phrase" target="_blank">See examples (Python, JavaScript)</a>.
+
+        Use this endpoint to securely and randomly generate a secret recovery phrase for a Solana wallet. Complete the wallet creation by using the endpoint below.
+
+        `Cost: 1 Credit` (<a href="#section/Pricing">See Pricing</a>)
+      operationId: solanaGenerateSecretRecoveryPhrase
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SecretPhrase'
+          description: Successful Response
+        "400":
+          description: Bad request (check response message)
+        "401":
+          description: Invalid API key pair in headers
+        "402":
+          description: Payment required. Occurs when you run out of API requests.
+            Upgrade <a href="https://dashboard.theblockchainapi.com/billing" target="_blank">here</a>.
+      security:
+      - APIKeyID: []
+        APISecretKey: []
+      summary: Generate secret phrase
+      tags:
+      - Solana Wallet
+  /solana/wallet/public_key:
+    post:
+      description: "<a href=\"https://github.com/BL0CK-X/the-blockchain-api/tree/main/examples/solana-wallet/derive-public-key\"\
+        \ target=\"_blank\">See examples (Python, JavaScript)</a>.\n    \nReturns\
+        \ a public key given a secret recovery phrase and optionally a passphrase\
+        \ and a derivation path.\n\nA wallet is defined by a public key. A public\
+        \ key is derived from a combination of seed phrase, derivation path, and passphrase.\
+        \ Changing any *one* of these three will change the public key output.\n\n\
+        *You can generate a unique public key with each combination of secret recovery\
+        \ phrase, passphrase, and derivation path. Thus,\nwith a single secret recovery\
+        \ phrase, you can generate many public keys. If you are just starting, just\
+        \ supply the secret recovery phrase you generated with the Solana Wallet Secret\
+        \ Recovery Phrase endpoint.*\n\n*If you are trying to get a public key that\
+        \ already exists (e.g., created in the Phantom wallet), make sure you use\
+        \ the correct derivation path and passphrase. To read more about that, see\
+        \ the descriptions of those parameters below.*\n\n`Cost: 1 Credit` (<a href=\"\
+        #section/Pricing\">See Pricing</a>)"
+      operationId: solanaDerivePublicKey
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GetPublicKeyRequest'
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PublicKey'
+          description: Successful Response
+        "400":
+          description: Bad request (check response message)
+        "401":
+          description: Invalid API key pair in headers
+        "402":
+          description: Payment required. Occurs when you run out of API requests.
+            Upgrade <a href="https://dashboard.theblockchainapi.com/billing" target="_blank">here</a>.
+      security:
+      - APIKeyID: []
+        APISecretKey: []
+      summary: Derive public key
+      tags:
+      - Solana Wallet
+  /solana/wallet/transfer:
+    post:
+      description: |-
+        <a href="https://github.com/BL0CK-X/the-blockchain-api/tree/main/examples/solana-wallet/transfer-sol" target="_blank">See transfer SOL example (Python, JavaScript)</a>.
+
+        <a href="https://github.com/BL0CK-X/the-blockchain-api/tree/main/examples/solana-wallet/transfer-nft" target="_blank">See transfer NFT example (can also be used for SPL token) (Python, JavaScript)</a>.
+
+        Transfer SOL, a token or an NFT to another address. If you're transferring an NFT, supply the `mint` (the address of the mint) for the `token_address`.
+
+        If you're transfering a token, supply the token address found on the explorer (e.g., see `SRMuApVNdxXokk5GT7XD5cUUgXMBCoAz2LHeuAoKWRt` for <a href="https://explorer.solana.com/address/SRMuApVNdxXokk5GT7XD5cUUgXMBCoAz2LHeuAoKWRt" target="_blank">Serum Token</a>) for the `token_address`. If you're transferring SOL, do not supply a value for `token_address`.
+
+        `Cost: 1 Credit` (<a href="#section/Pricing">See Pricing</a>)
+      operationId: solanaTransfer
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TransferRequest'
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TransferResponse'
+          description: Successful Response
+        "400":
+          description: Bad request (check response message)
+        "401":
+          description: Invalid API key pair in headers
+        "402":
+          description: Payment required. Occurs when you run out of API requests.
+            Upgrade <a href="https://dashboard.theblockchainapi.com/billing" target="_blank">here</a>.
+      security:
+      - APIKeyID: []
+        APISecretKey: []
+      summary: Transfer SOL, a token, or an NFT to another address
+      tags:
+      - Solana Wallet
+  /solana/wallet/{public_key}/associated_token_account/{mint_address}:
+    get:
+      description: "<a href=\"https://github.com/BL0CK-X/the-blockchain-api/tree/main/examples/solana-wallet/derive-associated-token-account-address\"\
+        \ target=\"_blank\">See example (Python, JavaScript)</a>.\n    \n*Each wallet\
+        \ can own tokens, but in Solana, each token is actually held by an <a href=\"\
+        https://spl.solana.com/associated-token-account\" target=\"_blank\">associated\
+        \ token account</a> (ATA), which is an account specific for a token owned\
+        \ by the wallet. When you transfer an SPL token, such as Serum, or transfer\
+        \ an NFT, you're transfering from an ATA you own to another person's ATA for\
+        \ that specific token. With this endpoint, you can derive an associated token\
+        \ address given a wallet and a token address.*\n\n`Cost: 1 Credit` (<a href=\"\
+        #section/Pricing\">See Pricing</a>)"
+      operationId: solanaDeriveAssociatedTokenAccountAddress
+      parameters:
+      - description: The public key of the wallet
+        example: 31LKs39pjT5oj6fWjC3F76dHWf9489asCthmgj8wu7pj
+        explode: false
+        in: path
+        name: public_key
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: The mint address of the token (either SPL or NFT)
+        example: 7EWJNaNYfPYMaqzdAAa4ps5kpqW95B7VHsjhW1kr18sj
+        explode: false
+        in: path
+        name: mint_address
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ATAResponse'
+          description: Successful Response
+        "400":
+          description: Bad request (check response message)
+        "401":
+          description: Invalid API key pair in headers
+        "402":
+          description: Payment required. Occurs when you run out of API requests.
+            Upgrade <a href="https://dashboard.theblockchainapi.com/billing" target="_blank">here</a>.
+      security:
+      - APIKeyID: []
+        APISecretKey: []
+      summary: Derive an associated token account address
+      tags:
+      - Solana Wallet
+  /solana/wallet/airdrop:
+    post:
+      description: "<a href=\"https://github.com/BL0CK-X/the-blockchain-api/tree/main/examples/solana-wallet/get-airdrop\"\
+        \ target=\"_blank\">See examples (Python, JavaScript)</a>.\n    \nUse this\
+        \ endpoint to get an airdrop of SOL on the devnet (not real SOL). Amount of\
+        \ 0.015, \nwhich is the minimum amount of SOL you need to mint a Metaplex\
+        \ NFT and then transfer it to another wallet.\n\n`Cost: 1 Credit` (<a href=\"\
+        #section/Pricing\">See Pricing</a>)"
+      operationId: solanaGetAirdrop
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AirdropRequest'
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TransferResponse'
+          description: Successful Response
+        "400":
+          description: Bad request (check response message)
+        "401":
+          description: Invalid API key pair in headers
+        "402":
+          description: Payment required. Occurs when you run out of API requests.
+            Upgrade <a href="https://dashboard.theblockchainapi.com/billing" target="_blank">here</a>.
+      security:
+      - APIKeyID: []
+        APISecretKey: []
+      summary: Get an airdrop on devnet
+      tags:
+      - Solana Wallet
+  /solana/wallet/balance:
+    post:
+      description: "<a href=\"https://github.com/BL0CK-X/the-blockchain-api/tree/main/examples/solana-wallet/get-wallet-balance\"\
+        \ target=\"_blank\">See examples (Python, JavaScript) [More examples coming\
+        \ soon]</a>.\n    \nSee the balance of a wallet in SOL or any SPL token.\n\
+        \n`Cost: 1 Credit` (<a href=\"#section/Pricing\">See Pricing</a>)"
+      operationId: solanaGetBalance
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/BalanceRequest'
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BalanceResponse'
+          description: Successful Response
+        "400":
+          description: Bad request (check response message)
+        "401":
+          description: Invalid API key pair in headers
+        "402":
+          description: Payment required. Occurs when you run out of API requests.
+            Upgrade <a href="https://dashboard.theblockchainapi.com/billing" target="_blank">here</a>.
+      security:
+      - APIKeyID: []
+        APISecretKey: []
+      summary: Get wallet's balance in SOL or any SPL
+      tags:
+      - Solana Wallet
+  /solana/wallet/{network}/{public_key}/tokens:
+    get:
+      description: "<a href=\"\" target=\"_blank\">See examples (Python, JavaScript)\
+        \ [Coming Soon]</a>.\n    \nSee the token holdings of a given public key address\n\
+        \n`Cost: 1 Credit` (<a href=\"#section/Pricing\">See Pricing</a>)"
+      operationId: solanaGetTokensBelongingToWallet
+      parameters:
+      - description: The network ID (devnet, mainnet-beta)
+        example: mainnet-beta
+        explode: false
+        in: path
+        name: network
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: The public key of the account whose list of owned NFTs you want
+          to get
+        example: GKNcUmNacSJo4S2Kq3DuYRYRGw3sNUfJ4tyqd198t6vQ
+        explode: false
+        in: path
+        name: public_key
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListTokensResponse'
+          description: Successful Response
+        "400":
+          description: Bad request (check response message)
+        "401":
+          description: Invalid API key pair in headers
+        "402":
+          description: Payment required. Occurs when you run out of API requests.
+            Upgrade <a href="https://dashboard.theblockchainapi.com/billing" target="_blank">here</a>.
+      security:
+      - APIKeyID: []
+        APISecretKey: []
+      summary: Get address's tokens and respective balances
+      tags:
+      - Solana Wallet
+  /solana/wallet/{network}/{public_key}/nfts:
+    get:
+      description: "<a href=\"https://github.com/BL0CK-X/the-blockchain-api/tree/main/examples/solana-wallet/get-wallet-nfts\"\
+        \ target=\"_blank\">See examples (Python, JavaScript)</a>.\n    \nSee the\
+        \ NFTs that belong to a given public key address\n\n`Cost: 1 Credit` (<a href=\"\
+        #section/Pricing\">See Pricing</a>)"
+      operationId: solanaGetNFTsBelongingToWallet
+      parameters:
+      - description: The network ID (devnet, mainnet-beta)
+        example: mainnet-beta
+        explode: false
+        in: path
+        name: network
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: The public key of the account whose list of owned NFTs you want
+          to get
+        example: 8WRsGBaDcs1X7bHWr4Ad5Nx3bW29BkcmEbyavrLXDC4i
+        explode: false
+        in: path
+        name: public_key
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListNFTsResponse'
+          description: Successful Response
+        "400":
+          description: Bad request (check response message)
+        "401":
+          description: Invalid API key pair in headers
+        "402":
+          description: Payment required. Occurs when you run out of API requests.
+            Upgrade <a href="https://dashboard.theblockchainapi.com/billing" target="_blank">here</a>.
+      security:
+      - APIKeyID: []
+        APISecretKey: []
+      summary: Get address's NFTs
+      tags:
+      - Solana Wallet
+  /solana/nft:
+    post:
+      description: |-
+        <a href="https://github.com/BL0CK-X/the-blockchain-api/tree/main/examples/solana-nft/create-an-nft" target="_blank">See examples (Python, JavaScript)</a>.
+
+        Create a Metaplex NFT on Solana. Read more on this <a href="https://blog.theblockchainapi.com/2021/11/16/a-note-on-nfts.html" target="_blank">here</a>.
+
+        `Cost: 2 Credits` (<a href="#section/Pricing">See Pricing</a>)
+      operationId: solanaCreateNFT
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/NFTMintRequest'
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NFT'
+          description: Successful Response
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NFTMintErrorResponse'
+          description: Bad request (check response message)
+        "401":
+          description: Invalid API key pair in headers
+        "402":
+          description: Payment required. Occurs when you run out of API requests.
+            Upgrade <a href="https://dashboard.theblockchainapi.com/billing" target="_blank">here</a>.
+        "414":
+          description: URI too long (the data you provided was too large [e.g., the
+            metadata provided was 500kb])
+        "502":
+          description: Service unavailable. This can happen when Solana's leading
+            validator is behind and is unable to process transactions we send. We
+            have no control over this. The proper response here is to wait 10 or so
+            seconds and try again.
+      security:
+      - APIKeyID: []
+        APISecretKey: []
+      summary: Create an NFT on Solana
+      tags:
+      - Solana NFT
+  /solana/nft/{network}/{mint_address}:
+    get:
+      description: "<a href=\"https://github.com/BL0CK-X/the-blockchain-api/tree/main/examples/solana-nft/get-nft-metadata\"\
+        \ target=\"_blank\">See examples (Python, JavaScript)</a>. \n    \nGet the\
+        \ metadata of an NFT.\n\n`Cost: 1 Credits` (<a href=\"#section/Pricing\">See\
+        \ Pricing</a>)"
+      operationId: solanaGetNFT
+      parameters:
+      - description: The network ID (devnet, mainnet-beta)
+        example: mainnet-beta
+        explode: false
+        in: path
+        name: network
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: The mint address of the NFT
+        example: EEr5yQpNXf7Bru6Rt5podx56HGW9CEehXqgRGh2wa71w
+        explode: false
+        in: path
+        name: mint_address
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NFT'
+          description: Successful Response
+        "400":
+          description: Bad request (check response message)
+        "401":
+          description: Invalid API key pair in headers
+        "402":
+          description: Payment required. Occurs when you run out of API requests.
+            Upgrade <a href="https://dashboard.theblockchainapi.com/billing" target="_blank">here</a>.
+        "404":
+          description: The doesn't exist
+      security:
+      - APIKeyID: []
+        APISecretKey: []
+      summary: Get an NFT's metadata
+      tags:
+      - Solana NFT
+  /solana/nft/{network}/{mint_address}/owner:
+    get:
+      description: "<a href=\"https://github.com/BL0CK-X/the-blockchain-api/tree/main/examples/solana-nft/get-nft-owner\"\
+        \ target=\"_blank\">See examples (Python, JavaScript)</a>. \n    \nGet the\
+        \ owner of an NFT. This returns the public key of the wallet that owns the\
+        \ associated token account that owns the NFT.\n\nIf you want to get the associated\
+        \ token account that literally owns the NFT, derive the associated token account\
+        \ address from the public key returned and the NFT mint address using <a href=\"\
+        #operation/solanaDeriveAssociatedTokenAccountAddress\">this endpoint</a>.\n\
+        \n`Cost: 1 Credits` (<a href=\"#section/Pricing\">See Pricing</a>)"
+      operationId: solanaGetNFTOwner
+      parameters:
+      - description: The network ID (devnet, mainnet-beta)
+        example: mainnet-beta
+        explode: false
+        in: path
+        name: network
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: The mint address of the NFT
+        example: 4zH3Rwm1QXdfTSUqsYmeUBY4QqQmQEXJVbv4ErSK736Q
+        explode: false
+        in: path
+        name: mint_address
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NFTOwnerResponse'
+          description: Successful Response
+        "400":
+          description: Bad request (check response message)
+        "401":
+          description: Invalid API key pair in headers
+        "402":
+          description: Payment required. Occurs when you run out of API requests.
+            Upgrade <a href="https://dashboard.theblockchainapi.com/billing" target="_blank">here</a>.
+        "404":
+          description: The doesn't exist
+      security:
+      - APIKeyID: []
+        APISecretKey: []
+      summary: Get owner of an NFT
+      tags:
+      - Solana NFT
+  /solana/nft/mint/fee:
+    get:
+      description: "<a href=\"https://github.com/BL0CK-X/the-blockchain-api/tree/main/examples/solana-nft/get-nft-mint-fee\"\
+        \ target=\"_blank\">See examples (Python, JavaScript)</a>.\n    \nGet the\
+        \ estimated fee for minting an NFT on the Solana blockchain using the Metaplex\
+        \ protocol.\n\n`Cost: 1 Credit` (<a href=\"#section/Pricing\">See Pricing</a>)"
+      operationId: solanaGetNFTMintFee
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NFTMintFee'
+          description: Successful Response
+        "401":
+          description: Invalid API key pair in headers
+        "402":
+          description: Payment required. Occurs when you run out of API requests.
+            Upgrade <a href="https://dashboard.theblockchainapi.com/billing" target="_blank">here</a>.
+      security:
+      - APIKeyID: []
+        APISecretKey: []
+      summary: Get the NFT mint fee
+      tags:
+      - Solana NFT
+  /solana/nft/candy_machine_id:
+    post:
+      description: |-
+        <a href="https://github.com/BL0CK-X/the-blockchain-api/tree/main/examples/solana-nft/get-nft-candy-machine-id" target="_blank">See examples (Python, JavaScript)</a>.
+
+        Get the candy machine ID from where the NFT came, if any. NFTs can also be minted without a candy machine.
+
+        `Cost: 1 Credit` (<a href="#section/Pricing">See Pricing</a>)
+      operationId: solanaGetNFTsCandyMachineId
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GetCandyMachineIDRequest'
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetCandyMachineIDResponse'
+          description: Successful Response
+        "400":
+          description: Bad request (check response message)
+        "401":
+          description: Invalid API key pair in headers
+        "402":
+          description: Payment required. Occurs when you run out of API requests.
+            Upgrade <a href="https://dashboard.theblockchainapi.com/billing" target="_blank">here</a>.
+        "404":
+          description: Not found
+      security:
+      - APIKeyID: []
+        APISecretKey: []
+      summary: |
+        Get the ID of the candy machine of an NFT
+      tags:
+      - Solana NFT
+  /solana/nft/candy_machine/info:
+    post:
+      description: |-
+        <a href="https://github.com/BL0CK-X/the-blockchain-api/tree/main/examples/solana-candy-machine/get-candy-machine-info" target="_blank">See examples (Python, JavaScript)</a>.
+
+        Use this endpoint to get the following details about a Metaplex candy machine: uuid, go live date, items in the collection, and the cost to mint.
+
+        `Cost: 2 Credits` (<a href="#section/Pricing">See Pricing</a>)
+      operationId: solanaGetCandyMachineDetails
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GetCandyDetailsRequest'
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetCandyDetailsResponse'
+          description: |
+            Successful Response.
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetCandyDetailsErrorResponse'
+          description: Bad request (check response message)
+        "401":
+          description: Invalid API key pair in headers
+        "402":
+          description: Payment required. Occurs when you run out of API requests.
+            Upgrade <a href="https://dashboard.theblockchainapi.com/billing" target="_blank">here</a>.
+      security:
+      - APIKeyID: []
+        APISecretKey: []
+      summary: |
+        Get a Metaplex candy machine's details
+      tags:
+      - Solana Candy Machine
+  /solana/nft/candy_machine:
+    post:
+      description: "<a href=\"https://github.com/BL0CK-X/the-blockchain-api/tree/main/examples/solana-candy-machine/create-test-candy-machine\"\
+        \ target=\"_blank\">See examples (Python, JavaScript)</a>.\n \nUse this endpoint\
+        \ to create a test candy machine so that you can test your minting bot.\n\n\
+        `Cost: 1 Credit` (<a href=\"#section/Pricing\">See Pricing</a>)"
+      operationId: solanaCreateTestCandyMachine
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateTestCandyMachineRequest'
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreateTestCandyMachineResponse'
+          description: Successful Response
+        "400":
+          description: Bad request (check response message)
+        "401":
+          description: Invalid API key pair in headers
+        "402":
+          description: Payment required. Occurs when you run out of API requests.
+            Upgrade <a href="https://dashboard.theblockchainapi.com/billing" target="_blank">here</a>.
+      security:
+      - APIKeyID: []
+        APISecretKey: []
+      summary: |
+        Create a test candy machine
+      tags:
+      - Solana Candy Machine
+  /solana/nft/candy_machine/nfts:
+    post:
+      description: |-
+        <a href="https://github.com/BL0CK-X/the-blockchain-api/tree/main/examples/solana-candy-machine/get-candy-machine-minted-nfts" target="_blank">See examples (Python, JavaScript)</a>.
+
+        Use this endpoint to get the list of NFTs minted from a Solana Candy Machine.
+
+        See example for how to get the list of NFT hashes <a href="https://github.com/BL0CK-X/the-blockchain-api/tree/main/examples/solana-candy-machine/get-candy-machine-hash-table" target="_blank">here</a>.
+
+        `Cost: 2 Credits` (<a href="#section/Pricing">See Pricing</a>)
+      operationId: solanaGetNFTsMintedFromCandyMachine
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GetMintedNFTsRequest'
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/GetMintedNFTsResponse'
+                type: array
+          description: Successful Response. Click "Expand All" on the right sidebar
+            to see more.
+        "400":
+          description: Bad request (check response message)
+        "401":
+          description: Invalid API key pair in headers
+        "402":
+          description: Payment required. Occurs when you run out of API requests.
+            Upgrade <a href="https://dashboard.theblockchainapi.com/billing" target="_blank">here</a>.
+        "404":
+          description: Not found
+      security:
+      - APIKeyID: []
+        APISecretKey: []
+      summary: |
+        Get the list of NFTs minted from a Solana Candy Machine
+      tags:
+      - Solana Candy Machine
+  /solana/nft/candy_machine/{network}/{candy_machine_id}/nfts:
+    get:
+      description: |-
+        <a href="https://github.com/BL0CK-X/the-blockchain-api/tree/main/examples/solana-candy-machine/get-candy-machine-all-nfts" target="_blank"> See examples (Python, JavaScript)</a>.
+
+        Use this endpoint to get the list of all NFTs (minted and unminted) from a Solana Candy Machine.
+
+        `Cost: 3 Credits` (<a href="#section/Pricing">See Pricing</a>)
+      operationId: solanaGetAllNFTsFromCandyMachine
+      parameters:
+      - description: The network ID (devnet, mainnet-beta)
+        example: mainnet-beta
+        explode: false
+        in: path
+        name: network
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: The ID of the candy machine
+        example: FmkrvXRenCGtwBHw3VtBcExp8eTdnau97upaewF4GUEX
+        explode: false
+        in: path
+        name: candy_machine_id
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetAllNFTsResponse'
+          description: Successful Response. Click "Expand All" on the right sidebar
+            to see more.
+        "400":
+          description: Bad request (check response message)
+        "401":
+          description: Invalid API key pair in headers
+        "402":
+          description: Payment required. Occurs when you run out of API requests.
+            Upgrade <a href="https://dashboard.theblockchainapi.com/billing" target="_blank">here</a>.
+        "404":
+          description: Not found
+      security:
+      - APIKeyID: []
+        APISecretKey: []
+      summary: |
+        Get the list of all NFTs (minted and unminted) from a Solana Candy Machine
+      tags:
+      - Solana Candy Machine
+  /solana/nft/candy_machine/config/info:
+    post:
+      description: |-
+        <a href="https://github.com/BL0CK-X/the-blockchain-api/tree/main/examples/solana-candy-machine/get-candy-machine-config-info" target="_blank">See examples (Python, JavaScript)</a>.
+
+        Use this endpoint to get the details of a Solana Candy Machine configuration.
+
+        `Cost: 1 Credit` (<a href="#section/Pricing">See Pricing</a>)
+      operationId: solanaGetCandyMachineConfigurationDetails
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GetConfigInfoRequest'
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetConfigInfoResponse'
+          description: Successful Response
+        "400":
+          description: Bad request (check response message)
+        "401":
+          description: Invalid API key pair in headers
+        "402":
+          description: Payment required. Occurs when you run out of API requests.
+            Upgrade <a href="https://dashboard.theblockchainapi.com/billing" target="_blank">here</a>.
+        "404":
+          description: Not found
+      security:
+      - APIKeyID: []
+        APISecretKey: []
+      summary: |
+        Get the details of a Solana Candy Machine configuration
+      tags:
+      - Solana Candy Machine
+  /solana/nft/candy_machine/mint:
+    post:
+      description: |-
+        <a href="https://github.com/BL0CK-X/the-blockchain-api/tree/main/examples/solana-candy-machine/mint-from-candy-machine" target="_blank">See examples (Python, JavaScript)</a>.
+
+        Use this endpoint to mint an NFT from a metaplex candy machine as soon as it drops.
+
+        `Cost: 10 Credits` (<a href="#section/Pricing">See Pricing</a>)
+      operationId: solanaMintFromCandyMachine
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/MintNFTRequest'
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MintNFTResponse'
+          description: |
+            Successful Response. The actual response to this API will be something like {"task_id": "10jd12Ka1"}.  You must poll the task ID endpoint to get info on this task. Once the task is completed, the returned format will follow the schema {'transaction_signature': '...'}. See the [Task endpoint](/#tag/Task/paths/~1task~1{task_id}/get).
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MintNFTErrorResponse'
+          description: Bad request (check response message)
+        "401":
+          description: Invalid API key pair in headers
+        "402":
+          description: Payment required. Occurs when you run out of API requests.
+            Upgrade <a href="https://dashboard.theblockchainapi.com/billing" target="_blank">here</a>.
+      security:
+      - APIKeyID: []
+        APISecretKey: []
+      summary: Mint an NFT from a Metaplex candy machine
+      tags:
+      - Solana Candy Machine
+components:
+  schemas:
+    Task:
+      example:
+        status_code: 6.027456183070403
+        time_completed: 0.8008281904610115
+        response: '{}'
+      properties:
+        response:
+          type: object
+        time_completed:
+          type: number
+        status_code:
+          type: number
+      required:
+      - response
+      - status_code
+    UploadFileRequest:
+      properties:
+        upload_method:
+          default: IPFS
+          enum:
+          - IPFS
+          - Arweave
+          - Filecoin
+          type: string
+      type: object
+    GetFileResponse:
+      example:
+        uri: https://ipfs.io/ipfs/QmXoypizjW3WknFiJnKLwHCnL72vedxjQkDDP1mXWo6uco/wiki/Aardvark.html
+        size: "1024"
+        upload_time: "1634073275"
+      properties:
+        uri:
+          type: string
+        size:
+          description: File size in kilobytes
+          type: string
+        upload_time:
+          description: The time when the file was uploaded
+          type: string
+      type: object
+    Account:
+      example:
+        context:
+          slot: 108532393
+        value:
+          data:
+            parsed:
+              info:
+                decimals: 0
+                freeze_authority: HATCV2FuPkoN4S5PQqjk8vz17FTH9XFu7hymkCJo483V
+                is_initialized: true
+                mint_authority: HATCV2FuPkoN4S5PQqjk8vz17FTH9XFu7hymkCJo483V
+                supply: "1"
+              type: mint
+            program: spl-token
+            space: 82
+          executable: false
+          lamports: 1461600
+          owner: TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA
+          rent_epoch: 250
+      properties:
+        context:
+          $ref: '#/components/schemas/Account_context'
+        value:
+          $ref: '#/components/schemas/Account_value'
+    AccountIsNFT:
+      example:
+        is_nft: true
+      properties:
+        is_nft:
+          type: boolean
+      required:
+      - is_nft
+      type: object
+    AccountIsCandyMachine:
+      example:
+        is_candy_machine: true
+      properties:
+        is_candy_machine:
+          type: boolean
+      required:
+      - is_candy_machine
+      type: object
+    Transaction:
+      example:
+        block_time: 1634782875
+        meta:
+          err: {}
+          fee: 5000
+          inner_instructions: []
+          log_messages:
+          - Program 11111111111111111111111111111111 invoke [1]
+          - Program 11111111111111111111111111111111 success
+          post_balances:
+          - 1263499110
+          - 10000000
+          - 1
+          post_token_balances: []
+          pre_balances:
+          - 1273504110
+          - 0
+          - 1
+          pre_token_balances: []
+          rewards: []
+          status:
+            _ok: {}
+        slot: 102654672
+        transaction:
+          message: null
+          account_keys:
+          - pubkey:
+              _bn: dee6a11fcc1dc31f0ed939f826fbade9c01c1a911e023cd6bd2cd9a089144a69
+            signer: true
+            writable: true
+          - pubkey:
+              _bn: 1dcd39962ad5410c1996873e23c4e9af189bcca84b0c24fd2ff1865a3382c288
+            signer: false
+            writable: true
+          - pubkey:
+              _bn: "00"
+            signer: false
+            writable: false
+          instructions:
+          - parsed:
+              info:
+                destination: 31LKs39pjT5oj6fWjC3F76dHWf9489asCthmgj8wu7pj
+                lamports: 10000000
+                source: G17UmNGnMJ851x3M1JXocgpft1afcYedjPuFpo1ohhCk
+              type: transfer
+            program: system
+            program_id:
+              _bn: "00"
+          recent_blockhash: B4HW8uQT3VddawYKhsoHbhSYYARfWFCxJwaoAZBYBo1Y
+          signatures:
+          - 5MB3KY9Dps7Z9E9gJNykfaDHD8cwgxXhszxoeXEdcpUqsLm4BMjpwKWRKr4ojGg7s7wfpLwEPXLACZxhzAFBg4nz
+      properties:
+        block_time:
+          type: number
+        meta:
+          type: object
+        slot:
+          type: number
+        transaction:
+          type: object
+        network:
+          default: devnet
+          enum:
+          - devnet
+          - mainnet-beta
+          type: string
+    SecretPhrase:
+      example:
+        secret_recovery_phrase: fire owner display success half rescue pledge oval
+          foam gossip window once
+      properties:
+        secret_recovery_phrase:
+          description: The twelve word phrase that can be used to derive many public
+            key addresses. To derive a public key, you need a secret recovery phrase,
+            a derivation path, and an optional passphrase. See our Security section
+            <a href="#section/Security">here</a>.
+          type: string
+      title: The response when listing the API key pairs
+    GetPublicKeyRequest:
+      example:
+        secret_recovery_phrase: fire owner display success half rescue pledge oval
+          foam gossip window once
+        derivation_path: m/44/501/0/0
+        passphrase: water
+      properties:
+        secret_recovery_phrase:
+          description: The twelve word phrase that can be used to derive many public
+            key addresses. To derive a public key, you need a secret recovery phrase,
+            a derivation path, and an optional passphrase. See our Security section
+            <a href="#section/Security">here</a>.
+          type: string
+        derivation_path:
+          default: m/44/501/0/0
+          description: |-
+            Derivation paths are used to derive the public key from the secret recovery phrase. Only certain paths are accepted.
+
+            We use "m/44/501/0/0" by default, if it is not provided. This is the path that the Phantom and Sollet wallets use.
+            If you provide the empty string "" as the value for the derivation path, then we will use the Solana CLI default value.
+            The SolFlare recommended path is "m/44/501/0".
+
+            You can also arbitrarily increment the default path ("m/44/501/0/0") to generate more wallets (e.g., "m/44/501/0/1", "m/44/501/0/2", ...). This is how Phantom generates more wallets.
+
+            To learn more about derivation paths, check out <a href="https://learnmeabitcoin.com/technical/derivation-paths" target="_blank">this tutorial</a>.
+          type: string
+        passphrase:
+          default: ""
+          description: 'PASSPHRASE != PASSWORD. This is NOT your Phantom password
+            or any other password. It is an optional string you use when creating
+            a wallet. This provides an additional layer of security because a hacker
+            would need both the secret recovery phrase and the passphrase to access
+            the output public key. By default, most wallet UI extensions do not use
+            a passphrase. (You probably did not use a passphrase.) Limited to 500
+            characters. '
+          type: string
+      required:
+      - secret_recovery_phrase
+    PublicKey:
+      example:
+        public_key: GoUhxkKRiy8psWcr1csF1mbuDsfNd28JZXNHMQ5BSBnc
+      properties:
+        public_key:
+          type: string
+      required:
+      - public_key
+      type: object
+    TransferRequest:
+      example:
+        secret_recovery_phrase: fire owner display success half rescue pledge oval
+          foam gossip window once
+        token_address: CK1LHEANTu7RFqN3XMzo2AnZhyus2W1vue1njrxLEM1d
+      properties:
+        recipient_address:
+          description: The public key address of the recipient to whom you want to
+            send a token or NFT
+          type: string
+        secret_recovery_phrase:
+          description: The twelve word phrase that can be used to derive many public
+            key addresses. To derive a public key, you need a secret recovery phrase,
+            a derivation path, and an optional passphrase. See our Security section
+            <a href="#section/Security">here</a>.
+          type: string
+        derivation_path:
+          default: m/44/501/0/0
+          description: |-
+            Derivation paths are used to derive the public key from the secret recovery phrase. Only certain paths are accepted.
+
+            We use "m/44/501/0/0" by default, if it is not provided. This is the path that the Phantom and Sollet wallets use.
+            If you provide the empty string "" as the value for the derivation path, then we will use the Solana CLI default value.
+            The SolFlare recommended path is "m/44/501/0".
+
+            You can also arbitrarily increment the default path ("m/44/501/0/0") to generate more wallets (e.g., "m/44/501/0/1", "m/44/501/0/2", ...). This is how Phantom generates more wallets.
+
+            To learn more about derivation paths, check out <a href="https://learnmeabitcoin.com/technical/derivation-paths" target="_blank">this tutorial</a>.
+          type: string
+        passphrase:
+          default: ""
+          description: 'PASSPHRASE != PASSWORD. This is NOT your Phantom password
+            or any other password. It is an optional string you use when creating
+            a wallet. This provides an additional layer of security because a hacker
+            would need both the secret recovery phrase and the passphrase to access
+            the output public key. By default, most wallet UI extensions do not use
+            a passphrase. (You probably did not use a passphrase.) Limited to 500
+            characters. '
+          type: string
+        token_address:
+          description: |
+            If you're transfering an NFT, supply the `mint` (the address of the mint) for the `token_address`. If you're transfering a token, supply the token address found on the explorer (e.g., see `SRMuApVNdxXokk5GT7XD5cUUgXMBCoAz2LHeuAoKWRt` for <a href="https://explorer.solana.com/address/SRMuApVNdxXokk5GT7XD5cUUgXMBCoAz2LHeuAoKWRt" target="_blank">Serum Token</a>) for the `token_address`. If you're transferring SOL, do not supply a value for `token_address`.
+          type: string
+        network:
+          default: devnet
+          enum:
+          - devnet
+          - mainnet-beta
+          type: string
+        amount:
+          default: "1"
+          description: |
+            The quantity of the token or NFT you want to send. If sending an NFT, there is no need to supply this value.  This value must be a string. You can supply a float value (e.g., "0.0005").
+          type: string
+      required:
+      - recipient_address
+      - secret_recovery_phrase
+      type: object
+    TransferResponse:
+      example:
+        transaction_signature: 38jivwh89t38hkN4dS2M585NZFRHbsGfmnuFb2MVDwrfTXdvYBamQPRo7QQNGdx8mfYahfkUV6s822nH3K7ej5nj
+      properties:
+        transaction_signature:
+          description: The signature of the transaction
+          type: string
+      type: object
+    ATAResponse:
+      example:
+        associated_token_address: CnW7tnQrfbSMkHYpvn5mtYw11qGpat6WM87D68cNT2hC
+      properties:
+        associated_token_address:
+          description: The associated token address
+          type: string
+      required:
+      - associated_token_address
+      type: object
+    AirdropRequest:
+      example:
+        recipient_address: recipient_address
+      properties:
+        recipient_address:
+          description: The address to which to send the airdrop of 0.015 SOL
+          type: string
+      required:
+      - recipient_address
+      type: object
+    BalanceRequest:
+      example:
+        public_key: GKNcUmNacSJo4S2Kq3DuYRYRGw3sNUfJ4tyqd198t6vQ
+        network: mainnet-beta
+        mint_address: EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v
+      properties:
+        public_key:
+          description: The public key address of the wallet
+          type: string
+        unit:
+          default: lamport
+          description: If you are retrieving the SOL balance, you can select whether
+            to retrieve this in SOL or Lamport units (1 SOL = 1e9 Lamports).
+          enum:
+          - lamport
+          - sol
+          type: string
+        network:
+          default: devnet
+          enum:
+          - devnet
+          - mainnet-beta
+          type: string
+        mint_address:
+          default: "null"
+          description: |-
+            The mint address of the SPL token. If not provided, the balance returned is in SOL. Make sure to use the correct network.
+
+            Some example mint addresses:
+            - USDC: EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v
+            - Mango: MangoCzJ36AjZyKwVj3VnYU4GTonjfVEnJmvvWaxLac
+            - Serum: SRMuApVNdxXokk5GT7XD5cUUgXMBCoAz2LHeuAoKWRt
+            - Raydium: 4k3Dyjzvzp8eMZWUXbBCjEvwSkkk59S5iCNLY3QrkX6R
+            - wSOL: So11111111111111111111111111111111111111112
+            - ATLAS: ATLASXmbPQxBUYbxPsV97usA3fPQYEqzQBUHgiFCUsXx
+          type: string
+      required:
+      - public_key
+      type: object
+    BalanceResponse:
+      example:
+        balance: 3.322105
+        decimals: 6
+        integer_balance: 3322105
+        network: mainnet-beta
+      properties:
+        balance:
+          description: The balance of the token in the wallet
+          type: number
+        integer_balance:
+          description: Not included if retreiving SOL balance
+          type: number
+        decimals:
+          description: Not included if retreiving SOL balance
+          type: number
+        network:
+          enum:
+          - devnet
+          - mainnet-beta
+          type: string
+        unit:
+          description: Not included if retreiving an SPL token balance
+          enum:
+          - lamport
+          - sol
+          type: string
+      required:
+      - balance
+      - network
+    ListTokensResponse:
+      description: A list the wallet's of token positions
+      example:
+      - amount: "125000000000"
+        decimals: 9
+        mint_address: 4UuGQgkD3rSeoXatXRWwRfRd21G87d5LiCfkVzNNv1Tt
+        token_address: 5mSHqsF7hdQMRsnADXFy2m39G2oNHQEBLg1dFhCrTqe8
+        ui_amount: 125
+      - amount: "10090000000000000000"
+        decimals: 9
+        mint_address: 5jv9QU2SHehzt1Rya7hi8eEdoBMX6a98uWjXFSwWXspT
+        token_address: EASFLGGD8ZCwB2nux8WZtnRGF85eC3kETa81SYB5K6gW
+        ui_amount: 10090000000
+      - amount: "3"
+        decimals: 0
+        mint_address: FRbqQnbuLoMbUG4gtQMeULgCDHyY6YWF9NRUuLa98qmq
+        token_address: 3tTXfF2GWxDFnvueTFMbBagtcgzXgX9cuc8QcASFD3j8
+        ui_amount: 3
+      - amount: "5000"
+        decimals: 0
+        mint_address: H32T9DYWTt83n9iRFyrq9TEGa3LUDFgWnFKrMvYS4JUf
+        token_address: Zd23L1RCzKApSzyLhwMZeZ5ASokgbthQhyQ5QFG7U74
+        ui_amount: 5000
+      - amount: "3322105"
+        decimals: 6
+        mint_address: EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v
+        token_address: 29TwF9mm2ZfrcjRiV3PCRQmgYzL95HJJhaUairYmWLJC
+        ui_amount: 3.322105
+      - amount: "46"
+        decimals': 6
+        mint_address: MangoCzJ36AjZyKwVj3VnYU4GTonjfVEnJmvvWaxLac
+        token_address: GizuDGzHpZFFJTjRKG57LFmzb5AooBiceugbmDPgsb5S
+        ui_amount: 4.6E-5
+      items:
+        properties:
+          amount:
+            description: The balance. To get the balance without decimals, divide
+              by 10^x where x = the number of decimals
+            type: string
+          decimals:
+            type: number
+          mint_address:
+            description: The mint address of the SPL token
+            type: string
+          token_address:
+            description: The token address
+            type: string
+          ui_amount:
+            description: The amount to display (the actual balance divided by 10^x,
+              where x = the number of decimals)
+            type: string
+        type: object
+      type: array
+    ListNFTsResponse:
+      example:
+        nfts_owned:
+        - EEr5yQpNXf7Bru6Rt5podx56HGW9CEehXqgRGh2wa71w
+        - 7pFfMc3WougD7vntz3cFpfU2XLhWivWwP2czUzFvBcsz
+        - Afx3bYC8UjKStEe9RWsax1RNG8rbTha4oZ3TZV1CFk8K
+        - GYnqJEK9qCLQPqt2znXm6MS3sMGcfb1XLfFRUbh9uVnM
+        - E8TZyFJR2xcfZSWAQ7mEarhbE1rAJ5hZ4zVAcemKT3j8
+        - BMQniBDV3Km4AbWK3fDaiRMaiS4NBb1TLHtyLnWbY2ua
+        - 8aaSoLHdcBDRBSDjPJoTwBZkCYj9AEDJcM3atPYewMq1
+        - 2dav6k3iSJVxpyvcvU1ZUxdn9Z15gd3HxGo8qN7N2MTT
+        - 3mVEER8G8uaEMGi1AzH3SmiY8nTy7hwqYeBStbx5jn5K
+        - PFmjRgMTZYvvM8k6rWGHKemhkUFciYbB8ybEyJ3rqHy
+        - GXMeGFDnAwf5uC4uwjrBJAdb3wsHBd8KMc7FmnuDy6Td
+        - 51Dd17AtVVsp3Dv9VMJEJ5UKLSfrBWHyFHN4n3wZqHz4
+        - 5xsYQ1dughTssMr4T9FbcetFU2eUDoEocNr8XUqNTyGx
+      properties:
+        nfts_owned:
+          description: A list of mint addresses represented by a string
+          items:
+            description: A mint address
+            type: string
+          type: array
+      type: object
+    NFTMintRequest:
+      example:
+        secret_recovery_phrase: fire owner display success half rescue pledge oval
+          foam gossip window once
+        nft_name: Super Musk
+        nft_symbol: MUSK
+        nft_description: Buy this image of Super Musk!
+        nft_url: https://static01.nyt.com/images/2021/03/11/business/00china-musk/00china-musk-superJumbo.jpg
+        nft_metadata: '{"cleverness": 100, "data": ["foo", {"bar": ["baz", null, 1.0,
+          2]}]}'
+        nft_upload_method: S3
+        is_mutable: true
+        is_master_edition: true
+        seller_fee_basis_points: 100
+        creators: '["31LKs39pjT5oj6fWjC3F76dHWf9489asCthmgj8wu7pj", "G17UmNGnMJ851x3M1JXocgpft1afcYedjPuFpo1ohhCk"]'
+        share: '[40, 60]'
+        network: devnet
+      properties:
+        secret_recovery_phrase:
+          description: The twelve word phrase that can be used to derive many public
+            key addresses. To derive a public key, you need a secret recovery phrase,
+            a derivation path, and an optional passphrase. See our Security section
+            <a href="#section/Security">here</a>.
+          type: string
+        derivation_path:
+          default: m/44/501/0/0
+          description: |-
+            Derivation paths are used to derive the public key from the secret recovery phrase. Only certain paths are accepted.
+
+            We use "m/44/501/0/0" by default, if it is not provided. This is the path that the Phantom and Sollet wallets use.
+            If you provide the empty string "" as the value for the derivation path, then we will use the Solana CLI default value.
+            The SolFlare recommended path is "m/44/501/0".
+
+            You can also arbitrarily increment the default path ("m/44/501/0/0") to generate more wallets (e.g., "m/44/501/0/1", "m/44/501/0/2", ...). This is how Phantom generates more wallets.
+
+            To learn more about derivation paths, check out <a href="https://learnmeabitcoin.com/technical/derivation-paths" target="_blank">this tutorial</a>.
+          type: string
+        passphrase:
+          default: ""
+          description: 'PASSPHRASE != PASSWORD. This is NOT your Phantom password
+            or any other password. It is an optional string you use when creating
+            a wallet. This provides an additional layer of security because a hacker
+            would need both the secret recovery phrase and the passphrase to access
+            the output public key. By default, most wallet UI extensions do not use
+            a passphrase. (You probably did not use a passphrase.) Limited to 500
+            characters. '
+          type: string
+        nft_name:
+          default: ""
+          description: The name of the token. Limited to 32 characters. Stored on
+            the blockchain.
+          type: string
+        nft_symbol:
+          default: ""
+          description: The symbol of the token. Limited to 10 characters. Stored on
+            the blockchain.
+          type: string
+        nft_description:
+          default: ""
+          description: |
+            The description of the token. Limited to 2000 characters. Not stored on the blockchain.  This is stored in S3 in a bucket we own, and the link to that file is stored on the blockchain.  If you provide your own link, the link is also stored in that S3 file, which is publicly accessible. However, if you choose the NFT upload method "LINK" instead of "S3", then we upload the link you  provide for nft_url directly to the blockchain, and S3 is not used at all. Thus, when you provide the "LINK" option, the value nft_description is ignored and not used. The Metaplex API does not provide functionality to store any data about your NFT besides a URL.
+          type: string
+        nft_url:
+          default: ""
+          description: |
+            The URL you provided. Limited to 200 characters. This does not need to be a valid URL. Whether or not this is  stored on the blockchain depends on which upload method you choose. If you choose LINK, then this is stored on the  blockchain directly. If you choose S3, then this link is embedded in a public S3 text file that also contains the metadata, the name,  the symbol, and the description of the NFT.
+          type: string
+        nft_metadata:
+          default: '{}'
+          description: |
+            Any data you provide. Must be a string and properly encoded json. Will be viewable on S3. Limited to 2000 bytes. Not stored on the blockchain.  This is stored in S3 in a bucket we own, and the link to that file is stored on the blockchain.  If you provide your own link, the link is also stored in that S3 file, which is publicly accessible. However, if you choose the NFT upload method "LINK" instead of "S3", then we upload the link you  provide for nft_url directly to the blockchain, and S3 is not used at all. Thus, when you provide the "LINK" option, the value nft_metadata is ignored and not used. The Metaplex API does not provide functionality to store any data about your NFT besides a URL.
+          type: string
+        nft_upload_method:
+          default: S3
+          description: "When you choose S3, all of the nft_description, nft_name,\
+            \ nft_symbol, nft_metadata, and nft_url are put into a json dictionary\
+            \ and uploaded to S3 as a text file.  This is uploaded to an AWS S3 bucket\
+            \ we own, and is an option we provide at no charge. The S3 link to this\
+            \ file is stored on the NFT on the blockchain.\n  When you choose LINK,\
+            \ the nft_url you provide is stored on the blockchain, and the nft_metadata\
+            \ and nft_description are ignored and not stored anywhere. \n"
+          enum:
+          - S3
+          - LINK
+          type: string
+        is_mutable:
+          default: true
+          description: |
+            Indicates whether or not the NFT created is mutable. If mutable, the NFT can be updated later. Once set to immutable, the NFT is unable to be changed.
+          type: boolean
+        is_master_edition:
+          default: true
+          description: |
+            Whether or not the NFT is a master edition NFT. Saves about 0.001 SOL in transaction costs when set to false.
+          type: boolean
+        seller_fee_basis_points:
+          default: 0
+          description: |
+            Valid values from 0 to 10000. Must be an integer.  Represents the number of basis points that the seller receives as a fee upon sale.  E.g., 100 indicates a 1% seller fee. Seller does not receive a fee when "primary_sale_has_happened" is set to true.  Will be set to false after first sale has occurred.
+          type: number
+        creators:
+          default:
+          - The Public Key Corresponding to The Seed Phrase, Path, and Passphrase
+            Provided
+          description: |
+            A JSON encoded string representing an array / list.  The designated creators of the NFT. Length of the creator list must match length of the list of share.  Valid lengths of the list range from 1 to 5. Each item in the list must be a valid public key address.    Only the public key corresponding to the seed phrase provided will be marked as verified. Any other creators supplied will be marked as unverified.
+          items:
+            type: string
+          type: array
+        share:
+          default:
+          - 100
+          description: |
+            A JSON encoded string representing an array / list.  The share of the royalty that each creator gets. Valid values range from 0 to 100.  Sum of the values must equal 100.  Only integer value accepted. Length of the share list must match length of the list of creators.
+          items:
+            type: integer
+          type: array
+        network:
+          default: devnet
+          description: "This determines which network you choose to run the API calls\
+            \ on. We recommend first testing on the devnet, because minting an NFT\
+            \ costs a little above 0.01 SOL, which is about $1.60 at the time of this\
+            \ writing.  When you run on the mainnet-beta, each successful call will\
+            \ deduct approximately that much. When you run on the devnet, that amount\
+            \ is deducted from a simulated amount, so you are not paying with real\
+            \ SOL. To get SOL on the devnet,\n  airdrop SOL to this address using\
+            \ the CLI. Keep in mind that you can only do this every so often. If you\
+            \ are rate-limited, consider using a VPN and trying again, or just waiting.\
+            \ To get SOL on the mainnet-beta, you \n  must transfer real SOL to this\
+            \ account from another wallet (e.g., from another wallet you own, from\
+            \ an exchange, etc.). We hope to make this process easier in the future,\
+            \ and if you have any suggestions, please add them \n  as an issue on\
+            \ our <a href=\"https://github.com/BL0CK-X/the-blockchain-api\" target=\"\
+            _blank\">GitHub repository</a> for the API. To get a fee estimate, make\
+            \ a GET requests to the <a href=\"#tag/Solana-NFT/paths/~1solana~1nft~1mint~1fee/get\"\
+            >v1/solana/nft/mint/fee endpoint</a> (details in sidebar).\n"
+          enum:
+          - devnet
+          - mainnet-beta
+          type: string
+      required:
+      - secret_recovery_phrase
+      type: object
+    NFT:
+      example:
+        data:
+          creators:
+          - HuAiZg55P557gdjr5jkq79YdMe9sbdHuPj5UN21XuSyK
+          - 5FzddvKbxE54KEg2WoeNiGWJYAUBabKVFg2MVCSacWiJ
+          name: 'Vox Punks Club #966'
+          seller_fee_basis_points: 500
+          share:
+          - 0
+          - 100
+          symbol: ""
+          uri: https://arweave.net/_Y8tETU3FbAFZSM1wXNeWPweWwrW9K6oSF1SYi_bH9A
+          verified:
+          - 1
+          - 1
+        is_mutable: true
+        mint: EEr5yQpNXf7Bru6Rt5podx56HGW9CEehXqgRGh2wa71w
+        primary_sale_happened: true
+        update_authority: 5FzddvKbxE54KEg2WoeNiGWJYAUBabKVFg2MVCSacWiJ
+      properties:
+        data:
+          $ref: '#/components/schemas/NFT_data'
+        is_mutable:
+          type: boolean
+        mint:
+          description: |
+            The public key address of the NFT
+          type: string
+        primary_sale_happened:
+          type: boolean
+        update_authority:
+          description: |
+            A public key address that is usually that of the person who minted the NFT
+          type: string
+        seller_fee_basis_points:
+          type: number
+        mint_secret_recovery_phrase:
+          type: string
+        explorer_url:
+          type: string
+      type: object
+    NFTMintErrorResponse:
+      example:
+        error: |
+          Insufficient balance. You need 12500434 lamports, but you have 20.  If you are running on the devnet, see how to airdrop SOL to your wallet to get started. If you are  running on the mainnet, you will have to transfer real SOL to your wallet from an exchange, another  wallet or some other source. You can check your balance with our endpoint v1/solana/wallet/balance.
+      properties:
+        error:
+          type: string
+      title: A response error when minting an NFT
+    NFTOwnerResponse:
+      example:
+        nft_owner: 31LKs39pjT5oj6fWjC3F76dHWf9489asCthmgj8wu7pj
+      properties:
+        nft_owner:
+          description: The public key address of the wallet that has ownership over
+            the provided NFT
+          type: string
+      required:
+      - nft_owner
+      type: object
+    NFTMintFee:
+      example:
+        description: "We calculated the fee as follows: 10000000 + 1461600 + 534600\
+          \ = 11996200 lamports = 0.0119962 SOL.  The largest portion of the fee (10000000\
+          \ lamports) goes to the Metaplex protocol. They list their  fees on their\
+          \ front page <a href=\"https://metaplex.com/\">here</a>. The rent fee (1461600\
+          \ lamports) is the lifetime  fee needed to store the NFT on the blockchain.\
+          \ This is paid to the validators of the network. You can see  how the rent\
+          \ fees work <a href=\"https://docs.solana.com/implemented-proposals/rent\"\
+          \ target=\"_blank\">here</a>. The transaction fee  (534600 lamports) is\
+          \ what is paid to the validators for processing the three transactions that\
+          \ compose  the minting of an NFT: creating an account, initializing the\
+          \ mint, creating the metadata, and updating  the metadata. \n"
+        fee: 11996200
+      properties:
+        nft_mint_fee_estimate_lamports:
+          description: The estimate of the total fee for minting an NFT on Solana
+          type: number
+        description:
+          description: A description of the fee that explains how it was estimated
+          type: string
+      title: The response when getting an estimated fee for minting a Solana NFT
+    GetCandyMachineIDRequest:
+      example:
+        mint_address: AFPX7VQcezoxJsLWeA6zVTHLGtrjrY5SqgtmjD8jxvgx
+        network: mainnet-beta
+      properties:
+        mint_address:
+          description: The address of the NFT. NOT the mint authority address
+          type: string
+        network:
+          default: devnet
+          enum:
+          - devnet
+          - mainnet-beta
+          type: string
+      required:
+      - mint_address
+      type: object
+    GetCandyMachineIDResponse:
+      example:
+        candy_machine_id: FmkrvXRenCGtwBHw3VtBcExp8eTdnau97upaewF4GUEX
+      properties:
+        candy_machine_id:
+          description: The ID of the candy machine that minted the NFT
+          type: string
+      type: object
+    GetCandyDetailsRequest:
+      example:
+        candy_machine_id: FmkrvXRenCGtwBHw3VtBcExp8eTdnau97upaewF4GUEX
+        network: mainnet-beta
+      properties:
+        candy_machine_id:
+          description: |
+            The ID of the candy machine
+          type: string
+        network:
+          default: devnet
+          enum:
+          - devnet
+          - mainnet-beta
+          type: string
+      required:
+      - candy_machine_id
+      type: object
+    GetCandyDetailsResponse:
+      example:
+        authority: 5hybnoWHp7ruUizgKoxSviJrGfgBLLxzybZosQoHhK6C
+        bump: 255
+        config_address: HpVdfPyqfTzVLprw9UdVH94QJeTB3HEdD1bFwxR46my6
+        go_live_date: 4481031600
+        items_available: 3125
+        items_redeemed: 125
+        price: 250000000
+        token_mint: null
+        uuid: HpVdfP
+        wallet: 5hybnoWHp7ruUizgKoxSviJrGfgBLLxzybZosQoHhK6C
+      properties:
+        uuid:
+          description: The uuid of the candy machine
+          type: string
+        go_live_date:
+          description: |
+            The unix timestamp of the start date of the candy machine
+          type: number
+        price:
+          description: |
+            The price in Lamports for minting an NFT from the candy machine. 1e9 Lamport  = 1 SOL
+          type: number
+        items_available:
+          description: |
+            The number of NFTs available for mint from the candy machine
+          type: number
+        items_redeemed:
+          description: |
+            The number of NFTs minted already from the candy machine
+          type: number
+        token_mint:
+          type: string
+        config_address:
+          description: |
+            The configuration public key address of the candy machine
+          type: string
+        wallet:
+          description: |
+            The public key address of the wallet that recevies the proceeds from NFT mints
+          type: string
+        bump:
+          type: number
+      type: object
+    GetCandyDetailsErrorResponse:
+      example:
+        error: "Unknown error. Possible issues: \n  - You gave an invalid candy machine\
+          \ ID.\n  - You used the wrong network.\n"
+      properties:
+        error:
+          type: string
+    CreateTestCandyMachineRequest:
+      example:
+        secret_recovery_phrase: fire owner display success half rescue pledge oval
+          foam gossip window once
+        derivation_path: m/44/501/0/0
+        passphrase: ""
+        network: devnet
+      properties:
+        secret_recovery_phrase:
+          description: The twelve word phrase that can be used to derive many public
+            key addresses. To derive a public key, you need a secret recovery phrase,
+            a derivation path, and an optional passphrase. See our Security section
+            <a href="#section/Security">here</a>.
+          type: string
+        derivation_path:
+          default: m/44/501/0/0
+          description: |-
+            Derivation paths are used to derive the public key from the secret recovery phrase. Only certain paths are accepted.
+
+            We use "m/44/501/0/0" by default, if it is not provided. This is the path that the Phantom and Sollet wallets use.
+            If you provide the empty string "" as the value for the derivation path, then we will use the Solana CLI default value.
+            The SolFlare recommended path is "m/44/501/0".
+
+            You can also arbitrarily increment the default path ("m/44/501/0/0") to generate more wallets (e.g., "m/44/501/0/1", "m/44/501/0/2", ...). This is how Phantom generates more wallets.
+
+            To learn more about derivation paths, check out <a href="https://learnmeabitcoin.com/technical/derivation-paths" target="_blank">this tutorial</a>.
+          type: string
+        passphrase:
+          default: ""
+          description: 'PASSPHRASE != PASSWORD. This is NOT your Phantom password
+            or any other password. It is an optional string you use when creating
+            a wallet. This provides an additional layer of security because a hacker
+            would need both the secret recovery phrase and the passphrase to access
+            the output public key. By default, most wallet UI extensions do not use
+            a passphrase. (You probably did not use a passphrase.) Limited to 500
+            characters. '
+          type: string
+        network:
+          default: devnet
+          enum:
+          - devnet
+          - mainnet-beta
+          type: string
+      required:
+      - secret_recovery_phrase
+      type: object
+    CreateTestCandyMachineResponse:
+      example:
+        candy_machine_id: G9CFGuYBeyyrpKBeRikFrZF5SiTKEU6PifA3Yh4a2huq
+      properties:
+        candy_machine_id:
+          description: The ID of the candy machine created
+          type: string
+      required:
+      - candy_machine_id
+      type: object
+    GetMintedNFTsRequest:
+      example:
+        candy_machine_id: FmkrvXRenCGtwBHw3VtBcExp8eTdnau97upaewF4GUEX
+        network: mainnet-beta
+      properties:
+        candy_machine_id:
+          description: The ID of the candy machine
+          type: string
+        network:
+          default: devnet
+          enum:
+          - devnet
+          - mainnet-beta
+          type: string
+      required:
+      - candy_machine_id
+      type: object
+    GetMintedNFTsResponse:
+      example:
+        nft_metadata:
+          data:
+            creators:
+            - FmkrvXRenCGtwBHw3VtBcExp8eTdnau97upaewF4GUEX
+            - 5hybnoWHp7ruUizgKoxSviJrGfgBLLxzybZosQoHhK6C
+            name: 'God Particle #0078'
+            seller_fee_basis_points: 500
+            share:
+            - 0
+            - 100
+            symbol': GP
+            uri: https://arweave.net/GIVhsoTr7Phcs4AZxqkVZZ-MToupqK-NRYLVw9yTdLk
+            verified:
+            - 1
+            - 0
+          is_mutable: true
+          mint: TqQvdc5USoG5snWk75YiwDTPTLJe8U1BR7pSbhDRmUS
+          primary_sale_happened: true
+          update_authority: 5hybnoWHp7ruUizgKoxSviJrGfgBLLxzybZosQoHhK6C
+        pub_key_hash: G7EBE41G3yv2JJJGPzw6HQr6hqzaNtythGJD4Af97fec
+      properties:
+        nft_metadata:
+          $ref: '#/components/schemas/NFT'
+        pub_key_hash:
+          description: Use this to verify the NFT
+          type: string
+      type: object
+    GetAllNFTsResponse:
+      example:
+        minted:
+        - nft_metadata:
+            data:
+              creators:
+              - FmkrvXRenCGtwBHw3VtBcExp8eTdnau97upaewF4GUEX
+              - 5hybnoWHp7ruUizgKoxSviJrGfgBLLxzybZosQoHhK6C
+              name: 'God Particle #0078'
+              seller_fee_basis_points: 500
+              share:
+              - 0
+              - 100
+              symbol': GP
+              uri: https://arweave.net/GIVhsoTr7Phcs4AZxqkVZZ-MToupqK-NRYLVw9yTdLk
+              verified:
+              - 1
+              - 0
+            is_mutable: true
+            mint: TqQvdc5USoG5snWk75YiwDTPTLJe8U1BR7pSbhDRmUS
+            primary_sale_happened: true
+            update_authority: 5hybnoWHp7ruUizgKoxSviJrGfgBLLxzybZosQoHhK6C
+          pub_key_hash: G7EBE41G3yv2JJJGPzw6HQr6hqzaNtythGJD4Af97fec
+        unminted:
+        - name: 'God Particle #3123'
+          uri: https://arweave.net/vNw7FWhtkgbNr7uPh9tgjIfH7ueN9EXV7X_qxdUn1dM
+      properties:
+        minted_nfts:
+          items:
+            $ref: '#/components/schemas/GetAllNFTsResponse_minted_nfts'
+          type: array
+        unminted_nfts:
+          items:
+            $ref: '#/components/schemas/GetAllNFTsResponse_unminted_nfts'
+          type: array
+      type: object
+    GetConfigInfoRequest:
+      example:
+        config_address: 3xHPFczscixxv9bKsZrzQ5x4yYGB8oARGyusXn2jW4dc
+        network: mainnet-beta
+      properties:
+        config_address:
+          description: "The config address of the candy machine. \nIf you don't know\
+            \ the address of a candy machine, you can use the \"Get Candy Machine\
+            \ Details\" endpoint to get the configuration public key address. \nIf\
+            \ you don't know the candy machine ID to call this endpoint, you can find\
+            \ it with the \"Get NFT's Candy Machine ID\" endpoint.\n"
+          type: string
+        network:
+          default: devnet
+          enum:
+          - devnet
+          - mainnet-beta
+          type: string
+      required:
+      - config_address
+      type: object
+    GetConfigInfoResponse:
+      example:
+        authority: JE7FqTYGKtcWFqhduHgXRsSPMhWSGBphB1FNvwb188RY
+        creators:
+        - address: r3MyLziYpwjNaGCabWpoKAVGLUHR6qm9T6fhm5RBQyF
+          share: 33
+        - address: 3EYuP9odzWrMeh1ioP62x5Y2DagLa4cQgz9GuFtFxVdD
+          share: 32
+        - address: GN3Mi6B6xBWPyHvnHiRjN9dftHhVBysrJQry8odN7vT
+          share: 17
+        - address: CRW9KduRo8cncmVggKUuLccXHsAWNbzCczqc8gja7HFG
+          share: 18
+        is_mutable: true
+        max_number_of_lines: 6666
+        max_supply: 0
+        retain_authority: true
+        seller_fee_basis_points: 500
+        symbol: \x00\x00\x00\x00\x00\x00\x00\x00\x00\x00
+        config_address: FVbP4uormTqtmR8uQS2YrfKEfoVoQfGEzznCMPTQMZoQ
+      properties:
+        authority:
+          type: string
+        creators:
+          items:
+            $ref: '#/components/schemas/GetConfigInfoResponse_creators'
+          type: array
+        is_mutable:
+          type: boolean
+        retain_authority:
+          description: A public key address
+          type: string
+        seller_fee_basis_points:
+          description: The fee of each sale the creators receive. 100 basis points
+            = 1%
+          type: number
+        symbol:
+          description: The symbol of the candy machine NFT colletion
+          type: string
+      required:
+      - config_address
+      type: object
+    MintNFTRequest:
+      example:
+        secret_recovery_phrase: fire owner display success half rescue pledge oval
+          foam gossip window once
+        derivation_path: m/44/501/0/0
+        passphrase: ""
+        network: devnet
+      properties:
+        config_address:
+          description: |
+            The config address of the candy machine. You can retrieve this if you have the candy machine ID using <a href="#operation/solanaGetCandyMachineDetails">this endpoint</a> and retrieving the `config_address` from the response..
+          type: string
+        secret_recovery_phrase:
+          description: The twelve word phrase that can be used to derive many public
+            key addresses. To derive a public key, you need a secret recovery phrase,
+            a derivation path, and an optional passphrase. See our Security section
+            <a href="#section/Security">here</a>.
+          type: string
+        derivation_path:
+          default: m/44/501/0/0
+          description: |-
+            Derivation paths are used to derive the public key from the secret recovery phrase. Only certain paths are accepted.
+
+            We use "m/44/501/0/0" by default, if it is not provided. This is the path that the Phantom and Sollet wallets use.
+            If you provide the empty string "" as the value for the derivation path, then we will use the Solana CLI default value.
+            The SolFlare recommended path is "m/44/501/0".
+
+            You can also arbitrarily increment the default path ("m/44/501/0/0") to generate more wallets (e.g., "m/44/501/0/1", "m/44/501/0/2", ...). This is how Phantom generates more wallets.
+
+            To learn more about derivation paths, check out <a href="https://learnmeabitcoin.com/technical/derivation-paths" target="_blank">this tutorial</a>.
+          type: string
+        passphrase:
+          default: ""
+          description: 'PASSPHRASE != PASSWORD. This is NOT your Phantom password
+            or any other password. It is an optional string you use when creating
+            a wallet. This provides an additional layer of security because a hacker
+            would need both the secret recovery phrase and the passphrase to access
+            the output public key. By default, most wallet UI extensions do not use
+            a passphrase. (You probably did not use a passphrase.) Limited to 500
+            characters. '
+          type: string
+        network:
+          default: devnet
+          enum:
+          - devnet
+          - mainnet-beta
+          type: string
+      required:
+      - config_address
+      - secret_recovery_phrase
+      type: object
+    MintNFTResponse:
+      example:
+        task_id: 1a029eJdas
+      properties:
+        task_id:
+          description: The task ID of the task launched to complete the request
+          type: string
+      type: object
+    MintNFTErrorResponse:
+      example:
+        error: "Unknown error. Possible issues: \n  - No more minting available.\n\
+          \  - Your address doesn't have enough SOL for the transactions.\n  - You\
+          \ gave an invalid candy machine ID.\n"
+      properties:
+        error:
+          type: string
+    Account_context:
+      properties:
+        slot:
+          type: number
+      type: object
+    Account_value:
+      properties:
+        data:
+          description: More info about the account. What are included depends on the
+            type of account. See examples.
+          type: object
+        executable:
+          description: Whether or not this account is marked as executable
+          type: boolean
+        owner:
+          description: The owner of the account
+          type: string
+        rent_epoch:
+          type: number
+      type: object
+    NFT_data:
+      properties:
+        creators:
+          description: |
+            The creators of the NFT
+          items:
+            description: The public key address of each creator
+            type: string
+          type: array
+        name:
+          description: |
+            The name of the NFT
+          type: string
+        share:
+          description: |
+            The portion of the seller fee that each creator receives. Index 0 corresponds to creator at index 0 in the creator array, and so on. Length of share array must be the same as the length of the creator array.
+          items:
+            description: The share of the seller fee
+            format: float
+            type: number
+          type: array
+        symbol:
+          description: |
+            The symbol of the NFT
+          type: string
+        uri:
+          description: |
+            The URI of the NFT
+          type: string
+        verified:
+          description: |
+            Whether or not the respective creator has signed the minting transaction of the NFT. Index 0 corresponds to creator at index 0 in the creator array, and so on. Length of verified array must be the same as the length of the creator array.
+          items:
+            description: The share of the seller fee
+            maximum: 1
+            minimum: 0
+            type: integer
+          type: array
+      type: object
+    GetAllNFTsResponse_minted_nfts:
+      properties:
+        nft_metadata:
+          $ref: '#/components/schemas/NFT'
+        pub_key_hash:
+          description: Use this to verify the NFT
+          type: string
+      type: object
+    GetAllNFTsResponse_unminted_nfts:
+      properties:
+        name:
+          description: The name of the unminted NFT
+          type: string
+        uri:
+          description: The uri of the unminted NFT
+          type: string
+      type: object
+    GetConfigInfoResponse_creators:
+      properties:
+        address:
+          description: Public key address of a creator
+          type: string
+        share:
+          description: The share of the royalty that the creator receives
+          type: number
+      type: object
+  securitySchemes:
+    APIKeyID:
+      description: Get a free API key pair <a target="_blank" href="https://dashboard.theblockchainapi.com/api-keys">here</a>.
+      in: header
+      name: APIKeyID
+      type: apiKey
+    APISecretKey:
+      description: Get a free API key pair <a target="_blank" href="https://dashboard.theblockchainapi.com/api-keys">here</a>.
+      in: header
+      name: APISecretKey
+      type: apiKey
+x-tagGroups:
+- name: Solana
+  tags:
+  - Solana Wallet
+  - Solana NFT
+  - Solana Candy Machine
+  - Solana Transaction
+  - Solana Account
+- name: Files
+  tags:
+  - File
+- name: Tasks
+  tags:
+  - Task
