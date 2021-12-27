@@ -422,7 +422,7 @@ Name | Type | Description  | Notes
 
 ## SolanaGetTokensBelongingToWallet
 
-> []map[string]interface{} SolanaGetTokensBelongingToWallet(ctx, network, publicKey).ListTokensRequest(listTokensRequest).Execute()
+> []map[string]interface{} SolanaGetTokensBelongingToWallet(ctx, network, publicKey).IncludeNfts(includeNfts).IncludeZeroBalanceHoldings(includeZeroBalanceHoldings).Execute()
 
 Get address's tokens and respective balances
 
@@ -443,11 +443,12 @@ import (
 func main() {
     network := "mainnet-beta" // string | The network ID (devnet, mainnet-beta)
     publicKey := "GKNcUmNacSJo4S2Kq3DuYRYRGw3sNUfJ4tyqd198t6vQ" // string | The public key of the account whose list of owned NFTs you want to get
-    listTokensRequest := *openapiclient.NewListTokensRequest() // ListTokensRequest |  (optional)
+    includeNfts := false // bool | Whether or not to include NFTs in the response (optional) (default to false)
+    includeZeroBalanceHoldings := false // bool | Whether or not to include holdings that have zero balance. This indicates that the wallet held this token or NFT in the past, but no longer holds it. (optional) (default to false)
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.SolanaWalletApi.SolanaGetTokensBelongingToWallet(context.Background(), network, publicKey).ListTokensRequest(listTokensRequest).Execute()
+    resp, r, err := api_client.SolanaWalletApi.SolanaGetTokensBelongingToWallet(context.Background(), network, publicKey).IncludeNfts(includeNfts).IncludeZeroBalanceHoldings(includeZeroBalanceHoldings).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `SolanaWalletApi.SolanaGetTokensBelongingToWallet``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -475,7 +476,8 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
 
- **listTokensRequest** | [**ListTokensRequest**](ListTokensRequest.md) |  | 
+ **includeNfts** | **bool** | Whether or not to include NFTs in the response | [default to false]
+ **includeZeroBalanceHoldings** | **bool** | Whether or not to include holdings that have zero balance. This indicates that the wallet held this token or NFT in the past, but no longer holds it. | [default to false]
 
 ### Return type
 
@@ -487,7 +489,7 @@ Name | Type | Description  | Notes
 
 ### HTTP request headers
 
-- **Content-Type**: application/json
+- **Content-Type**: Not defined
 - **Accept**: application/json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)

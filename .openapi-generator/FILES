@@ -36,7 +36,6 @@ docs/GetCandyMetadataResponseCreators.md
 docs/GetFileResponse.md
 docs/GetPublicKeyRequest.md
 docs/ListNFTsResponse.md
-docs/ListTokensRequest.md
 docs/MintNFTErrorResponse.md
 docs/MintNFTRequest.md
 docs/MintNFTResponse.md
@@ -87,7 +86,6 @@ model_get_candy_metadata_response_creators.go
 model_get_file_response.go
 model_get_public_key_request.go
 model_list_nfts_response.go
-model_list_tokens_request.go
 model_mint_nft_error_response.go
 model_mint_nft_request.go
 model_mint_nft_response.go

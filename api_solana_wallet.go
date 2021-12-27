@@ -889,11 +889,18 @@ type ApiSolanaGetTokensBelongingToWalletRequest struct {
 	ApiService *SolanaWalletApiService
 	network string
 	publicKey string
-	listTokensRequest *ListTokensRequest
+	includeNfts *bool
+	includeZeroBalanceHoldings *bool
 }
 
-func (r ApiSolanaGetTokensBelongingToWalletRequest) ListTokensRequest(listTokensRequest ListTokensRequest) ApiSolanaGetTokensBelongingToWalletRequest {
-	r.listTokensRequest = &listTokensRequest
+// Whether or not to include NFTs in the response
+func (r ApiSolanaGetTokensBelongingToWalletRequest) IncludeNfts(includeNfts bool) ApiSolanaGetTokensBelongingToWalletRequest {
+	r.includeNfts = &includeNfts
+	return r
+}
+// Whether or not to include holdings that have zero balance. This indicates that the wallet held this token or NFT in the past, but no longer holds it.
+func (r ApiSolanaGetTokensBelongingToWalletRequest) IncludeZeroBalanceHoldings(includeZeroBalanceHoldings bool) ApiSolanaGetTokensBelongingToWalletRequest {
+	r.includeZeroBalanceHoldings = &includeZeroBalanceHoldings
 	return r
 }
 
@@ -949,8 +956,14 @@ func (a *SolanaWalletApiService) SolanaGetTokensBelongingToWalletExecute(r ApiSo
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 
+	if r.includeNfts != nil {
+		localVarQueryParams.Add("include_nfts", parameterToString(*r.includeNfts, ""))
+	}
+	if r.includeZeroBalanceHoldings != nil {
+		localVarQueryParams.Add("include_zero_balance_holdings", parameterToString(*r.includeZeroBalanceHoldings, ""))
+	}
 	// to determine the Content-Type header
-	localVarHTTPContentTypes := []string{"application/json"}
+	localVarHTTPContentTypes := []string{}
 
 	// set Content-Type header
 	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
@@ -966,8 +979,6 @@ func (a *SolanaWalletApiService) SolanaGetTokensBelongingToWalletExecute(r ApiSo
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	// body params
-	localVarPostBody = r.listTokensRequest
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {

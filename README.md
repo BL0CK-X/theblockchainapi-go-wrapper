@@ -241,7 +241,6 @@ Class | Method | HTTP request | Description
  - [GetFileResponse](docs/GetFileResponse.md)
  - [GetPublicKeyRequest](docs/GetPublicKeyRequest.md)
  - [ListNFTsResponse](docs/ListNFTsResponse.md)
- - [ListTokensRequest](docs/ListTokensRequest.md)
  - [MintNFTErrorResponse](docs/MintNFTErrorResponse.md)
  - [MintNFTRequest](docs/MintNFTRequest.md)
  - [MintNFTResponse](docs/MintNFTResponse.md)

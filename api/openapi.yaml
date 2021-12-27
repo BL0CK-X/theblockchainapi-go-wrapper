@@ -613,12 +613,28 @@ paths:
         schema:
           type: string
         style: simple
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/ListTokensRequest'
+      - description: Whether or not to include NFTs in the response
+        example: false
+        explode: true
+        in: query
+        name: include_nfts
         required: false
+        schema:
+          default: false
+          type: boolean
+        style: form
+      - description: Whether or not to include holdings that have zero balance. This
+          indicates that the wallet held this token or NFT in the past, but no longer
+          holds it.
+        example: false
+        explode: true
+        in: query
+        name: include_zero_balance_holdings
+        required: false
+        schema:
+          default: false
+          type: boolean
+        style: form
       responses:
         "200":
           content:
@@ -1603,21 +1619,6 @@ components:
       required:
       - balance
       - network
-    ListTokensRequest:
-      example:
-        include_nfts: false
-        include_zero_balance_holdings: false
-      properties:
-        include_nfts:
-          default: false
-          description: Whether or not to include NFTs in the response
-          type: boolean
-        include_zero_balance_holdings:
-          default: false
-          description: Whether or not to include holdings that have zero balance.
-            This indicates that the wallet held this token or NFT in the past, but
-            no longer holds it.
-          type: boolean
     ListTokensResponse:
       description: A list the wallet's of token positions
       example:
