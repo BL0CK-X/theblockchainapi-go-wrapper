@@ -4,7 +4,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**TaskId** | Pointer to **string** | The task ID of the task launched to complete the request | [optional] 
+**TransactionSignature** | Pointer to **string** | The signature of the transaction. Just because this is returned does not mean it was successful.  To determine if the mint was successful, use this Gist: https://gist.github.com/joshwolff1/298e8251e43ff9b4815028683b1ca17d  | [optional] 
 
 ## Methods
 
@@ -25,30 +25,30 @@ NewMintNFTResponseWithDefaults instantiates a new MintNFTResponse object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
 
-### GetTaskId
+### GetTransactionSignature
 
-`func (o *MintNFTResponse) GetTaskId() string`
+`func (o *MintNFTResponse) GetTransactionSignature() string`
 
-GetTaskId returns the TaskId field if non-nil, zero value otherwise.
+GetTransactionSignature returns the TransactionSignature field if non-nil, zero value otherwise.
 
-### GetTaskIdOk
+### GetTransactionSignatureOk
 
-`func (o *MintNFTResponse) GetTaskIdOk() (*string, bool)`
+`func (o *MintNFTResponse) GetTransactionSignatureOk() (*string, bool)`
 
-GetTaskIdOk returns a tuple with the TaskId field if it's non-nil, zero value otherwise
+GetTransactionSignatureOk returns a tuple with the TransactionSignature field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
-### SetTaskId
+### SetTransactionSignature
 
-`func (o *MintNFTResponse) SetTaskId(v string)`
+`func (o *MintNFTResponse) SetTransactionSignature(v string)`
 
-SetTaskId sets TaskId field to given value.
+SetTransactionSignature sets TransactionSignature field to given value.
 
-### HasTaskId
+### HasTransactionSignature
 
-`func (o *MintNFTResponse) HasTaskId() bool`
+`func (o *MintNFTResponse) HasTransactionSignature() bool`
 
-HasTaskId returns a boolean if a field has been set.
+HasTransactionSignature returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

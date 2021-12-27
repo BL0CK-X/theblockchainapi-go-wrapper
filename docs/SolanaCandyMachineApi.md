@@ -4,12 +4,12 @@ All URIs are relative to *https://api.theblockchainapi.com/v1*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**SolanaCreateTestCandyMachine**](SolanaCandyMachineApi.md#SolanaCreateTestCandyMachine) | **Post** /solana/nft/candy_machine | Create a test candy machine 
-[**SolanaGetAllNFTsFromCandyMachine**](SolanaCandyMachineApi.md#SolanaGetAllNFTsFromCandyMachine) | **Get** /solana/nft/candy_machine/{network}/{candy_machine_id}/nfts | Get the list of all NFTs (minted and unminted) from a Solana Candy Machine 
-[**SolanaGetCandyMachineConfigurationDetails**](SolanaCandyMachineApi.md#SolanaGetCandyMachineConfigurationDetails) | **Post** /solana/nft/candy_machine/config/info | Get the details of a Solana Candy Machine configuration 
-[**SolanaGetCandyMachineDetails**](SolanaCandyMachineApi.md#SolanaGetCandyMachineDetails) | **Post** /solana/nft/candy_machine/info | Get a Metaplex candy machine&#39;s details 
-[**SolanaGetNFTsMintedFromCandyMachine**](SolanaCandyMachineApi.md#SolanaGetNFTsMintedFromCandyMachine) | **Post** /solana/nft/candy_machine/nfts | Get the list of NFTs minted from a Solana Candy Machine 
-[**SolanaMintFromCandyMachine**](SolanaCandyMachineApi.md#SolanaMintFromCandyMachine) | **Post** /solana/nft/candy_machine/mint | Mint an NFT from a Metaplex candy machine
+[**SolanaCreateTestCandyMachine**](SolanaCandyMachineApi.md#SolanaCreateTestCandyMachine) | **Post** /solana/nft/candy_machine | Create a test CM
+[**SolanaGetAllNFTsFromCandyMachine**](SolanaCandyMachineApi.md#SolanaGetAllNFTsFromCandyMachine) | **Get** /solana/nft/candy_machine/{network}/{candy_machine_id}/nfts | Get CM&#39;s NFTs  
+[**SolanaGetCandyMachineMetadata**](SolanaCandyMachineApi.md#SolanaGetCandyMachineMetadata) | **Post** /solana/nft/candy_machine/metadata | Get a CM&#39;s metadata 
+[**SolanaListAllCandyMachines**](SolanaCandyMachineApi.md#SolanaListAllCandyMachines) | **Get** /solana/nft/candy_machine/list | List all CMs
+[**SolanaMintFromCandyMachine**](SolanaCandyMachineApi.md#SolanaMintFromCandyMachine) | **Post** /solana/nft/candy_machine/mint | Mint from a CM
+[**SolanaSearchCandyMachines**](SolanaCandyMachineApi.md#SolanaSearchCandyMachines) | **Post** /solana/nft/candy_machine/search | Search CMs
 
 
 
@@ -17,7 +17,7 @@ Method | HTTP request | Description
 
 > CreateTestCandyMachineResponse SolanaCreateTestCandyMachine(ctx).CreateTestCandyMachineRequest(createTestCandyMachineRequest).Execute()
 
-Create a test candy machine 
+Create a test CM
 
 
 
@@ -83,7 +83,7 @@ Name | Type | Description  | Notes
 
 > GetAllNFTsResponse SolanaGetAllNFTsFromCandyMachine(ctx, network, candyMachineId).Execute()
 
-Get the list of all NFTs (minted and unminted) from a Solana Candy Machine 
+Get CM's NFTs  
 
 
 
@@ -152,11 +152,11 @@ Name | Type | Description  | Notes
 [[Back to README]](../README.md)
 
 
-## SolanaGetCandyMachineConfigurationDetails
+## SolanaGetCandyMachineMetadata
 
-> GetConfigInfoResponse SolanaGetCandyMachineConfigurationDetails(ctx).GetConfigInfoRequest(getConfigInfoRequest).Execute()
+> GetCandyMetadataResponse SolanaGetCandyMachineMetadata(ctx).GetCandyMetadataRequest(getCandyMetadataRequest).Execute()
 
-Get the details of a Solana Candy Machine configuration 
+Get a CM's metadata 
 
 
 
@@ -173,17 +173,17 @@ import (
 )
 
 func main() {
-    getConfigInfoRequest := *openapiclient.NewGetConfigInfoRequest("ConfigAddress_example") // GetConfigInfoRequest |  (optional)
+    getCandyMetadataRequest := *openapiclient.NewGetCandyMetadataRequest() // GetCandyMetadataRequest |  (optional)
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.SolanaCandyMachineApi.SolanaGetCandyMachineConfigurationDetails(context.Background()).GetConfigInfoRequest(getConfigInfoRequest).Execute()
+    resp, r, err := api_client.SolanaCandyMachineApi.SolanaGetCandyMachineMetadata(context.Background()).GetCandyMetadataRequest(getCandyMetadataRequest).Execute()
     if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `SolanaCandyMachineApi.SolanaGetCandyMachineConfigurationDetails``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Error when calling `SolanaCandyMachineApi.SolanaGetCandyMachineMetadata``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
-    // response from `SolanaGetCandyMachineConfigurationDetails`: GetConfigInfoResponse
-    fmt.Fprintf(os.Stdout, "Response from `SolanaCandyMachineApi.SolanaGetCandyMachineConfigurationDetails`: %v\n", resp)
+    // response from `SolanaGetCandyMachineMetadata`: GetCandyMetadataResponse
+    fmt.Fprintf(os.Stdout, "Response from `SolanaCandyMachineApi.SolanaGetCandyMachineMetadata`: %v\n", resp)
 }
 ```
 
@@ -193,16 +193,16 @@ func main() {
 
 ### Other Parameters
 
-Other parameters are passed through a pointer to a apiSolanaGetCandyMachineConfigurationDetailsRequest struct via the builder pattern
+Other parameters are passed through a pointer to a apiSolanaGetCandyMachineMetadataRequest struct via the builder pattern
 
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **getConfigInfoRequest** | [**GetConfigInfoRequest**](GetConfigInfoRequest.md) |  | 
+ **getCandyMetadataRequest** | [**GetCandyMetadataRequest**](GetCandyMetadataRequest.md) |  | 
 
 ### Return type
 
-[**GetConfigInfoResponse**](GetConfigInfoResponse.md)
+[**GetCandyMetadataResponse**](GetCandyMetadataResponse.md)
 
 ### Authorization
 
@@ -218,77 +218,11 @@ Name | Type | Description  | Notes
 [[Back to README]](../README.md)
 
 
-## SolanaGetCandyMachineDetails
+## SolanaListAllCandyMachines
 
-> GetCandyDetailsResponse SolanaGetCandyMachineDetails(ctx).GetCandyDetailsRequest(getCandyDetailsRequest).Execute()
+> interface{} SolanaListAllCandyMachines(ctx).Execute()
 
-Get a Metaplex candy machine's details 
-
-
-
-### Example
-
-```go
-package main
-
-import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "./openapi"
-)
-
-func main() {
-    getCandyDetailsRequest := *openapiclient.NewGetCandyDetailsRequest("CandyMachineId_example") // GetCandyDetailsRequest |  (optional)
-
-    configuration := openapiclient.NewConfiguration()
-    api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.SolanaCandyMachineApi.SolanaGetCandyMachineDetails(context.Background()).GetCandyDetailsRequest(getCandyDetailsRequest).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `SolanaCandyMachineApi.SolanaGetCandyMachineDetails``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `SolanaGetCandyMachineDetails`: GetCandyDetailsResponse
-    fmt.Fprintf(os.Stdout, "Response from `SolanaCandyMachineApi.SolanaGetCandyMachineDetails`: %v\n", resp)
-}
-```
-
-### Path Parameters
-
-
-
-### Other Parameters
-
-Other parameters are passed through a pointer to a apiSolanaGetCandyMachineDetailsRequest struct via the builder pattern
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **getCandyDetailsRequest** | [**GetCandyDetailsRequest**](GetCandyDetailsRequest.md) |  | 
-
-### Return type
-
-[**GetCandyDetailsResponse**](GetCandyDetailsResponse.md)
-
-### Authorization
-
-[APIKeyID](../README.md#APIKeyID), [APISecretKey](../README.md#APISecretKey)
-
-### HTTP request headers
-
-- **Content-Type**: application/json
-- **Accept**: application/json
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
-[[Back to Model list]](../README.md#documentation-for-models)
-[[Back to README]](../README.md)
-
-
-## SolanaGetNFTsMintedFromCandyMachine
-
-> []GetMintedNFTsResponse SolanaGetNFTsMintedFromCandyMachine(ctx).GetMintedNFTsRequest(getMintedNFTsRequest).Execute()
-
-Get the list of NFTs minted from a Solana Candy Machine 
+List all CMs
 
 
 
@@ -305,36 +239,31 @@ import (
 )
 
 func main() {
-    getMintedNFTsRequest := *openapiclient.NewGetMintedNFTsRequest("CandyMachineId_example") // GetMintedNFTsRequest |  (optional)
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.SolanaCandyMachineApi.SolanaGetNFTsMintedFromCandyMachine(context.Background()).GetMintedNFTsRequest(getMintedNFTsRequest).Execute()
+    resp, r, err := api_client.SolanaCandyMachineApi.SolanaListAllCandyMachines(context.Background()).Execute()
     if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `SolanaCandyMachineApi.SolanaGetNFTsMintedFromCandyMachine``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Error when calling `SolanaCandyMachineApi.SolanaListAllCandyMachines``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
-    // response from `SolanaGetNFTsMintedFromCandyMachine`: []GetMintedNFTsResponse
-    fmt.Fprintf(os.Stdout, "Response from `SolanaCandyMachineApi.SolanaGetNFTsMintedFromCandyMachine`: %v\n", resp)
+    // response from `SolanaListAllCandyMachines`: interface{}
+    fmt.Fprintf(os.Stdout, "Response from `SolanaCandyMachineApi.SolanaListAllCandyMachines`: %v\n", resp)
 }
 ```
 
 ### Path Parameters
 
-
+This endpoint does not need any parameter.
 
 ### Other Parameters
 
-Other parameters are passed through a pointer to a apiSolanaGetNFTsMintedFromCandyMachineRequest struct via the builder pattern
+Other parameters are passed through a pointer to a apiSolanaListAllCandyMachinesRequest struct via the builder pattern
 
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **getMintedNFTsRequest** | [**GetMintedNFTsRequest**](GetMintedNFTsRequest.md) |  | 
 
 ### Return type
 
-[**[]GetMintedNFTsResponse**](GetMintedNFTsResponse.md)
+**interface{}**
 
 ### Authorization
 
@@ -342,7 +271,7 @@ Name | Type | Description  | Notes
 
 ### HTTP request headers
 
-- **Content-Type**: application/json
+- **Content-Type**: Not defined
 - **Accept**: application/json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
@@ -354,7 +283,7 @@ Name | Type | Description  | Notes
 
 > MintNFTResponse SolanaMintFromCandyMachine(ctx).MintNFTRequest(mintNFTRequest).Execute()
 
-Mint an NFT from a Metaplex candy machine
+Mint from a CM
 
 
 
@@ -401,6 +330,72 @@ Name | Type | Description  | Notes
 ### Return type
 
 [**MintNFTResponse**](MintNFTResponse.md)
+
+### Authorization
+
+[APIKeyID](../README.md#APIKeyID), [APISecretKey](../README.md#APISecretKey)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## SolanaSearchCandyMachines
+
+> []CandyMachineSearchResponse SolanaSearchCandyMachines(ctx).CandyMachineSearchRequest(candyMachineSearchRequest).Execute()
+
+Search CMs
+
+
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+    candyMachineSearchRequest := *openapiclient.NewCandyMachineSearchRequest() // CandyMachineSearchRequest |  (optional)
+
+    configuration := openapiclient.NewConfiguration()
+    api_client := openapiclient.NewAPIClient(configuration)
+    resp, r, err := api_client.SolanaCandyMachineApi.SolanaSearchCandyMachines(context.Background()).CandyMachineSearchRequest(candyMachineSearchRequest).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `SolanaCandyMachineApi.SolanaSearchCandyMachines``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `SolanaSearchCandyMachines`: []CandyMachineSearchResponse
+    fmt.Fprintf(os.Stdout, "Response from `SolanaCandyMachineApi.SolanaSearchCandyMachines`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiSolanaSearchCandyMachinesRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **candyMachineSearchRequest** | [**CandyMachineSearchRequest**](CandyMachineSearchRequest.md) |  | 
+
+### Return type
+
+[**[]CandyMachineSearchResponse**](CandyMachineSearchResponse.md)
 
 ### Authorization
 

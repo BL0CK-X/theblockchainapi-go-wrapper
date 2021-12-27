@@ -422,7 +422,7 @@ Name | Type | Description  | Notes
 
 ## SolanaGetTokensBelongingToWallet
 
-> []map[string]interface{} SolanaGetTokensBelongingToWallet(ctx, network, publicKey).Execute()
+> []map[string]interface{} SolanaGetTokensBelongingToWallet(ctx, network, publicKey).ListTokensRequest(listTokensRequest).Execute()
 
 Get address's tokens and respective balances
 
@@ -443,10 +443,11 @@ import (
 func main() {
     network := "mainnet-beta" // string | The network ID (devnet, mainnet-beta)
     publicKey := "GKNcUmNacSJo4S2Kq3DuYRYRGw3sNUfJ4tyqd198t6vQ" // string | The public key of the account whose list of owned NFTs you want to get
+    listTokensRequest := *openapiclient.NewListTokensRequest() // ListTokensRequest |  (optional)
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.SolanaWalletApi.SolanaGetTokensBelongingToWallet(context.Background(), network, publicKey).Execute()
+    resp, r, err := api_client.SolanaWalletApi.SolanaGetTokensBelongingToWallet(context.Background(), network, publicKey).ListTokensRequest(listTokensRequest).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `SolanaWalletApi.SolanaGetTokensBelongingToWallet``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -474,6 +475,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
 
+ **listTokensRequest** | [**ListTokensRequest**](ListTokensRequest.md) |  | 
 
 ### Return type
 
@@ -485,7 +487,7 @@ Name | Type | Description  | Notes
 
 ### HTTP request headers
 
-- **Content-Type**: Not defined
+- **Content-Type**: application/json
 - **Accept**: application/json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)

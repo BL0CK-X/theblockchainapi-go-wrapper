@@ -6,9 +6,9 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Balance** | **float32** | The balance of the token in the wallet | 
 **IntegerBalance** | Pointer to **float32** | Not included if retreiving SOL balance | [optional] 
-**Decimals** | Pointer to **float32** | Not included if retreiving SOL balance | [optional] 
+**Decimals** | Pointer to **float32** | Not included if retreiving SOL balance. Sometimes not included if the balance of the token is &#39;0&#39;. | [optional] 
 **Network** | **string** |  | 
-**Unit** | Pointer to **string** | Not included if retreiving an SPL token balance | [optional] 
+**Unit** | Pointer to **string** | Not included if retreiving an SPL token/NFT balance | [optional] 
 
 ## Methods
 

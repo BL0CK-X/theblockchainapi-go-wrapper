@@ -55,24 +55,24 @@ info:
     \ illegal, and we will report offenders. Do not harrass us. Rather, feel free\
     \ to discuss your concerns with us and we will be more than happy to work with\
     \ you to come up with a solution.\n\n# Pricing\n\n<b>Each user receives 500 free\
-    \ credits every month.</b>\n\nYou can learn more about our pricing <a href=\"\
-    https://dashboard.theblockchainapi.com/billing\" target=\"_blank\">here</a>. \n\
-    \nWe frequently do custom plans. If our pricing doesn't work for you, <a href=\"\
-    #section/Contact\">contact us</a>.\n\nIf you have questions, concerns, feedback,\
-    \ or ideas, <a href=\"#section/Contact\">contact us</a>.\n\n# SDKs / API Wrappers\n\
-    \nWe have examples using both our <a href=\"https://github.com/BL0CK-X/the-blockchain-api/tree/main/examples\"\
-    \ target=\"_blank\">Python wrapper and our JavaScript wrapper here</a>.\n\nWe\
-    \ have built a custom <a href=\"https://github.com/BL0CK-X/the-blockchain-api-python-wrapper\"\
-    \ target=\"_blank\">Python wrapper</a>.\n\n`pip install theblockchainapi`\n\n\
-    We also have published a <a href=\"https://github.com/BL0CK-X/theblockchainapi-wrappers/tree/main/javascript\"\
+    \ credits.</b>\n\nYou can learn more about our pricing <a href=\"https://dashboard.theblockchainapi.com/billing\"\
+    \ target=\"_blank\">here</a>. \n\nWe frequently do custom plans. If our pricing\
+    \ doesn't work for you, <a href=\"#section/Contact\">contact us</a>.\n\nIf you\
+    \ have questions, concerns, feedback, or ideas, <a href=\"#section/Contact\">contact\
+    \ us</a>.\n\n# SDKs / API Wrappers\n\nWe have examples using both our <a href=\"\
+    https://github.com/BL0CK-X/the-blockchain-api/tree/main/examples\" target=\"_blank\"\
+    >Python wrapper and our JavaScript wrapper here</a>.\n\nWe have built a custom\
+    \ <a href=\"https://github.com/BL0CK-X/the-blockchain-api-python-wrapper\" target=\"\
+    _blank\">Python wrapper</a>.\n\n`pip install theblockchainapi`\n\nWe also have\
+    \ published a <a href=\"https://github.com/BL0CK-X/theblockchainapi-javascript-wrapper\"\
     \ target=\"_blank\">JavaScript Wrapper</a>.\n\n`npm install theblockchainapi`\n\
     \nWe also have auto-generated wrappers for the following languages:\n- <a href=\"\
-    https://github.com/BL0CK-X/theblockchainapi-wrappers/tree/main/go\" target = \"\
-    _blank\">Go</a>\n- <a href=\"https://github.com/BL0CK-X/theblockchainapi-wrappers/tree/main/java\"\
-    \ target = \"_blank\">Java</a>\n- <a href=\"https://github.com/BL0CK-X/theblockchainapi-wrappers/tree/main/go\"\
-    \ target = \"_blank\">Kotlin</a>\n- <a href=\"https://github.com/BL0CK-X/theblockchainapi-wrappers/tree/main/go\"\
-    \ target = \"_blank\">PHP</a>\n- <a href=\"https://github.com/BL0CK-X/theblockchainapi-wrappers/tree/main/go\"\
-    \ target = \"_blank\">Swift5</a>\n- <a href=\"https://github.com/BL0CK-X/theblockchainapi-wrappers/tree/main/go\"\
+    https://github.com/BL0CK-X/theblockchainapi-go-wrapper\" target = \"_blank\">Go</a>\n\
+    - <a href=\"https://github.com/BL0CK-X/theblockchainapi-java-wrapper\" target\
+    \ = \"_blank\">Java</a>\n- <a href=\"https://github.com/BL0CK-X/theblockchainapi-kotlin-wrapper\"\
+    \ target = \"_blank\">Kotlin</a>\n- <a href=\"https://github.com/BL0CK-X/theblockchainapi-php-wrapper\"\
+    \ target = \"_blank\">PHP</a>\n- <a href=\"https://github.com/BL0CK-X/theblockchainapi-swift-wrapper\"\
+    \ target = \"_blank\">Swift5</a>\n- <a href=\"https://github.com/BL0CK-X/theblockchainapi-typescript-wrapper\"\
     \ target = \"_blank\">TypeScript</a>\n\nIf you would like a different language\
     \ as well, submit an issue <a href=\"https://github.com/BL0CK-X/theblockchainapi-wrappers/issues/new\"\
     \ target=\"_blank\">here</a>.\n\nIf you run into any bugs with the wrappers, submit\
@@ -105,57 +105,6 @@ tags:
     Upload to IPFS, Arweave, and Filecoin easily. In order to access this endpoint, please sign up for [the waitlist](https://forms.gle/N4KSqcptpSrHQ1427). This waitlist is unique for this endpoint. Feature requests are welcome on our [GitHub repository](https://github.com/BL0CK-X/the-blockchain-api/issues/new).
   name: Files
 paths:
-  /task/{task_id}:
-    get:
-      description: "<a href=\"https://github.com/BL0CK-X/the-blockchain-api/tree/main/examples/solana-candy-machine/mint-from-candy-machine\"\
-        \ target=\"_blank\">See examples (Python, JavaScript)</a>.\n    \nGet the\
-        \ result of a task. Replace `task_id` with the ID of your task.\n\n`Cost:\
-        \ 1 Credit` (<a href=\"#section/Pricing\">See Pricing</a>)"
-      operationId: getTask
-      parameters:
-      - description: The ID of the task
-        explode: false
-        in: path
-        name: task_id
-        required: true
-        schema:
-          type: string
-        style: simple
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Task'
-          description: Task completed. Does *NOT* indicate that the task was successful.
-            Check the response data for details.
-        "202":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Task'
-          description: Task in Progress. Check back again in a bit!
-        "401":
-          description: Invalid API key pair in headers
-        "402":
-          description: Payment required. Occurs when you run out of API requests.
-            Upgrade <a href="https://dashboard.theblockchainapi.com/billing" target="_blank">here</a>.
-        "404":
-          description: Task not found.
-      security:
-      - APIKeyID: []
-        APISecretKey: []
-      summary: Get the result of a task
-      tags:
-      - Task
-      x-codeSamples:
-      - lang: cURL
-        label: CLI
-        source: |
-          curl --request POST \
-          --url 'https://data.apiexample.com/api/example/batch_query/json?format=json' \
-          --header 'content-type: application/octet-stream: ' \
-          --data '{}'
   /file:
     post:
       description: Easily upload a file to any of IPFS, Arweave, and Filecoin. Not
@@ -243,9 +192,10 @@ paths:
       - Solana Account
   /solana/account/{network}/{public_key}/is_nft:
     get:
-      description: "<a href=\"\" target=\"_blank\">See examples (Python, JavaScript)\
-        \ [COMING SOON]</a>.\n    \nDetermine whether or not a public key is an NFT\
-        \ `mint address`\n\n`Cost: 1 Credit` (<a href=\"#section/Pricing\">See Pricing</a>)"
+      description: "<a href=\"https://github.com/BL0CK-X/the-blockchain-api/tree/main/examples/solana-account/get-is-nft\"\
+        \ target=\"_blank\">See examples (Python, JavaScript)</a>.\n    \nDetermine\
+        \ whether or not a public key is an NFT `mint address`\n\n`Cost: 1 Credit`\
+        \ (<a href=\"#section/Pricing\">See Pricing</a>)"
       operationId: solanaGetAccountIsNFT
       parameters:
       - description: The network ID (devnet, mainnet-beta)
@@ -291,10 +241,11 @@ paths:
       - Solana Account
   /solana/account/{network}/{public_key}/is_candy_machine:
     get:
-      description: "<a href=\"\" target=\"_blank\">See examples (Python, JavaScript)\
-        \ [COMING SOON]</a>.\n    \nDetermine whether or not a public key address\
-        \ corresponds to a candy machine ID or candy machine configuration.\n\n`Cost:\
-        \ 1 Credit` (<a href=\"#section/Pricing\">See Pricing</a>)"
+      description: "<a href=\"https://github.com/BL0CK-X/the-blockchain-api/tree/main/examples/solana-account/get-is-candy-machine\"\
+        \ target=\"_blank\">See examples (Python, JavaScript)</a>.\n    \nDetermine\
+        \ whether or not a public key address corresponds to a candy machine ID or\
+        \ candy machine configuration.\n\n`Cost: 1 Credit` (<a href=\"#section/Pricing\"\
+        >See Pricing</a>)"
       operationId: solanaGetAccountIsCandyMachine
       parameters:
       - description: The network ID (devnet, mainnet-beta)
@@ -463,16 +414,24 @@ paths:
       - Solana Wallet
   /solana/wallet/transfer:
     post:
-      description: |-
-        <a href="https://github.com/BL0CK-X/the-blockchain-api/tree/main/examples/solana-wallet/transfer-sol" target="_blank">See transfer SOL example (Python, JavaScript)</a>.
-
-        <a href="https://github.com/BL0CK-X/the-blockchain-api/tree/main/examples/solana-wallet/transfer-nft" target="_blank">See transfer NFT example (can also be used for SPL token) (Python, JavaScript)</a>.
-
-        Transfer SOL, a token or an NFT to another address. If you're transferring an NFT, supply the `mint` (the address of the mint) for the `token_address`.
-
-        If you're transfering a token, supply the token address found on the explorer (e.g., see `SRMuApVNdxXokk5GT7XD5cUUgXMBCoAz2LHeuAoKWRt` for <a href="https://explorer.solana.com/address/SRMuApVNdxXokk5GT7XD5cUUgXMBCoAz2LHeuAoKWRt" target="_blank">Serum Token</a>) for the `token_address`. If you're transferring SOL, do not supply a value for `token_address`.
-
-        `Cost: 1 Credit` (<a href="#section/Pricing">See Pricing</a>)
+      description: "<a href=\"https://github.com/BL0CK-X/the-blockchain-api/tree/main/examples/solana-wallet/transfer-sol\"\
+        \ target=\"_blank\">See transfer SOL example (Python, JavaScript)</a>.\n\n\
+        <a href=\"https://github.com/BL0CK-X/the-blockchain-api/tree/main/examples/solana-wallet/transfer-nft\"\
+        \ target=\"_blank\">See transfer NFT example (can also be used for SPL token)\
+        \ (Python, JavaScript)</a>.\n\nTransfer SOL, a token or an NFT to another\
+        \ address. If you're transferring an NFT, supply the `mint` (the address of\
+        \ the mint) for the `token_address`.\n\nSENDER: Note that the wallet information\
+        \ (`secret_recovery_phrase`, `passphrase`, `derivation_path`) is used to authorize\
+        \ the sending of the tokens and identifies the source of the tokens. \n\n\
+        RECEIVER: `recipient_address` identifies the receiver. This is entirely separate\
+        \ from the information used for the SENDER above. So, in this API call, there\
+        \ are two wallets involved, but only one (namely, the SENDER) is needed to\
+        \ authorize the transaction.\n\nIf you're transfering a token, supply the\
+        \ token address found on the explorer (e.g., see `SRMuApVNdxXokk5GT7XD5cUUgXMBCoAz2LHeuAoKWRt`\
+        \ for <a href=\"https://explorer.solana.com/address/SRMuApVNdxXokk5GT7XD5cUUgXMBCoAz2LHeuAoKWRt\"\
+        \ target=\"_blank\">Serum Token</a>) for the `token_address`. If you're transferring\
+        \ SOL, do not supply a value for `token_address`.\n\n`Cost: 1 Credit` (<a\
+        \ href=\"#section/Pricing\">See Pricing</a>)"
       operationId: solanaTransfer
       requestBody:
         content:
@@ -588,9 +547,19 @@ paths:
   /solana/wallet/balance:
     post:
       description: "<a href=\"https://github.com/BL0CK-X/the-blockchain-api/tree/main/examples/solana-wallet/get-wallet-balance\"\
-        \ target=\"_blank\">See examples (Python, JavaScript) [More examples coming\
-        \ soon]</a>.\n    \nSee the balance of a wallet in SOL or any SPL token.\n\
-        \n`Cost: 1 Credit` (<a href=\"#section/Pricing\">See Pricing</a>)"
+        \ target=\"_blank\">See examples (Python, JavaScript)</a>.\n    \nSee the\
+        \ balance of a wallet in SOL or any SPL token.\n\nTo get the balance of an\
+        \ SPL token, supply the `mint_address` of the SPL token. The list of SPL tokens\
+        \ can be viewed <a href=\"https://raw.githubusercontent.com/solana-labs/token-list/main/src/tokens/solana.tokenlist.json\"\
+        \ target=\"_blank\">here</a>.\n\nYou can also use this endpoint to see whether\
+        \ or not a person owns an NFT. Just supply the `mint_address` of the NFT.\
+        \ A balance of \"1\" means the person owns the NFT, and a balance of \"0\"\
+        \ means the person does not own the NFT. This works in most cases, but we\
+        \ are aware of one edge case where a balance of \"0\" will show up for a person\
+        \ who is actually the owner of the NFT. We just recommend using the <a href=\"\
+        #operation/solanaGetNFTOwner\">getNFTOwner</a> endpoint and comparing that\
+        \ output to the expected address.\n\n`Cost: 1 Credit` (<a href=\"#section/Pricing\"\
+        >See Pricing</a>)"
       operationId: solanaGetBalance
       requestBody:
         content:
@@ -619,9 +588,10 @@ paths:
       - Solana Wallet
   /solana/wallet/{network}/{public_key}/tokens:
     get:
-      description: "<a href=\"\" target=\"_blank\">See examples (Python, JavaScript)\
-        \ [Coming Soon]</a>.\n    \nSee the token holdings of a given public key address\n\
-        \n`Cost: 1 Credit` (<a href=\"#section/Pricing\">See Pricing</a>)"
+      description: "<a href=\"https://github.com/BL0CK-X/the-blockchain-api/tree/main/examples/solana-wallet/get-wallet-token-holdings\"\
+        \ target=\"_blank\">See examples (Python, JavaScript)</a>.\n    \nSee the\
+        \ token holdings of a given public key address\n\n`Cost: 1 Credit` (<a href=\"\
+        #section/Pricing\">See Pricing</a>)"
       operationId: solanaGetTokensBelongingToWallet
       parameters:
       - description: The network ID (devnet, mainnet-beta)
@@ -643,6 +613,12 @@ paths:
         schema:
           type: string
         style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ListTokensRequest'
+        required: false
       responses:
         "200":
           content:
@@ -717,6 +693,8 @@ paths:
 
         Create a Metaplex NFT on Solana. Read more on this <a href="https://blog.theblockchainapi.com/2021/11/16/a-note-on-nfts.html" target="_blank">here</a>.
 
+        To add attributes to the NFT, add them to a JSON file and upload that to Arweave/IPFS/Filecoin. The JSON file should follow this format: <a href="https://docs.metaplex.com/nft-standard" target="_blank">NFT Standard.</a> (See the "URI JSON Schema" section in that article). Then supply the link to the JSON file in `nft_url`. You don't need to use `nft_metadata`.
+
         `Cost: 2 Credits` (<a href="#section/Pricing">See Pricing</a>)
       operationId: solanaCreateNFT
       requestBody:
@@ -745,23 +723,60 @@ paths:
         "414":
           description: URI too long (the data you provided was too large [e.g., the
             metadata provided was 500kb])
-        "502":
-          description: Service unavailable. This can happen when Solana's leading
-            validator is behind and is unable to process transactions we send. We
-            have no control over this. The proper response here is to wait 10 or so
-            seconds and try again.
       security:
       - APIKeyID: []
         APISecretKey: []
       summary: Create an NFT on Solana
       tags:
       - Solana NFT
+  /solana/nft/search:
+    post:
+      description: |-
+        <a href="" target="_blank">See examples (Python, JavaScript) [Coming Soon]</a>.
+
+        With this endpoint, you can search for NFTs by their symbol, name of NFTs, uuid, configuration address, and update authority.
+
+        The output is a list of NFTs that match your query.
+
+        You can also provide multiple search clauses, such as the update authority (`update_authority="G17UmNGnMJ851x3M1JXocgpft1afcYedjPuFpo1ohhCk"`) and symbol begins with "Sol" (`symbol="Sol", symbol_search_method='begins_with'`).
+
+        `Cost: 1 Credit` (<a href="#section/Pricing">See Pricing</a>)
+      operationId: solanaSearchNFTs
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/NFTSearchRequest'
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NFTSearchResponse'
+          description: Successful Response
+        "400":
+          description: Bad request (check response message)
+        "401":
+          description: Invalid API key pair in headers
+        "402":
+          description: Payment required. Occurs when you run out of API requests.
+            Upgrade <a href="https://dashboard.theblockchainapi.com/billing" target="_blank">here</a>.
+      security:
+      - APIKeyID: []
+        APISecretKey: []
+      summary: Search NFTs on Solana
+      tags:
+      - Solana NFT
   /solana/nft/{network}/{mint_address}:
     get:
       description: "<a href=\"https://github.com/BL0CK-X/the-blockchain-api/tree/main/examples/solana-nft/get-nft-metadata\"\
         \ target=\"_blank\">See examples (Python, JavaScript)</a>. \n    \nGet the\
-        \ metadata of an NFT.\n\n`Cost: 1 Credits` (<a href=\"#section/Pricing\">See\
-        \ Pricing</a>)"
+        \ metadata of an NFT.\n\nIf you're looking for metadata such as attributes\
+        \ and others, you can retrieve them from the link in the URI field of the\
+        \ NFT metadata returned. See the example on the right. The URI is an Arweave\
+        \ URL. That contains the attributes and other information about the NFT. That\
+        \ URL is stored on the Solana blockchain.\n\n`Cost: 1 Credits` (<a href=\"\
+        #section/Pricing\">See Pricing</a>)"
       operationId: solanaGetNFT
       parameters:
       - description: The network ID (devnet, mainnet-beta)
@@ -918,46 +933,6 @@ paths:
         Get the ID of the candy machine of an NFT
       tags:
       - Solana NFT
-  /solana/nft/candy_machine/info:
-    post:
-      description: |-
-        <a href="https://github.com/BL0CK-X/the-blockchain-api/tree/main/examples/solana-candy-machine/get-candy-machine-info" target="_blank">See examples (Python, JavaScript)</a>.
-
-        Use this endpoint to get the following details about a Metaplex candy machine: uuid, go live date, items in the collection, and the cost to mint.
-
-        `Cost: 2 Credits` (<a href="#section/Pricing">See Pricing</a>)
-      operationId: solanaGetCandyMachineDetails
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/GetCandyDetailsRequest'
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/GetCandyDetailsResponse'
-          description: |
-            Successful Response.
-        "400":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/GetCandyDetailsErrorResponse'
-          description: Bad request (check response message)
-        "401":
-          description: Invalid API key pair in headers
-        "402":
-          description: Payment required. Occurs when you run out of API requests.
-            Upgrade <a href="https://dashboard.theblockchainapi.com/billing" target="_blank">here</a>.
-      security:
-      - APIKeyID: []
-        APISecretKey: []
-      summary: |
-        Get a Metaplex candy machine's details
-      tags:
-      - Solana Candy Machine
   /solana/nft/candy_machine:
     post:
       description: "<a href=\"https://github.com/BL0CK-X/the-blockchain-api/tree/main/examples/solana-candy-machine/create-test-candy-machine\"\
@@ -987,36 +962,40 @@ paths:
       security:
       - APIKeyID: []
         APISecretKey: []
-      summary: |
-        Create a test candy machine
+      summary: Create a test CM
       tags:
       - Solana Candy Machine
-  /solana/nft/candy_machine/nfts:
+  /solana/nft/candy_machine/search:
     post:
       description: |-
-        <a href="https://github.com/BL0CK-X/the-blockchain-api/tree/main/examples/solana-candy-machine/get-candy-machine-minted-nfts" target="_blank">See examples (Python, JavaScript)</a>.
+        <a href="" target="_blank">See examples (Python, JavaScript) [Coming Soon]</a>.
 
-        Use this endpoint to get the list of NFTs minted from a Solana Candy Machine.
+        With this endpoint, you can search candy machines by their symbol, name of NFTs, uuid, configuration address, and update authority.
 
-        See example for how to get the list of NFT hashes <a href="https://github.com/BL0CK-X/the-blockchain-api/tree/main/examples/solana-candy-machine/get-candy-machine-hash-table" target="_blank">here</a>.
+        The output is a list of config addresses.
+
+        You can also provide multiple search clauses, such as the update authority (`update_authority="G17UmNGnMJ851x3M1JXocgpft1afcYedjPuFpo1ohhCk"`) and symbol begins with "Sol" (`symbol="Sol", symbol_search_method='begins_with'`).
 
         `Cost: 2 Credits` (<a href="#section/Pricing">See Pricing</a>)
-      operationId: solanaGetNFTsMintedFromCandyMachine
+      operationId: solanaSearchCandyMachines
       requestBody:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/GetMintedNFTsRequest'
+              $ref: '#/components/schemas/CandyMachineSearchRequest'
       responses:
         "200":
           content:
             application/json:
               schema:
+                example:
+                - 9AYhVG9rH4DwPufEmSD1PD3vs64GhaXWNzXb33jFpByA
+                - FmZNv5HqPWEqXHYtKPKe15WF8PuNk1FbJmVMN92dVjNP
+                - 6Anxd2Tn7KEEMKpGyBdVWTCp5jpAum8cppgXMJTzp44R
                 items:
-                  $ref: '#/components/schemas/GetMintedNFTsResponse'
+                  $ref: '#/components/schemas/CandyMachineSearchResponse'
                 type: array
-          description: Successful Response. Click "Expand All" on the right sidebar
-            to see more.
+          description: Successful Response
         "400":
           description: Bad request (check response message)
         "401":
@@ -1024,23 +1003,116 @@ paths:
         "402":
           description: Payment required. Occurs when you run out of API requests.
             Upgrade <a href="https://dashboard.theblockchainapi.com/billing" target="_blank">here</a>.
-        "404":
-          description: Not found
       security:
       - APIKeyID: []
         APISecretKey: []
-      summary: |
-        Get the list of NFTs minted from a Solana Candy Machine
+      summary: Search CMs
+      tags:
+      - Solana Candy Machine
+  /solana/nft/candy_machine/list:
+    get:
+      description: |-
+        <a href="" target="_blank">See examples (Python, JavaScript) [Coming Soon]</a>.
+
+        With this endpoint, you can list all candy machines published to Solana mainnet.
+
+        We update this data every 15 minutes.
+
+        The output is a list of config addresses, currently about 17000 in length.
+
+        `Cost: 2 Credits` (<a href="#section/Pricing">See Pricing</a>)
+      operationId: solanaListAllCandyMachines
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                example:
+                  last_updated: 1639529803
+                  config_addresses:
+                  - 9AYhVG9rH4DwPufEmSD1PD3vs64GhaXWNzXb33jFpByA
+                  - FmZNv5HqPWEqXHYtKPKe15WF8PuNk1FbJmVMN92dVjNP
+                  - 6Anxd2Tn7KEEMKpGyBdVWTCp5jpAum8cppgXMJTzp44R
+                  config_addresses_v1:
+                  - 9AYhVG9rH4DwPufEmSD1PD3vs64GhaXWNzXb33jFpByA
+                  - FmZNv5HqPWEqXHYtKPKe15WF8PuNk1FbJmVMN92dVjNP
+                  - 6Anxd2Tn7KEEMKpGyBdVWTCp5jpAum8cppgXMJTzp44R
+                  config_addresses_v2:
+                  - BfA9f9My57iUQE1tFNd2hNzFMK9fRMbyDvWNGuFw38gB
+                  - w8cmmrTixuf2rdVbxLLFsiRwcZrERxMfb8JbDKSj26f
+                  - C1tf83mSHT7aptd5VagjY2VXjfqa7qgkZkjiW5nPQshN
+                  config_addresses_magic-eden-v1:
+                  - GXYYT2V594gfXoYWFj4UXbEMkymoZ6hVwxqWXjQmwRBa
+                  - 8fFG9VsS1PGEuQZJjxZMjXfimysUfR1sePcTqq1AehCM
+                  - 4PN9nnWC4ttvNpNxxaGyTkpMyVfG1a7N54U4cr4nwigF
+                properties:
+                  last_updated:
+                    description: The unix epoch time stamp of when the candy machine
+                      list was last updated (UTC time)
+                    type: int
+                  config_addresses:
+                    description: List of `v1` config addresses. Only supplied for
+                      backwards compatibility.
+                    items:
+                      properties:
+                        config_address:
+                          description: The config addresses of a `v1` candy machine
+                          type: string
+                    type: array
+                  config_addresses_v1:
+                    description: List of config addresses for all `v1` candy machines
+                      on Solana.
+                    items:
+                      properties:
+                        config_address:
+                          description: The config address of a `v1` candy machine
+                          type: string
+                    type: array
+                  config_addresses_v2:
+                    description: List of config addresses for all `v2` candy machines
+                      on Solana.
+                    items:
+                      properties:
+                        config_address:
+                          description: The config address of a `v2` candy machine
+                          type: string
+                    type: array
+                  config_addresses_magic-eden-v1:
+                    description: List of config addresses for all `Magic Eden` candy
+                      machines on Solana.
+                    items:
+                      properties:
+                        config_address:
+                          description: The config address of a `Magic Eden` candy
+                            machine
+                          type: string
+                    type: array
+          description: Successful Response
+        "400":
+          description: Bad request (check response message)
+        "401":
+          description: Invalid API key pair in headers
+        "402":
+          description: Payment required. Occurs when you run out of API requests.
+            Upgrade <a href="https://dashboard.theblockchainapi.com/billing" target="_blank">here</a>.
+      security:
+      - APIKeyID: []
+        APISecretKey: []
+      summary: List all CMs
       tags:
       - Solana Candy Machine
   /solana/nft/candy_machine/{network}/{candy_machine_id}/nfts:
     get:
-      description: |-
-        <a href="https://github.com/BL0CK-X/the-blockchain-api/tree/main/examples/solana-candy-machine/get-candy-machine-all-nfts" target="_blank"> See examples (Python, JavaScript)</a>.
-
-        Use this endpoint to get the list of all NFTs (minted and unminted) from a Solana Candy Machine.
-
-        `Cost: 3 Credits` (<a href="#section/Pricing">See Pricing</a>)
+      description: "<a href=\"https://github.com/BL0CK-X/the-blockchain-api/tree/main/examples/solana-candy-machine/get-candy-machine-all-nfts\"\
+        \ target=\"_blank\"> See examples (Python, JavaScript)</a>.\n\nUse this endpoint\
+        \ to get the list of all NFTs (minted and unminted) from a Solana Candy Machine.\n\
+        \nThis works for `v1` and `v2` candy machines. \n\n*However*, for `v2` only\
+        \ the value for `all_nfts` is provided. To determine which are minted and\
+        \ unminted follow this example.\n\nYou do not need to specify `v1` or `v2`\
+        \ for this endpoint as it will automatically determine it from the candy machine\
+        \ ID.\n\nSee example for how to get the list of NFT hashes <a href=\"https://github.com/BL0CK-X/the-blockchain-api/tree/main/examples/solana-candy-machine/get-candy-machine-hash-table\"\
+        \ target=\"_blank\">here</a>.\n\n\n\n`Cost: 2 Credits` (<a href=\"#section/Pricing\"\
+        >See Pricing</a>)"
       operationId: solanaGetAllNFTsFromCandyMachine
       parameters:
       - description: The network ID (devnet, mainnet-beta)
@@ -1081,45 +1153,50 @@ paths:
       security:
       - APIKeyID: []
         APISecretKey: []
-      summary: |
-        Get the list of all NFTs (minted and unminted) from a Solana Candy Machine
+      summary: "Get CM's NFTs \n"
       tags:
       - Solana Candy Machine
-  /solana/nft/candy_machine/config/info:
+  /solana/nft/candy_machine/metadata:
     post:
       description: |-
-        <a href="https://github.com/BL0CK-X/the-blockchain-api/tree/main/examples/solana-candy-machine/get-candy-machine-config-info" target="_blank">See examples (Python, JavaScript)</a>.
+        <a href="" target="_blank">See examples (Python, JavaScript) [Coming Soon]</a>.
 
-        Use this endpoint to get the details of a Solana Candy Machine configuration.
+        Use this endpoint to get metadata about a Metaplex candy machine. This includes the goLiveDate, itemsAvailable, and itemsRedeemed. To see what is included, expand the green successful response below.
 
-        `Cost: 1 Credit` (<a href="#section/Pricing">See Pricing</a>)
-      operationId: solanaGetCandyMachineConfigurationDetails
+        NOTE: Supply exactly one of `candy_machine_id`, `config_address`, or `uuid`. If you provide more than one, you will receive a `400` error.
+
+
+        `Cost: 2 Credits` (<a href="#section/Pricing">See Pricing</a>)
+      operationId: solanaGetCandyMachineMetadata
       requestBody:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/GetConfigInfoRequest'
+              $ref: '#/components/schemas/GetCandyMetadataRequest'
       responses:
         "200":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/GetConfigInfoResponse'
-          description: Successful Response
+                $ref: '#/components/schemas/GetCandyMetadataResponse'
+          description: |
+            Successful Response.
         "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetCandyMetadataErrorResponse'
           description: Bad request (check response message)
         "401":
           description: Invalid API key pair in headers
         "402":
           description: Payment required. Occurs when you run out of API requests.
             Upgrade <a href="https://dashboard.theblockchainapi.com/billing" target="_blank">here</a>.
-        "404":
-          description: Not found
       security:
       - APIKeyID: []
         APISecretKey: []
       summary: |
-        Get the details of a Solana Candy Machine configuration
+        Get a CM's metadata
       tags:
       - Solana Candy Machine
   /solana/nft/candy_machine/mint:
@@ -1129,7 +1206,9 @@ paths:
 
         Use this endpoint to mint an NFT from a metaplex candy machine as soon as it drops.
 
-        `Cost: 10 Credits` (<a href="#section/Pricing">See Pricing</a>)
+        In order to achieve speed, this endpoint sends the transaction without checking whether or not it confirmed. It could still fail, for example, because the candy machine ran out of available mints. You should check the status of the transaction using our <a href="#operation/solanaGetTransaction">getTransaction</a> endpoint.
+
+        `Cost: 2 Credits` (<a href="#section/Pricing">See Pricing</a>)
       operationId: solanaMintFromCandyMachine
       requestBody:
         content:
@@ -1143,7 +1222,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/MintNFTResponse'
           description: |
-            Successful Response. The actual response to this API will be something like {"task_id": "10jd12Ka1"}.  You must poll the task ID endpoint to get info on this task. Once the task is completed, the returned format will follow the schema {'transaction_signature': '...'}. See the [Task endpoint](/#tag/Task/paths/~1task~1{task_id}/get).
+            Successful Response.
         "400":
           content:
             application/json:
@@ -1158,26 +1237,11 @@ paths:
       security:
       - APIKeyID: []
         APISecretKey: []
-      summary: Mint an NFT from a Metaplex candy machine
+      summary: Mint from a CM
       tags:
       - Solana Candy Machine
 components:
   schemas:
-    Task:
-      example:
-        status_code: 6.027456183070403
-        time_completed: 0.8008281904610115
-        response: '{}'
-      properties:
-        response:
-          type: object
-        time_completed:
-          type: number
-        status_code:
-          type: number
-      required:
-      - response
-      - status_code
     UploadFileRequest:
       properties:
         upload_method:
@@ -1240,9 +1304,18 @@ components:
     AccountIsCandyMachine:
       example:
         is_candy_machine: true
+        candy_machine_contract_version: v1
       properties:
         is_candy_machine:
           type: boolean
+        candy_machine_contract_version:
+          description: Whether or not this corresponds to candy machine v1, candy
+            machine v2, or a Magic Eden candy machine.
+          enum:
+          - v1
+          - v2
+          - magic-eden-v1
+          type: string
       required:
       - is_candy_machine
       type: object
@@ -1484,9 +1557,11 @@ components:
         mint_address:
           default: "null"
           description: |-
-            The mint address of the SPL token. If not provided, the balance returned is in SOL. Make sure to use the correct network.
+            The mint address of the SPL token or NFT. If not provided, the balance returned is in SOL. Make sure to use the correct network.
 
-            Some example mint addresses:
+            You can see the mint addresses of popular SPL tokens <a href="https://raw.githubusercontent.com/solana-labs/token-list/main/src/tokens/solana.tokenlist.json" target="_blank">here</a>.
+
+            Some example mint addresses of SPL tokens:
             - USDC: EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v
             - Mango: MangoCzJ36AjZyKwVj3VnYU4GTonjfVEnJmvvWaxLac
             - Serum: SRMuApVNdxXokk5GT7XD5cUUgXMBCoAz2LHeuAoKWRt
@@ -1511,7 +1586,8 @@ components:
           description: Not included if retreiving SOL balance
           type: number
         decimals:
-          description: Not included if retreiving SOL balance
+          description: Not included if retreiving SOL balance. Sometimes not included
+            if the balance of the token is '0'.
           type: number
         network:
           enum:
@@ -1519,7 +1595,7 @@ components:
           - mainnet-beta
           type: string
         unit:
-          description: Not included if retreiving an SPL token balance
+          description: Not included if retreiving an SPL token/NFT balance
           enum:
           - lamport
           - sol
@@ -1527,6 +1603,21 @@ components:
       required:
       - balance
       - network
+    ListTokensRequest:
+      example:
+        include_nfts: false
+        include_zero_balance_holdings: false
+      properties:
+        include_nfts:
+          default: false
+          description: Whether or not to include NFTs in the response
+          type: boolean
+        include_zero_balance_holdings:
+          default: false
+          description: Whether or not to include holdings that have zero balance.
+            This indicates that the wallet held this token or NFT in the past, but
+            no longer holds it.
+          type: boolean
     ListTokensResponse:
       description: A list the wallet's of token positions
       example:
@@ -1678,13 +1769,9 @@ components:
           type: string
         nft_upload_method:
           default: S3
-          description: "When you choose S3, all of the nft_description, nft_name,\
-            \ nft_symbol, nft_metadata, and nft_url are put into a json dictionary\
-            \ and uploaded to S3 as a text file.  This is uploaded to an AWS S3 bucket\
-            \ we own, and is an option we provide at no charge. The S3 link to this\
-            \ file is stored on the NFT on the blockchain.\n  When you choose LINK,\
-            \ the nft_url you provide is stored on the blockchain, and the nft_metadata\
-            \ and nft_description are ignored and not stored anywhere. \n"
+          description: |
+            When you choose S3, all of the nft_description, nft_name, nft_symbol, nft_metadata, and nft_url are put into a json dictionary and uploaded to S3 as a text file.  This is uploaded to an AWS S3 bucket we own, and is an option we provide at no charge. The S3 link to this file is stored on the NFT on the blockchain.
+              When you choose LINK, the nft_url you provide is stored on the blockchain, and the nft_metadata and nft_description are ignored and not stored anywhere. S3 is then NOT used.
           enum:
           - S3
           - LINK
@@ -1797,6 +1884,135 @@ components:
         error:
           type: string
       title: A response error when minting an NFT
+    NFTSearchRequest:
+      example:
+        name: Elon Musk
+        name_search_method: exact_match
+        symbol: Elo
+        symbol_search_method: begins_with
+        network: mainnet-beta
+      properties:
+        update_authority:
+          description: The public key of the update authority of the NFT
+          type: string
+        update_authority_search_method:
+          default: exact_match
+          description: Only `exact_match` supported at this time
+          enum:
+          - exact_match
+          type: string
+        mint_address:
+          description: The mint address of the NFT
+          type: string
+        mint_address_search_method:
+          default: exact_match
+          description: Only `exact_match` supported at this time
+          enum:
+          - exact_match
+          type: string
+        name:
+          description: The name of the NFT
+          type: string
+        name_search_method:
+          default: exact_match
+          enum:
+          - begins_with
+          - exact_match
+          type: string
+        uri:
+          description: The NFT's uri
+          type: string
+        uri_search_method:
+          default: exact_match
+          enum:
+          - begins_with
+          - exact_match
+          type: string
+        symbol:
+          description: The symbol associated with the candy machine
+          type: string
+        symbol_search_method:
+          default: exact_match
+          enum:
+          - begins_with
+          - exact_match
+          type: string
+        network:
+          default: devnet
+          enum:
+          - devnet
+          - mainnet-beta
+          type: string
+      type: object
+    NFTSearchResponse:
+      example:
+      - nft_metadata:
+          data:
+            creators:
+            - F5Nrvo1Vn3J2uhVKYTxwx6j2vsq4m8wFj15smSmoTnz7
+            - 567srSapKFaKmhpCXcQEDjsw9oBTSYLwpJ447ZmaWD4Z
+            name: Elon Musk
+            seller_fee_basis_points: 500
+            share:
+            - 0
+            - 100
+            symbol: ElonVerse
+            uri: https://ipfs.io/ipfs/QmYrS4MhTz528ATfeNHXqhf5QnacdAJ2At1dkKZ7ULvYr3
+            verified:
+            - 1
+            - 0
+          is_mutable: true
+          mint: 7cnQ9K6Xgckd28jMj14memHJhLpPGs7iofBYr4e9iHnS
+          primary_sale_happened: true
+          update_authority: 567srSapKFaKmhpCXcQEDjsw9oBTSYLwpJ447ZmaWD4Z
+        pub_key_hash: GGrF8NjbSKWJHsbhBJLSdG35K9wfaWqZe1mQaPKQmuH9
+      - nft_metadata:
+          data:
+            creators:
+            - Cx1ngaJkFsRJQNDRtQJzLtyr56JHXr3Z3QHnP1qVdwhz
+            - 567srSapKFaKmhpCXcQEDjsw9oBTSYLwpJ447ZmaWD4Z
+            name: Elon Musk
+            seller_fee_basis_points: 500
+            share:
+            - 0
+            - 100
+            symbol: ElonVerse
+            uri: https://ipfs.io/ipfs/QmYrS4MhTz528ATfeNHXqhf5QnacdAJ2At1dkKZ7ULvYr3
+            verified:
+            - 1
+            - 0
+            is_mutable: true
+            mint: Et7fwzBWVTP9wrN53N1GcToyTJR2kUQFjKvC4VzEXWzF
+            primary_sale_happened: true
+            update_authority: 567srSapKFaKmhpCXcQEDjsw9oBTSYLwpJ447ZmaWD4Z
+        pub_key_hash: 14nn1oBHHB6oRNHMgLQdu7SFd3wqFW3NA7W3eGYQWMSt
+      - nft_metadata:
+          data:
+            creators:
+            - ETBTMwqTp2oWfdr7krxdtKM8cfGiL4d3yVz24sZvwGpR
+            - 567srSapKFaKmhpCXcQEDjsw9oBTSYLwpJ447ZmaWD4Z
+            name: Elon Musk
+            seller_fee_basis_points: 500
+            share:
+            - 0
+            - 100
+            symbol: ElonVerse
+            uri: https://ipfs.io/ipfs/QmYrS4MhTz528ATfeNHXqhf5QnacdAJ2At1dkKZ7ULvYr3
+            verified:
+            - 1
+            - 0
+            is_mutable: true
+            mint: EehtKnwXy4hyB6vGBTAwnqvE3tNwQtiQPw1ebki3mR7R
+            primary_sale_happened: true
+            update_authority: 567srSapKFaKmhpCXcQEDjsw9oBTSYLwpJ447ZmaWD4Z
+        pub_key_hash: cko2u862bb9JCp7MSgKhSToHgSXEUmr8MtHpnzpZ1UR
+      properties:
+        nft_metadata:
+          $ref: '#/components/schemas/NFT'
+        pub_key_hash:
+          description: Use this to verify the NFT
+          type: string
+      type: object
     NFTOwnerResponse:
       example:
         nft_owner: 31LKs39pjT5oj6fWjC3F76dHWf9489asCthmgj8wu7pj
@@ -1850,81 +2066,20 @@ components:
     GetCandyMachineIDResponse:
       example:
         candy_machine_id: FmkrvXRenCGtwBHw3VtBcExp8eTdnau97upaewF4GUEX
+        candy_machine_contract_version: v1
       properties:
         candy_machine_id:
           description: The ID of the candy machine that minted the NFT
           type: string
-      type: object
-    GetCandyDetailsRequest:
-      example:
-        candy_machine_id: FmkrvXRenCGtwBHw3VtBcExp8eTdnau97upaewF4GUEX
-        network: mainnet-beta
-      properties:
-        candy_machine_id:
-          description: |
-            The ID of the candy machine
-          type: string
-        network:
-          default: devnet
+        candy_machine_contract_version:
+          description: Whether or not this corresponds to candy machine v1, candy
+            machine v2, or a Magic Eden candy machine.
           enum:
-          - devnet
-          - mainnet-beta
+          - v1
+          - v2
+          - magic-eden-v1
           type: string
-      required:
-      - candy_machine_id
       type: object
-    GetCandyDetailsResponse:
-      example:
-        authority: 5hybnoWHp7ruUizgKoxSviJrGfgBLLxzybZosQoHhK6C
-        bump: 255
-        config_address: HpVdfPyqfTzVLprw9UdVH94QJeTB3HEdD1bFwxR46my6
-        go_live_date: 4481031600
-        items_available: 3125
-        items_redeemed: 125
-        price: 250000000
-        token_mint: null
-        uuid: HpVdfP
-        wallet: 5hybnoWHp7ruUizgKoxSviJrGfgBLLxzybZosQoHhK6C
-      properties:
-        uuid:
-          description: The uuid of the candy machine
-          type: string
-        go_live_date:
-          description: |
-            The unix timestamp of the start date of the candy machine
-          type: number
-        price:
-          description: |
-            The price in Lamports for minting an NFT from the candy machine. 1e9 Lamport  = 1 SOL
-          type: number
-        items_available:
-          description: |
-            The number of NFTs available for mint from the candy machine
-          type: number
-        items_redeemed:
-          description: |
-            The number of NFTs minted already from the candy machine
-          type: number
-        token_mint:
-          type: string
-        config_address:
-          description: |
-            The configuration public key address of the candy machine
-          type: string
-        wallet:
-          description: |
-            The public key address of the wallet that recevies the proceeds from NFT mints
-          type: string
-        bump:
-          type: number
-      type: object
-    GetCandyDetailsErrorResponse:
-      example:
-        error: "Unknown error. Possible issues: \n  - You gave an invalid candy machine\
-          \ ID.\n  - You used the wrong network.\n"
-      properties:
-        error:
-          type: string
     CreateTestCandyMachineRequest:
       example:
         secret_recovery_phrase: fire owner display success half rescue pledge oval
@@ -1968,6 +2123,18 @@ components:
           - devnet
           - mainnet-beta
           type: string
+        candy_machine_contract_version:
+          default: v1
+          description: The contract you want to use to create the candy machine
+          enum:
+          - v1
+          - v2
+          type: string
+        include_gatekeeper:
+          default: false
+          description: Whether or not to include a gatekeeper for testing purposes.
+            Only applies to v2 candy machines.
+          type: boolean
       required:
       - secret_recovery_phrase
       type: object
@@ -1981,13 +2148,64 @@ components:
       required:
       - candy_machine_id
       type: object
-    GetMintedNFTsRequest:
+    CandyMachineSearchRequest:
       example:
-        candy_machine_id: FmkrvXRenCGtwBHw3VtBcExp8eTdnau97upaewF4GUEX
+        nft_name: Elon
+        nft_name_index: 44
+        nft_name_search_method: begins_with
         network: mainnet-beta
       properties:
-        candy_machine_id:
-          description: The ID of the candy machine
+        update_authority:
+          description: The public key of the update authority of the candy machine
+          type: string
+        update_authority_search_method:
+          default: exact_match
+          description: Only `exact_match` supported at this time
+          enum:
+          - exact_match
+          type: string
+        config_address:
+          description: The public key of the configuration of the candy machine
+          type: string
+        config_address_search_method:
+          default: exact_match
+          description: Only `exact_match` supported at this time
+          enum:
+          - exact_match
+          type: string
+        uuid:
+          description: |
+            The alphanumeric string of length six that corresponds to the candy machine. This is NOT the candy machine ID.  This is the first six letters of the configuration address and is also used to identify the candy machine. An example is `4zKV6i`.
+          type: string
+        uuid_search_method:
+          default: exact_match
+          description: Only `exact_match` supported at this time
+          enum:
+          - exact_match
+          type: string
+        symbol:
+          description: The symbol associated with the candy machine
+          type: string
+        symbol_search_method:
+          default: exact_match
+          enum:
+          - begins_with
+          - exact_match
+          type: string
+        nft_name:
+          description: |
+            The name of an NFT on the candy machine, minted or unminted. For example, to find The Solana Money Boys candy machine, you already know that each NFT is named "Solana Money Boy #0", "Solana Money Boy #1", and so on. So you could search with  nft_name="Solana Money Boy #0", nft_name_index=0, nft_name_search_method='exact_match', for example, which would return the candy machine ID. This also works with candy machines that are not live but are uploaded.
+          type: string
+        nft_name_index:
+          default: "0"
+          description: |
+            The index of the NFT to check, e.g., the 2nd NFT would have an index of 1. We cannot search all NFTs on a candy machine currently, so you must search an NFT at a particular position, such as the first, second, and so on. In general, nft_name_index=0 works for most use cases.
+          type: string
+        nft_name_search_method:
+          default: exact_match
+          enum:
+          - begins_with
+          - exact_match
           type: string
         network:
           default: devnet
@@ -1995,41 +2213,27 @@ components:
           - devnet
           - mainnet-beta
           type: string
-      required:
-      - candy_machine_id
-      type: object
-    GetMintedNFTsResponse:
-      example:
-        nft_metadata:
-          data:
-            creators:
-            - FmkrvXRenCGtwBHw3VtBcExp8eTdnau97upaewF4GUEX
-            - 5hybnoWHp7ruUizgKoxSviJrGfgBLLxzybZosQoHhK6C
-            name: 'God Particle #0078'
-            seller_fee_basis_points: 500
-            share:
-            - 0
-            - 100
-            symbol': GP
-            uri: https://arweave.net/GIVhsoTr7Phcs4AZxqkVZZ-MToupqK-NRYLVw9yTdLk
-            verified:
-            - 1
-            - 0
-          is_mutable: true
-          mint: TqQvdc5USoG5snWk75YiwDTPTLJe8U1BR7pSbhDRmUS
-          primary_sale_happened: true
-          update_authority: 5hybnoWHp7ruUizgKoxSviJrGfgBLLxzybZosQoHhK6C
-        pub_key_hash: G7EBE41G3yv2JJJGPzw6HQr6hqzaNtythGJD4Af97fec
-      properties:
-        nft_metadata:
-          $ref: '#/components/schemas/NFT'
-        pub_key_hash:
-          description: Use this to verify the NFT
+        candy_machine_contract_version:
+          default: v1
+          description: "The candy machine contract you want to search. \nIf you want\
+            \ to search `v1` candy machines, set this to `v1`. If you want to search\
+            \ `v2` candy machines. set this to `v2`.\n"
+          enum:
+          - v1
+          - v2
           type: string
+      type: object
+    CandyMachineSearchResponse:
+      properties:
+        config_address:
+          description: The config address of the candy machine
+          type: string
+      required:
+      - config_address
       type: object
     GetAllNFTsResponse:
       example:
-        minted:
+        minted_nfts:
         - nft_metadata:
             data:
               creators:
@@ -2050,30 +2254,48 @@ components:
             primary_sale_happened: true
             update_authority: 5hybnoWHp7ruUizgKoxSviJrGfgBLLxzybZosQoHhK6C
           pub_key_hash: G7EBE41G3yv2JJJGPzw6HQr6hqzaNtythGJD4Af97fec
-        unminted:
+        unminted_nfts:
+        - name: 'God Particle #3123'
+          uri: https://arweave.net/vNw7FWhtkgbNr7uPh9tgjIfH7ueN9EXV7X_qxdUn1dM
+        all_nfts:
         - name: 'God Particle #3123'
           uri: https://arweave.net/vNw7FWhtkgbNr7uPh9tgjIfH7ueN9EXV7X_qxdUn1dM
       properties:
         minted_nfts:
+          description: The minted NFTs. Only filled in for `v1` candy machines. Left
+            empty for `v2`.
           items:
             $ref: '#/components/schemas/GetAllNFTsResponse_minted_nfts'
           type: array
         unminted_nfts:
+          description: The unminted NFTs. Only filled in for `v1` candy machines.
+            Left empty for `v2`.
+          items:
+            $ref: '#/components/schemas/GetAllNFTsResponse_unminted_nfts'
+          type: array
+        all_nfts:
+          description: The list of all NFTs. Filled in for both `v1` and `v2` NFTs.
           items:
             $ref: '#/components/schemas/GetAllNFTsResponse_unminted_nfts'
           type: array
       type: object
-    GetConfigInfoRequest:
+    GetCandyMetadataRequest:
       example:
-        config_address: 3xHPFczscixxv9bKsZrzQ5x4yYGB8oARGyusXn2jW4dc
+        candy_machine_id: FmkrvXRenCGtwBHw3VtBcExp8eTdnau97upaewF4GUEX
         network: mainnet-beta
+        candy_machine_contract_version: v1
       properties:
+        candy_machine_id:
+          description: |
+            The ID of the candy machine. This is the same as `config_address` for `v2` candy machines (supply either).
+          type: string
         config_address:
-          description: "The config address of the candy machine. \nIf you don't know\
-            \ the address of a candy machine, you can use the \"Get Candy Machine\
-            \ Details\" endpoint to get the configuration public key address. \nIf\
-            \ you don't know the candy machine ID to call this endpoint, you can find\
-            \ it with the \"Get NFT's Candy Machine ID\" endpoint.\n"
+          description: |
+            The configuration address of the candy machine. This is the same as `candy_machine_id` for `v2` candy machines (supply either).
+          type: string
+        uuid:
+          description: |
+            The uuid of the candy machine. This is an alphanumeric string of length six (e.g., HpVdfP), which corresponds to the first six characters of the config_address.
           type: string
         network:
           default: devnet
@@ -2081,50 +2303,103 @@ components:
           - devnet
           - mainnet-beta
           type: string
-      required:
-      - config_address
+        candy_machine_contract_version:
+          default: v1
+          description: |
+            The candy machine contract of the candy machine for which you are retrieving the metadata.
+            If you are providing `v1` candy machine ID, set this to `v1`. If you are providing `v2` candy machine ID, set this to `v2`. If you don't know which version your candy machine is, check out <a href="#operation/solanaGetAccountIsCandyMachine">this endpoint</a>.
+          enum:
+          - v1
+          - v2
+          type: string
       type: object
-    GetConfigInfoResponse:
+    GetCandyMetadataResponse:
       example:
-        authority: JE7FqTYGKtcWFqhduHgXRsSPMhWSGBphB1FNvwb188RY
+        authority: 5hybnoWHp7ruUizgKoxSviJrGfgBLLxzybZosQoHhK6C
+        bump: 255
         creators:
-        - address: r3MyLziYpwjNaGCabWpoKAVGLUHR6qm9T6fhm5RBQyF
-          share: 33
-        - address: 3EYuP9odzWrMeh1ioP62x5Y2DagLa4cQgz9GuFtFxVdD
-          share: 32
-        - address: GN3Mi6B6xBWPyHvnHiRjN9dftHhVBysrJQry8odN7vT
-          share: 17
-        - address: CRW9KduRo8cncmVggKUuLccXHsAWNbzCczqc8gja7HFG
-          share: 18
+        - address: 5hybnoWHp7ruUizgKoxSviJrGfgBLLxzybZosQoHhK6C
+          share: 100
+        candy_machine_id: 8BG7YY2tHagJz6xdYmXwHUNxaUKSzQyafr4Nsa2PmyeT
+        config_address: HpVdfPyqfTzVLprw9UdVH94QJeTB3HEdD1bFwxR46my6
+        go_live_date: 4481031600
         is_mutable: true
-        max_number_of_lines: 6666
+        items_available: 3125
+        items_redeemed: 125
+        max_number_of_lines: 3125
         max_supply: 0
+        price: 250000000
         retain_authority: true
         seller_fee_basis_points: 500
-        symbol: \x00\x00\x00\x00\x00\x00\x00\x00\x00\x00
-        config_address: FVbP4uormTqtmR8uQS2YrfKEfoVoQfGEzznCMPTQMZoQ
+        symbol: GP
+        token_mint: null
+        uuid: HpVdfP
+        wallet: 5hybnoWHp7ruUizgKoxSviJrGfgBLLxzybZosQoHhK6C
       properties:
         authority:
+          description: The update authority of the candy machine
+          type: string
+        bump:
+          type: number
+        candy_machine_id:
+          description: |
+            The ID of the candy machine
+          type: string
+        config_address:
+          description: |
+            The configuration public key address of the candy machine
           type: string
         creators:
           items:
-            $ref: '#/components/schemas/GetConfigInfoResponse_creators'
+            $ref: '#/components/schemas/GetCandyMetadataResponse_creators'
           type: array
+        go_live_date:
+          description: |
+            The unix timestamp of the start date of the candy machine
+          type: number
         is_mutable:
           type: boolean
+        items_available:
+          description: |
+            The number of NFTs available for mint from the candy machine
+          type: number
+        items_redeemed:
+          description: |
+            The number of NFTs minted already from the candy machine
+          type: number
+        max_number_of_lines:
+          type: number
+        max_supply:
+          type: number
+        price:
+          description: |
+            The price in Lamports for minting an NFT from the candy machine. 1e9 Lamport  = 1 SOL
+          type: number
         retain_authority:
-          description: A public key address
-          type: string
+          type: boolean
         seller_fee_basis_points:
-          description: The fee of each sale the creators receive. 100 basis points
-            = 1%
+          description: |
+            The royalty the creators receive on each sale after the primary sale (the initial minting) (denominated in basis points (e.g., 75 basis points = 0.75%))
           type: number
         symbol:
-          description: The symbol of the candy machine NFT colletion
           type: string
-      required:
-      - config_address
+        token_mint:
+          type: string
+        uuid:
+          description: The uuid of the candy machine
+          type: string
+        wallet:
+          description: |
+            The public key address of the wallet that recevies the proceeds from NFT mints
+          type: string
       type: object
+    GetCandyMetadataErrorResponse:
+      example:
+        error: "Unknown error. Possible issues: \n  - You gave an invalid candy machine\
+          \ ID.\n  - You used the wrong network.\n"
+      properties:
+        error:
+          type: string
     MintNFTRequest:
       example:
         secret_recovery_phrase: fire owner display success half rescue pledge oval
@@ -2172,16 +2447,27 @@ components:
           - devnet
           - mainnet-beta
           type: string
+        candy_machine_contract_version:
+          default: v1
+          description: |
+            The candy machine contract of the candy machine from which you're minting.
+            If you are minting from a `v1` candy machine ID, set this to `v1`. If you are minting from a `v2` candy machine ID, set this to `v2`. If you don't know which the version of your candy machine, check out <a href="#operation/solanaGetAccountIsCandyMachine">this endpoint</a>.
+          enum:
+          - v1
+          - v2
+          type: string
       required:
       - config_address
       - secret_recovery_phrase
       type: object
     MintNFTResponse:
       example:
-        task_id: 1a029eJdas
+        transaction_signature: 5ag74sGQJTpPFtsSPt4ZCBXCx6c1d3Y46wgadLHgrmXdsduyAE7KzZ5HePbqGi1gD84KHXwdcCge6GTH5TmA2opr
       properties:
-        task_id:
-          description: The task ID of the task launched to complete the request
+        transaction_signature:
+          description: "The signature of the transaction. Just because this is returned\
+            \ does not mean it was successful. \nTo determine if the mint was successful,\
+            \ use this Gist: https://gist.github.com/joshwolff1/298e8251e43ff9b4815028683b1ca17d\n"
           type: string
       type: object
     MintNFTErrorResponse:
@@ -2268,13 +2554,13 @@ components:
           description: The uri of the unminted NFT
           type: string
       type: object
-    GetConfigInfoResponse_creators:
+    GetCandyMetadataResponse_creators:
       properties:
         address:
-          description: Public key address of a creator
+          description: The public key of a creator
           type: string
         share:
-          description: The share of the royalty that the creator receives
+          description: The share of the royalty that each creator receives
           type: number
       type: object
   securitySchemes:
@@ -2299,6 +2585,3 @@ x-tagGroups:
 - name: Files
   tags:
   - File
-- name: Tasks
-  tags:
-  - Task

@@ -79,7 +79,7 @@ Note: We have had a couple of individuals harrass and threaten us. These individ
 
 # Pricing
 
-<b>Each user receives 500 free credits every month.</b>
+<b>Each user receives 500 free credits.</b>
 
 You can learn more about our pricing <a href=\"https://dashboard.theblockchainapi.com/billing\" target=\"_blank\">here</a>. 
 
@@ -95,17 +95,17 @@ We have built a custom <a href=\"https://github.com/BL0CK-X/the-blockchain-api-p
 
 `pip install theblockchainapi`
 
-We also have published a <a href=\"https://github.com/BL0CK-X/theblockchainapi-wrappers/tree/main/javascript\" target=\"_blank\">JavaScript Wrapper</a>.
+We also have published a <a href=\"https://github.com/BL0CK-X/theblockchainapi-javascript-wrapper\" target=\"_blank\">JavaScript Wrapper</a>.
 
 `npm install theblockchainapi`
 
 We also have auto-generated wrappers for the following languages:
-- <a href=\"https://github.com/BL0CK-X/theblockchainapi-wrappers/tree/main/go\" target = \"_blank\">Go</a>
-- <a href=\"https://github.com/BL0CK-X/theblockchainapi-wrappers/tree/main/java\" target = \"_blank\">Java</a>
-- <a href=\"https://github.com/BL0CK-X/theblockchainapi-wrappers/tree/main/go\" target = \"_blank\">Kotlin</a>
-- <a href=\"https://github.com/BL0CK-X/theblockchainapi-wrappers/tree/main/go\" target = \"_blank\">PHP</a>
-- <a href=\"https://github.com/BL0CK-X/theblockchainapi-wrappers/tree/main/go\" target = \"_blank\">Swift5</a>
-- <a href=\"https://github.com/BL0CK-X/theblockchainapi-wrappers/tree/main/go\" target = \"_blank\">TypeScript</a>
+- <a href=\"https://github.com/BL0CK-X/theblockchainapi-go-wrapper\" target = \"_blank\">Go</a>
+- <a href=\"https://github.com/BL0CK-X/theblockchainapi-java-wrapper\" target = \"_blank\">Java</a>
+- <a href=\"https://github.com/BL0CK-X/theblockchainapi-kotlin-wrapper\" target = \"_blank\">Kotlin</a>
+- <a href=\"https://github.com/BL0CK-X/theblockchainapi-php-wrapper\" target = \"_blank\">PHP</a>
+- <a href=\"https://github.com/BL0CK-X/theblockchainapi-swift-wrapper\" target = \"_blank\">Swift5</a>
+- <a href=\"https://github.com/BL0CK-X/theblockchainapi-typescript-wrapper\" target = \"_blank\">TypeScript</a>
 
 If you would like a different language as well, submit an issue <a href=\"https://github.com/BL0CK-X/theblockchainapi-wrappers/issues/new\" target=\"_blank\">here</a>.
 
@@ -191,17 +191,18 @@ Class | Method | HTTP request | Description
 *SolanaAccountApi* | [**SolanaGetAccount**](docs/SolanaAccountApi.md#solanagetaccount) | **Get** /solana/account/{network}/{public_key} | Get the details of an account on Solana
 *SolanaAccountApi* | [**SolanaGetAccountIsCandyMachine**](docs/SolanaAccountApi.md#solanagetaccountiscandymachine) | **Get** /solana/account/{network}/{public_key}/is_candy_machine | Get if account is candy machine
 *SolanaAccountApi* | [**SolanaGetAccountIsNFT**](docs/SolanaAccountApi.md#solanagetaccountisnft) | **Get** /solana/account/{network}/{public_key}/is_nft | Get if account is NFT
-*SolanaCandyMachineApi* | [**SolanaCreateTestCandyMachine**](docs/SolanaCandyMachineApi.md#solanacreatetestcandymachine) | **Post** /solana/nft/candy_machine | Create a test candy machine 
-*SolanaCandyMachineApi* | [**SolanaGetAllNFTsFromCandyMachine**](docs/SolanaCandyMachineApi.md#solanagetallnftsfromcandymachine) | **Get** /solana/nft/candy_machine/{network}/{candy_machine_id}/nfts | Get the list of all NFTs (minted and unminted) from a Solana Candy Machine 
-*SolanaCandyMachineApi* | [**SolanaGetCandyMachineConfigurationDetails**](docs/SolanaCandyMachineApi.md#solanagetcandymachineconfigurationdetails) | **Post** /solana/nft/candy_machine/config/info | Get the details of a Solana Candy Machine configuration 
-*SolanaCandyMachineApi* | [**SolanaGetCandyMachineDetails**](docs/SolanaCandyMachineApi.md#solanagetcandymachinedetails) | **Post** /solana/nft/candy_machine/info | Get a Metaplex candy machine&#39;s details 
-*SolanaCandyMachineApi* | [**SolanaGetNFTsMintedFromCandyMachine**](docs/SolanaCandyMachineApi.md#solanagetnftsmintedfromcandymachine) | **Post** /solana/nft/candy_machine/nfts | Get the list of NFTs minted from a Solana Candy Machine 
-*SolanaCandyMachineApi* | [**SolanaMintFromCandyMachine**](docs/SolanaCandyMachineApi.md#solanamintfromcandymachine) | **Post** /solana/nft/candy_machine/mint | Mint an NFT from a Metaplex candy machine
+*SolanaCandyMachineApi* | [**SolanaCreateTestCandyMachine**](docs/SolanaCandyMachineApi.md#solanacreatetestcandymachine) | **Post** /solana/nft/candy_machine | Create a test CM
+*SolanaCandyMachineApi* | [**SolanaGetAllNFTsFromCandyMachine**](docs/SolanaCandyMachineApi.md#solanagetallnftsfromcandymachine) | **Get** /solana/nft/candy_machine/{network}/{candy_machine_id}/nfts | Get CM&#39;s NFTs  
+*SolanaCandyMachineApi* | [**SolanaGetCandyMachineMetadata**](docs/SolanaCandyMachineApi.md#solanagetcandymachinemetadata) | **Post** /solana/nft/candy_machine/metadata | Get a CM&#39;s metadata 
+*SolanaCandyMachineApi* | [**SolanaListAllCandyMachines**](docs/SolanaCandyMachineApi.md#solanalistallcandymachines) | **Get** /solana/nft/candy_machine/list | List all CMs
+*SolanaCandyMachineApi* | [**SolanaMintFromCandyMachine**](docs/SolanaCandyMachineApi.md#solanamintfromcandymachine) | **Post** /solana/nft/candy_machine/mint | Mint from a CM
+*SolanaCandyMachineApi* | [**SolanaSearchCandyMachines**](docs/SolanaCandyMachineApi.md#solanasearchcandymachines) | **Post** /solana/nft/candy_machine/search | Search CMs
 *SolanaNFTApi* | [**SolanaCreateNFT**](docs/SolanaNFTApi.md#solanacreatenft) | **Post** /solana/nft | Create an NFT on Solana
 *SolanaNFTApi* | [**SolanaGetNFT**](docs/SolanaNFTApi.md#solanagetnft) | **Get** /solana/nft/{network}/{mint_address} | Get an NFT&#39;s metadata
 *SolanaNFTApi* | [**SolanaGetNFTMintFee**](docs/SolanaNFTApi.md#solanagetnftmintfee) | **Get** /solana/nft/mint/fee | Get the NFT mint fee
 *SolanaNFTApi* | [**SolanaGetNFTOwner**](docs/SolanaNFTApi.md#solanagetnftowner) | **Get** /solana/nft/{network}/{mint_address}/owner | Get owner of an NFT
 *SolanaNFTApi* | [**SolanaGetNFTsCandyMachineId**](docs/SolanaNFTApi.md#solanagetnftscandymachineid) | **Post** /solana/nft/candy_machine_id | Get the ID of the candy machine of an NFT 
+*SolanaNFTApi* | [**SolanaSearchNFTs**](docs/SolanaNFTApi.md#solanasearchnfts) | **Post** /solana/nft/search | Search NFTs on Solana
 *SolanaTransactionApi* | [**SolanaGetTransaction**](docs/SolanaTransactionApi.md#solanagettransaction) | **Get** /solana/transaction/{network}/{tx_signature} | Get the details of a transaction made on Solana
 *SolanaWalletApi* | [**SolanaDeriveAssociatedTokenAccountAddress**](docs/SolanaWalletApi.md#solanaderiveassociatedtokenaccountaddress) | **Get** /solana/wallet/{public_key}/associated_token_account/{mint_address} | Derive an associated token account address
 *SolanaWalletApi* | [**SolanaDerivePublicKey**](docs/SolanaWalletApi.md#solanaderivepublickey) | **Post** /solana/wallet/public_key | Derive public key
@@ -211,7 +212,6 @@ Class | Method | HTTP request | Description
 *SolanaWalletApi* | [**SolanaGetNFTsBelongingToWallet**](docs/SolanaWalletApi.md#solanagetnftsbelongingtowallet) | **Get** /solana/wallet/{network}/{public_key}/nfts | Get address&#39;s NFTs
 *SolanaWalletApi* | [**SolanaGetTokensBelongingToWallet**](docs/SolanaWalletApi.md#solanagettokensbelongingtowallet) | **Get** /solana/wallet/{network}/{public_key}/tokens | Get address&#39;s tokens and respective balances
 *SolanaWalletApi* | [**SolanaTransfer**](docs/SolanaWalletApi.md#solanatransfer) | **Post** /solana/wallet/transfer | Transfer SOL, a token, or an NFT to another address
-*TaskApi* | [**GetTask**](docs/TaskApi.md#gettask) | **Get** /task/{task_id} | Get the result of a task
 
 
 ## Documentation For Models
@@ -225,24 +225,23 @@ Class | Method | HTTP request | Description
  - [AirdropRequest](docs/AirdropRequest.md)
  - [BalanceRequest](docs/BalanceRequest.md)
  - [BalanceResponse](docs/BalanceResponse.md)
+ - [CandyMachineSearchRequest](docs/CandyMachineSearchRequest.md)
+ - [CandyMachineSearchResponse](docs/CandyMachineSearchResponse.md)
  - [CreateTestCandyMachineRequest](docs/CreateTestCandyMachineRequest.md)
  - [CreateTestCandyMachineResponse](docs/CreateTestCandyMachineResponse.md)
  - [GetAllNFTsResponse](docs/GetAllNFTsResponse.md)
  - [GetAllNFTsResponseMintedNfts](docs/GetAllNFTsResponseMintedNfts.md)
  - [GetAllNFTsResponseUnmintedNfts](docs/GetAllNFTsResponseUnmintedNfts.md)
- - [GetCandyDetailsErrorResponse](docs/GetCandyDetailsErrorResponse.md)
- - [GetCandyDetailsRequest](docs/GetCandyDetailsRequest.md)
- - [GetCandyDetailsResponse](docs/GetCandyDetailsResponse.md)
  - [GetCandyMachineIDRequest](docs/GetCandyMachineIDRequest.md)
  - [GetCandyMachineIDResponse](docs/GetCandyMachineIDResponse.md)
- - [GetConfigInfoRequest](docs/GetConfigInfoRequest.md)
- - [GetConfigInfoResponse](docs/GetConfigInfoResponse.md)
- - [GetConfigInfoResponseCreators](docs/GetConfigInfoResponseCreators.md)
+ - [GetCandyMetadataErrorResponse](docs/GetCandyMetadataErrorResponse.md)
+ - [GetCandyMetadataRequest](docs/GetCandyMetadataRequest.md)
+ - [GetCandyMetadataResponse](docs/GetCandyMetadataResponse.md)
+ - [GetCandyMetadataResponseCreators](docs/GetCandyMetadataResponseCreators.md)
  - [GetFileResponse](docs/GetFileResponse.md)
- - [GetMintedNFTsRequest](docs/GetMintedNFTsRequest.md)
- - [GetMintedNFTsResponse](docs/GetMintedNFTsResponse.md)
  - [GetPublicKeyRequest](docs/GetPublicKeyRequest.md)
  - [ListNFTsResponse](docs/ListNFTsResponse.md)
+ - [ListTokensRequest](docs/ListTokensRequest.md)
  - [MintNFTErrorResponse](docs/MintNFTErrorResponse.md)
  - [MintNFTRequest](docs/MintNFTRequest.md)
  - [MintNFTResponse](docs/MintNFTResponse.md)
@@ -252,9 +251,10 @@ Class | Method | HTTP request | Description
  - [NFTMintFee](docs/NFTMintFee.md)
  - [NFTMintRequest](docs/NFTMintRequest.md)
  - [NFTOwnerResponse](docs/NFTOwnerResponse.md)
+ - [NFTSearchRequest](docs/NFTSearchRequest.md)
+ - [NFTSearchResponse](docs/NFTSearchResponse.md)
  - [PublicKey](docs/PublicKey.md)
  - [SecretPhrase](docs/SecretPhrase.md)
- - [Task](docs/Task.md)
  - [Transaction](docs/Transaction.md)
  - [TransferRequest](docs/TransferRequest.md)
  - [TransferResponse](docs/TransferResponse.md)
