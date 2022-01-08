@@ -23,6 +23,8 @@ type GetAllNFTsResponse struct {
 	UnmintedNfts *[]GetAllNFTsResponseUnmintedNfts `json:"unminted_nfts,omitempty"`
 	// The list of all NFTs. Filled in for both `v1` and `v2` NFTs.
 	AllNfts *[]GetAllNFTsResponseUnmintedNfts `json:"all_nfts,omitempty"`
+	// Whether or not the division of NFTs among minted and unminted is accurate. If it is not accurate, then it is possible that NFTs have been included in the `minted` list that are not actually minted. If it is accurate, then the split of  minted and unminted is correct. `v1` candy machines always return a correct minted/unminted split.  
+	Accurate *bool `json:"accurate,omitempty"`
 }
 
 // NewGetAllNFTsResponse instantiates a new GetAllNFTsResponse object
@@ -138,6 +140,38 @@ func (o *GetAllNFTsResponse) SetAllNfts(v []GetAllNFTsResponseUnmintedNfts) {
 	o.AllNfts = &v
 }
 
+// GetAccurate returns the Accurate field value if set, zero value otherwise.
+func (o *GetAllNFTsResponse) GetAccurate() bool {
+	if o == nil || o.Accurate == nil {
+		var ret bool
+		return ret
+	}
+	return *o.Accurate
+}
+
+// GetAccurateOk returns a tuple with the Accurate field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *GetAllNFTsResponse) GetAccurateOk() (*bool, bool) {
+	if o == nil || o.Accurate == nil {
+		return nil, false
+	}
+	return o.Accurate, true
+}
+
+// HasAccurate returns a boolean if a field has been set.
+func (o *GetAllNFTsResponse) HasAccurate() bool {
+	if o != nil && o.Accurate != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetAccurate gets a reference to the given bool and assigns it to the Accurate field.
+func (o *GetAllNFTsResponse) SetAccurate(v bool) {
+	o.Accurate = &v
+}
+
 func (o GetAllNFTsResponse) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
 	if o.MintedNfts != nil {
@@ -148,6 +182,9 @@ func (o GetAllNFTsResponse) MarshalJSON() ([]byte, error) {
 	}
 	if o.AllNfts != nil {
 		toSerialize["all_nfts"] = o.AllNfts
+	}
+	if o.Accurate != nil {
+		toSerialize["accurate"] = o.Accurate
 	}
 	return json.Marshal(toSerialize)
 }

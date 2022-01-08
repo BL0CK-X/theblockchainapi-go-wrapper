@@ -34,7 +34,7 @@ import (
 )
 
 func main() {
-    nFTMintRequest := *openapiclient.NewNFTMintRequest("SecretRecoveryPhrase_example") // NFTMintRequest |  (optional)
+    nFTMintRequest := *openapiclient.NewNFTMintRequest(openapiclient.Wallet{B58PrivateKey: openapiclient.NewB58PrivateKey("B58PrivateKey_example")}) // NFTMintRequest |  (optional)
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
@@ -354,7 +354,7 @@ Name | Type | Description  | Notes
 
 ## SolanaSearchNFTs
 
-> NFTSearchResponse SolanaSearchNFTs(ctx).NFTSearchRequest(nFTSearchRequest).Execute()
+> []NFTSearchResponse SolanaSearchNFTs(ctx).NFTSearchRequest(nFTSearchRequest).Execute()
 
 Search NFTs on Solana
 
@@ -382,7 +382,7 @@ func main() {
         fmt.Fprintf(os.Stderr, "Error when calling `SolanaNFTApi.SolanaSearchNFTs``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
-    // response from `SolanaSearchNFTs`: NFTSearchResponse
+    // response from `SolanaSearchNFTs`: []NFTSearchResponse
     fmt.Fprintf(os.Stdout, "Response from `SolanaNFTApi.SolanaSearchNFTs`: %v\n", resp)
 }
 ```
@@ -402,7 +402,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**NFTSearchResponse**](NFTSearchResponse.md)
+[**[]NFTSearchResponse**](NFTSearchResponse.md)
 
 ### Authorization
 

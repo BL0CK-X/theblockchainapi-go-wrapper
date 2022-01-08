@@ -625,6 +625,8 @@ SolanaGetNFTsCandyMachineId Get the ID of the candy machine of an NFT
 
 Get the candy machine ID from where the NFT came, if any. NFTs can also be minted without a candy machine.
 
+It's also possible that we return "Not Found" when the NFT actually did come from a version of a candy machine. We check for the most popular versions of candy machine, but it is possible that someone creates their own candy machine version and mints NFTs from it.
+
 `Cost: 1 Credit` (<a href="#section/Pricing">See Pricing</a>)
 
  @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
@@ -755,14 +757,14 @@ func (r ApiSolanaSearchNFTsRequest) NFTSearchRequest(nFTSearchRequest NFTSearchR
 	return r
 }
 
-func (r ApiSolanaSearchNFTsRequest) Execute() (NFTSearchResponse, *_nethttp.Response, error) {
+func (r ApiSolanaSearchNFTsRequest) Execute() ([]NFTSearchResponse, *_nethttp.Response, error) {
 	return r.ApiService.SolanaSearchNFTsExecute(r)
 }
 
 /*
 SolanaSearchNFTs Search NFTs on Solana
 
-<a href="" target="_blank">See examples (Python, JavaScript) [Coming Soon]</a>.
+<a href="https://github.com/BL0CK-X/the-blockchain-api/tree/main/examples/solana-nft/search-nfts" target="_blank">See examples (Python, JavaScript)</a>.
 
 With this endpoint, you can search for NFTs by their symbol, name of NFTs, uuid, configuration address, and update authority.
 
@@ -783,15 +785,15 @@ func (a *SolanaNFTApiService) SolanaSearchNFTs(ctx _context.Context) ApiSolanaSe
 }
 
 // Execute executes the request
-//  @return NFTSearchResponse
-func (a *SolanaNFTApiService) SolanaSearchNFTsExecute(r ApiSolanaSearchNFTsRequest) (NFTSearchResponse, *_nethttp.Response, error) {
+//  @return []NFTSearchResponse
+func (a *SolanaNFTApiService) SolanaSearchNFTsExecute(r ApiSolanaSearchNFTsRequest) ([]NFTSearchResponse, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPost
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		localVarReturnValue  NFTSearchResponse
+		localVarReturnValue  []NFTSearchResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "SolanaNFTApiService.SolanaSearchNFTs")

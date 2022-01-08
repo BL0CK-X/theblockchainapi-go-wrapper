@@ -5,8 +5,10 @@ All URIs are relative to *https://api.theblockchainapi.com/v1*
 Method | HTTP request | Description
 ------------- | ------------- | -------------
 [**SolanaDeriveAssociatedTokenAccountAddress**](SolanaWalletApi.md#SolanaDeriveAssociatedTokenAccountAddress) | **Get** /solana/wallet/{public_key}/associated_token_account/{mint_address} | Derive an associated token account address
+[**SolanaDerivePrivateKey**](SolanaWalletApi.md#SolanaDerivePrivateKey) | **Post** /solana/wallet/private_key | Derive private key
 [**SolanaDerivePublicKey**](SolanaWalletApi.md#SolanaDerivePublicKey) | **Post** /solana/wallet/public_key | Derive public key
-[**SolanaGenerateSecretRecoveryPhrase**](SolanaWalletApi.md#SolanaGenerateSecretRecoveryPhrase) | **Post** /solana/wallet/secret_recovery_phrase | Generate secret phrase
+[**SolanaGeneratePrivateKey**](SolanaWalletApi.md#SolanaGeneratePrivateKey) | **Post** /solana/wallet/generate/private_key | Generate private key
+[**SolanaGenerateSecretRecoveryPhrase**](SolanaWalletApi.md#SolanaGenerateSecretRecoveryPhrase) | **Post** /solana/wallet/generate/secret_recovery_phrase | Generate secret phrase
 [**SolanaGetAirdrop**](SolanaWalletApi.md#SolanaGetAirdrop) | **Post** /solana/wallet/airdrop | Get an airdrop on devnet
 [**SolanaGetBalance**](SolanaWalletApi.md#SolanaGetBalance) | **Post** /solana/wallet/balance | Get wallet&#39;s balance in SOL or any SPL
 [**SolanaGetNFTsBelongingToWallet**](SolanaWalletApi.md#SolanaGetNFTsBelongingToWallet) | **Get** /solana/wallet/{network}/{public_key}/nfts | Get address&#39;s NFTs
@@ -88,6 +90,72 @@ Name | Type | Description  | Notes
 [[Back to README]](../README.md)
 
 
+## SolanaDerivePrivateKey
+
+> GeneratePrivateKey SolanaDerivePrivateKey(ctx).GetPublicKeyRequest(getPublicKeyRequest).Execute()
+
+Derive private key
+
+
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+    getPublicKeyRequest := *openapiclient.NewGetPublicKeyRequest(openapiclient.Wallet{B58PrivateKey: openapiclient.NewB58PrivateKey("B58PrivateKey_example")}) // GetPublicKeyRequest | 
+
+    configuration := openapiclient.NewConfiguration()
+    api_client := openapiclient.NewAPIClient(configuration)
+    resp, r, err := api_client.SolanaWalletApi.SolanaDerivePrivateKey(context.Background()).GetPublicKeyRequest(getPublicKeyRequest).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `SolanaWalletApi.SolanaDerivePrivateKey``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `SolanaDerivePrivateKey`: GeneratePrivateKey
+    fmt.Fprintf(os.Stdout, "Response from `SolanaWalletApi.SolanaDerivePrivateKey`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiSolanaDerivePrivateKeyRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **getPublicKeyRequest** | [**GetPublicKeyRequest**](GetPublicKeyRequest.md) |  | 
+
+### Return type
+
+[**GeneratePrivateKey**](GeneratePrivateKey.md)
+
+### Authorization
+
+[APIKeyID](../README.md#APIKeyID), [APISecretKey](../README.md#APISecretKey)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
 ## SolanaDerivePublicKey
 
 > PublicKey SolanaDerivePublicKey(ctx).GetPublicKeyRequest(getPublicKeyRequest).Execute()
@@ -109,7 +177,7 @@ import (
 )
 
 func main() {
-    getPublicKeyRequest := *openapiclient.NewGetPublicKeyRequest("SecretRecoveryPhrase_example") // GetPublicKeyRequest | 
+    getPublicKeyRequest := *openapiclient.NewGetPublicKeyRequest(openapiclient.Wallet{B58PrivateKey: openapiclient.NewB58PrivateKey("B58PrivateKey_example")}) // GetPublicKeyRequest | 
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
@@ -147,6 +215,67 @@ Name | Type | Description  | Notes
 ### HTTP request headers
 
 - **Content-Type**: application/json
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## SolanaGeneratePrivateKey
+
+> GeneratePrivateKey SolanaGeneratePrivateKey(ctx).Execute()
+
+Generate private key
+
+
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+
+    configuration := openapiclient.NewConfiguration()
+    api_client := openapiclient.NewAPIClient(configuration)
+    resp, r, err := api_client.SolanaWalletApi.SolanaGeneratePrivateKey(context.Background()).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `SolanaWalletApi.SolanaGeneratePrivateKey``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `SolanaGeneratePrivateKey`: GeneratePrivateKey
+    fmt.Fprintf(os.Stdout, "Response from `SolanaWalletApi.SolanaGeneratePrivateKey`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+This endpoint does not need any parameter.
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiSolanaGeneratePrivateKeyRequest struct via the builder pattern
+
+
+### Return type
+
+[**GeneratePrivateKey**](GeneratePrivateKey.md)
+
+### Authorization
+
+[APIKeyID](../README.md#APIKeyID), [APISecretKey](../README.md#APISecretKey)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
 - **Accept**: application/json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
@@ -518,7 +647,7 @@ import (
 )
 
 func main() {
-    transferRequest := *openapiclient.NewTransferRequest("RecipientAddress_example", "SecretRecoveryPhrase_example") // TransferRequest |  (optional)
+    transferRequest := *openapiclient.NewTransferRequest("RecipientAddress_example", openapiclient.Wallet{B58PrivateKey: openapiclient.NewB58PrivateKey("B58PrivateKey_example")}) // TransferRequest |  (optional)
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)

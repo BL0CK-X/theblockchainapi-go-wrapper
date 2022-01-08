@@ -15,172 +15,94 @@ import (
 	"encoding/json"
 )
 
-// Transaction struct for Transaction
-type Transaction struct {
-	Id *float32 `json:"id,omitempty"`
-	Jsonrpc *string `json:"jsonrpc,omitempty"`
-	Result *TransactionResult `json:"result,omitempty"`
+// PrivateKey struct for PrivateKey
+type PrivateKey struct {
+	// A private key corresponds to exactly one public key address. A private key can be used to move assets out of the wallet and sign transaction with the corresponding public key.  A private key is an array of integers (e.g.,   `[185,108,153,165,57,193,166,167,58,148,133,121,92,252,242,13,233,246,35,103,185,20,27,56,111,169,12,50,50,36,83,156,173,195,143,75,135,78,204,129,217,231,58,129,69,180,185,86,119,43,200,193,94,112,31,135,68,128,207,26,85,150,68,181]`).  <a href=\"https://solflare.com\" target=\"_blank\">Solflare</a> is a popular wallet interface on Solana that allows you to export your private key in this format.
+	PrivateKey map[string]interface{} `json:"private_key"`
 }
 
-// NewTransaction instantiates a new Transaction object
+// NewPrivateKey instantiates a new PrivateKey object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewTransaction() *Transaction {
-	this := Transaction{}
+func NewPrivateKey(privateKey map[string]interface{}) *PrivateKey {
+	this := PrivateKey{}
+	this.PrivateKey = privateKey
 	return &this
 }
 
-// NewTransactionWithDefaults instantiates a new Transaction object
+// NewPrivateKeyWithDefaults instantiates a new PrivateKey object
 // This constructor will only assign default values to properties that have it defined,
 // but it doesn't guarantee that properties required by API are set
-func NewTransactionWithDefaults() *Transaction {
-	this := Transaction{}
+func NewPrivateKeyWithDefaults() *PrivateKey {
+	this := PrivateKey{}
 	return &this
 }
 
-// GetId returns the Id field value if set, zero value otherwise.
-func (o *Transaction) GetId() float32 {
-	if o == nil || o.Id == nil {
-		var ret float32
+// GetPrivateKey returns the PrivateKey field value
+func (o *PrivateKey) GetPrivateKey() map[string]interface{} {
+	if o == nil {
+		var ret map[string]interface{}
 		return ret
 	}
-	return *o.Id
+
+	return o.PrivateKey
 }
 
-// GetIdOk returns a tuple with the Id field value if set, nil otherwise
+// GetPrivateKeyOk returns a tuple with the PrivateKey field value
 // and a boolean to check if the value has been set.
-func (o *Transaction) GetIdOk() (*float32, bool) {
-	if o == nil || o.Id == nil {
+func (o *PrivateKey) GetPrivateKeyOk() (*map[string]interface{}, bool) {
+	if o == nil  {
 		return nil, false
 	}
-	return o.Id, true
+	return &o.PrivateKey, true
 }
 
-// HasId returns a boolean if a field has been set.
-func (o *Transaction) HasId() bool {
-	if o != nil && o.Id != nil {
-		return true
-	}
-
-	return false
+// SetPrivateKey sets field value
+func (o *PrivateKey) SetPrivateKey(v map[string]interface{}) {
+	o.PrivateKey = v
 }
 
-// SetId gets a reference to the given float32 and assigns it to the Id field.
-func (o *Transaction) SetId(v float32) {
-	o.Id = &v
-}
-
-// GetJsonrpc returns the Jsonrpc field value if set, zero value otherwise.
-func (o *Transaction) GetJsonrpc() string {
-	if o == nil || o.Jsonrpc == nil {
-		var ret string
-		return ret
-	}
-	return *o.Jsonrpc
-}
-
-// GetJsonrpcOk returns a tuple with the Jsonrpc field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *Transaction) GetJsonrpcOk() (*string, bool) {
-	if o == nil || o.Jsonrpc == nil {
-		return nil, false
-	}
-	return o.Jsonrpc, true
-}
-
-// HasJsonrpc returns a boolean if a field has been set.
-func (o *Transaction) HasJsonrpc() bool {
-	if o != nil && o.Jsonrpc != nil {
-		return true
-	}
-
-	return false
-}
-
-// SetJsonrpc gets a reference to the given string and assigns it to the Jsonrpc field.
-func (o *Transaction) SetJsonrpc(v string) {
-	o.Jsonrpc = &v
-}
-
-// GetResult returns the Result field value if set, zero value otherwise.
-func (o *Transaction) GetResult() TransactionResult {
-	if o == nil || o.Result == nil {
-		var ret TransactionResult
-		return ret
-	}
-	return *o.Result
-}
-
-// GetResultOk returns a tuple with the Result field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *Transaction) GetResultOk() (*TransactionResult, bool) {
-	if o == nil || o.Result == nil {
-		return nil, false
-	}
-	return o.Result, true
-}
-
-// HasResult returns a boolean if a field has been set.
-func (o *Transaction) HasResult() bool {
-	if o != nil && o.Result != nil {
-		return true
-	}
-
-	return false
-}
-
-// SetResult gets a reference to the given TransactionResult and assigns it to the Result field.
-func (o *Transaction) SetResult(v TransactionResult) {
-	o.Result = &v
-}
-
-func (o Transaction) MarshalJSON() ([]byte, error) {
+func (o PrivateKey) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
-	if o.Id != nil {
-		toSerialize["id"] = o.Id
-	}
-	if o.Jsonrpc != nil {
-		toSerialize["jsonrpc"] = o.Jsonrpc
-	}
-	if o.Result != nil {
-		toSerialize["result"] = o.Result
+	if true {
+		toSerialize["private_key"] = o.PrivateKey
 	}
 	return json.Marshal(toSerialize)
 }
 
-type NullableTransaction struct {
-	value *Transaction
+type NullablePrivateKey struct {
+	value *PrivateKey
 	isSet bool
 }
 
-func (v NullableTransaction) Get() *Transaction {
+func (v NullablePrivateKey) Get() *PrivateKey {
 	return v.value
 }
 
-func (v *NullableTransaction) Set(val *Transaction) {
+func (v *NullablePrivateKey) Set(val *PrivateKey) {
 	v.value = val
 	v.isSet = true
 }
 
-func (v NullableTransaction) IsSet() bool {
+func (v NullablePrivateKey) IsSet() bool {
 	return v.isSet
 }
 
-func (v *NullableTransaction) Unset() {
+func (v *NullablePrivateKey) Unset() {
 	v.value = nil
 	v.isSet = false
 }
 
-func NewNullableTransaction(val *Transaction) *NullableTransaction {
-	return &NullableTransaction{value: val, isSet: true}
+func NewNullablePrivateKey(val *PrivateKey) *NullablePrivateKey {
+	return &NullablePrivateKey{value: val, isSet: true}
 }
 
-func (v NullableTransaction) MarshalJSON() ([]byte, error) {
+func (v NullablePrivateKey) MarshalJSON() ([]byte, error) {
 	return json.Marshal(v.value)
 }
 
-func (v *NullableTransaction) UnmarshalJSON(src []byte) error {
+func (v *NullablePrivateKey) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }

@@ -289,6 +289,66 @@ paths:
       summary: Get if account is candy machine
       tags:
       - Solana Account
+  /solana/spl-token/{network}/{public_key}:
+    get:
+      description: |-
+        <a href="https://github.com/BL0CK-X/the-blockchain-api/tree/main/examples/solana-spl-token/get-spl-token" target="_blank">See examples (Python, JavaScript)</a>.
+
+        Retrieves basic information about an SPL token given its `mint_address`.
+
+        You can see the mint addresses of popular SPL tokens <a href="https://raw.githubusercontent.com/solana-labs/token-list/main/src/tokens/solana.tokenlist.json" target="_blank">here</a>.
+
+        Some example mint addresses of SPL tokens:
+        - USDC: EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v
+        - Mango: MangoCzJ36AjZyKwVj3VnYU4GTonjfVEnJmvvWaxLac
+        - Serum: SRMuApVNdxXokk5GT7XD5cUUgXMBCoAz2LHeuAoKWRt
+        - Raydium: 4k3Dyjzvzp8eMZWUXbBCjEvwSkkk59S5iCNLY3QrkX6R
+        - wSOL: So11111111111111111111111111111111111111112
+        - ATLAS: ATLASXmbPQxBUYbxPsV97usA3fPQYEqzQBUHgiFCUsXx
+
+        `Cost: 1 Credit` (<a href="#section/Pricing">See Pricing</a>)
+      operationId: solanaGetSPLToken
+      parameters:
+      - description: The public key of the token
+        example: MangoCzJ36AjZyKwVj3VnYU4GTonjfVEnJmvvWaxLac
+        explode: false
+        in: path
+        name: public_key
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: The network ID (devnet, mainnet-beta)
+        example: mainnet-beta
+        explode: false
+        in: path
+        name: network
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetSPLTokenResponse'
+          description: Successful Response
+        "400":
+          description: Bad request (check response message)
+        "401":
+          description: Invalid API key pair in headers
+        "402":
+          description: Payment required. Occurs when you run out of API requests.
+            Upgrade <a href="https://dashboard.theblockchainapi.com/billing" target="_blank">here</a>.
+        "404":
+          description: Account not found / not initialized with this public key address.
+      security:
+      - APIKeyID: []
+        APISecretKey: []
+      summary: Get SPL token metadata
+      tags:
+      - Solana SPL Token
   /solana/transaction/{network}/{tx_signature}:
     get:
       description: "<a href=\"https://github.com/BL0CK-X/the-blockchain-api/tree/main/examples/solana-transaction/get-transaction\"\
@@ -339,14 +399,12 @@ paths:
       summary: Get the details of a transaction made on Solana
       tags:
       - Solana Transaction
-  /solana/wallet/secret_recovery_phrase:
+  /solana/wallet/generate/secret_recovery_phrase:
     post:
-      description: |-
-        <a href="https://github.com/BL0CK-X/the-blockchain-api/tree/main/examples/solana-wallet/generate-secret-phrase" target="_blank">See examples (Python, JavaScript)</a>.
-
-        Use this endpoint to securely and randomly generate a secret recovery phrase for a Solana wallet. Complete the wallet creation by using the endpoint below.
-
-        `Cost: 1 Credit` (<a href="#section/Pricing">See Pricing</a>)
+      description: "<a href=\"https://github.com/BL0CK-X/the-blockchain-api/tree/main/examples/solana-wallet/generate-secret-phrase\"\
+        \ target=\"_blank\">See examples (Python, JavaScript)</a>.\n\nUse this endpoint\
+        \ to securely and randomly generate a secret recovery phrase for a Solana\
+        \ wallet. \n\n`Cost: 1 Credit` (<a href=\"#section/Pricing\">See Pricing</a>)"
       operationId: solanaGenerateSecretRecoveryPhrase
       responses:
         "200":
@@ -368,23 +426,97 @@ paths:
       summary: Generate secret phrase
       tags:
       - Solana Wallet
+  /solana/wallet/generate/private_key:
+    post:
+      description: |-
+        <a href="https://github.com/BL0CK-X/the-blockchain-api/tree/main/examples/solana-wallet/generate-private-key" target="_blank">See examples (Python, JavaScript)</a>.
+
+        Use this endpoint to securely and randomly generate a private key for a Solana wallet.
+
+        `Cost: 1 Credit` (<a href="#section/Pricing">See Pricing</a>)
+      operationId: solanaGeneratePrivateKey
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GeneratePrivateKey'
+          description: Successful Response
+        "400":
+          description: Bad request (check response message)
+        "401":
+          description: Invalid API key pair in headers
+        "402":
+          description: Payment required. Occurs when you run out of API requests.
+            Upgrade <a href="https://dashboard.theblockchainapi.com/billing" target="_blank">here</a>.
+      security:
+      - APIKeyID: []
+        APISecretKey: []
+      summary: Generate private key
+      tags:
+      - Solana Wallet
+  /solana/wallet/private_key:
+    post:
+      description: "<a href=\"https://github.com/BL0CK-X/the-blockchain-api/tree/main/examples/solana-wallet/derive-private-key\"\
+        \ target=\"_blank\">See examples (Python, JavaScript)</a>.\n    \nReturns\
+        \ a private key array and a base58-encoded private key given wallet authentication.\n\
+        \nA wallet is defined by a public key. A public key is derived from a combination\
+        \ of seed phrase, derivation path, and passphrase. Changing any *one* of these\
+        \ three will change the public key output.\n\n*You can generate a unique public\
+        \ key with each combination of secret recovery phrase, passphrase, and derivation\
+        \ path. Thus,\nwith a single secret recovery phrase, you can generate many\
+        \ public keys. If you are just starting, just supply the secret recovery phrase\
+        \ you generated with the Solana Wallet Secret Recovery Phrase endpoint.*\n\
+        \n*If you are trying to get a public key that already exists (e.g., created\
+        \ in the Phantom wallet), make sure you use the correct derivation path and\
+        \ passphrase. To read more about that, see the descriptions of those parameters\
+        \ below.*\n\n`Cost: 1 Credit` (<a href=\"#section/Pricing\">See Pricing</a>)"
+      operationId: solanaDerivePrivateKey
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GetPublicKeyRequest'
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GeneratePrivateKey'
+          description: Successful Response
+        "400":
+          description: Bad request (check response message)
+        "401":
+          description: Invalid API key pair in headers
+        "402":
+          description: Payment required. Occurs when you run out of API requests.
+            Upgrade <a href="https://dashboard.theblockchainapi.com/billing" target="_blank">here</a>.
+      security:
+      - APIKeyID: []
+        APISecretKey: []
+      summary: Derive private key
+      tags:
+      - Solana Wallet
   /solana/wallet/public_key:
     post:
       description: "<a href=\"https://github.com/BL0CK-X/the-blockchain-api/tree/main/examples/solana-wallet/derive-public-key\"\
         \ target=\"_blank\">See examples (Python, JavaScript)</a>.\n    \nReturns\
-        \ a public key given a secret recovery phrase and optionally a passphrase\
-        \ and a derivation path.\n\nA wallet is defined by a public key. A public\
-        \ key is derived from a combination of seed phrase, derivation path, and passphrase.\
-        \ Changing any *one* of these three will change the public key output.\n\n\
-        *You can generate a unique public key with each combination of secret recovery\
-        \ phrase, passphrase, and derivation path. Thus,\nwith a single secret recovery\
-        \ phrase, you can generate many public keys. If you are just starting, just\
-        \ supply the secret recovery phrase you generated with the Solana Wallet Secret\
-        \ Recovery Phrase endpoint.*\n\n*If you are trying to get a public key that\
-        \ already exists (e.g., created in the Phantom wallet), make sure you use\
-        \ the correct derivation path and passphrase. To read more about that, see\
-        \ the descriptions of those parameters below.*\n\n`Cost: 1 Credit` (<a href=\"\
-        #section/Pricing\">See Pricing</a>)"
+        \ a public key given wallet authentication.\n\nA wallet is identified by a\
+        \ public key. A public key is derived from a combination of seed phrase, derivation\
+        \ path, and passphrase. Changing any *one* of these three will change the\
+        \ public key output. \n\nIt can also be derived from a private key.\n\n*You\
+        \ can generate a unique public key with each combination of secret recovery\
+        \ phrase, passphrase, and derivation path; or from a private key. Thus,\n\
+        with a single secret recovery phrase, you can generate many public keys; however,\
+        \ with a private key, you can only generate one public key. If you are just\
+        \ starting, generate a <a href=\"#operation/solanaGenerateSecretRecoveryPhrase\"\
+        >secret recovery phrase</a> or <a href=\"#operation/solanaGeneratePrivateKey\"\
+        >private key</a>.\n\n*If you are trying to get a public key that already exists\
+        \ (e.g., created in the Phantom wallet), make sure you use the correct derivation\
+        \ path and passphrase; or just use the private key. To read more about that,\
+        \ see the descriptions of those parameters below.*\n\n`Cost: 1 Credit` (<a\
+        \ href=\"#section/Pricing\">See Pricing</a>)"
       operationId: solanaDerivePublicKey
       requestBody:
         content:
@@ -748,7 +880,7 @@ paths:
   /solana/nft/search:
     post:
       description: |-
-        <a href="" target="_blank">See examples (Python, JavaScript) [Coming Soon]</a>.
+        <a href="https://github.com/BL0CK-X/the-blockchain-api/tree/main/examples/solana-nft/search-nfts" target="_blank">See examples (Python, JavaScript)</a>.
 
         With this endpoint, you can search for NFTs by their symbol, name of NFTs, uuid, configuration address, and update authority.
 
@@ -768,7 +900,9 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/NFTSearchResponse'
+                items:
+                  $ref: '#/components/schemas/NFTSearchResponse'
+                type: array
           description: Successful Response
         "400":
           description: Bad request (check response message)
@@ -919,6 +1053,8 @@ paths:
 
         Get the candy machine ID from where the NFT came, if any. NFTs can also be minted without a candy machine.
 
+        It's also possible that we return "Not Found" when the NFT actually did come from a version of a candy machine. We check for the most popular versions of candy machine, but it is possible that someone creates their own candy machine version and mints NFTs from it.
+
         `Cost: 1 Credit` (<a href="#section/Pricing">See Pricing</a>)
       operationId: solanaGetNFTsCandyMachineId
       requestBody:
@@ -984,7 +1120,7 @@ paths:
   /solana/nft/candy_machine/search:
     post:
       description: |-
-        <a href="" target="_blank">See examples (Python, JavaScript) [Coming Soon]</a>.
+        <a href="https://github.com/BL0CK-X/the-blockchain-api/tree/main/examples/solana-candy-machine/search-candy-machines" target="_blank">See examples (Python, JavaScript)</a>.
 
         With this endpoint, you can search candy machines by their symbol, name of NFTs, uuid, configuration address, and update authority.
 
@@ -1009,7 +1145,8 @@ paths:
                 - FmZNv5HqPWEqXHYtKPKe15WF8PuNk1FbJmVMN92dVjNP
                 - 6Anxd2Tn7KEEMKpGyBdVWTCp5jpAum8cppgXMJTzp44R
                 items:
-                  $ref: '#/components/schemas/CandyMachineSearchResponse'
+                  description: The config address of a matching candy machine
+                  type: string
                 type: array
           description: Successful Response
         "400":
@@ -1028,7 +1165,7 @@ paths:
   /solana/nft/candy_machine/list:
     get:
       description: |-
-        <a href="" target="_blank">See examples (Python, JavaScript) [Coming Soon]</a>.
+        <a href="https://github.com/BL0CK-X/the-blockchain-api/tree/main/examples/solana-candy-machine/list-all-candy-machines" target="_blank">See examples (Python, JavaScript)</a>.
 
         With this endpoint, you can list all candy machines published to Solana mainnet.
 
@@ -1175,7 +1312,7 @@ paths:
   /solana/nft/candy_machine/metadata:
     post:
       description: |-
-        <a href="" target="_blank">See examples (Python, JavaScript) [Coming Soon]</a>.
+        <a href="https://github.com/BL0CK-X/the-blockchain-api/tree/main/examples/solana-candy-machine/get-candy-machine-metadata" target="_blank">See examples (Python, JavaScript)</a>.
 
         Use this endpoint to get metadata about a Metaplex candy machine. This includes the goLiveDate, itemsAvailable, and itemsRedeemed. To see what is included, expand the green successful response below.
 
@@ -1217,14 +1354,30 @@ paths:
       - Solana Candy Machine
   /solana/nft/candy_machine/mint:
     post:
-      description: |-
-        <a href="https://github.com/BL0CK-X/the-blockchain-api/tree/main/examples/solana-candy-machine/mint-from-candy-machine" target="_blank">See examples (Python, JavaScript)</a>.
-
-        Use this endpoint to mint an NFT from a metaplex candy machine as soon as it drops.
-
-        In order to achieve speed, this endpoint sends the transaction without checking whether or not it confirmed. It could still fail, for example, because the candy machine ran out of available mints. You should check the status of the transaction using our <a href="#operation/solanaGetTransaction">getTransaction</a> endpoint.
-
-        `Cost: 2 Credits` (<a href="#section/Pricing">See Pricing</a>)
+      description: "<a href=\"https://github.com/BL0CK-X/the-blockchain-api/tree/main/examples/solana-candy-machine/mint-from-candy-machine\"\
+        \ target=\"_blank\">See examples (Python, JavaScript)</a>.\n\nUse this endpoint\
+        \ to mint an NFT from a metaplex candy machine as soon as it drops.\n\nThis\
+        \ only works for `v1` and `v2` candy machines, and does not work for candy\
+        \ machines of any other type such as Magic Eden candy machines.\n\nIn order\
+        \ to achieve speed, this endpoint sends the transaction without checking whether\
+        \ or not it confirmed. It could still fail, for example, because the candy\
+        \ machine ran out of available mints. You should check the status of the transaction\
+        \ using our <a href=\"#operation/solanaGetTransaction\">getTransaction</a>\
+        \ endpoint. <a href=\"https://gist.github.com/joshwolff1/298e8251e43ff9b4815028683b1ca17d\"\
+        \ target=\"_blank\">Here's an example</a> of how to do this.\n\nMint transactions\
+        \ for candy machines that have capatcha/Civic enabled will fail. There is\
+        \ a gatekeeper functionality where you must manually verify through Civic\
+        \ and captcha in order to mint from a candy machine. In this functionality,\
+        \ Civic signs the transaction. Therefore, if the gatekeeper functionality\
+        \ is enabled, our “Mint from candy machine” endpoint will fail because it\
+        \ is missing a signer. If it is not enabled, then our “Mint from candy machine”\
+        \ endpoint will succeed. One caveat is the attribute “expireOnUse”. If this\
+        \ is True, then you have to solve a captcha each time. In this case, the “\
+        Mint from candy machine” endpoint will fail. If this is False, then your first\
+        \ verification is sufficient for further mints. In which case, after verifying\
+        \ manually the first time, you can use our endpoint thereafter. \n\nYou can\
+        \ check if the gatekeeper functionality is enabled with this <a href=\"#operation/solanaGetCandyMachineMetadata\"\
+        >endpoint</a>.\n\n`Cost: 2 Credits` (<a href=\"#section/Pricing\">See Pricing</a>)"
       operationId: solanaMintFromCandyMachine
       requestBody:
         content:
@@ -1335,108 +1488,212 @@ components:
       required:
       - is_candy_machine
       type: object
+    GetSPLTokenResponse:
+      example:
+        decimals: 6
+        freeze_authority: 3sNBr7kMccME5D55xNgsmYpZnzPgP2g12CixAajXypn6
+        is_initialized: true
+        mint_authority: 2wmVCSfPxGPjrnMMn7rchp4uaeoTqN39mXFC2zhPdri9
+        supply: "4785000018865782"
+      properties:
+        decimals:
+          description: |
+            The number of decimals of the token. For example, if the USDC token has 6 decimals, then you need 1 * 10e6 = 1,000,000 tokens to have 1 USDC. The purpose of this is that everything must be stored as  an integer. Thus, if there are $100 USDC in total, there must be $100 * 10e6 tokens in order for the $100 to be divisible into lower denominations than $1.
+          type: number
+        freeze_authority:
+          description: Public key address
+          type: string
+        mint_authority:
+          description: Public key address
+          type: string
+        is_initialized:
+          type: boolean
+        supply:
+          description: The supply of the token
+          type: string
     Transaction:
       example:
-        block_time: 1634782875
-        meta:
-          err: {}
-          fee: 5000
-          inner_instructions: []
-          log_messages:
-          - Program 11111111111111111111111111111111 invoke [1]
-          - Program 11111111111111111111111111111111 success
-          post_balances:
-          - 1263499110
-          - 10000000
-          - 1
-          post_token_balances: []
-          pre_balances:
-          - 1273504110
-          - 0
-          - 1
-          pre_token_balances: []
-          rewards: []
-          status:
-            _ok: {}
-        slot: 102654672
-        transaction:
-          message: null
-          account_keys:
-          - pubkey:
-              _bn: dee6a11fcc1dc31f0ed939f826fbade9c01c1a911e023cd6bd2cd9a089144a69
-            signer: true
-            writable: true
-          - pubkey:
-              _bn: 1dcd39962ad5410c1996873e23c4e9af189bcca84b0c24fd2ff1865a3382c288
-            signer: false
-            writable: true
-          - pubkey:
-              _bn: "00"
-            signer: false
-            writable: false
-          instructions:
-          - parsed:
-              info:
-                destination: 31LKs39pjT5oj6fWjC3F76dHWf9489asCthmgj8wu7pj
-                lamports: 10000000
-                source: G17UmNGnMJ851x3M1JXocgpft1afcYedjPuFpo1ohhCk
-              type: transfer
-            program: system
-            program_id:
-              _bn: "00"
-          recent_blockhash: B4HW8uQT3VddawYKhsoHbhSYYARfWFCxJwaoAZBYBo1Y
-          signatures:
-          - 5MB3KY9Dps7Z9E9gJNykfaDHD8cwgxXhszxoeXEdcpUqsLm4BMjpwKWRKr4ojGg7s7wfpLwEPXLACZxhzAFBg4nz
+        id: 1
+        jsonrpc: "2.0"
+        result:
+          block_time: 1634782875
+          meta:
+            err: {}
+            fee: 5000
+            inner_instructions: []
+            log_messages:
+            - Program 11111111111111111111111111111111 invoke [1]
+            - Program 11111111111111111111111111111111 success
+            post_balances:
+            - 1263499110
+            - 10000000
+            - 1
+            post_token_balances: []
+            pre_balances:
+            - 1273504110
+            - 0
+            - 1
+            pre_token_balances: []
+            rewards: []
+            status:
+              _ok: {}
+          slot: 102654672
+          transaction:
+            message: null
+            account_keys:
+            - pubkey:
+                _bn: dee6a11fcc1dc31f0ed939f826fbade9c01c1a911e023cd6bd2cd9a089144a69
+              signer: true
+              writable: true
+            - pubkey:
+                _bn: 1dcd39962ad5410c1996873e23c4e9af189bcca84b0c24fd2ff1865a3382c288
+              signer: false
+              writable: true
+            - pubkey:
+                _bn: "00"
+              signer: false
+              writable: false
+            instructions:
+            - parsed:
+                info:
+                  destination: 31LKs39pjT5oj6fWjC3F76dHWf9489asCthmgj8wu7pj
+                  lamports: 10000000
+                  source: G17UmNGnMJ851x3M1JXocgpft1afcYedjPuFpo1ohhCk
+                type: transfer
+              program: system
+              program_id:
+                _bn: "00"
+            recent_blockhash: B4HW8uQT3VddawYKhsoHbhSYYARfWFCxJwaoAZBYBo1Y
+            signatures:
+            - 5MB3KY9Dps7Z9E9gJNykfaDHD8cwgxXhszxoeXEdcpUqsLm4BMjpwKWRKr4ojGg7s7wfpLwEPXLACZxhzAFBg4nz
       properties:
-        block_time:
+        id:
           type: number
-        meta:
-          type: object
-        slot:
-          type: number
-        transaction:
-          type: object
-        network:
-          default: devnet
-          enum:
-          - devnet
-          - mainnet-beta
+        jsonrpc:
           type: string
+        result:
+          $ref: '#/components/schemas/Transaction_result'
     SecretPhrase:
       example:
         secret_recovery_phrase: fire owner display success half rescue pledge oval
           foam gossip window once
       properties:
         secret_recovery_phrase:
-          description: The twelve word phrase that can be used to derive many public
-            key addresses. To derive a public key, you need a secret recovery phrase,
-            a derivation path, and an optional passphrase. See our Security section
-            <a href="#section/Security">here</a>.
+          description: "The twelve word phrase that can be used to derive many public\
+            \ key addresses (e.g., bottom army bless castle alter habit dish embody\
+            \ child flame smooth zone).\n\nTo derive a public key, you need a secret\
+            \ recovery phrase, a derivation path, and an optional passphrase. \n\n\
+            Alternatively, you can derive a public key with a private key."
           type: string
       title: The response when listing the API key pairs
-    GetPublicKeyRequest:
+    GeneratePrivateKey:
       example:
-        secret_recovery_phrase: fire owner display success half rescue pledge oval
-          foam gossip window once
-        derivation_path: m/44/501/0/0
-        passphrase: water
+        b58_private_key: 5UNBwP7bYMRZZeT5sENFZFaTQxwPFFhLsCKZVgicNDpB6uceSAS1qtfzGfQmAmPzM7Nf8P3b3sk2QUntY7huHhqS
+        private_key:
+        - 223
+        - 170
+        - 179
+        - 221
+        - 165
+        - 191
+        - 167
+        - 243
+        - 159
+        - 10
+        - 84
+        - 192
+        - 72
+        - 106
+        - 183
+        - 78
+        - 172
+        - 176
+        - 186
+        - 93
+        - 40
+        - 181
+        - 198
+        - 55
+        - 109
+        - 52
+        - 203
+        - 131
+        - 83
+        - 175
+        - 183
+        - 44
+        - 75
+        - 198
+        - 179
+        - 199
+        - 37
+        - 156
+        - 85
+        - 149
+        - 181
+        - 161
+        - 239
+        - 36
+        - 185
+        - 202
+        - 86
+        - 63
+        - 51
+        - 210
+        - 41
+        - 10
+        - 34
+        - 230
+        - 176
+        - 38
+        - 153
+        - 219
+        - 197
+        - 85
+        - 2
+        - 197
+        - 167
+        - 89
+      properties:
+        private_key:
+          description: |-
+            A private key corresponds to exactly one public key address. A private key can be used to move assets out of the wallet and sign transaction with the corresponding public key.
+
+            A private key is an array of integers (e.g.,   `[185,108,153,165,57,193,166,167,58,148,133,121,92,252,242,13,233,246,35,103,185,20,27,56,111,169,12,50,50,36,83,156,173,195,143,75,135,78,204,129,217,231,58,129,69,180,185,86,119,43,200,193,94,112,31,135,68,128,207,26,85,150,68,181]`).
+
+            <a href="https://solflare.com" target="_blank">Solflare</a> is a popular wallet interface on Solana that allows you to export your private key in this format.
+          type: object
+        b58_private_key:
+          description: |-
+            A private key corresponds to exactly one public key address. A private key can be used to move assets out of the wallet and sign transaction with the corresponding public key.
+
+            A base58-encoded private key is a base58-encoded version of the typical private key. It is represented as a string (e.g., `4waBTVeAVWEAczSdx36uMrR19668ACgQDs7r386vrUes3UCzvXCQ2FPSCVGb1zJrwcULgpNzgABreyQaWSpGBwfx`).
+
+            <a href="https://phantom.app" target="_blank">Phantom</a> is a popular wallet interface on Solana that allows you to export your private key in this format.
+          type: string
+    SecretRecoveryPhrase:
       properties:
         secret_recovery_phrase:
-          description: The twelve word phrase that can be used to derive many public
-            key addresses. To derive a public key, you need a secret recovery phrase,
-            a derivation path, and an optional passphrase. See our Security section
-            <a href="#section/Security">here</a>.
+          description: "The twelve word phrase that can be used to derive many public\
+            \ key addresses (e.g., bottom army bless castle alter habit dish embody\
+            \ child flame smooth zone).\n\nTo derive a public key, you need a secret\
+            \ recovery phrase, a derivation path, and an optional passphrase. \n\n\
+            Alternatively, you can derive a public key with a private key."
           type: string
         derivation_path:
           default: m/44/501/0/0
           description: |-
             Derivation paths are used to derive the public key from the secret recovery phrase. Only certain paths are accepted.
 
-            We use "m/44/501/0/0" by default, if it is not provided. This is the path that the Phantom and Sollet wallets use.
-            If you provide the empty string "" as the value for the derivation path, then we will use the Solana CLI default value.
-            The SolFlare recommended path is "m/44/501/0".
+            If you provide the empty string "" as the value for the derivation path, then we will derive your public key with the same behavior as the default behavior of the Solana CLI.
 
-            You can also arbitrarily increment the default path ("m/44/501/0/0") to generate more wallets (e.g., "m/44/501/0/1", "m/44/501/0/2", ...). This is how Phantom generates more wallets.
+            By default, we use "m/44/501/0/0". This is the path that the Phantom and Sollet wallets use.
+
+            You can also arbitrarily increment the default path ("m/44/501/0/0") to generate more wallets (e.g., "m/44/501/0/1", "m/44/501/0/2", ... AND/OR "m/44/501/1/0", "m/44/501/2/0", ...).
+
+            Phantom's Wallet increments the first digit (e.g., "m/44/501/0/0", "m/44/501/1/0", "m/44/501/2/0", ...) to generate more public key addresses.
+
+            The SolFlare recommended path is "m/44/501/0".
 
             To learn more about derivation paths, check out <a href="https://learnmeabitcoin.com/technical/derivation-paths" target="_blank">this tutorial</a>.
           type: string
@@ -1452,6 +1709,49 @@ components:
           type: string
       required:
       - secret_recovery_phrase
+    PrivateKey:
+      properties:
+        private_key:
+          description: |-
+            A private key corresponds to exactly one public key address. A private key can be used to move assets out of the wallet and sign transaction with the corresponding public key.
+
+            A private key is an array of integers (e.g.,   `[185,108,153,165,57,193,166,167,58,148,133,121,92,252,242,13,233,246,35,103,185,20,27,56,111,169,12,50,50,36,83,156,173,195,143,75,135,78,204,129,217,231,58,129,69,180,185,86,119,43,200,193,94,112,31,135,68,128,207,26,85,150,68,181]`).
+
+            <a href="https://solflare.com" target="_blank">Solflare</a> is a popular wallet interface on Solana that allows you to export your private key in this format.
+          type: object
+      required:
+      - private_key
+    B58PrivateKey:
+      properties:
+        b58_private_key:
+          description: |-
+            A private key corresponds to exactly one public key address. A private key can be used to move assets out of the wallet and sign transaction with the corresponding public key.
+
+            A base58-encoded private key is a base58-encoded version of the typical private key. It is represented as a string (e.g., `4waBTVeAVWEAczSdx36uMrR19668ACgQDs7r386vrUes3UCzvXCQ2FPSCVGb1zJrwcULgpNzgABreyQaWSpGBwfx`).
+
+            <a href="https://phantom.app" target="_blank">Phantom</a> is a popular wallet interface on Solana that allows you to export your private key in this format.
+          type: string
+      required:
+      - b58_private_key
+    Wallet:
+      description: |
+        The wallet authentication information required to sign transactions.  Click the `>` arrow next to "wallet" on the left to see more details. See our Security section <a href="#section/Security">here</a>.
+      oneOf:
+      - $ref: '#/components/schemas/SecretRecoveryPhrase'
+      - $ref: '#/components/schemas/PrivateKey'
+      - $ref: '#/components/schemas/B58PrivateKey'
+    GetPublicKeyRequest:
+      example:
+        wallet:
+          secret_recovery_phrase: fire owner display success half rescue pledge oval
+            foam gossip window once
+          derivation_path: m/44/501/0/0
+          passphrase: water
+      properties:
+        wallet:
+          $ref: '#/components/schemas/Wallet'
+      required:
+      - wallet
     PublicKey:
       example:
         public_key: GoUhxkKRiy8psWcr1csF1mbuDsfNd28JZXNHMQ5BSBnc
@@ -1463,43 +1763,17 @@ components:
       type: object
     TransferRequest:
       example:
-        secret_recovery_phrase: fire owner display success half rescue pledge oval
-          foam gossip window once
+        wallet:
+          secret_recovery_phrase: fire owner display success half rescue pledge oval
+            foam gossip window once
         token_address: CK1LHEANTu7RFqN3XMzo2AnZhyus2W1vue1njrxLEM1d
       properties:
         recipient_address:
           description: The public key address of the recipient to whom you want to
             send a token or NFT
           type: string
-        secret_recovery_phrase:
-          description: The twelve word phrase that can be used to derive many public
-            key addresses. To derive a public key, you need a secret recovery phrase,
-            a derivation path, and an optional passphrase. See our Security section
-            <a href="#section/Security">here</a>.
-          type: string
-        derivation_path:
-          default: m/44/501/0/0
-          description: |-
-            Derivation paths are used to derive the public key from the secret recovery phrase. Only certain paths are accepted.
-
-            We use "m/44/501/0/0" by default, if it is not provided. This is the path that the Phantom and Sollet wallets use.
-            If you provide the empty string "" as the value for the derivation path, then we will use the Solana CLI default value.
-            The SolFlare recommended path is "m/44/501/0".
-
-            You can also arbitrarily increment the default path ("m/44/501/0/0") to generate more wallets (e.g., "m/44/501/0/1", "m/44/501/0/2", ...). This is how Phantom generates more wallets.
-
-            To learn more about derivation paths, check out <a href="https://learnmeabitcoin.com/technical/derivation-paths" target="_blank">this tutorial</a>.
-          type: string
-        passphrase:
-          default: ""
-          description: 'PASSPHRASE != PASSWORD. This is NOT your Phantom password
-            or any other password. It is an optional string you use when creating
-            a wallet. This provides an additional layer of security because a hacker
-            would need both the secret recovery phrase and the passphrase to access
-            the output public key. By default, most wallet UI extensions do not use
-            a passphrase. (You probably did not use a passphrase.) Limited to 500
-            characters. '
-          type: string
+        wallet:
+          $ref: '#/components/schemas/Wallet'
         token_address:
           description: |
             If you're transfering an NFT, supply the `mint` (the address of the mint) for the `token_address`. If you're transfering a token, supply the token address found on the explorer (e.g., see `SRMuApVNdxXokk5GT7XD5cUUgXMBCoAz2LHeuAoKWRt` for <a href="https://explorer.solana.com/address/SRMuApVNdxXokk5GT7XD5cUUgXMBCoAz2LHeuAoKWRt" target="_blank">Serum Token</a>) for the `token_address`. If you're transferring SOL, do not supply a value for `token_address`.
@@ -1512,12 +1786,16 @@ components:
           type: string
         amount:
           default: "1"
-          description: |
-            The quantity of the token or NFT you want to send. If sending an NFT, there is no need to supply this value.  This value must be a string. You can supply a float value (e.g., "0.0005").
+          description: |-
+            This value must be a string. What you provide here depends on if you are sending an NFT, an SPL token, or SOL.
+
+            - NFT: This must be '1'.
+            - SPL Token: This must be an integer in string format. To convert from what you see on a wallet UI (e.g., 1 ATLAS, 1 USDC) to an integer value, you have to multiply that value by 10^<i>x</i> where <i>x</i> is the number of decimals. For example, to transfer 0.2 USDC, if USDC uses 6 decimals, then the amount is 0.2 * 10^6 = 200000. You can get the number of decimals for a given SPL token <a href="#operation/solanaGetSPLToken">here</a>.
+            - SOL: Supply this value denominated in SOL in a string format. This does not need to be an integer. For example, if you want to send 0.0005 SOL, then amount = "0.0005".
           type: string
       required:
       - recipient_address
-      - secret_recovery_phrase
+      - wallet
       type: object
     TransferResponse:
       example:
@@ -1698,8 +1976,9 @@ components:
       type: object
     NFTMintRequest:
       example:
-        secret_recovery_phrase: fire owner display success half rescue pledge oval
-          foam gossip window once
+        wallet:
+          secret_recovery_phrase: fire owner display success half rescue pledge oval
+            foam gossip window once
         nft_name: Super Musk
         nft_symbol: MUSK
         nft_description: Buy this image of Super Musk!
@@ -1714,35 +1993,8 @@ components:
         share: '[40, 60]'
         network: devnet
       properties:
-        secret_recovery_phrase:
-          description: The twelve word phrase that can be used to derive many public
-            key addresses. To derive a public key, you need a secret recovery phrase,
-            a derivation path, and an optional passphrase. See our Security section
-            <a href="#section/Security">here</a>.
-          type: string
-        derivation_path:
-          default: m/44/501/0/0
-          description: |-
-            Derivation paths are used to derive the public key from the secret recovery phrase. Only certain paths are accepted.
-
-            We use "m/44/501/0/0" by default, if it is not provided. This is the path that the Phantom and Sollet wallets use.
-            If you provide the empty string "" as the value for the derivation path, then we will use the Solana CLI default value.
-            The SolFlare recommended path is "m/44/501/0".
-
-            You can also arbitrarily increment the default path ("m/44/501/0/0") to generate more wallets (e.g., "m/44/501/0/1", "m/44/501/0/2", ...). This is how Phantom generates more wallets.
-
-            To learn more about derivation paths, check out <a href="https://learnmeabitcoin.com/technical/derivation-paths" target="_blank">this tutorial</a>.
-          type: string
-        passphrase:
-          default: ""
-          description: 'PASSPHRASE != PASSWORD. This is NOT your Phantom password
-            or any other password. It is an optional string you use when creating
-            a wallet. This provides an additional layer of security because a hacker
-            would need both the secret recovery phrase and the passphrase to access
-            the output public key. By default, most wallet UI extensions do not use
-            a passphrase. (You probably did not use a passphrase.) Limited to 500
-            characters. '
-          type: string
+        wallet:
+          $ref: '#/components/schemas/Wallet'
         nft_name:
           default: ""
           description: The name of the token. Limited to 32 characters. Stored on
@@ -1809,6 +2061,11 @@ components:
           items:
             type: integer
           type: array
+        mint_to_public_key:
+          default: The public key of the wallet provided
+          description: |
+            Assign ownership of the NFT to the public key address given by `mint_to_public_key`
+          type: string
         network:
           default: devnet
           description: "This determines which network you choose to run the API calls\
@@ -1833,7 +2090,7 @@ components:
           - mainnet-beta
           type: string
       required:
-      - secret_recovery_phrase
+      - wallet
       type: object
     NFT:
       example:
@@ -2083,41 +2340,15 @@ components:
       type: object
     CreateTestCandyMachineRequest:
       example:
-        secret_recovery_phrase: fire owner display success half rescue pledge oval
-          foam gossip window once
-        derivation_path: m/44/501/0/0
-        passphrase: ""
+        wallet:
+          secret_recovery_phrase: fire owner display success half rescue pledge oval
+            foam gossip window once
+          derivation_path: m/44/501/0/0
+          passphrase: ""
         network: devnet
       properties:
-        secret_recovery_phrase:
-          description: The twelve word phrase that can be used to derive many public
-            key addresses. To derive a public key, you need a secret recovery phrase,
-            a derivation path, and an optional passphrase. See our Security section
-            <a href="#section/Security">here</a>.
-          type: string
-        derivation_path:
-          default: m/44/501/0/0
-          description: |-
-            Derivation paths are used to derive the public key from the secret recovery phrase. Only certain paths are accepted.
-
-            We use "m/44/501/0/0" by default, if it is not provided. This is the path that the Phantom and Sollet wallets use.
-            If you provide the empty string "" as the value for the derivation path, then we will use the Solana CLI default value.
-            The SolFlare recommended path is "m/44/501/0".
-
-            You can also arbitrarily increment the default path ("m/44/501/0/0") to generate more wallets (e.g., "m/44/501/0/1", "m/44/501/0/2", ...). This is how Phantom generates more wallets.
-
-            To learn more about derivation paths, check out <a href="https://learnmeabitcoin.com/technical/derivation-paths" target="_blank">this tutorial</a>.
-          type: string
-        passphrase:
-          default: ""
-          description: 'PASSPHRASE != PASSWORD. This is NOT your Phantom password
-            or any other password. It is an optional string you use when creating
-            a wallet. This provides an additional layer of security because a hacker
-            would need both the secret recovery phrase and the passphrase to access
-            the output public key. By default, most wallet UI extensions do not use
-            a passphrase. (You probably did not use a passphrase.) Limited to 500
-            characters. '
-          type: string
+        wallet:
+          $ref: '#/components/schemas/Wallet'
         network:
           default: devnet
           enum:
@@ -2125,10 +2356,10 @@ components:
           - mainnet-beta
           type: string
         candy_machine_contract_version:
-          default: v1
-          description: The contract you want to use to create the candy machine
+          default: v2
+          description: |
+            The contract you want to use to create the candy machine. Note: Metaplex disabled the creation of `v1` candy machines on their smart contract, and so we no longer support the creation of `v1` test candy machines.
           enum:
-          - v1
           - v2
           type: string
         include_gatekeeper:
@@ -2137,7 +2368,7 @@ components:
             Only applies to v2 candy machines.
           type: boolean
       required:
-      - secret_recovery_phrase
+      - wallet
       type: object
     CreateTestCandyMachineResponse:
       example:
@@ -2224,14 +2455,6 @@ components:
           - v2
           type: string
       type: object
-    CandyMachineSearchResponse:
-      properties:
-        config_address:
-          description: The config address of the candy machine
-          type: string
-      required:
-      - config_address
-      type: object
     GetAllNFTsResponse:
       example:
         minted_nfts:
@@ -2279,6 +2502,13 @@ components:
           items:
             $ref: '#/components/schemas/GetAllNFTsResponse_unminted_nfts'
           type: array
+        accurate:
+          description: "Whether or not the division of NFTs among minted and unminted\
+            \ is accurate. If it is not accurate, then it is possible that NFTs have\
+            \ been included in the `minted` list that are not actually minted. If\
+            \ it is accurate, then the split of  minted and unminted is correct. `v1`\
+            \ candy machines always return a correct minted/unminted split. \n"
+          type: boolean
       type: object
     GetCandyMetadataRequest:
       example:
@@ -2403,44 +2633,20 @@ components:
           type: string
     MintNFTRequest:
       example:
-        secret_recovery_phrase: fire owner display success half rescue pledge oval
-          foam gossip window once
-        derivation_path: m/44/501/0/0
-        passphrase: ""
+        wallet:
+          secret_recovery_phrase: fire owner display success half rescue pledge oval
+            foam gossip window once
+          derivation_path: m/44/501/0/0
+          passphrase: ""
         network: devnet
+        config_address: 9zK91gUYTcdnqDa9iEnjz2ZNEPbQkCgBrx2JM9tfNMtt
+        candy_machine_contract_version: v2
       properties:
+        wallet:
+          $ref: '#/components/schemas/Wallet'
         config_address:
           description: |
-            The config address of the candy machine. You can retrieve this if you have the candy machine ID using <a href="#operation/solanaGetCandyMachineDetails">this endpoint</a> and retrieving the `config_address` from the response..
-          type: string
-        secret_recovery_phrase:
-          description: The twelve word phrase that can be used to derive many public
-            key addresses. To derive a public key, you need a secret recovery phrase,
-            a derivation path, and an optional passphrase. See our Security section
-            <a href="#section/Security">here</a>.
-          type: string
-        derivation_path:
-          default: m/44/501/0/0
-          description: |-
-            Derivation paths are used to derive the public key from the secret recovery phrase. Only certain paths are accepted.
-
-            We use "m/44/501/0/0" by default, if it is not provided. This is the path that the Phantom and Sollet wallets use.
-            If you provide the empty string "" as the value for the derivation path, then we will use the Solana CLI default value.
-            The SolFlare recommended path is "m/44/501/0".
-
-            You can also arbitrarily increment the default path ("m/44/501/0/0") to generate more wallets (e.g., "m/44/501/0/1", "m/44/501/0/2", ...). This is how Phantom generates more wallets.
-
-            To learn more about derivation paths, check out <a href="https://learnmeabitcoin.com/technical/derivation-paths" target="_blank">this tutorial</a>.
-          type: string
-        passphrase:
-          default: ""
-          description: 'PASSPHRASE != PASSWORD. This is NOT your Phantom password
-            or any other password. It is an optional string you use when creating
-            a wallet. This provides an additional layer of security because a hacker
-            would need both the secret recovery phrase and the passphrase to access
-            the output public key. By default, most wallet UI extensions do not use
-            a passphrase. (You probably did not use a passphrase.) Limited to 500
-            characters. '
+            The config address of the candy machine. You can retrieve this if you have the candy machine ID using <a href="#operation/solanaGetCandyMachineDetails">this endpoint</a> and retrieving the `config_address` from the response.  A candy machine ID is the same thing as a configuration address for v2 candy machines.
           type: string
         network:
           default: devnet
@@ -2452,14 +2658,15 @@ components:
           default: v1
           description: |
             The candy machine contract of the candy machine from which you're minting.
-            If you are minting from a `v1` candy machine ID, set this to `v1`. If you are minting from a `v2` candy machine ID, set this to `v2`. If you don't know which the version of your candy machine, check out <a href="#operation/solanaGetAccountIsCandyMachine">this endpoint</a>.
+            If you are minting from a `v1` candy machine ID, set this to `v1`. If you are minting from a `v2` candy machine ID, set this to `v2`.
+            If you don't know which the version of your candy machine, check out <a href="#operation/solanaGetAccountIsCandyMachine">this endpoint</a>.
           enum:
           - v1
           - v2
           type: string
       required:
       - config_address
-      - secret_recovery_phrase
+      - wallet
       type: object
     MintNFTResponse:
       example:
@@ -2498,6 +2705,17 @@ components:
           type: string
         rent_epoch:
           type: number
+      type: object
+    Transaction_result:
+      properties:
+        block_time:
+          type: number
+        meta:
+          type: object
+        slot:
+          type: number
+        transaction:
+          type: object
       type: object
     NFT_data:
       properties:
@@ -2583,6 +2801,7 @@ x-tagGroups:
   - Solana Candy Machine
   - Solana Transaction
   - Solana Account
+  - Solana SPL Token
 - name: Files
   tags:
   - File

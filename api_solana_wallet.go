@@ -170,6 +170,157 @@ func (a *SolanaWalletApiService) SolanaDeriveAssociatedTokenAccountAddressExecut
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
+type ApiSolanaDerivePrivateKeyRequest struct {
+	ctx _context.Context
+	ApiService *SolanaWalletApiService
+	getPublicKeyRequest *GetPublicKeyRequest
+}
+
+func (r ApiSolanaDerivePrivateKeyRequest) GetPublicKeyRequest(getPublicKeyRequest GetPublicKeyRequest) ApiSolanaDerivePrivateKeyRequest {
+	r.getPublicKeyRequest = &getPublicKeyRequest
+	return r
+}
+
+func (r ApiSolanaDerivePrivateKeyRequest) Execute() (GeneratePrivateKey, *_nethttp.Response, error) {
+	return r.ApiService.SolanaDerivePrivateKeyExecute(r)
+}
+
+/*
+SolanaDerivePrivateKey Derive private key
+
+<a href="https://github.com/BL0CK-X/the-blockchain-api/tree/main/examples/solana-wallet/derive-private-key" target="_blank">See examples (Python, JavaScript)</a>.
+    
+Returns a private key array and a base58-encoded private key given wallet authentication.
+
+A wallet is defined by a public key. A public key is derived from a combination of seed phrase, derivation path, and passphrase. Changing any *one* of these three will change the public key output.
+
+*You can generate a unique public key with each combination of secret recovery phrase, passphrase, and derivation path. Thus,
+with a single secret recovery phrase, you can generate many public keys. If you are just starting, just supply the secret recovery phrase you generated with the Solana Wallet Secret Recovery Phrase endpoint.*
+
+*If you are trying to get a public key that already exists (e.g., created in the Phantom wallet), make sure you use the correct derivation path and passphrase. To read more about that, see the descriptions of those parameters below.*
+
+`Cost: 1 Credit` (<a href="#section/Pricing">See Pricing</a>)
+
+ @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @return ApiSolanaDerivePrivateKeyRequest
+*/
+func (a *SolanaWalletApiService) SolanaDerivePrivateKey(ctx _context.Context) ApiSolanaDerivePrivateKeyRequest {
+	return ApiSolanaDerivePrivateKeyRequest{
+		ApiService: a,
+		ctx: ctx,
+	}
+}
+
+// Execute executes the request
+//  @return GeneratePrivateKey
+func (a *SolanaWalletApiService) SolanaDerivePrivateKeyExecute(r ApiSolanaDerivePrivateKeyRequest) (GeneratePrivateKey, *_nethttp.Response, error) {
+	var (
+		localVarHTTPMethod   = _nethttp.MethodPost
+		localVarPostBody     interface{}
+		localVarFormFileName string
+		localVarFileName     string
+		localVarFileBytes    []byte
+		localVarReturnValue  GeneratePrivateKey
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "SolanaWalletApiService.SolanaDerivePrivateKey")
+	if err != nil {
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/solana/wallet/private_key"
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := _neturl.Values{}
+	localVarFormParams := _neturl.Values{}
+	if r.getPublicKeyRequest == nil {
+		return localVarReturnValue, nil, reportError("getPublicKeyRequest is required and must be specified")
+	}
+
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{"application/json"}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	// body params
+	localVarPostBody = r.getPublicKeyRequest
+	if r.ctx != nil {
+		// API Key Authentication
+		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
+			if apiKey, ok := auth["APIKeyID"]; ok {
+				var key string
+				if apiKey.Prefix != "" {
+					key = apiKey.Prefix + " " + apiKey.Key
+				} else {
+					key = apiKey.Key
+				}
+				localVarHeaderParams["APIKeyID"] = key
+			}
+		}
+	}
+	if r.ctx != nil {
+		// API Key Authentication
+		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
+			if apiKey, ok := auth["APISecretKey"]; ok {
+				var key string
+				if apiKey.Prefix != "" {
+					key = apiKey.Prefix + " " + apiKey.Key
+				} else {
+					key = apiKey.Key
+				}
+				localVarHeaderParams["APISecretKey"] = key
+			}
+		}
+	}
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
 type ApiSolanaDerivePublicKeyRequest struct {
 	ctx _context.Context
 	ApiService *SolanaWalletApiService
@@ -190,14 +341,16 @@ SolanaDerivePublicKey Derive public key
 
 <a href="https://github.com/BL0CK-X/the-blockchain-api/tree/main/examples/solana-wallet/derive-public-key" target="_blank">See examples (Python, JavaScript)</a>.
     
-Returns a public key given a secret recovery phrase and optionally a passphrase and a derivation path.
+Returns a public key given wallet authentication.
 
-A wallet is defined by a public key. A public key is derived from a combination of seed phrase, derivation path, and passphrase. Changing any *one* of these three will change the public key output.
+A wallet is identified by a public key. A public key is derived from a combination of seed phrase, derivation path, and passphrase. Changing any *one* of these three will change the public key output. 
 
-*You can generate a unique public key with each combination of secret recovery phrase, passphrase, and derivation path. Thus,
-with a single secret recovery phrase, you can generate many public keys. If you are just starting, just supply the secret recovery phrase you generated with the Solana Wallet Secret Recovery Phrase endpoint.*
+It can also be derived from a private key.
 
-*If you are trying to get a public key that already exists (e.g., created in the Phantom wallet), make sure you use the correct derivation path and passphrase. To read more about that, see the descriptions of those parameters below.*
+*You can generate a unique public key with each combination of secret recovery phrase, passphrase, and derivation path; or from a private key. Thus,
+with a single secret recovery phrase, you can generate many public keys; however, with a private key, you can only generate one public key. If you are just starting, generate a <a href="#operation/solanaGenerateSecretRecoveryPhrase">secret recovery phrase</a> or <a href="#operation/solanaGeneratePrivateKey">private key</a>.
+
+*If you are trying to get a public key that already exists (e.g., created in the Phantom wallet), make sure you use the correct derivation path and passphrase; or just use the private key. To read more about that, see the descriptions of those parameters below.*
 
 `Cost: 1 Credit` (<a href="#section/Pricing">See Pricing</a>)
 
@@ -321,6 +474,140 @@ func (a *SolanaWalletApiService) SolanaDerivePublicKeyExecute(r ApiSolanaDeriveP
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
+type ApiSolanaGeneratePrivateKeyRequest struct {
+	ctx _context.Context
+	ApiService *SolanaWalletApiService
+}
+
+
+func (r ApiSolanaGeneratePrivateKeyRequest) Execute() (GeneratePrivateKey, *_nethttp.Response, error) {
+	return r.ApiService.SolanaGeneratePrivateKeyExecute(r)
+}
+
+/*
+SolanaGeneratePrivateKey Generate private key
+
+<a href="https://github.com/BL0CK-X/the-blockchain-api/tree/main/examples/solana-wallet/generate-private-key" target="_blank">See examples (Python, JavaScript)</a>.
+
+Use this endpoint to securely and randomly generate a private key for a Solana wallet.
+
+`Cost: 1 Credit` (<a href="#section/Pricing">See Pricing</a>)
+
+ @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @return ApiSolanaGeneratePrivateKeyRequest
+*/
+func (a *SolanaWalletApiService) SolanaGeneratePrivateKey(ctx _context.Context) ApiSolanaGeneratePrivateKeyRequest {
+	return ApiSolanaGeneratePrivateKeyRequest{
+		ApiService: a,
+		ctx: ctx,
+	}
+}
+
+// Execute executes the request
+//  @return GeneratePrivateKey
+func (a *SolanaWalletApiService) SolanaGeneratePrivateKeyExecute(r ApiSolanaGeneratePrivateKeyRequest) (GeneratePrivateKey, *_nethttp.Response, error) {
+	var (
+		localVarHTTPMethod   = _nethttp.MethodPost
+		localVarPostBody     interface{}
+		localVarFormFileName string
+		localVarFileName     string
+		localVarFileBytes    []byte
+		localVarReturnValue  GeneratePrivateKey
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "SolanaWalletApiService.SolanaGeneratePrivateKey")
+	if err != nil {
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/solana/wallet/generate/private_key"
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := _neturl.Values{}
+	localVarFormParams := _neturl.Values{}
+
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	if r.ctx != nil {
+		// API Key Authentication
+		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
+			if apiKey, ok := auth["APIKeyID"]; ok {
+				var key string
+				if apiKey.Prefix != "" {
+					key = apiKey.Prefix + " " + apiKey.Key
+				} else {
+					key = apiKey.Key
+				}
+				localVarHeaderParams["APIKeyID"] = key
+			}
+		}
+	}
+	if r.ctx != nil {
+		// API Key Authentication
+		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
+			if apiKey, ok := auth["APISecretKey"]; ok {
+				var key string
+				if apiKey.Prefix != "" {
+					key = apiKey.Prefix + " " + apiKey.Key
+				} else {
+					key = apiKey.Key
+				}
+				localVarHeaderParams["APISecretKey"] = key
+			}
+		}
+	}
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
 type ApiSolanaGenerateSecretRecoveryPhraseRequest struct {
 	ctx _context.Context
 	ApiService *SolanaWalletApiService
@@ -336,7 +623,7 @@ SolanaGenerateSecretRecoveryPhrase Generate secret phrase
 
 <a href="https://github.com/BL0CK-X/the-blockchain-api/tree/main/examples/solana-wallet/generate-secret-phrase" target="_blank">See examples (Python, JavaScript)</a>.
 
-Use this endpoint to securely and randomly generate a secret recovery phrase for a Solana wallet. Complete the wallet creation by using the endpoint below.
+Use this endpoint to securely and randomly generate a secret recovery phrase for a Solana wallet. 
 
 `Cost: 1 Credit` (<a href="#section/Pricing">See Pricing</a>)
 
@@ -367,7 +654,7 @@ func (a *SolanaWalletApiService) SolanaGenerateSecretRecoveryPhraseExecute(r Api
 		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/solana/wallet/secret_recovery_phrase"
+	localVarPath := localBasePath + "/solana/wallet/generate/secret_recovery_phrase"
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := _neturl.Values{}

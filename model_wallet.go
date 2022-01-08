@@ -13,174 +13,156 @@ package openapi
 
 import (
 	"encoding/json"
+	"fmt"
 )
 
-// Transaction struct for Transaction
-type Transaction struct {
-	Id *float32 `json:"id,omitempty"`
-	Jsonrpc *string `json:"jsonrpc,omitempty"`
-	Result *TransactionResult `json:"result,omitempty"`
+// Wallet - The wallet authentication information required to sign transactions.  Click the `>` arrow next to \"wallet\" on the left to see more details. See our Security section <a href=\"#section/Security\">here</a>. 
+type Wallet struct {
+	B58PrivateKey *B58PrivateKey
+	PrivateKey *PrivateKey
+	SecretRecoveryPhrase *SecretRecoveryPhrase
 }
 
-// NewTransaction instantiates a new Transaction object
-// This constructor will assign default values to properties that have it defined,
-// and makes sure properties required by API are set, but the set of arguments
-// will change when the set of required properties is changed
-func NewTransaction() *Transaction {
-	this := Transaction{}
-	return &this
+// B58PrivateKeyAsWallet is a convenience function that returns B58PrivateKey wrapped in Wallet
+func B58PrivateKeyAsWallet(v *B58PrivateKey) Wallet {
+	return Wallet{ B58PrivateKey: v}
 }
 
-// NewTransactionWithDefaults instantiates a new Transaction object
-// This constructor will only assign default values to properties that have it defined,
-// but it doesn't guarantee that properties required by API are set
-func NewTransactionWithDefaults() *Transaction {
-	this := Transaction{}
-	return &this
+// PrivateKeyAsWallet is a convenience function that returns PrivateKey wrapped in Wallet
+func PrivateKeyAsWallet(v *PrivateKey) Wallet {
+	return Wallet{ PrivateKey: v}
 }
 
-// GetId returns the Id field value if set, zero value otherwise.
-func (o *Transaction) GetId() float32 {
-	if o == nil || o.Id == nil {
-		var ret float32
-		return ret
-	}
-	return *o.Id
+// SecretRecoveryPhraseAsWallet is a convenience function that returns SecretRecoveryPhrase wrapped in Wallet
+func SecretRecoveryPhraseAsWallet(v *SecretRecoveryPhrase) Wallet {
+	return Wallet{ SecretRecoveryPhrase: v}
 }
 
-// GetIdOk returns a tuple with the Id field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *Transaction) GetIdOk() (*float32, bool) {
-	if o == nil || o.Id == nil {
-		return nil, false
-	}
-	return o.Id, true
-}
 
-// HasId returns a boolean if a field has been set.
-func (o *Transaction) HasId() bool {
-	if o != nil && o.Id != nil {
-		return true
+// Unmarshal JSON data into one of the pointers in the struct
+func (dst *Wallet) UnmarshalJSON(data []byte) error {
+	var err error
+	match := 0
+	// try to unmarshal data into B58PrivateKey
+	err = json.Unmarshal(data, &dst.B58PrivateKey)
+	if err == nil {
+		jsonB58PrivateKey, _ := json.Marshal(dst.B58PrivateKey)
+		if string(jsonB58PrivateKey) == "{}" { // empty struct
+			dst.B58PrivateKey = nil
+		} else {
+			match++
+		}
+	} else {
+		dst.B58PrivateKey = nil
 	}
 
-	return false
-}
-
-// SetId gets a reference to the given float32 and assigns it to the Id field.
-func (o *Transaction) SetId(v float32) {
-	o.Id = &v
-}
-
-// GetJsonrpc returns the Jsonrpc field value if set, zero value otherwise.
-func (o *Transaction) GetJsonrpc() string {
-	if o == nil || o.Jsonrpc == nil {
-		var ret string
-		return ret
-	}
-	return *o.Jsonrpc
-}
-
-// GetJsonrpcOk returns a tuple with the Jsonrpc field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *Transaction) GetJsonrpcOk() (*string, bool) {
-	if o == nil || o.Jsonrpc == nil {
-		return nil, false
-	}
-	return o.Jsonrpc, true
-}
-
-// HasJsonrpc returns a boolean if a field has been set.
-func (o *Transaction) HasJsonrpc() bool {
-	if o != nil && o.Jsonrpc != nil {
-		return true
+	// try to unmarshal data into PrivateKey
+	err = json.Unmarshal(data, &dst.PrivateKey)
+	if err == nil {
+		jsonPrivateKey, _ := json.Marshal(dst.PrivateKey)
+		if string(jsonPrivateKey) == "{}" { // empty struct
+			dst.PrivateKey = nil
+		} else {
+			match++
+		}
+	} else {
+		dst.PrivateKey = nil
 	}
 
-	return false
-}
-
-// SetJsonrpc gets a reference to the given string and assigns it to the Jsonrpc field.
-func (o *Transaction) SetJsonrpc(v string) {
-	o.Jsonrpc = &v
-}
-
-// GetResult returns the Result field value if set, zero value otherwise.
-func (o *Transaction) GetResult() TransactionResult {
-	if o == nil || o.Result == nil {
-		var ret TransactionResult
-		return ret
-	}
-	return *o.Result
-}
-
-// GetResultOk returns a tuple with the Result field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *Transaction) GetResultOk() (*TransactionResult, bool) {
-	if o == nil || o.Result == nil {
-		return nil, false
-	}
-	return o.Result, true
-}
-
-// HasResult returns a boolean if a field has been set.
-func (o *Transaction) HasResult() bool {
-	if o != nil && o.Result != nil {
-		return true
+	// try to unmarshal data into SecretRecoveryPhrase
+	err = json.Unmarshal(data, &dst.SecretRecoveryPhrase)
+	if err == nil {
+		jsonSecretRecoveryPhrase, _ := json.Marshal(dst.SecretRecoveryPhrase)
+		if string(jsonSecretRecoveryPhrase) == "{}" { // empty struct
+			dst.SecretRecoveryPhrase = nil
+		} else {
+			match++
+		}
+	} else {
+		dst.SecretRecoveryPhrase = nil
 	}
 
-	return false
+	if match > 1 { // more than 1 match
+		// reset to nil
+		dst.B58PrivateKey = nil
+		dst.PrivateKey = nil
+		dst.SecretRecoveryPhrase = nil
+
+		return fmt.Errorf("Data matches more than one schema in oneOf(Wallet)")
+	} else if match == 1 {
+		return nil // exactly one match
+	} else { // no match
+		return fmt.Errorf("Data failed to match schemas in oneOf(Wallet)")
+	}
 }
 
-// SetResult gets a reference to the given TransactionResult and assigns it to the Result field.
-func (o *Transaction) SetResult(v TransactionResult) {
-	o.Result = &v
+// Marshal data from the first non-nil pointers in the struct to JSON
+func (src Wallet) MarshalJSON() ([]byte, error) {
+	if src.B58PrivateKey != nil {
+		return json.Marshal(&src.B58PrivateKey)
+	}
+
+	if src.PrivateKey != nil {
+		return json.Marshal(&src.PrivateKey)
+	}
+
+	if src.SecretRecoveryPhrase != nil {
+		return json.Marshal(&src.SecretRecoveryPhrase)
+	}
+
+	return nil, nil // no data in oneOf schemas
 }
 
-func (o Transaction) MarshalJSON() ([]byte, error) {
-	toSerialize := map[string]interface{}{}
-	if o.Id != nil {
-		toSerialize["id"] = o.Id
+// Get the actual instance
+func (obj *Wallet) GetActualInstance() (interface{}) {
+	if obj.B58PrivateKey != nil {
+		return obj.B58PrivateKey
 	}
-	if o.Jsonrpc != nil {
-		toSerialize["jsonrpc"] = o.Jsonrpc
+
+	if obj.PrivateKey != nil {
+		return obj.PrivateKey
 	}
-	if o.Result != nil {
-		toSerialize["result"] = o.Result
+
+	if obj.SecretRecoveryPhrase != nil {
+		return obj.SecretRecoveryPhrase
 	}
-	return json.Marshal(toSerialize)
+
+	// all schemas are nil
+	return nil
 }
 
-type NullableTransaction struct {
-	value *Transaction
+type NullableWallet struct {
+	value *Wallet
 	isSet bool
 }
 
-func (v NullableTransaction) Get() *Transaction {
+func (v NullableWallet) Get() *Wallet {
 	return v.value
 }
 
-func (v *NullableTransaction) Set(val *Transaction) {
+func (v *NullableWallet) Set(val *Wallet) {
 	v.value = val
 	v.isSet = true
 }
 
-func (v NullableTransaction) IsSet() bool {
+func (v NullableWallet) IsSet() bool {
 	return v.isSet
 }
 
-func (v *NullableTransaction) Unset() {
+func (v *NullableWallet) Unset() {
 	v.value = nil
 	v.isSet = false
 }
 
-func NewNullableTransaction(val *Transaction) *NullableTransaction {
-	return &NullableTransaction{value: val, isSet: true}
+func NewNullableWallet(val *Wallet) *NullableWallet {
+	return &NullableWallet{value: val, isSet: true}
 }
 
-func (v NullableTransaction) MarshalJSON() ([]byte, error) {
+func (v NullableWallet) MarshalJSON() ([]byte, error) {
 	return json.Marshal(v.value)
 }
 
-func (v *NullableTransaction) UnmarshalJSON(src []byte) error {
+func (v *NullableWallet) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }

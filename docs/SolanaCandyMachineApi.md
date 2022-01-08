@@ -34,7 +34,7 @@ import (
 )
 
 func main() {
-    createTestCandyMachineRequest := *openapiclient.NewCreateTestCandyMachineRequest("SecretRecoveryPhrase_example") // CreateTestCandyMachineRequest |  (optional)
+    createTestCandyMachineRequest := *openapiclient.NewCreateTestCandyMachineRequest(openapiclient.Wallet{B58PrivateKey: openapiclient.NewB58PrivateKey("B58PrivateKey_example")}) // CreateTestCandyMachineRequest |  (optional)
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
@@ -300,7 +300,7 @@ import (
 )
 
 func main() {
-    mintNFTRequest := *openapiclient.NewMintNFTRequest("ConfigAddress_example", "SecretRecoveryPhrase_example") // MintNFTRequest |  (optional)
+    mintNFTRequest := *openapiclient.NewMintNFTRequest(openapiclient.Wallet{B58PrivateKey: openapiclient.NewB58PrivateKey("B58PrivateKey_example")}, "ConfigAddress_example") // MintNFTRequest |  (optional)
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
@@ -347,7 +347,7 @@ Name | Type | Description  | Notes
 
 ## SolanaSearchCandyMachines
 
-> []CandyMachineSearchResponse SolanaSearchCandyMachines(ctx).CandyMachineSearchRequest(candyMachineSearchRequest).Execute()
+> []string SolanaSearchCandyMachines(ctx).CandyMachineSearchRequest(candyMachineSearchRequest).Execute()
 
 Search CMs
 
@@ -375,7 +375,7 @@ func main() {
         fmt.Fprintf(os.Stderr, "Error when calling `SolanaCandyMachineApi.SolanaSearchCandyMachines``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
-    // response from `SolanaSearchCandyMachines`: []CandyMachineSearchResponse
+    // response from `SolanaSearchCandyMachines`: []string
     fmt.Fprintf(os.Stdout, "Response from `SolanaCandyMachineApi.SolanaSearchCandyMachines`: %v\n", resp)
 }
 ```
@@ -395,7 +395,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**[]CandyMachineSearchResponse**](CandyMachineSearchResponse.md)
+**[]string**
 
 ### Authorization
 

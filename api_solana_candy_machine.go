@@ -339,7 +339,7 @@ func (r ApiSolanaGetCandyMachineMetadataRequest) Execute() (GetCandyMetadataResp
 /*
 SolanaGetCandyMachineMetadata Get a CM's metadata 
 
-<a href="" target="_blank">See examples (Python, JavaScript) [Coming Soon]</a>.
+<a href="https://github.com/BL0CK-X/the-blockchain-api/tree/main/examples/solana-candy-machine/get-candy-machine-metadata" target="_blank">See examples (Python, JavaScript)</a>.
 
 Use this endpoint to get metadata about a Metaplex candy machine. This includes the goLiveDate, itemsAvailable, and itemsRedeemed. To see what is included, expand the green successful response below.
 
@@ -488,7 +488,7 @@ func (r ApiSolanaListAllCandyMachinesRequest) Execute() (interface{}, *_nethttp.
 /*
 SolanaListAllCandyMachines List all CMs
 
-<a href="" target="_blank">See examples (Python, JavaScript) [Coming Soon]</a>.
+<a href="https://github.com/BL0CK-X/the-blockchain-api/tree/main/examples/solana-candy-machine/list-all-candy-machines" target="_blank">See examples (Python, JavaScript)</a>.
 
 With this endpoint, you can list all candy machines published to Solana mainnet.
 
@@ -635,7 +635,13 @@ SolanaMintFromCandyMachine Mint from a CM
 
 Use this endpoint to mint an NFT from a metaplex candy machine as soon as it drops.
 
-In order to achieve speed, this endpoint sends the transaction without checking whether or not it confirmed. It could still fail, for example, because the candy machine ran out of available mints. You should check the status of the transaction using our <a href="#operation/solanaGetTransaction">getTransaction</a> endpoint.
+This only works for `v1` and `v2` candy machines, and does not work for candy machines of any other type such as Magic Eden candy machines.
+
+In order to achieve speed, this endpoint sends the transaction without checking whether or not it confirmed. It could still fail, for example, because the candy machine ran out of available mints. You should check the status of the transaction using our <a href="#operation/solanaGetTransaction">getTransaction</a> endpoint. <a href="https://gist.github.com/joshwolff1/298e8251e43ff9b4815028683b1ca17d" target="_blank">Here's an example</a> of how to do this.
+
+Mint transactions for candy machines that have capatcha/Civic enabled will fail. There is a gatekeeper functionality where you must manually verify through Civic and captcha in order to mint from a candy machine. In this functionality, Civic signs the transaction. Therefore, if the gatekeeper functionality is enabled, our “Mint from candy machine” endpoint will fail because it is missing a signer. If it is not enabled, then our “Mint from candy machine” endpoint will succeed. One caveat is the attribute “expireOnUse”. If this is True, then you have to solve a captcha each time. In this case, the “Mint from candy machine” endpoint will fail. If this is False, then your first verification is sufficient for further mints. In which case, after verifying manually the first time, you can use our endpoint thereafter. 
+
+You can check if the gatekeeper functionality is enabled with this <a href="#operation/solanaGetCandyMachineMetadata">endpoint</a>.
 
 `Cost: 2 Credits` (<a href="#section/Pricing">See Pricing</a>)
 
@@ -777,14 +783,14 @@ func (r ApiSolanaSearchCandyMachinesRequest) CandyMachineSearchRequest(candyMach
 	return r
 }
 
-func (r ApiSolanaSearchCandyMachinesRequest) Execute() ([]CandyMachineSearchResponse, *_nethttp.Response, error) {
+func (r ApiSolanaSearchCandyMachinesRequest) Execute() ([]string, *_nethttp.Response, error) {
 	return r.ApiService.SolanaSearchCandyMachinesExecute(r)
 }
 
 /*
 SolanaSearchCandyMachines Search CMs
 
-<a href="" target="_blank">See examples (Python, JavaScript) [Coming Soon]</a>.
+<a href="https://github.com/BL0CK-X/the-blockchain-api/tree/main/examples/solana-candy-machine/search-candy-machines" target="_blank">See examples (Python, JavaScript)</a>.
 
 With this endpoint, you can search candy machines by their symbol, name of NFTs, uuid, configuration address, and update authority.
 
@@ -805,15 +811,15 @@ func (a *SolanaCandyMachineApiService) SolanaSearchCandyMachines(ctx _context.Co
 }
 
 // Execute executes the request
-//  @return []CandyMachineSearchResponse
-func (a *SolanaCandyMachineApiService) SolanaSearchCandyMachinesExecute(r ApiSolanaSearchCandyMachinesRequest) ([]CandyMachineSearchResponse, *_nethttp.Response, error) {
+//  @return []string
+func (a *SolanaCandyMachineApiService) SolanaSearchCandyMachinesExecute(r ApiSolanaSearchCandyMachinesRequest) ([]string, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPost
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		localVarReturnValue  []CandyMachineSearchResponse
+		localVarReturnValue  []string
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "SolanaCandyMachineApiService.SolanaSearchCandyMachines")

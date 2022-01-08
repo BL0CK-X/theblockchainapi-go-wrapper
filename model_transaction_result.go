@@ -15,172 +15,208 @@ import (
 	"encoding/json"
 )
 
-// Transaction struct for Transaction
-type Transaction struct {
-	Id *float32 `json:"id,omitempty"`
-	Jsonrpc *string `json:"jsonrpc,omitempty"`
-	Result *TransactionResult `json:"result,omitempty"`
+// TransactionResult struct for TransactionResult
+type TransactionResult struct {
+	BlockTime *float32 `json:"block_time,omitempty"`
+	Meta *map[string]interface{} `json:"meta,omitempty"`
+	Slot *float32 `json:"slot,omitempty"`
+	Transaction *map[string]interface{} `json:"transaction,omitempty"`
 }
 
-// NewTransaction instantiates a new Transaction object
+// NewTransactionResult instantiates a new TransactionResult object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewTransaction() *Transaction {
-	this := Transaction{}
+func NewTransactionResult() *TransactionResult {
+	this := TransactionResult{}
 	return &this
 }
 
-// NewTransactionWithDefaults instantiates a new Transaction object
+// NewTransactionResultWithDefaults instantiates a new TransactionResult object
 // This constructor will only assign default values to properties that have it defined,
 // but it doesn't guarantee that properties required by API are set
-func NewTransactionWithDefaults() *Transaction {
-	this := Transaction{}
+func NewTransactionResultWithDefaults() *TransactionResult {
+	this := TransactionResult{}
 	return &this
 }
 
-// GetId returns the Id field value if set, zero value otherwise.
-func (o *Transaction) GetId() float32 {
-	if o == nil || o.Id == nil {
+// GetBlockTime returns the BlockTime field value if set, zero value otherwise.
+func (o *TransactionResult) GetBlockTime() float32 {
+	if o == nil || o.BlockTime == nil {
 		var ret float32
 		return ret
 	}
-	return *o.Id
+	return *o.BlockTime
 }
 
-// GetIdOk returns a tuple with the Id field value if set, nil otherwise
+// GetBlockTimeOk returns a tuple with the BlockTime field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *Transaction) GetIdOk() (*float32, bool) {
-	if o == nil || o.Id == nil {
+func (o *TransactionResult) GetBlockTimeOk() (*float32, bool) {
+	if o == nil || o.BlockTime == nil {
 		return nil, false
 	}
-	return o.Id, true
+	return o.BlockTime, true
 }
 
-// HasId returns a boolean if a field has been set.
-func (o *Transaction) HasId() bool {
-	if o != nil && o.Id != nil {
+// HasBlockTime returns a boolean if a field has been set.
+func (o *TransactionResult) HasBlockTime() bool {
+	if o != nil && o.BlockTime != nil {
 		return true
 	}
 
 	return false
 }
 
-// SetId gets a reference to the given float32 and assigns it to the Id field.
-func (o *Transaction) SetId(v float32) {
-	o.Id = &v
+// SetBlockTime gets a reference to the given float32 and assigns it to the BlockTime field.
+func (o *TransactionResult) SetBlockTime(v float32) {
+	o.BlockTime = &v
 }
 
-// GetJsonrpc returns the Jsonrpc field value if set, zero value otherwise.
-func (o *Transaction) GetJsonrpc() string {
-	if o == nil || o.Jsonrpc == nil {
-		var ret string
+// GetMeta returns the Meta field value if set, zero value otherwise.
+func (o *TransactionResult) GetMeta() map[string]interface{} {
+	if o == nil || o.Meta == nil {
+		var ret map[string]interface{}
 		return ret
 	}
-	return *o.Jsonrpc
+	return *o.Meta
 }
 
-// GetJsonrpcOk returns a tuple with the Jsonrpc field value if set, nil otherwise
+// GetMetaOk returns a tuple with the Meta field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *Transaction) GetJsonrpcOk() (*string, bool) {
-	if o == nil || o.Jsonrpc == nil {
+func (o *TransactionResult) GetMetaOk() (*map[string]interface{}, bool) {
+	if o == nil || o.Meta == nil {
 		return nil, false
 	}
-	return o.Jsonrpc, true
+	return o.Meta, true
 }
 
-// HasJsonrpc returns a boolean if a field has been set.
-func (o *Transaction) HasJsonrpc() bool {
-	if o != nil && o.Jsonrpc != nil {
+// HasMeta returns a boolean if a field has been set.
+func (o *TransactionResult) HasMeta() bool {
+	if o != nil && o.Meta != nil {
 		return true
 	}
 
 	return false
 }
 
-// SetJsonrpc gets a reference to the given string and assigns it to the Jsonrpc field.
-func (o *Transaction) SetJsonrpc(v string) {
-	o.Jsonrpc = &v
+// SetMeta gets a reference to the given map[string]interface{} and assigns it to the Meta field.
+func (o *TransactionResult) SetMeta(v map[string]interface{}) {
+	o.Meta = &v
 }
 
-// GetResult returns the Result field value if set, zero value otherwise.
-func (o *Transaction) GetResult() TransactionResult {
-	if o == nil || o.Result == nil {
-		var ret TransactionResult
+// GetSlot returns the Slot field value if set, zero value otherwise.
+func (o *TransactionResult) GetSlot() float32 {
+	if o == nil || o.Slot == nil {
+		var ret float32
 		return ret
 	}
-	return *o.Result
+	return *o.Slot
 }
 
-// GetResultOk returns a tuple with the Result field value if set, nil otherwise
+// GetSlotOk returns a tuple with the Slot field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *Transaction) GetResultOk() (*TransactionResult, bool) {
-	if o == nil || o.Result == nil {
+func (o *TransactionResult) GetSlotOk() (*float32, bool) {
+	if o == nil || o.Slot == nil {
 		return nil, false
 	}
-	return o.Result, true
+	return o.Slot, true
 }
 
-// HasResult returns a boolean if a field has been set.
-func (o *Transaction) HasResult() bool {
-	if o != nil && o.Result != nil {
+// HasSlot returns a boolean if a field has been set.
+func (o *TransactionResult) HasSlot() bool {
+	if o != nil && o.Slot != nil {
 		return true
 	}
 
 	return false
 }
 
-// SetResult gets a reference to the given TransactionResult and assigns it to the Result field.
-func (o *Transaction) SetResult(v TransactionResult) {
-	o.Result = &v
+// SetSlot gets a reference to the given float32 and assigns it to the Slot field.
+func (o *TransactionResult) SetSlot(v float32) {
+	o.Slot = &v
 }
 
-func (o Transaction) MarshalJSON() ([]byte, error) {
+// GetTransaction returns the Transaction field value if set, zero value otherwise.
+func (o *TransactionResult) GetTransaction() map[string]interface{} {
+	if o == nil || o.Transaction == nil {
+		var ret map[string]interface{}
+		return ret
+	}
+	return *o.Transaction
+}
+
+// GetTransactionOk returns a tuple with the Transaction field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *TransactionResult) GetTransactionOk() (*map[string]interface{}, bool) {
+	if o == nil || o.Transaction == nil {
+		return nil, false
+	}
+	return o.Transaction, true
+}
+
+// HasTransaction returns a boolean if a field has been set.
+func (o *TransactionResult) HasTransaction() bool {
+	if o != nil && o.Transaction != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetTransaction gets a reference to the given map[string]interface{} and assigns it to the Transaction field.
+func (o *TransactionResult) SetTransaction(v map[string]interface{}) {
+	o.Transaction = &v
+}
+
+func (o TransactionResult) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
-	if o.Id != nil {
-		toSerialize["id"] = o.Id
+	if o.BlockTime != nil {
+		toSerialize["block_time"] = o.BlockTime
 	}
-	if o.Jsonrpc != nil {
-		toSerialize["jsonrpc"] = o.Jsonrpc
+	if o.Meta != nil {
+		toSerialize["meta"] = o.Meta
 	}
-	if o.Result != nil {
-		toSerialize["result"] = o.Result
+	if o.Slot != nil {
+		toSerialize["slot"] = o.Slot
+	}
+	if o.Transaction != nil {
+		toSerialize["transaction"] = o.Transaction
 	}
 	return json.Marshal(toSerialize)
 }
 
-type NullableTransaction struct {
-	value *Transaction
+type NullableTransactionResult struct {
+	value *TransactionResult
 	isSet bool
 }
 
-func (v NullableTransaction) Get() *Transaction {
+func (v NullableTransactionResult) Get() *TransactionResult {
 	return v.value
 }
 
-func (v *NullableTransaction) Set(val *Transaction) {
+func (v *NullableTransactionResult) Set(val *TransactionResult) {
 	v.value = val
 	v.isSet = true
 }
 
-func (v NullableTransaction) IsSet() bool {
+func (v NullableTransactionResult) IsSet() bool {
 	return v.isSet
 }
 
-func (v *NullableTransaction) Unset() {
+func (v *NullableTransactionResult) Unset() {
 	v.value = nil
 	v.isSet = false
 }
 
-func NewNullableTransaction(val *Transaction) *NullableTransaction {
-	return &NullableTransaction{value: val, isSet: true}
+func NewNullableTransactionResult(val *TransactionResult) *NullableTransactionResult {
+	return &NullableTransactionResult{value: val, isSet: true}
 }
 
-func (v NullableTransaction) MarshalJSON() ([]byte, error) {
+func (v NullableTransactionResult) MarshalJSON() ([]byte, error) {
 	return json.Marshal(v.value)
 }
 
-func (v *NullableTransaction) UnmarshalJSON(src []byte) error {
+func (v *NullableTransactionResult) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }

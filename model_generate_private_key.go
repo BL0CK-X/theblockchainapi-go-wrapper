@@ -15,172 +15,138 @@ import (
 	"encoding/json"
 )
 
-// Transaction struct for Transaction
-type Transaction struct {
-	Id *float32 `json:"id,omitempty"`
-	Jsonrpc *string `json:"jsonrpc,omitempty"`
-	Result *TransactionResult `json:"result,omitempty"`
+// GeneratePrivateKey struct for GeneratePrivateKey
+type GeneratePrivateKey struct {
+	// A private key corresponds to exactly one public key address. A private key can be used to move assets out of the wallet and sign transaction with the corresponding public key.  A private key is an array of integers (e.g.,   `[185,108,153,165,57,193,166,167,58,148,133,121,92,252,242,13,233,246,35,103,185,20,27,56,111,169,12,50,50,36,83,156,173,195,143,75,135,78,204,129,217,231,58,129,69,180,185,86,119,43,200,193,94,112,31,135,68,128,207,26,85,150,68,181]`).  <a href=\"https://solflare.com\" target=\"_blank\">Solflare</a> is a popular wallet interface on Solana that allows you to export your private key in this format.
+	PrivateKey *map[string]interface{} `json:"private_key,omitempty"`
+	// A private key corresponds to exactly one public key address. A private key can be used to move assets out of the wallet and sign transaction with the corresponding public key.  A base58-encoded private key is a base58-encoded version of the typical private key. It is represented as a string (e.g., `4waBTVeAVWEAczSdx36uMrR19668ACgQDs7r386vrUes3UCzvXCQ2FPSCVGb1zJrwcULgpNzgABreyQaWSpGBwfx`).  <a href=\"https://phantom.app\" target=\"_blank\">Phantom</a> is a popular wallet interface on Solana that allows you to export your private key in this format.
+	B58PrivateKey *string `json:"b58_private_key,omitempty"`
 }
 
-// NewTransaction instantiates a new Transaction object
+// NewGeneratePrivateKey instantiates a new GeneratePrivateKey object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewTransaction() *Transaction {
-	this := Transaction{}
+func NewGeneratePrivateKey() *GeneratePrivateKey {
+	this := GeneratePrivateKey{}
 	return &this
 }
 
-// NewTransactionWithDefaults instantiates a new Transaction object
+// NewGeneratePrivateKeyWithDefaults instantiates a new GeneratePrivateKey object
 // This constructor will only assign default values to properties that have it defined,
 // but it doesn't guarantee that properties required by API are set
-func NewTransactionWithDefaults() *Transaction {
-	this := Transaction{}
+func NewGeneratePrivateKeyWithDefaults() *GeneratePrivateKey {
+	this := GeneratePrivateKey{}
 	return &this
 }
 
-// GetId returns the Id field value if set, zero value otherwise.
-func (o *Transaction) GetId() float32 {
-	if o == nil || o.Id == nil {
-		var ret float32
+// GetPrivateKey returns the PrivateKey field value if set, zero value otherwise.
+func (o *GeneratePrivateKey) GetPrivateKey() map[string]interface{} {
+	if o == nil || o.PrivateKey == nil {
+		var ret map[string]interface{}
 		return ret
 	}
-	return *o.Id
+	return *o.PrivateKey
 }
 
-// GetIdOk returns a tuple with the Id field value if set, nil otherwise
+// GetPrivateKeyOk returns a tuple with the PrivateKey field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *Transaction) GetIdOk() (*float32, bool) {
-	if o == nil || o.Id == nil {
+func (o *GeneratePrivateKey) GetPrivateKeyOk() (*map[string]interface{}, bool) {
+	if o == nil || o.PrivateKey == nil {
 		return nil, false
 	}
-	return o.Id, true
+	return o.PrivateKey, true
 }
 
-// HasId returns a boolean if a field has been set.
-func (o *Transaction) HasId() bool {
-	if o != nil && o.Id != nil {
+// HasPrivateKey returns a boolean if a field has been set.
+func (o *GeneratePrivateKey) HasPrivateKey() bool {
+	if o != nil && o.PrivateKey != nil {
 		return true
 	}
 
 	return false
 }
 
-// SetId gets a reference to the given float32 and assigns it to the Id field.
-func (o *Transaction) SetId(v float32) {
-	o.Id = &v
+// SetPrivateKey gets a reference to the given map[string]interface{} and assigns it to the PrivateKey field.
+func (o *GeneratePrivateKey) SetPrivateKey(v map[string]interface{}) {
+	o.PrivateKey = &v
 }
 
-// GetJsonrpc returns the Jsonrpc field value if set, zero value otherwise.
-func (o *Transaction) GetJsonrpc() string {
-	if o == nil || o.Jsonrpc == nil {
+// GetB58PrivateKey returns the B58PrivateKey field value if set, zero value otherwise.
+func (o *GeneratePrivateKey) GetB58PrivateKey() string {
+	if o == nil || o.B58PrivateKey == nil {
 		var ret string
 		return ret
 	}
-	return *o.Jsonrpc
+	return *o.B58PrivateKey
 }
 
-// GetJsonrpcOk returns a tuple with the Jsonrpc field value if set, nil otherwise
+// GetB58PrivateKeyOk returns a tuple with the B58PrivateKey field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *Transaction) GetJsonrpcOk() (*string, bool) {
-	if o == nil || o.Jsonrpc == nil {
+func (o *GeneratePrivateKey) GetB58PrivateKeyOk() (*string, bool) {
+	if o == nil || o.B58PrivateKey == nil {
 		return nil, false
 	}
-	return o.Jsonrpc, true
+	return o.B58PrivateKey, true
 }
 
-// HasJsonrpc returns a boolean if a field has been set.
-func (o *Transaction) HasJsonrpc() bool {
-	if o != nil && o.Jsonrpc != nil {
+// HasB58PrivateKey returns a boolean if a field has been set.
+func (o *GeneratePrivateKey) HasB58PrivateKey() bool {
+	if o != nil && o.B58PrivateKey != nil {
 		return true
 	}
 
 	return false
 }
 
-// SetJsonrpc gets a reference to the given string and assigns it to the Jsonrpc field.
-func (o *Transaction) SetJsonrpc(v string) {
-	o.Jsonrpc = &v
+// SetB58PrivateKey gets a reference to the given string and assigns it to the B58PrivateKey field.
+func (o *GeneratePrivateKey) SetB58PrivateKey(v string) {
+	o.B58PrivateKey = &v
 }
 
-// GetResult returns the Result field value if set, zero value otherwise.
-func (o *Transaction) GetResult() TransactionResult {
-	if o == nil || o.Result == nil {
-		var ret TransactionResult
-		return ret
-	}
-	return *o.Result
-}
-
-// GetResultOk returns a tuple with the Result field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *Transaction) GetResultOk() (*TransactionResult, bool) {
-	if o == nil || o.Result == nil {
-		return nil, false
-	}
-	return o.Result, true
-}
-
-// HasResult returns a boolean if a field has been set.
-func (o *Transaction) HasResult() bool {
-	if o != nil && o.Result != nil {
-		return true
-	}
-
-	return false
-}
-
-// SetResult gets a reference to the given TransactionResult and assigns it to the Result field.
-func (o *Transaction) SetResult(v TransactionResult) {
-	o.Result = &v
-}
-
-func (o Transaction) MarshalJSON() ([]byte, error) {
+func (o GeneratePrivateKey) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
-	if o.Id != nil {
-		toSerialize["id"] = o.Id
+	if o.PrivateKey != nil {
+		toSerialize["private_key"] = o.PrivateKey
 	}
-	if o.Jsonrpc != nil {
-		toSerialize["jsonrpc"] = o.Jsonrpc
-	}
-	if o.Result != nil {
-		toSerialize["result"] = o.Result
+	if o.B58PrivateKey != nil {
+		toSerialize["b58_private_key"] = o.B58PrivateKey
 	}
 	return json.Marshal(toSerialize)
 }
 
-type NullableTransaction struct {
-	value *Transaction
+type NullableGeneratePrivateKey struct {
+	value *GeneratePrivateKey
 	isSet bool
 }
 
-func (v NullableTransaction) Get() *Transaction {
+func (v NullableGeneratePrivateKey) Get() *GeneratePrivateKey {
 	return v.value
 }
 
-func (v *NullableTransaction) Set(val *Transaction) {
+func (v *NullableGeneratePrivateKey) Set(val *GeneratePrivateKey) {
 	v.value = val
 	v.isSet = true
 }
 
-func (v NullableTransaction) IsSet() bool {
+func (v NullableGeneratePrivateKey) IsSet() bool {
 	return v.isSet
 }
 
-func (v *NullableTransaction) Unset() {
+func (v *NullableGeneratePrivateKey) Unset() {
 	v.value = nil
 	v.isSet = false
 }
 
-func NewNullableTransaction(val *Transaction) *NullableTransaction {
-	return &NullableTransaction{value: val, isSet: true}
+func NewNullableGeneratePrivateKey(val *GeneratePrivateKey) *NullableGeneratePrivateKey {
+	return &NullableGeneratePrivateKey{value: val, isSet: true}
 }
 
-func (v NullableTransaction) MarshalJSON() ([]byte, error) {
+func (v NullableGeneratePrivateKey) MarshalJSON() ([]byte, error) {
 	return json.Marshal(v.value)
 }
 
-func (v *NullableTransaction) UnmarshalJSON(src []byte) error {
+func (v *NullableGeneratePrivateKey) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }

@@ -4,11 +4,9 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**BlockTime** | Pointer to **float32** |  | [optional] 
-**Meta** | Pointer to **map[string]interface{}** |  | [optional] 
-**Slot** | Pointer to **float32** |  | [optional] 
-**Transaction** | Pointer to **map[string]interface{}** |  | [optional] 
-**Network** | Pointer to **string** |  | [optional] [default to "devnet"]
+**Id** | Pointer to **float32** |  | [optional] 
+**Jsonrpc** | Pointer to **string** |  | [optional] 
+**Result** | Pointer to [**TransactionResult**](TransactionResult.md) |  | [optional] 
 
 ## Methods
 
@@ -29,130 +27,80 @@ NewTransactionWithDefaults instantiates a new Transaction object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
 
-### GetBlockTime
+### GetId
 
-`func (o *Transaction) GetBlockTime() float32`
+`func (o *Transaction) GetId() float32`
 
-GetBlockTime returns the BlockTime field if non-nil, zero value otherwise.
+GetId returns the Id field if non-nil, zero value otherwise.
 
-### GetBlockTimeOk
+### GetIdOk
 
-`func (o *Transaction) GetBlockTimeOk() (*float32, bool)`
+`func (o *Transaction) GetIdOk() (*float32, bool)`
 
-GetBlockTimeOk returns a tuple with the BlockTime field if it's non-nil, zero value otherwise
+GetIdOk returns a tuple with the Id field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
-### SetBlockTime
+### SetId
 
-`func (o *Transaction) SetBlockTime(v float32)`
+`func (o *Transaction) SetId(v float32)`
 
-SetBlockTime sets BlockTime field to given value.
+SetId sets Id field to given value.
 
-### HasBlockTime
+### HasId
 
-`func (o *Transaction) HasBlockTime() bool`
+`func (o *Transaction) HasId() bool`
 
-HasBlockTime returns a boolean if a field has been set.
+HasId returns a boolean if a field has been set.
 
-### GetMeta
+### GetJsonrpc
 
-`func (o *Transaction) GetMeta() map[string]interface{}`
+`func (o *Transaction) GetJsonrpc() string`
 
-GetMeta returns the Meta field if non-nil, zero value otherwise.
+GetJsonrpc returns the Jsonrpc field if non-nil, zero value otherwise.
 
-### GetMetaOk
+### GetJsonrpcOk
 
-`func (o *Transaction) GetMetaOk() (*map[string]interface{}, bool)`
+`func (o *Transaction) GetJsonrpcOk() (*string, bool)`
 
-GetMetaOk returns a tuple with the Meta field if it's non-nil, zero value otherwise
+GetJsonrpcOk returns a tuple with the Jsonrpc field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
-### SetMeta
+### SetJsonrpc
 
-`func (o *Transaction) SetMeta(v map[string]interface{})`
+`func (o *Transaction) SetJsonrpc(v string)`
 
-SetMeta sets Meta field to given value.
+SetJsonrpc sets Jsonrpc field to given value.
 
-### HasMeta
+### HasJsonrpc
 
-`func (o *Transaction) HasMeta() bool`
+`func (o *Transaction) HasJsonrpc() bool`
 
-HasMeta returns a boolean if a field has been set.
+HasJsonrpc returns a boolean if a field has been set.
 
-### GetSlot
+### GetResult
 
-`func (o *Transaction) GetSlot() float32`
+`func (o *Transaction) GetResult() TransactionResult`
 
-GetSlot returns the Slot field if non-nil, zero value otherwise.
+GetResult returns the Result field if non-nil, zero value otherwise.
 
-### GetSlotOk
+### GetResultOk
 
-`func (o *Transaction) GetSlotOk() (*float32, bool)`
+`func (o *Transaction) GetResultOk() (*TransactionResult, bool)`
 
-GetSlotOk returns a tuple with the Slot field if it's non-nil, zero value otherwise
+GetResultOk returns a tuple with the Result field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
-### SetSlot
+### SetResult
 
-`func (o *Transaction) SetSlot(v float32)`
+`func (o *Transaction) SetResult(v TransactionResult)`
 
-SetSlot sets Slot field to given value.
+SetResult sets Result field to given value.
 
-### HasSlot
+### HasResult
 
-`func (o *Transaction) HasSlot() bool`
+`func (o *Transaction) HasResult() bool`
 
-HasSlot returns a boolean if a field has been set.
-
-### GetTransaction
-
-`func (o *Transaction) GetTransaction() map[string]interface{}`
-
-GetTransaction returns the Transaction field if non-nil, zero value otherwise.
-
-### GetTransactionOk
-
-`func (o *Transaction) GetTransactionOk() (*map[string]interface{}, bool)`
-
-GetTransactionOk returns a tuple with the Transaction field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetTransaction
-
-`func (o *Transaction) SetTransaction(v map[string]interface{})`
-
-SetTransaction sets Transaction field to given value.
-
-### HasTransaction
-
-`func (o *Transaction) HasTransaction() bool`
-
-HasTransaction returns a boolean if a field has been set.
-
-### GetNetwork
-
-`func (o *Transaction) GetNetwork() string`
-
-GetNetwork returns the Network field if non-nil, zero value otherwise.
-
-### GetNetworkOk
-
-`func (o *Transaction) GetNetworkOk() (*string, bool)`
-
-GetNetworkOk returns a tuple with the Network field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetNetwork
-
-`func (o *Transaction) SetNetwork(v string)`
-
-SetNetwork sets Network field to given value.
-
-### HasNetwork
-
-`func (o *Transaction) HasNetwork() bool`
-
-HasNetwork returns a boolean if a field has been set.
+HasResult returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

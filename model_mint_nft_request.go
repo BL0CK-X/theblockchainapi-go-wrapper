@@ -17,14 +17,9 @@ import (
 
 // MintNFTRequest struct for MintNFTRequest
 type MintNFTRequest struct {
-	// The config address of the candy machine. You can retrieve this if you have the candy machine ID using <a href=\"#operation/solanaGetCandyMachineDetails\">this endpoint</a> and retrieving the `config_address` from the response.. 
+	Wallet Wallet `json:"wallet"`
+	// The config address of the candy machine. You can retrieve this if you have the candy machine ID using <a href=\"#operation/solanaGetCandyMachineDetails\">this endpoint</a> and retrieving the `config_address` from the response.  A candy machine ID is the same thing as a configuration address for v2 candy machines. 
 	ConfigAddress string `json:"config_address"`
-	// The twelve word phrase that can be used to derive many public key addresses. To derive a public key, you need a secret recovery phrase, a derivation path, and an optional passphrase. See our Security section <a href=\"#section/Security\">here</a>.
-	SecretRecoveryPhrase string `json:"secret_recovery_phrase"`
-	// Derivation paths are used to derive the public key from the secret recovery phrase. Only certain paths are accepted.  We use \"m/44/501/0/0\" by default, if it is not provided. This is the path that the Phantom and Sollet wallets use. If you provide the empty string \"\" as the value for the derivation path, then we will use the Solana CLI default value. The SolFlare recommended path is \"m/44/501/0\".  You can also arbitrarily increment the default path (\"m/44/501/0/0\") to generate more wallets (e.g., \"m/44/501/0/1\", \"m/44/501/0/2\", ...). This is how Phantom generates more wallets.  To learn more about derivation paths, check out <a href=\"https://learnmeabitcoin.com/technical/derivation-paths\" target=\"_blank\">this tutorial</a>.
-	DerivationPath *string `json:"derivation_path,omitempty"`
-	// PASSPHRASE != PASSWORD. This is NOT your Phantom password or any other password. It is an optional string you use when creating a wallet. This provides an additional layer of security because a hacker would need both the secret recovery phrase and the passphrase to access the output public key. By default, most wallet UI extensions do not use a passphrase. (You probably did not use a passphrase.) Limited to 500 characters. 
-	Passphrase *string `json:"passphrase,omitempty"`
 	Network *string `json:"network,omitempty"`
 	// The candy machine contract of the candy machine from which you're minting. If you are minting from a `v1` candy machine ID, set this to `v1`. If you are minting from a `v2` candy machine ID, set this to `v2`. If you don't know which the version of your candy machine, check out <a href=\"#operation/solanaGetAccountIsCandyMachine\">this endpoint</a>. 
 	CandyMachineContractVersion *string `json:"candy_machine_contract_version,omitempty"`
@@ -34,14 +29,10 @@ type MintNFTRequest struct {
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewMintNFTRequest(configAddress string, secretRecoveryPhrase string) *MintNFTRequest {
+func NewMintNFTRequest(wallet Wallet, configAddress string) *MintNFTRequest {
 	this := MintNFTRequest{}
+	this.Wallet = wallet
 	this.ConfigAddress = configAddress
-	this.SecretRecoveryPhrase = secretRecoveryPhrase
-	var derivationPath string = "m/44/501/0/0"
-	this.DerivationPath = &derivationPath
-	var passphrase string = ""
-	this.Passphrase = &passphrase
 	var network string = "devnet"
 	this.Network = &network
 	var candyMachineContractVersion string = "v1"
@@ -54,15 +45,35 @@ func NewMintNFTRequest(configAddress string, secretRecoveryPhrase string) *MintN
 // but it doesn't guarantee that properties required by API are set
 func NewMintNFTRequestWithDefaults() *MintNFTRequest {
 	this := MintNFTRequest{}
-	var derivationPath string = "m/44/501/0/0"
-	this.DerivationPath = &derivationPath
-	var passphrase string = ""
-	this.Passphrase = &passphrase
 	var network string = "devnet"
 	this.Network = &network
 	var candyMachineContractVersion string = "v1"
 	this.CandyMachineContractVersion = &candyMachineContractVersion
 	return &this
+}
+
+// GetWallet returns the Wallet field value
+func (o *MintNFTRequest) GetWallet() Wallet {
+	if o == nil {
+		var ret Wallet
+		return ret
+	}
+
+	return o.Wallet
+}
+
+// GetWalletOk returns a tuple with the Wallet field value
+// and a boolean to check if the value has been set.
+func (o *MintNFTRequest) GetWalletOk() (*Wallet, bool) {
+	if o == nil  {
+		return nil, false
+	}
+	return &o.Wallet, true
+}
+
+// SetWallet sets field value
+func (o *MintNFTRequest) SetWallet(v Wallet) {
+	o.Wallet = v
 }
 
 // GetConfigAddress returns the ConfigAddress field value
@@ -87,94 +98,6 @@ func (o *MintNFTRequest) GetConfigAddressOk() (*string, bool) {
 // SetConfigAddress sets field value
 func (o *MintNFTRequest) SetConfigAddress(v string) {
 	o.ConfigAddress = v
-}
-
-// GetSecretRecoveryPhrase returns the SecretRecoveryPhrase field value
-func (o *MintNFTRequest) GetSecretRecoveryPhrase() string {
-	if o == nil {
-		var ret string
-		return ret
-	}
-
-	return o.SecretRecoveryPhrase
-}
-
-// GetSecretRecoveryPhraseOk returns a tuple with the SecretRecoveryPhrase field value
-// and a boolean to check if the value has been set.
-func (o *MintNFTRequest) GetSecretRecoveryPhraseOk() (*string, bool) {
-	if o == nil  {
-		return nil, false
-	}
-	return &o.SecretRecoveryPhrase, true
-}
-
-// SetSecretRecoveryPhrase sets field value
-func (o *MintNFTRequest) SetSecretRecoveryPhrase(v string) {
-	o.SecretRecoveryPhrase = v
-}
-
-// GetDerivationPath returns the DerivationPath field value if set, zero value otherwise.
-func (o *MintNFTRequest) GetDerivationPath() string {
-	if o == nil || o.DerivationPath == nil {
-		var ret string
-		return ret
-	}
-	return *o.DerivationPath
-}
-
-// GetDerivationPathOk returns a tuple with the DerivationPath field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *MintNFTRequest) GetDerivationPathOk() (*string, bool) {
-	if o == nil || o.DerivationPath == nil {
-		return nil, false
-	}
-	return o.DerivationPath, true
-}
-
-// HasDerivationPath returns a boolean if a field has been set.
-func (o *MintNFTRequest) HasDerivationPath() bool {
-	if o != nil && o.DerivationPath != nil {
-		return true
-	}
-
-	return false
-}
-
-// SetDerivationPath gets a reference to the given string and assigns it to the DerivationPath field.
-func (o *MintNFTRequest) SetDerivationPath(v string) {
-	o.DerivationPath = &v
-}
-
-// GetPassphrase returns the Passphrase field value if set, zero value otherwise.
-func (o *MintNFTRequest) GetPassphrase() string {
-	if o == nil || o.Passphrase == nil {
-		var ret string
-		return ret
-	}
-	return *o.Passphrase
-}
-
-// GetPassphraseOk returns a tuple with the Passphrase field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *MintNFTRequest) GetPassphraseOk() (*string, bool) {
-	if o == nil || o.Passphrase == nil {
-		return nil, false
-	}
-	return o.Passphrase, true
-}
-
-// HasPassphrase returns a boolean if a field has been set.
-func (o *MintNFTRequest) HasPassphrase() bool {
-	if o != nil && o.Passphrase != nil {
-		return true
-	}
-
-	return false
-}
-
-// SetPassphrase gets a reference to the given string and assigns it to the Passphrase field.
-func (o *MintNFTRequest) SetPassphrase(v string) {
-	o.Passphrase = &v
 }
 
 // GetNetwork returns the Network field value if set, zero value otherwise.
@@ -244,16 +167,10 @@ func (o *MintNFTRequest) SetCandyMachineContractVersion(v string) {
 func (o MintNFTRequest) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
 	if true {
-		toSerialize["config_address"] = o.ConfigAddress
+		toSerialize["wallet"] = o.Wallet
 	}
 	if true {
-		toSerialize["secret_recovery_phrase"] = o.SecretRecoveryPhrase
-	}
-	if o.DerivationPath != nil {
-		toSerialize["derivation_path"] = o.DerivationPath
-	}
-	if o.Passphrase != nil {
-		toSerialize["passphrase"] = o.Passphrase
+		toSerialize["config_address"] = o.ConfigAddress
 	}
 	if o.Network != nil {
 		toSerialize["network"] = o.Network

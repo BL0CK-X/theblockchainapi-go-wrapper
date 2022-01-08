@@ -15,172 +15,176 @@ import (
 	"encoding/json"
 )
 
-// Transaction struct for Transaction
-type Transaction struct {
-	Id *float32 `json:"id,omitempty"`
-	Jsonrpc *string `json:"jsonrpc,omitempty"`
-	Result *TransactionResult `json:"result,omitempty"`
+// SecretRecoveryPhrase struct for SecretRecoveryPhrase
+type SecretRecoveryPhrase struct {
+	// The twelve word phrase that can be used to derive many public key addresses (e.g., bottom army bless castle alter habit dish embody child flame smooth zone).  To derive a public key, you need a secret recovery phrase, a derivation path, and an optional passphrase.   Alternatively, you can derive a public key with a private key.
+	SecretRecoveryPhrase string `json:"secret_recovery_phrase"`
+	// Derivation paths are used to derive the public key from the secret recovery phrase. Only certain paths are accepted.  If you provide the empty string \"\" as the value for the derivation path, then we will derive your public key with the same behavior as the default behavior of the Solana CLI.  By default, we use \"m/44/501/0/0\". This is the path that the Phantom and Sollet wallets use.  You can also arbitrarily increment the default path (\"m/44/501/0/0\") to generate more wallets (e.g., \"m/44/501/0/1\", \"m/44/501/0/2\", ... AND/OR \"m/44/501/1/0\", \"m/44/501/2/0\", ...).  Phantom's Wallet increments the first digit (e.g., \"m/44/501/0/0\", \"m/44/501/1/0\", \"m/44/501/2/0\", ...) to generate more public key addresses.  The SolFlare recommended path is \"m/44/501/0\".  To learn more about derivation paths, check out <a href=\"https://learnmeabitcoin.com/technical/derivation-paths\" target=\"_blank\">this tutorial</a>.
+	DerivationPath *string `json:"derivation_path,omitempty"`
+	// PASSPHRASE != PASSWORD. This is NOT your Phantom password or any other password. It is an optional string you use when creating a wallet. This provides an additional layer of security because a hacker would need both the secret recovery phrase and the passphrase to access the output public key. By default, most wallet UI extensions do not use a passphrase. (You probably did not use a passphrase.) Limited to 500 characters. 
+	Passphrase *string `json:"passphrase,omitempty"`
 }
 
-// NewTransaction instantiates a new Transaction object
+// NewSecretRecoveryPhrase instantiates a new SecretRecoveryPhrase object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewTransaction() *Transaction {
-	this := Transaction{}
+func NewSecretRecoveryPhrase(secretRecoveryPhrase string) *SecretRecoveryPhrase {
+	this := SecretRecoveryPhrase{}
+	this.SecretRecoveryPhrase = secretRecoveryPhrase
+	var derivationPath string = "m/44/501/0/0"
+	this.DerivationPath = &derivationPath
+	var passphrase string = ""
+	this.Passphrase = &passphrase
 	return &this
 }
 
-// NewTransactionWithDefaults instantiates a new Transaction object
+// NewSecretRecoveryPhraseWithDefaults instantiates a new SecretRecoveryPhrase object
 // This constructor will only assign default values to properties that have it defined,
 // but it doesn't guarantee that properties required by API are set
-func NewTransactionWithDefaults() *Transaction {
-	this := Transaction{}
+func NewSecretRecoveryPhraseWithDefaults() *SecretRecoveryPhrase {
+	this := SecretRecoveryPhrase{}
+	var derivationPath string = "m/44/501/0/0"
+	this.DerivationPath = &derivationPath
+	var passphrase string = ""
+	this.Passphrase = &passphrase
 	return &this
 }
 
-// GetId returns the Id field value if set, zero value otherwise.
-func (o *Transaction) GetId() float32 {
-	if o == nil || o.Id == nil {
-		var ret float32
-		return ret
-	}
-	return *o.Id
-}
-
-// GetIdOk returns a tuple with the Id field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *Transaction) GetIdOk() (*float32, bool) {
-	if o == nil || o.Id == nil {
-		return nil, false
-	}
-	return o.Id, true
-}
-
-// HasId returns a boolean if a field has been set.
-func (o *Transaction) HasId() bool {
-	if o != nil && o.Id != nil {
-		return true
-	}
-
-	return false
-}
-
-// SetId gets a reference to the given float32 and assigns it to the Id field.
-func (o *Transaction) SetId(v float32) {
-	o.Id = &v
-}
-
-// GetJsonrpc returns the Jsonrpc field value if set, zero value otherwise.
-func (o *Transaction) GetJsonrpc() string {
-	if o == nil || o.Jsonrpc == nil {
+// GetSecretRecoveryPhrase returns the SecretRecoveryPhrase field value
+func (o *SecretRecoveryPhrase) GetSecretRecoveryPhrase() string {
+	if o == nil {
 		var ret string
 		return ret
 	}
-	return *o.Jsonrpc
+
+	return o.SecretRecoveryPhrase
 }
 
-// GetJsonrpcOk returns a tuple with the Jsonrpc field value if set, nil otherwise
+// GetSecretRecoveryPhraseOk returns a tuple with the SecretRecoveryPhrase field value
 // and a boolean to check if the value has been set.
-func (o *Transaction) GetJsonrpcOk() (*string, bool) {
-	if o == nil || o.Jsonrpc == nil {
+func (o *SecretRecoveryPhrase) GetSecretRecoveryPhraseOk() (*string, bool) {
+	if o == nil  {
 		return nil, false
 	}
-	return o.Jsonrpc, true
+	return &o.SecretRecoveryPhrase, true
 }
 
-// HasJsonrpc returns a boolean if a field has been set.
-func (o *Transaction) HasJsonrpc() bool {
-	if o != nil && o.Jsonrpc != nil {
-		return true
-	}
-
-	return false
+// SetSecretRecoveryPhrase sets field value
+func (o *SecretRecoveryPhrase) SetSecretRecoveryPhrase(v string) {
+	o.SecretRecoveryPhrase = v
 }
 
-// SetJsonrpc gets a reference to the given string and assigns it to the Jsonrpc field.
-func (o *Transaction) SetJsonrpc(v string) {
-	o.Jsonrpc = &v
-}
-
-// GetResult returns the Result field value if set, zero value otherwise.
-func (o *Transaction) GetResult() TransactionResult {
-	if o == nil || o.Result == nil {
-		var ret TransactionResult
+// GetDerivationPath returns the DerivationPath field value if set, zero value otherwise.
+func (o *SecretRecoveryPhrase) GetDerivationPath() string {
+	if o == nil || o.DerivationPath == nil {
+		var ret string
 		return ret
 	}
-	return *o.Result
+	return *o.DerivationPath
 }
 
-// GetResultOk returns a tuple with the Result field value if set, nil otherwise
+// GetDerivationPathOk returns a tuple with the DerivationPath field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *Transaction) GetResultOk() (*TransactionResult, bool) {
-	if o == nil || o.Result == nil {
+func (o *SecretRecoveryPhrase) GetDerivationPathOk() (*string, bool) {
+	if o == nil || o.DerivationPath == nil {
 		return nil, false
 	}
-	return o.Result, true
+	return o.DerivationPath, true
 }
 
-// HasResult returns a boolean if a field has been set.
-func (o *Transaction) HasResult() bool {
-	if o != nil && o.Result != nil {
+// HasDerivationPath returns a boolean if a field has been set.
+func (o *SecretRecoveryPhrase) HasDerivationPath() bool {
+	if o != nil && o.DerivationPath != nil {
 		return true
 	}
 
 	return false
 }
 
-// SetResult gets a reference to the given TransactionResult and assigns it to the Result field.
-func (o *Transaction) SetResult(v TransactionResult) {
-	o.Result = &v
+// SetDerivationPath gets a reference to the given string and assigns it to the DerivationPath field.
+func (o *SecretRecoveryPhrase) SetDerivationPath(v string) {
+	o.DerivationPath = &v
 }
 
-func (o Transaction) MarshalJSON() ([]byte, error) {
+// GetPassphrase returns the Passphrase field value if set, zero value otherwise.
+func (o *SecretRecoveryPhrase) GetPassphrase() string {
+	if o == nil || o.Passphrase == nil {
+		var ret string
+		return ret
+	}
+	return *o.Passphrase
+}
+
+// GetPassphraseOk returns a tuple with the Passphrase field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *SecretRecoveryPhrase) GetPassphraseOk() (*string, bool) {
+	if o == nil || o.Passphrase == nil {
+		return nil, false
+	}
+	return o.Passphrase, true
+}
+
+// HasPassphrase returns a boolean if a field has been set.
+func (o *SecretRecoveryPhrase) HasPassphrase() bool {
+	if o != nil && o.Passphrase != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetPassphrase gets a reference to the given string and assigns it to the Passphrase field.
+func (o *SecretRecoveryPhrase) SetPassphrase(v string) {
+	o.Passphrase = &v
+}
+
+func (o SecretRecoveryPhrase) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
-	if o.Id != nil {
-		toSerialize["id"] = o.Id
+	if true {
+		toSerialize["secret_recovery_phrase"] = o.SecretRecoveryPhrase
 	}
-	if o.Jsonrpc != nil {
-		toSerialize["jsonrpc"] = o.Jsonrpc
+	if o.DerivationPath != nil {
+		toSerialize["derivation_path"] = o.DerivationPath
 	}
-	if o.Result != nil {
-		toSerialize["result"] = o.Result
+	if o.Passphrase != nil {
+		toSerialize["passphrase"] = o.Passphrase
 	}
 	return json.Marshal(toSerialize)
 }
 
-type NullableTransaction struct {
-	value *Transaction
+type NullableSecretRecoveryPhrase struct {
+	value *SecretRecoveryPhrase
 	isSet bool
 }
 
-func (v NullableTransaction) Get() *Transaction {
+func (v NullableSecretRecoveryPhrase) Get() *SecretRecoveryPhrase {
 	return v.value
 }
 
-func (v *NullableTransaction) Set(val *Transaction) {
+func (v *NullableSecretRecoveryPhrase) Set(val *SecretRecoveryPhrase) {
 	v.value = val
 	v.isSet = true
 }
 
-func (v NullableTransaction) IsSet() bool {
+func (v NullableSecretRecoveryPhrase) IsSet() bool {
 	return v.isSet
 }
 
-func (v *NullableTransaction) Unset() {
+func (v *NullableSecretRecoveryPhrase) Unset() {
 	v.value = nil
 	v.isSet = false
 }
 
-func NewNullableTransaction(val *Transaction) *NullableTransaction {
-	return &NullableTransaction{value: val, isSet: true}
+func NewNullableSecretRecoveryPhrase(val *SecretRecoveryPhrase) *NullableSecretRecoveryPhrase {
+	return &NullableSecretRecoveryPhrase{value: val, isSet: true}
 }
 
-func (v NullableTransaction) MarshalJSON() ([]byte, error) {
+func (v NullableSecretRecoveryPhrase) MarshalJSON() ([]byte, error) {
 	return json.Marshal(v.value)
 }
 
-func (v *NullableTransaction) UnmarshalJSON(src []byte) error {
+func (v *NullableSecretRecoveryPhrase) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }

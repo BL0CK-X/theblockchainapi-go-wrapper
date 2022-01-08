@@ -17,12 +17,7 @@ import (
 
 // NFTMintRequest struct for NFTMintRequest
 type NFTMintRequest struct {
-	// The twelve word phrase that can be used to derive many public key addresses. To derive a public key, you need a secret recovery phrase, a derivation path, and an optional passphrase. See our Security section <a href=\"#section/Security\">here</a>.
-	SecretRecoveryPhrase string `json:"secret_recovery_phrase"`
-	// Derivation paths are used to derive the public key from the secret recovery phrase. Only certain paths are accepted.  We use \"m/44/501/0/0\" by default, if it is not provided. This is the path that the Phantom and Sollet wallets use. If you provide the empty string \"\" as the value for the derivation path, then we will use the Solana CLI default value. The SolFlare recommended path is \"m/44/501/0\".  You can also arbitrarily increment the default path (\"m/44/501/0/0\") to generate more wallets (e.g., \"m/44/501/0/1\", \"m/44/501/0/2\", ...). This is how Phantom generates more wallets.  To learn more about derivation paths, check out <a href=\"https://learnmeabitcoin.com/technical/derivation-paths\" target=\"_blank\">this tutorial</a>.
-	DerivationPath *string `json:"derivation_path,omitempty"`
-	// PASSPHRASE != PASSWORD. This is NOT your Phantom password or any other password. It is an optional string you use when creating a wallet. This provides an additional layer of security because a hacker would need both the secret recovery phrase and the passphrase to access the output public key. By default, most wallet UI extensions do not use a passphrase. (You probably did not use a passphrase.) Limited to 500 characters. 
-	Passphrase *string `json:"passphrase,omitempty"`
+	Wallet Wallet `json:"wallet"`
 	// The name of the token. Limited to 32 characters. Stored on the blockchain.
 	NftName *string `json:"nft_name,omitempty"`
 	// The symbol of the token. Limited to 10 characters. Stored on the blockchain.
@@ -45,6 +40,8 @@ type NFTMintRequest struct {
 	Creators *[]string `json:"creators,omitempty"`
 	// A JSON encoded string representing an array / list.  The share of the royalty that each creator gets. Valid values range from 0 to 100.  Sum of the values must equal 100.  Only integer value accepted. Length of the share list must match length of the list of creators. 
 	Share *[]int32 `json:"share,omitempty"`
+	// Assign ownership of the NFT to the public key address given by `mint_to_public_key` 
+	MintToPublicKey *string `json:"mint_to_public_key,omitempty"`
 	// This determines which network you choose to run the API calls on. We recommend first testing on the devnet, because minting an NFT costs a little above 0.01 SOL, which is about $1.60 at the time of this writing.  When you run on the mainnet-beta, each successful call will deduct approximately that much. When you run on the devnet, that amount is deducted from a simulated amount, so you are not paying with real SOL. To get SOL on the devnet,   airdrop SOL to this address using the CLI. Keep in mind that you can only do this every so often. If you are rate-limited, consider using a VPN and trying again, or just waiting. To get SOL on the mainnet-beta, you    must transfer real SOL to this account from another wallet (e.g., from another wallet you own, from an exchange, etc.). We hope to make this process easier in the future, and if you have any suggestions, please add them    as an issue on our <a href=\"https://github.com/BL0CK-X/the-blockchain-api\" target=\"_blank\">GitHub repository</a> for the API. To get a fee estimate, make a GET requests to the <a href=\"#tag/Solana-NFT/paths/~1solana~1nft~1mint~1fee/get\">v1/solana/nft/mint/fee endpoint</a> (details in sidebar). 
 	Network *string `json:"network,omitempty"`
 }
@@ -53,13 +50,9 @@ type NFTMintRequest struct {
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewNFTMintRequest(secretRecoveryPhrase string) *NFTMintRequest {
+func NewNFTMintRequest(wallet Wallet) *NFTMintRequest {
 	this := NFTMintRequest{}
-	this.SecretRecoveryPhrase = secretRecoveryPhrase
-	var derivationPath string = "m/44/501/0/0"
-	this.DerivationPath = &derivationPath
-	var passphrase string = ""
-	this.Passphrase = &passphrase
+	this.Wallet = wallet
 	var nftName string = ""
 	this.NftName = &nftName
 	var nftSymbol string = ""
@@ -78,6 +71,8 @@ func NewNFTMintRequest(secretRecoveryPhrase string) *NFTMintRequest {
 	this.IsMasterEdition = &isMasterEdition
 	var sellerFeeBasisPoints float32 = 0
 	this.SellerFeeBasisPoints = &sellerFeeBasisPoints
+	var mintToPublicKey string = "The public key of the wallet provided"
+	this.MintToPublicKey = &mintToPublicKey
 	var network string = "devnet"
 	this.Network = &network
 	return &this
@@ -88,10 +83,6 @@ func NewNFTMintRequest(secretRecoveryPhrase string) *NFTMintRequest {
 // but it doesn't guarantee that properties required by API are set
 func NewNFTMintRequestWithDefaults() *NFTMintRequest {
 	this := NFTMintRequest{}
-	var derivationPath string = "m/44/501/0/0"
-	this.DerivationPath = &derivationPath
-	var passphrase string = ""
-	this.Passphrase = &passphrase
 	var nftName string = ""
 	this.NftName = &nftName
 	var nftSymbol string = ""
@@ -110,97 +101,35 @@ func NewNFTMintRequestWithDefaults() *NFTMintRequest {
 	this.IsMasterEdition = &isMasterEdition
 	var sellerFeeBasisPoints float32 = 0
 	this.SellerFeeBasisPoints = &sellerFeeBasisPoints
+	var mintToPublicKey string = "The public key of the wallet provided"
+	this.MintToPublicKey = &mintToPublicKey
 	var network string = "devnet"
 	this.Network = &network
 	return &this
 }
 
-// GetSecretRecoveryPhrase returns the SecretRecoveryPhrase field value
-func (o *NFTMintRequest) GetSecretRecoveryPhrase() string {
+// GetWallet returns the Wallet field value
+func (o *NFTMintRequest) GetWallet() Wallet {
 	if o == nil {
-		var ret string
+		var ret Wallet
 		return ret
 	}
 
-	return o.SecretRecoveryPhrase
+	return o.Wallet
 }
 
-// GetSecretRecoveryPhraseOk returns a tuple with the SecretRecoveryPhrase field value
+// GetWalletOk returns a tuple with the Wallet field value
 // and a boolean to check if the value has been set.
-func (o *NFTMintRequest) GetSecretRecoveryPhraseOk() (*string, bool) {
+func (o *NFTMintRequest) GetWalletOk() (*Wallet, bool) {
 	if o == nil  {
 		return nil, false
 	}
-	return &o.SecretRecoveryPhrase, true
+	return &o.Wallet, true
 }
 
-// SetSecretRecoveryPhrase sets field value
-func (o *NFTMintRequest) SetSecretRecoveryPhrase(v string) {
-	o.SecretRecoveryPhrase = v
-}
-
-// GetDerivationPath returns the DerivationPath field value if set, zero value otherwise.
-func (o *NFTMintRequest) GetDerivationPath() string {
-	if o == nil || o.DerivationPath == nil {
-		var ret string
-		return ret
-	}
-	return *o.DerivationPath
-}
-
-// GetDerivationPathOk returns a tuple with the DerivationPath field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *NFTMintRequest) GetDerivationPathOk() (*string, bool) {
-	if o == nil || o.DerivationPath == nil {
-		return nil, false
-	}
-	return o.DerivationPath, true
-}
-
-// HasDerivationPath returns a boolean if a field has been set.
-func (o *NFTMintRequest) HasDerivationPath() bool {
-	if o != nil && o.DerivationPath != nil {
-		return true
-	}
-
-	return false
-}
-
-// SetDerivationPath gets a reference to the given string and assigns it to the DerivationPath field.
-func (o *NFTMintRequest) SetDerivationPath(v string) {
-	o.DerivationPath = &v
-}
-
-// GetPassphrase returns the Passphrase field value if set, zero value otherwise.
-func (o *NFTMintRequest) GetPassphrase() string {
-	if o == nil || o.Passphrase == nil {
-		var ret string
-		return ret
-	}
-	return *o.Passphrase
-}
-
-// GetPassphraseOk returns a tuple with the Passphrase field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *NFTMintRequest) GetPassphraseOk() (*string, bool) {
-	if o == nil || o.Passphrase == nil {
-		return nil, false
-	}
-	return o.Passphrase, true
-}
-
-// HasPassphrase returns a boolean if a field has been set.
-func (o *NFTMintRequest) HasPassphrase() bool {
-	if o != nil && o.Passphrase != nil {
-		return true
-	}
-
-	return false
-}
-
-// SetPassphrase gets a reference to the given string and assigns it to the Passphrase field.
-func (o *NFTMintRequest) SetPassphrase(v string) {
-	o.Passphrase = &v
+// SetWallet sets field value
+func (o *NFTMintRequest) SetWallet(v Wallet) {
+	o.Wallet = v
 }
 
 // GetNftName returns the NftName field value if set, zero value otherwise.
@@ -555,6 +484,38 @@ func (o *NFTMintRequest) SetShare(v []int32) {
 	o.Share = &v
 }
 
+// GetMintToPublicKey returns the MintToPublicKey field value if set, zero value otherwise.
+func (o *NFTMintRequest) GetMintToPublicKey() string {
+	if o == nil || o.MintToPublicKey == nil {
+		var ret string
+		return ret
+	}
+	return *o.MintToPublicKey
+}
+
+// GetMintToPublicKeyOk returns a tuple with the MintToPublicKey field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *NFTMintRequest) GetMintToPublicKeyOk() (*string, bool) {
+	if o == nil || o.MintToPublicKey == nil {
+		return nil, false
+	}
+	return o.MintToPublicKey, true
+}
+
+// HasMintToPublicKey returns a boolean if a field has been set.
+func (o *NFTMintRequest) HasMintToPublicKey() bool {
+	if o != nil && o.MintToPublicKey != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetMintToPublicKey gets a reference to the given string and assigns it to the MintToPublicKey field.
+func (o *NFTMintRequest) SetMintToPublicKey(v string) {
+	o.MintToPublicKey = &v
+}
+
 // GetNetwork returns the Network field value if set, zero value otherwise.
 func (o *NFTMintRequest) GetNetwork() string {
 	if o == nil || o.Network == nil {
@@ -590,13 +551,7 @@ func (o *NFTMintRequest) SetNetwork(v string) {
 func (o NFTMintRequest) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
 	if true {
-		toSerialize["secret_recovery_phrase"] = o.SecretRecoveryPhrase
-	}
-	if o.DerivationPath != nil {
-		toSerialize["derivation_path"] = o.DerivationPath
-	}
-	if o.Passphrase != nil {
-		toSerialize["passphrase"] = o.Passphrase
+		toSerialize["wallet"] = o.Wallet
 	}
 	if o.NftName != nil {
 		toSerialize["nft_name"] = o.NftName
@@ -630,6 +585,9 @@ func (o NFTMintRequest) MarshalJSON() ([]byte, error) {
 	}
 	if o.Share != nil {
 		toSerialize["share"] = o.Share
+	}
+	if o.MintToPublicKey != nil {
+		toSerialize["mint_to_public_key"] = o.MintToPublicKey
 	}
 	if o.Network != nil {
 		toSerialize["network"] = o.Network

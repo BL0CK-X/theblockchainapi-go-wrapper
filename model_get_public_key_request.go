@@ -17,25 +17,16 @@ import (
 
 // GetPublicKeyRequest struct for GetPublicKeyRequest
 type GetPublicKeyRequest struct {
-	// The twelve word phrase that can be used to derive many public key addresses. To derive a public key, you need a secret recovery phrase, a derivation path, and an optional passphrase. See our Security section <a href=\"#section/Security\">here</a>.
-	SecretRecoveryPhrase string `json:"secret_recovery_phrase"`
-	// Derivation paths are used to derive the public key from the secret recovery phrase. Only certain paths are accepted.  We use \"m/44/501/0/0\" by default, if it is not provided. This is the path that the Phantom and Sollet wallets use. If you provide the empty string \"\" as the value for the derivation path, then we will use the Solana CLI default value. The SolFlare recommended path is \"m/44/501/0\".  You can also arbitrarily increment the default path (\"m/44/501/0/0\") to generate more wallets (e.g., \"m/44/501/0/1\", \"m/44/501/0/2\", ...). This is how Phantom generates more wallets.  To learn more about derivation paths, check out <a href=\"https://learnmeabitcoin.com/technical/derivation-paths\" target=\"_blank\">this tutorial</a>.
-	DerivationPath *string `json:"derivation_path,omitempty"`
-	// PASSPHRASE != PASSWORD. This is NOT your Phantom password or any other password. It is an optional string you use when creating a wallet. This provides an additional layer of security because a hacker would need both the secret recovery phrase and the passphrase to access the output public key. By default, most wallet UI extensions do not use a passphrase. (You probably did not use a passphrase.) Limited to 500 characters. 
-	Passphrase *string `json:"passphrase,omitempty"`
+	Wallet Wallet `json:"wallet"`
 }
 
 // NewGetPublicKeyRequest instantiates a new GetPublicKeyRequest object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewGetPublicKeyRequest(secretRecoveryPhrase string) *GetPublicKeyRequest {
+func NewGetPublicKeyRequest(wallet Wallet) *GetPublicKeyRequest {
 	this := GetPublicKeyRequest{}
-	this.SecretRecoveryPhrase = secretRecoveryPhrase
-	var derivationPath string = "m/44/501/0/0"
-	this.DerivationPath = &derivationPath
-	var passphrase string = ""
-	this.Passphrase = &passphrase
+	this.Wallet = wallet
 	return &this
 }
 
@@ -44,111 +35,37 @@ func NewGetPublicKeyRequest(secretRecoveryPhrase string) *GetPublicKeyRequest {
 // but it doesn't guarantee that properties required by API are set
 func NewGetPublicKeyRequestWithDefaults() *GetPublicKeyRequest {
 	this := GetPublicKeyRequest{}
-	var derivationPath string = "m/44/501/0/0"
-	this.DerivationPath = &derivationPath
-	var passphrase string = ""
-	this.Passphrase = &passphrase
 	return &this
 }
 
-// GetSecretRecoveryPhrase returns the SecretRecoveryPhrase field value
-func (o *GetPublicKeyRequest) GetSecretRecoveryPhrase() string {
+// GetWallet returns the Wallet field value
+func (o *GetPublicKeyRequest) GetWallet() Wallet {
 	if o == nil {
-		var ret string
+		var ret Wallet
 		return ret
 	}
 
-	return o.SecretRecoveryPhrase
+	return o.Wallet
 }
 
-// GetSecretRecoveryPhraseOk returns a tuple with the SecretRecoveryPhrase field value
+// GetWalletOk returns a tuple with the Wallet field value
 // and a boolean to check if the value has been set.
-func (o *GetPublicKeyRequest) GetSecretRecoveryPhraseOk() (*string, bool) {
+func (o *GetPublicKeyRequest) GetWalletOk() (*Wallet, bool) {
 	if o == nil  {
 		return nil, false
 	}
-	return &o.SecretRecoveryPhrase, true
+	return &o.Wallet, true
 }
 
-// SetSecretRecoveryPhrase sets field value
-func (o *GetPublicKeyRequest) SetSecretRecoveryPhrase(v string) {
-	o.SecretRecoveryPhrase = v
-}
-
-// GetDerivationPath returns the DerivationPath field value if set, zero value otherwise.
-func (o *GetPublicKeyRequest) GetDerivationPath() string {
-	if o == nil || o.DerivationPath == nil {
-		var ret string
-		return ret
-	}
-	return *o.DerivationPath
-}
-
-// GetDerivationPathOk returns a tuple with the DerivationPath field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *GetPublicKeyRequest) GetDerivationPathOk() (*string, bool) {
-	if o == nil || o.DerivationPath == nil {
-		return nil, false
-	}
-	return o.DerivationPath, true
-}
-
-// HasDerivationPath returns a boolean if a field has been set.
-func (o *GetPublicKeyRequest) HasDerivationPath() bool {
-	if o != nil && o.DerivationPath != nil {
-		return true
-	}
-
-	return false
-}
-
-// SetDerivationPath gets a reference to the given string and assigns it to the DerivationPath field.
-func (o *GetPublicKeyRequest) SetDerivationPath(v string) {
-	o.DerivationPath = &v
-}
-
-// GetPassphrase returns the Passphrase field value if set, zero value otherwise.
-func (o *GetPublicKeyRequest) GetPassphrase() string {
-	if o == nil || o.Passphrase == nil {
-		var ret string
-		return ret
-	}
-	return *o.Passphrase
-}
-
-// GetPassphraseOk returns a tuple with the Passphrase field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *GetPublicKeyRequest) GetPassphraseOk() (*string, bool) {
-	if o == nil || o.Passphrase == nil {
-		return nil, false
-	}
-	return o.Passphrase, true
-}
-
-// HasPassphrase returns a boolean if a field has been set.
-func (o *GetPublicKeyRequest) HasPassphrase() bool {
-	if o != nil && o.Passphrase != nil {
-		return true
-	}
-
-	return false
-}
-
-// SetPassphrase gets a reference to the given string and assigns it to the Passphrase field.
-func (o *GetPublicKeyRequest) SetPassphrase(v string) {
-	o.Passphrase = &v
+// SetWallet sets field value
+func (o *GetPublicKeyRequest) SetWallet(v Wallet) {
+	o.Wallet = v
 }
 
 func (o GetPublicKeyRequest) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
 	if true {
-		toSerialize["secret_recovery_phrase"] = o.SecretRecoveryPhrase
-	}
-	if o.DerivationPath != nil {
-		toSerialize["derivation_path"] = o.DerivationPath
-	}
-	if o.Passphrase != nil {
-		toSerialize["passphrase"] = o.Passphrase
+		toSerialize["wallet"] = o.Wallet
 	}
 	return json.Marshal(toSerialize)
 }

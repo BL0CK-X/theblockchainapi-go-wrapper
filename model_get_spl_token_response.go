@@ -15,172 +15,248 @@ import (
 	"encoding/json"
 )
 
-// Transaction struct for Transaction
-type Transaction struct {
-	Id *float32 `json:"id,omitempty"`
-	Jsonrpc *string `json:"jsonrpc,omitempty"`
-	Result *TransactionResult `json:"result,omitempty"`
+// GetSPLTokenResponse struct for GetSPLTokenResponse
+type GetSPLTokenResponse struct {
+	// The number of decimals of the token. For example, if the USDC token has 6 decimals, then you need 1 * 10e6 = 1,000,000 tokens to have 1 USDC. The purpose of this is that everything must be stored as  an integer. Thus, if there are $100 USDC in total, there must be $100 * 10e6 tokens in order for the $100 to be divisible into lower denominations than $1. 
+	Decimals *float32 `json:"decimals,omitempty"`
+	// Public key address
+	FreezeAuthority *string `json:"freeze_authority,omitempty"`
+	// Public key address
+	MintAuthority *string `json:"mint_authority,omitempty"`
+	IsInitialized *bool `json:"is_initialized,omitempty"`
+	// The supply of the token
+	Supply *string `json:"supply,omitempty"`
 }
 
-// NewTransaction instantiates a new Transaction object
+// NewGetSPLTokenResponse instantiates a new GetSPLTokenResponse object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewTransaction() *Transaction {
-	this := Transaction{}
+func NewGetSPLTokenResponse() *GetSPLTokenResponse {
+	this := GetSPLTokenResponse{}
 	return &this
 }
 
-// NewTransactionWithDefaults instantiates a new Transaction object
+// NewGetSPLTokenResponseWithDefaults instantiates a new GetSPLTokenResponse object
 // This constructor will only assign default values to properties that have it defined,
 // but it doesn't guarantee that properties required by API are set
-func NewTransactionWithDefaults() *Transaction {
-	this := Transaction{}
+func NewGetSPLTokenResponseWithDefaults() *GetSPLTokenResponse {
+	this := GetSPLTokenResponse{}
 	return &this
 }
 
-// GetId returns the Id field value if set, zero value otherwise.
-func (o *Transaction) GetId() float32 {
-	if o == nil || o.Id == nil {
+// GetDecimals returns the Decimals field value if set, zero value otherwise.
+func (o *GetSPLTokenResponse) GetDecimals() float32 {
+	if o == nil || o.Decimals == nil {
 		var ret float32
 		return ret
 	}
-	return *o.Id
+	return *o.Decimals
 }
 
-// GetIdOk returns a tuple with the Id field value if set, nil otherwise
+// GetDecimalsOk returns a tuple with the Decimals field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *Transaction) GetIdOk() (*float32, bool) {
-	if o == nil || o.Id == nil {
+func (o *GetSPLTokenResponse) GetDecimalsOk() (*float32, bool) {
+	if o == nil || o.Decimals == nil {
 		return nil, false
 	}
-	return o.Id, true
+	return o.Decimals, true
 }
 
-// HasId returns a boolean if a field has been set.
-func (o *Transaction) HasId() bool {
-	if o != nil && o.Id != nil {
+// HasDecimals returns a boolean if a field has been set.
+func (o *GetSPLTokenResponse) HasDecimals() bool {
+	if o != nil && o.Decimals != nil {
 		return true
 	}
 
 	return false
 }
 
-// SetId gets a reference to the given float32 and assigns it to the Id field.
-func (o *Transaction) SetId(v float32) {
-	o.Id = &v
+// SetDecimals gets a reference to the given float32 and assigns it to the Decimals field.
+func (o *GetSPLTokenResponse) SetDecimals(v float32) {
+	o.Decimals = &v
 }
 
-// GetJsonrpc returns the Jsonrpc field value if set, zero value otherwise.
-func (o *Transaction) GetJsonrpc() string {
-	if o == nil || o.Jsonrpc == nil {
+// GetFreezeAuthority returns the FreezeAuthority field value if set, zero value otherwise.
+func (o *GetSPLTokenResponse) GetFreezeAuthority() string {
+	if o == nil || o.FreezeAuthority == nil {
 		var ret string
 		return ret
 	}
-	return *o.Jsonrpc
+	return *o.FreezeAuthority
 }
 
-// GetJsonrpcOk returns a tuple with the Jsonrpc field value if set, nil otherwise
+// GetFreezeAuthorityOk returns a tuple with the FreezeAuthority field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *Transaction) GetJsonrpcOk() (*string, bool) {
-	if o == nil || o.Jsonrpc == nil {
+func (o *GetSPLTokenResponse) GetFreezeAuthorityOk() (*string, bool) {
+	if o == nil || o.FreezeAuthority == nil {
 		return nil, false
 	}
-	return o.Jsonrpc, true
+	return o.FreezeAuthority, true
 }
 
-// HasJsonrpc returns a boolean if a field has been set.
-func (o *Transaction) HasJsonrpc() bool {
-	if o != nil && o.Jsonrpc != nil {
+// HasFreezeAuthority returns a boolean if a field has been set.
+func (o *GetSPLTokenResponse) HasFreezeAuthority() bool {
+	if o != nil && o.FreezeAuthority != nil {
 		return true
 	}
 
 	return false
 }
 
-// SetJsonrpc gets a reference to the given string and assigns it to the Jsonrpc field.
-func (o *Transaction) SetJsonrpc(v string) {
-	o.Jsonrpc = &v
+// SetFreezeAuthority gets a reference to the given string and assigns it to the FreezeAuthority field.
+func (o *GetSPLTokenResponse) SetFreezeAuthority(v string) {
+	o.FreezeAuthority = &v
 }
 
-// GetResult returns the Result field value if set, zero value otherwise.
-func (o *Transaction) GetResult() TransactionResult {
-	if o == nil || o.Result == nil {
-		var ret TransactionResult
+// GetMintAuthority returns the MintAuthority field value if set, zero value otherwise.
+func (o *GetSPLTokenResponse) GetMintAuthority() string {
+	if o == nil || o.MintAuthority == nil {
+		var ret string
 		return ret
 	}
-	return *o.Result
+	return *o.MintAuthority
 }
 
-// GetResultOk returns a tuple with the Result field value if set, nil otherwise
+// GetMintAuthorityOk returns a tuple with the MintAuthority field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *Transaction) GetResultOk() (*TransactionResult, bool) {
-	if o == nil || o.Result == nil {
+func (o *GetSPLTokenResponse) GetMintAuthorityOk() (*string, bool) {
+	if o == nil || o.MintAuthority == nil {
 		return nil, false
 	}
-	return o.Result, true
+	return o.MintAuthority, true
 }
 
-// HasResult returns a boolean if a field has been set.
-func (o *Transaction) HasResult() bool {
-	if o != nil && o.Result != nil {
+// HasMintAuthority returns a boolean if a field has been set.
+func (o *GetSPLTokenResponse) HasMintAuthority() bool {
+	if o != nil && o.MintAuthority != nil {
 		return true
 	}
 
 	return false
 }
 
-// SetResult gets a reference to the given TransactionResult and assigns it to the Result field.
-func (o *Transaction) SetResult(v TransactionResult) {
-	o.Result = &v
+// SetMintAuthority gets a reference to the given string and assigns it to the MintAuthority field.
+func (o *GetSPLTokenResponse) SetMintAuthority(v string) {
+	o.MintAuthority = &v
 }
 
-func (o Transaction) MarshalJSON() ([]byte, error) {
+// GetIsInitialized returns the IsInitialized field value if set, zero value otherwise.
+func (o *GetSPLTokenResponse) GetIsInitialized() bool {
+	if o == nil || o.IsInitialized == nil {
+		var ret bool
+		return ret
+	}
+	return *o.IsInitialized
+}
+
+// GetIsInitializedOk returns a tuple with the IsInitialized field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *GetSPLTokenResponse) GetIsInitializedOk() (*bool, bool) {
+	if o == nil || o.IsInitialized == nil {
+		return nil, false
+	}
+	return o.IsInitialized, true
+}
+
+// HasIsInitialized returns a boolean if a field has been set.
+func (o *GetSPLTokenResponse) HasIsInitialized() bool {
+	if o != nil && o.IsInitialized != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetIsInitialized gets a reference to the given bool and assigns it to the IsInitialized field.
+func (o *GetSPLTokenResponse) SetIsInitialized(v bool) {
+	o.IsInitialized = &v
+}
+
+// GetSupply returns the Supply field value if set, zero value otherwise.
+func (o *GetSPLTokenResponse) GetSupply() string {
+	if o == nil || o.Supply == nil {
+		var ret string
+		return ret
+	}
+	return *o.Supply
+}
+
+// GetSupplyOk returns a tuple with the Supply field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *GetSPLTokenResponse) GetSupplyOk() (*string, bool) {
+	if o == nil || o.Supply == nil {
+		return nil, false
+	}
+	return o.Supply, true
+}
+
+// HasSupply returns a boolean if a field has been set.
+func (o *GetSPLTokenResponse) HasSupply() bool {
+	if o != nil && o.Supply != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetSupply gets a reference to the given string and assigns it to the Supply field.
+func (o *GetSPLTokenResponse) SetSupply(v string) {
+	o.Supply = &v
+}
+
+func (o GetSPLTokenResponse) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
-	if o.Id != nil {
-		toSerialize["id"] = o.Id
+	if o.Decimals != nil {
+		toSerialize["decimals"] = o.Decimals
 	}
-	if o.Jsonrpc != nil {
-		toSerialize["jsonrpc"] = o.Jsonrpc
+	if o.FreezeAuthority != nil {
+		toSerialize["freeze_authority"] = o.FreezeAuthority
 	}
-	if o.Result != nil {
-		toSerialize["result"] = o.Result
+	if o.MintAuthority != nil {
+		toSerialize["mint_authority"] = o.MintAuthority
+	}
+	if o.IsInitialized != nil {
+		toSerialize["is_initialized"] = o.IsInitialized
+	}
+	if o.Supply != nil {
+		toSerialize["supply"] = o.Supply
 	}
 	return json.Marshal(toSerialize)
 }
 
-type NullableTransaction struct {
-	value *Transaction
+type NullableGetSPLTokenResponse struct {
+	value *GetSPLTokenResponse
 	isSet bool
 }
 
-func (v NullableTransaction) Get() *Transaction {
+func (v NullableGetSPLTokenResponse) Get() *GetSPLTokenResponse {
 	return v.value
 }
 
-func (v *NullableTransaction) Set(val *Transaction) {
+func (v *NullableGetSPLTokenResponse) Set(val *GetSPLTokenResponse) {
 	v.value = val
 	v.isSet = true
 }
 
-func (v NullableTransaction) IsSet() bool {
+func (v NullableGetSPLTokenResponse) IsSet() bool {
 	return v.isSet
 }
 
-func (v *NullableTransaction) Unset() {
+func (v *NullableGetSPLTokenResponse) Unset() {
 	v.value = nil
 	v.isSet = false
 }
 
-func NewNullableTransaction(val *Transaction) *NullableTransaction {
-	return &NullableTransaction{value: val, isSet: true}
+func NewNullableGetSPLTokenResponse(val *GetSPLTokenResponse) *NullableGetSPLTokenResponse {
+	return &NullableGetSPLTokenResponse{value: val, isSet: true}
 }
 
-func (v NullableTransaction) MarshalJSON() ([]byte, error) {
+func (v NullableGetSPLTokenResponse) MarshalJSON() ([]byte, error) {
 	return json.Marshal(v.value)
 }
 
-func (v *NullableTransaction) UnmarshalJSON(src []byte) error {
+func (v *NullableGetSPLTokenResponse) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }

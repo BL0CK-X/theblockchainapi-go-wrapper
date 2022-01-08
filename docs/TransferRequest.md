@@ -5,18 +5,16 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **RecipientAddress** | **string** | The public key address of the recipient to whom you want to send a token or NFT | 
-**SecretRecoveryPhrase** | **string** | The twelve word phrase that can be used to derive many public key addresses. To derive a public key, you need a secret recovery phrase, a derivation path, and an optional passphrase. See our Security section &lt;a href&#x3D;\&quot;#section/Security\&quot;&gt;here&lt;/a&gt;. | 
-**DerivationPath** | Pointer to **string** | Derivation paths are used to derive the public key from the secret recovery phrase. Only certain paths are accepted.  We use \&quot;m/44/501/0/0\&quot; by default, if it is not provided. This is the path that the Phantom and Sollet wallets use. If you provide the empty string \&quot;\&quot; as the value for the derivation path, then we will use the Solana CLI default value. The SolFlare recommended path is \&quot;m/44/501/0\&quot;.  You can also arbitrarily increment the default path (\&quot;m/44/501/0/0\&quot;) to generate more wallets (e.g., \&quot;m/44/501/0/1\&quot;, \&quot;m/44/501/0/2\&quot;, ...). This is how Phantom generates more wallets.  To learn more about derivation paths, check out &lt;a href&#x3D;\&quot;https://learnmeabitcoin.com/technical/derivation-paths\&quot; target&#x3D;\&quot;_blank\&quot;&gt;this tutorial&lt;/a&gt;. | [optional] [default to "m/44/501/0/0"]
-**Passphrase** | Pointer to **string** | PASSPHRASE !&#x3D; PASSWORD. This is NOT your Phantom password or any other password. It is an optional string you use when creating a wallet. This provides an additional layer of security because a hacker would need both the secret recovery phrase and the passphrase to access the output public key. By default, most wallet UI extensions do not use a passphrase. (You probably did not use a passphrase.) Limited to 500 characters.  | [optional] [default to ""]
+**Wallet** | [**Wallet**](Wallet.md) |  | 
 **TokenAddress** | Pointer to **string** | If you&#39;re transfering an NFT, supply the &#x60;mint&#x60; (the address of the mint) for the &#x60;token_address&#x60;. If you&#39;re transfering a token, supply the token address found on the explorer (e.g., see &#x60;SRMuApVNdxXokk5GT7XD5cUUgXMBCoAz2LHeuAoKWRt&#x60; for &lt;a href&#x3D;\&quot;https://explorer.solana.com/address/SRMuApVNdxXokk5GT7XD5cUUgXMBCoAz2LHeuAoKWRt\&quot; target&#x3D;\&quot;_blank\&quot;&gt;Serum Token&lt;/a&gt;) for the &#x60;token_address&#x60;. If you&#39;re transferring SOL, do not supply a value for &#x60;token_address&#x60;.  | [optional] 
 **Network** | Pointer to **string** |  | [optional] [default to "devnet"]
-**Amount** | Pointer to **string** | The quantity of the token or NFT you want to send. If sending an NFT, there is no need to supply this value.  This value must be a string. You can supply a float value (e.g., \&quot;0.0005\&quot;).  | [optional] [default to "1"]
+**Amount** | Pointer to **string** | This value must be a string. What you provide here depends on if you are sending an NFT, an SPL token, or SOL.  - NFT: This must be &#39;1&#39;. - SPL Token: This must be an integer in string format. To convert from what you see on a wallet UI (e.g., 1 ATLAS, 1 USDC) to an integer value, you have to multiply that value by 10^&lt;i&gt;x&lt;/i&gt; where &lt;i&gt;x&lt;/i&gt; is the number of decimals. For example, to transfer 0.2 USDC, if USDC uses 6 decimals, then the amount is 0.2 * 10^6 &#x3D; 200000. You can get the number of decimals for a given SPL token &lt;a href&#x3D;\&quot;#operation/solanaGetSPLToken\&quot;&gt;here&lt;/a&gt;. - SOL: Supply this value denominated in SOL in a string format. This does not need to be an integer. For example, if you want to send 0.0005 SOL, then amount &#x3D; \&quot;0.0005\&quot;. | [optional] [default to "1"]
 
 ## Methods
 
 ### NewTransferRequest
 
-`func NewTransferRequest(recipientAddress string, secretRecoveryPhrase string, ) *TransferRequest`
+`func NewTransferRequest(recipientAddress string, wallet Wallet, ) *TransferRequest`
 
 NewTransferRequest instantiates a new TransferRequest object
 This constructor will assign default values to properties that have it defined,
@@ -51,75 +49,25 @@ and a boolean to check if the value has been set.
 SetRecipientAddress sets RecipientAddress field to given value.
 
 
-### GetSecretRecoveryPhrase
+### GetWallet
 
-`func (o *TransferRequest) GetSecretRecoveryPhrase() string`
+`func (o *TransferRequest) GetWallet() Wallet`
 
-GetSecretRecoveryPhrase returns the SecretRecoveryPhrase field if non-nil, zero value otherwise.
+GetWallet returns the Wallet field if non-nil, zero value otherwise.
 
-### GetSecretRecoveryPhraseOk
+### GetWalletOk
 
-`func (o *TransferRequest) GetSecretRecoveryPhraseOk() (*string, bool)`
+`func (o *TransferRequest) GetWalletOk() (*Wallet, bool)`
 
-GetSecretRecoveryPhraseOk returns a tuple with the SecretRecoveryPhrase field if it's non-nil, zero value otherwise
+GetWalletOk returns a tuple with the Wallet field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
-### SetSecretRecoveryPhrase
+### SetWallet
 
-`func (o *TransferRequest) SetSecretRecoveryPhrase(v string)`
+`func (o *TransferRequest) SetWallet(v Wallet)`
 
-SetSecretRecoveryPhrase sets SecretRecoveryPhrase field to given value.
+SetWallet sets Wallet field to given value.
 
-
-### GetDerivationPath
-
-`func (o *TransferRequest) GetDerivationPath() string`
-
-GetDerivationPath returns the DerivationPath field if non-nil, zero value otherwise.
-
-### GetDerivationPathOk
-
-`func (o *TransferRequest) GetDerivationPathOk() (*string, bool)`
-
-GetDerivationPathOk returns a tuple with the DerivationPath field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetDerivationPath
-
-`func (o *TransferRequest) SetDerivationPath(v string)`
-
-SetDerivationPath sets DerivationPath field to given value.
-
-### HasDerivationPath
-
-`func (o *TransferRequest) HasDerivationPath() bool`
-
-HasDerivationPath returns a boolean if a field has been set.
-
-### GetPassphrase
-
-`func (o *TransferRequest) GetPassphrase() string`
-
-GetPassphrase returns the Passphrase field if non-nil, zero value otherwise.
-
-### GetPassphraseOk
-
-`func (o *TransferRequest) GetPassphraseOk() (*string, bool)`
-
-GetPassphraseOk returns a tuple with the Passphrase field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetPassphrase
-
-`func (o *TransferRequest) SetPassphrase(v string)`
-
-SetPassphrase sets Passphrase field to given value.
-
-### HasPassphrase
-
-`func (o *TransferRequest) HasPassphrase() bool`
-
-HasPassphrase returns a boolean if a field has been set.
 
 ### GetTokenAddress
 

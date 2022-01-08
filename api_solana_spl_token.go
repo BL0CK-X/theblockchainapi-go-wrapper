@@ -12,177 +12,170 @@ Contact: info@theblockchainapi.com
 package openapi
 
 import (
-	"encoding/json"
+	"bytes"
+	_context "context"
+	_ioutil "io/ioutil"
+	_nethttp "net/http"
+	_neturl "net/url"
+	"strings"
 )
 
-// Transaction struct for Transaction
-type Transaction struct {
-	Id *float32 `json:"id,omitempty"`
-	Jsonrpc *string `json:"jsonrpc,omitempty"`
-	Result *TransactionResult `json:"result,omitempty"`
+// Linger please
+var (
+	_ _context.Context
+)
+
+// SolanaSPLTokenApiService SolanaSPLTokenApi service
+type SolanaSPLTokenApiService service
+
+type ApiSolanaGetSPLTokenRequest struct {
+	ctx _context.Context
+	ApiService *SolanaSPLTokenApiService
+	publicKey string
+	network string
 }
 
-// NewTransaction instantiates a new Transaction object
-// This constructor will assign default values to properties that have it defined,
-// and makes sure properties required by API are set, but the set of arguments
-// will change when the set of required properties is changed
-func NewTransaction() *Transaction {
-	this := Transaction{}
-	return &this
+
+func (r ApiSolanaGetSPLTokenRequest) Execute() (GetSPLTokenResponse, *_nethttp.Response, error) {
+	return r.ApiService.SolanaGetSPLTokenExecute(r)
 }
 
-// NewTransactionWithDefaults instantiates a new Transaction object
-// This constructor will only assign default values to properties that have it defined,
-// but it doesn't guarantee that properties required by API are set
-func NewTransactionWithDefaults() *Transaction {
-	this := Transaction{}
-	return &this
-}
+/*
+SolanaGetSPLToken Get SPL token metadata
 
-// GetId returns the Id field value if set, zero value otherwise.
-func (o *Transaction) GetId() float32 {
-	if o == nil || o.Id == nil {
-		var ret float32
-		return ret
+<a href="https://github.com/BL0CK-X/the-blockchain-api/tree/main/examples/solana-spl-token/get-spl-token" target="_blank">See examples (Python, JavaScript)</a>.
+
+Retrieves basic information about an SPL token given its `mint_address`.
+
+You can see the mint addresses of popular SPL tokens <a href="https://raw.githubusercontent.com/solana-labs/token-list/main/src/tokens/solana.tokenlist.json" target="_blank">here</a>.
+
+Some example mint addresses of SPL tokens:
+- USDC: EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v
+- Mango: MangoCzJ36AjZyKwVj3VnYU4GTonjfVEnJmvvWaxLac
+- Serum: SRMuApVNdxXokk5GT7XD5cUUgXMBCoAz2LHeuAoKWRt
+- Raydium: 4k3Dyjzvzp8eMZWUXbBCjEvwSkkk59S5iCNLY3QrkX6R
+- wSOL: So11111111111111111111111111111111111111112
+- ATLAS: ATLASXmbPQxBUYbxPsV97usA3fPQYEqzQBUHgiFCUsXx
+
+`Cost: 1 Credit` (<a href="#section/Pricing">See Pricing</a>)
+
+ @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param publicKey The public key of the token
+ @param network The network ID (devnet, mainnet-beta)
+ @return ApiSolanaGetSPLTokenRequest
+*/
+func (a *SolanaSPLTokenApiService) SolanaGetSPLToken(ctx _context.Context, publicKey string, network string) ApiSolanaGetSPLTokenRequest {
+	return ApiSolanaGetSPLTokenRequest{
+		ApiService: a,
+		ctx: ctx,
+		publicKey: publicKey,
+		network: network,
 	}
-	return *o.Id
 }
 
-// GetIdOk returns a tuple with the Id field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *Transaction) GetIdOk() (*float32, bool) {
-	if o == nil || o.Id == nil {
-		return nil, false
-	}
-	return o.Id, true
-}
+// Execute executes the request
+//  @return GetSPLTokenResponse
+func (a *SolanaSPLTokenApiService) SolanaGetSPLTokenExecute(r ApiSolanaGetSPLTokenRequest) (GetSPLTokenResponse, *_nethttp.Response, error) {
+	var (
+		localVarHTTPMethod   = _nethttp.MethodGet
+		localVarPostBody     interface{}
+		localVarFormFileName string
+		localVarFileName     string
+		localVarFileBytes    []byte
+		localVarReturnValue  GetSPLTokenResponse
+	)
 
-// HasId returns a boolean if a field has been set.
-func (o *Transaction) HasId() bool {
-	if o != nil && o.Id != nil {
-		return true
-	}
-
-	return false
-}
-
-// SetId gets a reference to the given float32 and assigns it to the Id field.
-func (o *Transaction) SetId(v float32) {
-	o.Id = &v
-}
-
-// GetJsonrpc returns the Jsonrpc field value if set, zero value otherwise.
-func (o *Transaction) GetJsonrpc() string {
-	if o == nil || o.Jsonrpc == nil {
-		var ret string
-		return ret
-	}
-	return *o.Jsonrpc
-}
-
-// GetJsonrpcOk returns a tuple with the Jsonrpc field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *Transaction) GetJsonrpcOk() (*string, bool) {
-	if o == nil || o.Jsonrpc == nil {
-		return nil, false
-	}
-	return o.Jsonrpc, true
-}
-
-// HasJsonrpc returns a boolean if a field has been set.
-func (o *Transaction) HasJsonrpc() bool {
-	if o != nil && o.Jsonrpc != nil {
-		return true
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "SolanaSPLTokenApiService.SolanaGetSPLToken")
+	if err != nil {
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
-	return false
-}
+	localVarPath := localBasePath + "/solana/spl-token/{network}/{public_key}"
+	localVarPath = strings.Replace(localVarPath, "{"+"public_key"+"}", _neturl.PathEscape(parameterToString(r.publicKey, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"network"+"}", _neturl.PathEscape(parameterToString(r.network, "")), -1)
 
-// SetJsonrpc gets a reference to the given string and assigns it to the Jsonrpc field.
-func (o *Transaction) SetJsonrpc(v string) {
-	o.Jsonrpc = &v
-}
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := _neturl.Values{}
+	localVarFormParams := _neturl.Values{}
 
-// GetResult returns the Result field value if set, zero value otherwise.
-func (o *Transaction) GetResult() TransactionResult {
-	if o == nil || o.Result == nil {
-		var ret TransactionResult
-		return ret
-	}
-	return *o.Result
-}
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{}
 
-// GetResultOk returns a tuple with the Result field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *Transaction) GetResultOk() (*TransactionResult, bool) {
-	if o == nil || o.Result == nil {
-		return nil, false
-	}
-	return o.Result, true
-}
-
-// HasResult returns a boolean if a field has been set.
-func (o *Transaction) HasResult() bool {
-	if o != nil && o.Result != nil {
-		return true
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
 	}
 
-	return false
-}
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
 
-// SetResult gets a reference to the given TransactionResult and assigns it to the Result field.
-func (o *Transaction) SetResult(v TransactionResult) {
-	o.Result = &v
-}
-
-func (o Transaction) MarshalJSON() ([]byte, error) {
-	toSerialize := map[string]interface{}{}
-	if o.Id != nil {
-		toSerialize["id"] = o.Id
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	if o.Jsonrpc != nil {
-		toSerialize["jsonrpc"] = o.Jsonrpc
+	if r.ctx != nil {
+		// API Key Authentication
+		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
+			if apiKey, ok := auth["APIKeyID"]; ok {
+				var key string
+				if apiKey.Prefix != "" {
+					key = apiKey.Prefix + " " + apiKey.Key
+				} else {
+					key = apiKey.Key
+				}
+				localVarHeaderParams["APIKeyID"] = key
+			}
+		}
 	}
-	if o.Result != nil {
-		toSerialize["result"] = o.Result
+	if r.ctx != nil {
+		// API Key Authentication
+		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
+			if apiKey, ok := auth["APISecretKey"]; ok {
+				var key string
+				if apiKey.Prefix != "" {
+					key = apiKey.Prefix + " " + apiKey.Key
+				} else {
+					key = apiKey.Key
+				}
+				localVarHeaderParams["APISecretKey"] = key
+			}
+		}
 	}
-	return json.Marshal(toSerialize)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
-
-type NullableTransaction struct {
-	value *Transaction
-	isSet bool
-}
-
-func (v NullableTransaction) Get() *Transaction {
-	return v.value
-}
-
-func (v *NullableTransaction) Set(val *Transaction) {
-	v.value = val
-	v.isSet = true
-}
-
-func (v NullableTransaction) IsSet() bool {
-	return v.isSet
-}
-
-func (v *NullableTransaction) Unset() {
-	v.value = nil
-	v.isSet = false
-}
-
-func NewNullableTransaction(val *Transaction) *NullableTransaction {
-	return &NullableTransaction{value: val, isSet: true}
-}
-
-func (v NullableTransaction) MarshalJSON() ([]byte, error) {
-	return json.Marshal(v.value)
-}
-
-func (v *NullableTransaction) UnmarshalJSON(src []byte) error {
-	v.isSet = true
-	return json.Unmarshal(src, &v.value)
-}
-
-

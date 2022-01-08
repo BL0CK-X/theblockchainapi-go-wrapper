@@ -19,16 +19,11 @@ import (
 type TransferRequest struct {
 	// The public key address of the recipient to whom you want to send a token or NFT
 	RecipientAddress string `json:"recipient_address"`
-	// The twelve word phrase that can be used to derive many public key addresses. To derive a public key, you need a secret recovery phrase, a derivation path, and an optional passphrase. See our Security section <a href=\"#section/Security\">here</a>.
-	SecretRecoveryPhrase string `json:"secret_recovery_phrase"`
-	// Derivation paths are used to derive the public key from the secret recovery phrase. Only certain paths are accepted.  We use \"m/44/501/0/0\" by default, if it is not provided. This is the path that the Phantom and Sollet wallets use. If you provide the empty string \"\" as the value for the derivation path, then we will use the Solana CLI default value. The SolFlare recommended path is \"m/44/501/0\".  You can also arbitrarily increment the default path (\"m/44/501/0/0\") to generate more wallets (e.g., \"m/44/501/0/1\", \"m/44/501/0/2\", ...). This is how Phantom generates more wallets.  To learn more about derivation paths, check out <a href=\"https://learnmeabitcoin.com/technical/derivation-paths\" target=\"_blank\">this tutorial</a>.
-	DerivationPath *string `json:"derivation_path,omitempty"`
-	// PASSPHRASE != PASSWORD. This is NOT your Phantom password or any other password. It is an optional string you use when creating a wallet. This provides an additional layer of security because a hacker would need both the secret recovery phrase and the passphrase to access the output public key. By default, most wallet UI extensions do not use a passphrase. (You probably did not use a passphrase.) Limited to 500 characters. 
-	Passphrase *string `json:"passphrase,omitempty"`
+	Wallet Wallet `json:"wallet"`
 	// If you're transfering an NFT, supply the `mint` (the address of the mint) for the `token_address`. If you're transfering a token, supply the token address found on the explorer (e.g., see `SRMuApVNdxXokk5GT7XD5cUUgXMBCoAz2LHeuAoKWRt` for <a href=\"https://explorer.solana.com/address/SRMuApVNdxXokk5GT7XD5cUUgXMBCoAz2LHeuAoKWRt\" target=\"_blank\">Serum Token</a>) for the `token_address`. If you're transferring SOL, do not supply a value for `token_address`. 
 	TokenAddress *string `json:"token_address,omitempty"`
 	Network *string `json:"network,omitempty"`
-	// The quantity of the token or NFT you want to send. If sending an NFT, there is no need to supply this value.  This value must be a string. You can supply a float value (e.g., \"0.0005\"). 
+	// This value must be a string. What you provide here depends on if you are sending an NFT, an SPL token, or SOL.  - NFT: This must be '1'. - SPL Token: This must be an integer in string format. To convert from what you see on a wallet UI (e.g., 1 ATLAS, 1 USDC) to an integer value, you have to multiply that value by 10^<i>x</i> where <i>x</i> is the number of decimals. For example, to transfer 0.2 USDC, if USDC uses 6 decimals, then the amount is 0.2 * 10^6 = 200000. You can get the number of decimals for a given SPL token <a href=\"#operation/solanaGetSPLToken\">here</a>. - SOL: Supply this value denominated in SOL in a string format. This does not need to be an integer. For example, if you want to send 0.0005 SOL, then amount = \"0.0005\".
 	Amount *string `json:"amount,omitempty"`
 }
 
@@ -36,14 +31,10 @@ type TransferRequest struct {
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewTransferRequest(recipientAddress string, secretRecoveryPhrase string) *TransferRequest {
+func NewTransferRequest(recipientAddress string, wallet Wallet) *TransferRequest {
 	this := TransferRequest{}
 	this.RecipientAddress = recipientAddress
-	this.SecretRecoveryPhrase = secretRecoveryPhrase
-	var derivationPath string = "m/44/501/0/0"
-	this.DerivationPath = &derivationPath
-	var passphrase string = ""
-	this.Passphrase = &passphrase
+	this.Wallet = wallet
 	var network string = "devnet"
 	this.Network = &network
 	var amount string = "1"
@@ -56,10 +47,6 @@ func NewTransferRequest(recipientAddress string, secretRecoveryPhrase string) *T
 // but it doesn't guarantee that properties required by API are set
 func NewTransferRequestWithDefaults() *TransferRequest {
 	this := TransferRequest{}
-	var derivationPath string = "m/44/501/0/0"
-	this.DerivationPath = &derivationPath
-	var passphrase string = ""
-	this.Passphrase = &passphrase
 	var network string = "devnet"
 	this.Network = &network
 	var amount string = "1"
@@ -91,92 +78,28 @@ func (o *TransferRequest) SetRecipientAddress(v string) {
 	o.RecipientAddress = v
 }
 
-// GetSecretRecoveryPhrase returns the SecretRecoveryPhrase field value
-func (o *TransferRequest) GetSecretRecoveryPhrase() string {
+// GetWallet returns the Wallet field value
+func (o *TransferRequest) GetWallet() Wallet {
 	if o == nil {
-		var ret string
+		var ret Wallet
 		return ret
 	}
 
-	return o.SecretRecoveryPhrase
+	return o.Wallet
 }
 
-// GetSecretRecoveryPhraseOk returns a tuple with the SecretRecoveryPhrase field value
+// GetWalletOk returns a tuple with the Wallet field value
 // and a boolean to check if the value has been set.
-func (o *TransferRequest) GetSecretRecoveryPhraseOk() (*string, bool) {
+func (o *TransferRequest) GetWalletOk() (*Wallet, bool) {
 	if o == nil  {
 		return nil, false
 	}
-	return &o.SecretRecoveryPhrase, true
+	return &o.Wallet, true
 }
 
-// SetSecretRecoveryPhrase sets field value
-func (o *TransferRequest) SetSecretRecoveryPhrase(v string) {
-	o.SecretRecoveryPhrase = v
-}
-
-// GetDerivationPath returns the DerivationPath field value if set, zero value otherwise.
-func (o *TransferRequest) GetDerivationPath() string {
-	if o == nil || o.DerivationPath == nil {
-		var ret string
-		return ret
-	}
-	return *o.DerivationPath
-}
-
-// GetDerivationPathOk returns a tuple with the DerivationPath field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *TransferRequest) GetDerivationPathOk() (*string, bool) {
-	if o == nil || o.DerivationPath == nil {
-		return nil, false
-	}
-	return o.DerivationPath, true
-}
-
-// HasDerivationPath returns a boolean if a field has been set.
-func (o *TransferRequest) HasDerivationPath() bool {
-	if o != nil && o.DerivationPath != nil {
-		return true
-	}
-
-	return false
-}
-
-// SetDerivationPath gets a reference to the given string and assigns it to the DerivationPath field.
-func (o *TransferRequest) SetDerivationPath(v string) {
-	o.DerivationPath = &v
-}
-
-// GetPassphrase returns the Passphrase field value if set, zero value otherwise.
-func (o *TransferRequest) GetPassphrase() string {
-	if o == nil || o.Passphrase == nil {
-		var ret string
-		return ret
-	}
-	return *o.Passphrase
-}
-
-// GetPassphraseOk returns a tuple with the Passphrase field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *TransferRequest) GetPassphraseOk() (*string, bool) {
-	if o == nil || o.Passphrase == nil {
-		return nil, false
-	}
-	return o.Passphrase, true
-}
-
-// HasPassphrase returns a boolean if a field has been set.
-func (o *TransferRequest) HasPassphrase() bool {
-	if o != nil && o.Passphrase != nil {
-		return true
-	}
-
-	return false
-}
-
-// SetPassphrase gets a reference to the given string and assigns it to the Passphrase field.
-func (o *TransferRequest) SetPassphrase(v string) {
-	o.Passphrase = &v
+// SetWallet sets field value
+func (o *TransferRequest) SetWallet(v Wallet) {
+	o.Wallet = v
 }
 
 // GetTokenAddress returns the TokenAddress field value if set, zero value otherwise.
@@ -281,13 +204,7 @@ func (o TransferRequest) MarshalJSON() ([]byte, error) {
 		toSerialize["recipient_address"] = o.RecipientAddress
 	}
 	if true {
-		toSerialize["secret_recovery_phrase"] = o.SecretRecoveryPhrase
-	}
-	if o.DerivationPath != nil {
-		toSerialize["derivation_path"] = o.DerivationPath
-	}
-	if o.Passphrase != nil {
-		toSerialize["passphrase"] = o.Passphrase
+		toSerialize["wallet"] = o.Wallet
 	}
 	if o.TokenAddress != nil {
 		toSerialize["token_address"] = o.TokenAddress

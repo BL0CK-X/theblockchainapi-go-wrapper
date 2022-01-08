@@ -58,6 +58,8 @@ type APIClient struct {
 
 	SolanaNFTApi *SolanaNFTApiService
 
+	SolanaSPLTokenApi *SolanaSPLTokenApiService
+
 	SolanaTransactionApi *SolanaTransactionApiService
 
 	SolanaWalletApi *SolanaWalletApiService
@@ -83,6 +85,7 @@ func NewAPIClient(cfg *Configuration) *APIClient {
 	c.SolanaAccountApi = (*SolanaAccountApiService)(&c.common)
 	c.SolanaCandyMachineApi = (*SolanaCandyMachineApiService)(&c.common)
 	c.SolanaNFTApi = (*SolanaNFTApiService)(&c.common)
+	c.SolanaSPLTokenApi = (*SolanaSPLTokenApiService)(&c.common)
 	c.SolanaTransactionApi = (*SolanaTransactionApiService)(&c.common)
 	c.SolanaWalletApi = (*SolanaWalletApiService)(&c.common)
 

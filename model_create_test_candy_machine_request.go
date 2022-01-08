@@ -17,14 +17,9 @@ import (
 
 // CreateTestCandyMachineRequest struct for CreateTestCandyMachineRequest
 type CreateTestCandyMachineRequest struct {
-	// The twelve word phrase that can be used to derive many public key addresses. To derive a public key, you need a secret recovery phrase, a derivation path, and an optional passphrase. See our Security section <a href=\"#section/Security\">here</a>.
-	SecretRecoveryPhrase string `json:"secret_recovery_phrase"`
-	// Derivation paths are used to derive the public key from the secret recovery phrase. Only certain paths are accepted.  We use \"m/44/501/0/0\" by default, if it is not provided. This is the path that the Phantom and Sollet wallets use. If you provide the empty string \"\" as the value for the derivation path, then we will use the Solana CLI default value. The SolFlare recommended path is \"m/44/501/0\".  You can also arbitrarily increment the default path (\"m/44/501/0/0\") to generate more wallets (e.g., \"m/44/501/0/1\", \"m/44/501/0/2\", ...). This is how Phantom generates more wallets.  To learn more about derivation paths, check out <a href=\"https://learnmeabitcoin.com/technical/derivation-paths\" target=\"_blank\">this tutorial</a>.
-	DerivationPath *string `json:"derivation_path,omitempty"`
-	// PASSPHRASE != PASSWORD. This is NOT your Phantom password or any other password. It is an optional string you use when creating a wallet. This provides an additional layer of security because a hacker would need both the secret recovery phrase and the passphrase to access the output public key. By default, most wallet UI extensions do not use a passphrase. (You probably did not use a passphrase.) Limited to 500 characters. 
-	Passphrase *string `json:"passphrase,omitempty"`
+	Wallet Wallet `json:"wallet"`
 	Network *string `json:"network,omitempty"`
-	// The contract you want to use to create the candy machine
+	// The contract you want to use to create the candy machine. Note: Metaplex disabled the creation of `v1` candy machines on their smart contract, and so we no longer support the creation of `v1` test candy machines. 
 	CandyMachineContractVersion *string `json:"candy_machine_contract_version,omitempty"`
 	// Whether or not to include a gatekeeper for testing purposes. Only applies to v2 candy machines.
 	IncludeGatekeeper *bool `json:"include_gatekeeper,omitempty"`
@@ -34,16 +29,12 @@ type CreateTestCandyMachineRequest struct {
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewCreateTestCandyMachineRequest(secretRecoveryPhrase string) *CreateTestCandyMachineRequest {
+func NewCreateTestCandyMachineRequest(wallet Wallet) *CreateTestCandyMachineRequest {
 	this := CreateTestCandyMachineRequest{}
-	this.SecretRecoveryPhrase = secretRecoveryPhrase
-	var derivationPath string = "m/44/501/0/0"
-	this.DerivationPath = &derivationPath
-	var passphrase string = ""
-	this.Passphrase = &passphrase
+	this.Wallet = wallet
 	var network string = "devnet"
 	this.Network = &network
-	var candyMachineContractVersion string = "v1"
+	var candyMachineContractVersion string = "v2"
 	this.CandyMachineContractVersion = &candyMachineContractVersion
 	var includeGatekeeper bool = false
 	this.IncludeGatekeeper = &includeGatekeeper
@@ -55,105 +46,37 @@ func NewCreateTestCandyMachineRequest(secretRecoveryPhrase string) *CreateTestCa
 // but it doesn't guarantee that properties required by API are set
 func NewCreateTestCandyMachineRequestWithDefaults() *CreateTestCandyMachineRequest {
 	this := CreateTestCandyMachineRequest{}
-	var derivationPath string = "m/44/501/0/0"
-	this.DerivationPath = &derivationPath
-	var passphrase string = ""
-	this.Passphrase = &passphrase
 	var network string = "devnet"
 	this.Network = &network
-	var candyMachineContractVersion string = "v1"
+	var candyMachineContractVersion string = "v2"
 	this.CandyMachineContractVersion = &candyMachineContractVersion
 	var includeGatekeeper bool = false
 	this.IncludeGatekeeper = &includeGatekeeper
 	return &this
 }
 
-// GetSecretRecoveryPhrase returns the SecretRecoveryPhrase field value
-func (o *CreateTestCandyMachineRequest) GetSecretRecoveryPhrase() string {
+// GetWallet returns the Wallet field value
+func (o *CreateTestCandyMachineRequest) GetWallet() Wallet {
 	if o == nil {
-		var ret string
+		var ret Wallet
 		return ret
 	}
 
-	return o.SecretRecoveryPhrase
+	return o.Wallet
 }
 
-// GetSecretRecoveryPhraseOk returns a tuple with the SecretRecoveryPhrase field value
+// GetWalletOk returns a tuple with the Wallet field value
 // and a boolean to check if the value has been set.
-func (o *CreateTestCandyMachineRequest) GetSecretRecoveryPhraseOk() (*string, bool) {
+func (o *CreateTestCandyMachineRequest) GetWalletOk() (*Wallet, bool) {
 	if o == nil  {
 		return nil, false
 	}
-	return &o.SecretRecoveryPhrase, true
+	return &o.Wallet, true
 }
 
-// SetSecretRecoveryPhrase sets field value
-func (o *CreateTestCandyMachineRequest) SetSecretRecoveryPhrase(v string) {
-	o.SecretRecoveryPhrase = v
-}
-
-// GetDerivationPath returns the DerivationPath field value if set, zero value otherwise.
-func (o *CreateTestCandyMachineRequest) GetDerivationPath() string {
-	if o == nil || o.DerivationPath == nil {
-		var ret string
-		return ret
-	}
-	return *o.DerivationPath
-}
-
-// GetDerivationPathOk returns a tuple with the DerivationPath field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *CreateTestCandyMachineRequest) GetDerivationPathOk() (*string, bool) {
-	if o == nil || o.DerivationPath == nil {
-		return nil, false
-	}
-	return o.DerivationPath, true
-}
-
-// HasDerivationPath returns a boolean if a field has been set.
-func (o *CreateTestCandyMachineRequest) HasDerivationPath() bool {
-	if o != nil && o.DerivationPath != nil {
-		return true
-	}
-
-	return false
-}
-
-// SetDerivationPath gets a reference to the given string and assigns it to the DerivationPath field.
-func (o *CreateTestCandyMachineRequest) SetDerivationPath(v string) {
-	o.DerivationPath = &v
-}
-
-// GetPassphrase returns the Passphrase field value if set, zero value otherwise.
-func (o *CreateTestCandyMachineRequest) GetPassphrase() string {
-	if o == nil || o.Passphrase == nil {
-		var ret string
-		return ret
-	}
-	return *o.Passphrase
-}
-
-// GetPassphraseOk returns a tuple with the Passphrase field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *CreateTestCandyMachineRequest) GetPassphraseOk() (*string, bool) {
-	if o == nil || o.Passphrase == nil {
-		return nil, false
-	}
-	return o.Passphrase, true
-}
-
-// HasPassphrase returns a boolean if a field has been set.
-func (o *CreateTestCandyMachineRequest) HasPassphrase() bool {
-	if o != nil && o.Passphrase != nil {
-		return true
-	}
-
-	return false
-}
-
-// SetPassphrase gets a reference to the given string and assigns it to the Passphrase field.
-func (o *CreateTestCandyMachineRequest) SetPassphrase(v string) {
-	o.Passphrase = &v
+// SetWallet sets field value
+func (o *CreateTestCandyMachineRequest) SetWallet(v Wallet) {
+	o.Wallet = v
 }
 
 // GetNetwork returns the Network field value if set, zero value otherwise.
@@ -255,13 +178,7 @@ func (o *CreateTestCandyMachineRequest) SetIncludeGatekeeper(v bool) {
 func (o CreateTestCandyMachineRequest) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
 	if true {
-		toSerialize["secret_recovery_phrase"] = o.SecretRecoveryPhrase
-	}
-	if o.DerivationPath != nil {
-		toSerialize["derivation_path"] = o.DerivationPath
-	}
-	if o.Passphrase != nil {
-		toSerialize["passphrase"] = o.Passphrase
+		toSerialize["wallet"] = o.Wallet
 	}
 	if o.Network != nil {
 		toSerialize["network"] = o.Network

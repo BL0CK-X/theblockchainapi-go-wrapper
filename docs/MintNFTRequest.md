@@ -4,10 +4,8 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**ConfigAddress** | **string** | The config address of the candy machine. You can retrieve this if you have the candy machine ID using &lt;a href&#x3D;\&quot;#operation/solanaGetCandyMachineDetails\&quot;&gt;this endpoint&lt;/a&gt; and retrieving the &#x60;config_address&#x60; from the response..  | 
-**SecretRecoveryPhrase** | **string** | The twelve word phrase that can be used to derive many public key addresses. To derive a public key, you need a secret recovery phrase, a derivation path, and an optional passphrase. See our Security section &lt;a href&#x3D;\&quot;#section/Security\&quot;&gt;here&lt;/a&gt;. | 
-**DerivationPath** | Pointer to **string** | Derivation paths are used to derive the public key from the secret recovery phrase. Only certain paths are accepted.  We use \&quot;m/44/501/0/0\&quot; by default, if it is not provided. This is the path that the Phantom and Sollet wallets use. If you provide the empty string \&quot;\&quot; as the value for the derivation path, then we will use the Solana CLI default value. The SolFlare recommended path is \&quot;m/44/501/0\&quot;.  You can also arbitrarily increment the default path (\&quot;m/44/501/0/0\&quot;) to generate more wallets (e.g., \&quot;m/44/501/0/1\&quot;, \&quot;m/44/501/0/2\&quot;, ...). This is how Phantom generates more wallets.  To learn more about derivation paths, check out &lt;a href&#x3D;\&quot;https://learnmeabitcoin.com/technical/derivation-paths\&quot; target&#x3D;\&quot;_blank\&quot;&gt;this tutorial&lt;/a&gt;. | [optional] [default to "m/44/501/0/0"]
-**Passphrase** | Pointer to **string** | PASSPHRASE !&#x3D; PASSWORD. This is NOT your Phantom password or any other password. It is an optional string you use when creating a wallet. This provides an additional layer of security because a hacker would need both the secret recovery phrase and the passphrase to access the output public key. By default, most wallet UI extensions do not use a passphrase. (You probably did not use a passphrase.) Limited to 500 characters.  | [optional] [default to ""]
+**Wallet** | [**Wallet**](Wallet.md) |  | 
+**ConfigAddress** | **string** | The config address of the candy machine. You can retrieve this if you have the candy machine ID using &lt;a href&#x3D;\&quot;#operation/solanaGetCandyMachineDetails\&quot;&gt;this endpoint&lt;/a&gt; and retrieving the &#x60;config_address&#x60; from the response.  A candy machine ID is the same thing as a configuration address for v2 candy machines.  | 
 **Network** | Pointer to **string** |  | [optional] [default to "devnet"]
 **CandyMachineContractVersion** | Pointer to **string** | The candy machine contract of the candy machine from which you&#39;re minting. If you are minting from a &#x60;v1&#x60; candy machine ID, set this to &#x60;v1&#x60;. If you are minting from a &#x60;v2&#x60; candy machine ID, set this to &#x60;v2&#x60;. If you don&#39;t know which the version of your candy machine, check out &lt;a href&#x3D;\&quot;#operation/solanaGetAccountIsCandyMachine\&quot;&gt;this endpoint&lt;/a&gt;.  | [optional] [default to "v1"]
 
@@ -15,7 +13,7 @@ Name | Type | Description | Notes
 
 ### NewMintNFTRequest
 
-`func NewMintNFTRequest(configAddress string, secretRecoveryPhrase string, ) *MintNFTRequest`
+`func NewMintNFTRequest(wallet Wallet, configAddress string, ) *MintNFTRequest`
 
 NewMintNFTRequest instantiates a new MintNFTRequest object
 This constructor will assign default values to properties that have it defined,
@@ -29,6 +27,26 @@ will change when the set of required properties is changed
 NewMintNFTRequestWithDefaults instantiates a new MintNFTRequest object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
+
+### GetWallet
+
+`func (o *MintNFTRequest) GetWallet() Wallet`
+
+GetWallet returns the Wallet field if non-nil, zero value otherwise.
+
+### GetWalletOk
+
+`func (o *MintNFTRequest) GetWalletOk() (*Wallet, bool)`
+
+GetWalletOk returns a tuple with the Wallet field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetWallet
+
+`func (o *MintNFTRequest) SetWallet(v Wallet)`
+
+SetWallet sets Wallet field to given value.
+
 
 ### GetConfigAddress
 
@@ -49,76 +67,6 @@ and a boolean to check if the value has been set.
 
 SetConfigAddress sets ConfigAddress field to given value.
 
-
-### GetSecretRecoveryPhrase
-
-`func (o *MintNFTRequest) GetSecretRecoveryPhrase() string`
-
-GetSecretRecoveryPhrase returns the SecretRecoveryPhrase field if non-nil, zero value otherwise.
-
-### GetSecretRecoveryPhraseOk
-
-`func (o *MintNFTRequest) GetSecretRecoveryPhraseOk() (*string, bool)`
-
-GetSecretRecoveryPhraseOk returns a tuple with the SecretRecoveryPhrase field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetSecretRecoveryPhrase
-
-`func (o *MintNFTRequest) SetSecretRecoveryPhrase(v string)`
-
-SetSecretRecoveryPhrase sets SecretRecoveryPhrase field to given value.
-
-
-### GetDerivationPath
-
-`func (o *MintNFTRequest) GetDerivationPath() string`
-
-GetDerivationPath returns the DerivationPath field if non-nil, zero value otherwise.
-
-### GetDerivationPathOk
-
-`func (o *MintNFTRequest) GetDerivationPathOk() (*string, bool)`
-
-GetDerivationPathOk returns a tuple with the DerivationPath field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetDerivationPath
-
-`func (o *MintNFTRequest) SetDerivationPath(v string)`
-
-SetDerivationPath sets DerivationPath field to given value.
-
-### HasDerivationPath
-
-`func (o *MintNFTRequest) HasDerivationPath() bool`
-
-HasDerivationPath returns a boolean if a field has been set.
-
-### GetPassphrase
-
-`func (o *MintNFTRequest) GetPassphrase() string`
-
-GetPassphrase returns the Passphrase field if non-nil, zero value otherwise.
-
-### GetPassphraseOk
-
-`func (o *MintNFTRequest) GetPassphraseOk() (*string, bool)`
-
-GetPassphraseOk returns a tuple with the Passphrase field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetPassphrase
-
-`func (o *MintNFTRequest) SetPassphrase(v string)`
-
-SetPassphrase sets Passphrase field to given value.
-
-### HasPassphrase
-
-`func (o *MintNFTRequest) HasPassphrase() bool`
-
-HasPassphrase returns a boolean if a field has been set.
 
 ### GetNetwork
 
