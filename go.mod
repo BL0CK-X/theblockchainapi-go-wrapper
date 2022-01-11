@@ -1,4 +1,4 @@
-module github.com/BL0CK-X/theblockchainapi-go-wrapper
+module github.com/GIT_USER_ID/GIT_REPO_ID
 
 go 1.13
 

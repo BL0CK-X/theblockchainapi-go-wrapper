@@ -1,22 +1,22 @@
 openapi: 3.0.0
 info:
   contact:
-    email: info@theblockchainapi.com
+    email: info@blockchainapi.com
   description: "# About\n\nOur vision is to make it super easy to interact with the\
     \ decentralized web. We want you to be able to do this in any coding language\
     \ and do it easily and quickly. \n\nYou're a key part of our vision. We love feature\
     \ requests! <a href=\"#section/Feature-Requests\">Make one!</a>\n\n# How to Use\
     \ the API\n\nTo use the API, you simply need to create an API key pair.\n\nDoing\
-    \ so takes less than a minute. Simply go to <a target=\"_blank\" href=\"https://dashboard.theblockchainapi.com\"\
+    \ so takes less than a minute. Simply go to <a target=\"_blank\" href=\"https://dashboard.blockchainapi.com\"\
     >the dashboard</a>, create an account, and generate a key pair. You can now use\
     \ this pair to make API requests. You must create your first pair via the dashboard.\n\
     \n# Feature Requests\n\nGot a feature request? Submit it as an issue on <a target=\"\
     _blank\" href=\"https://github.com/BL0CK-X/the-blockchain-api/issues/new/choose\"\
-    >our GitHub repo</a> or [email us](mailto:info@theblockchainapi.com).\n\n# Contact\n\
+    >our GitHub repo</a> or [email us](mailto:info@blockchainapi.com).\n\n# Contact\n\
     \n<figure>\n    <img \n        width=\"40px\"\n        height=\"40px\" \n    \
     \    src=\"https://theblockchainapi-docs.s3.amazonaws.com/icons/phone.svg\"\n\
     \    />\n    <figcaption style=\"textAlign:center;\">Text / Call: +1 (415) 888\
-    \ 4745 </figcaption>\n</figure> <a href=\"mailto:info@theblockchainapi.com\" target=\"\
+    \ 4745 </figcaption>\n</figure> <a href=\"mailto:info@blockchainapi.com\" target=\"\
     _blank\">\n    <figure>\n        <img \n            width=\"40px\"\n         \
     \   height=\"40px\" \n            src=\"https://theblockchainapi-docs.s3.amazonaws.com/icons/email.svg\"\
     \n        />\n        <figcaption style=\"textAlign:center;\">Email us: info@theblockchainapi.com</figcaption>\n\
@@ -55,7 +55,7 @@ info:
     \ illegal, and we will report offenders. Do not harrass us. Rather, feel free\
     \ to discuss your concerns with us and we will be more than happy to work with\
     \ you to come up with a solution.\n\n# Pricing\n\n<b>Each user receives 500 free\
-    \ credits.</b>\n\nYou can learn more about our pricing <a href=\"https://dashboard.theblockchainapi.com/billing\"\
+    \ credits.</b>\n\nYou can learn more about our pricing <a href=\"https://dashboard.blockchainapi.com/billing\"\
     \ target=\"_blank\">here</a>. \n\nWe frequently do custom plans. If our pricing\
     \ doesn't work for you, <a href=\"#section/Contact\">contact us</a>.\n\nIf you\
     \ have questions, concerns, feedback, or ideas, <a href=\"#section/Contact\">contact\
@@ -81,7 +81,7 @@ info:
   title: The Blockchain API
   version: "null"
 servers:
-- url: https://api.theblockchainapi.com/v1
+- url: https://api.blockchainapi.com/v1
 tags:
 - description: |
     The results of any asynchronous tasks that have been launched. You can poll this endpoint to see when tasks have completed.
