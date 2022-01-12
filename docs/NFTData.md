@@ -9,7 +9,7 @@ Name | Type | Description | Notes
 **Share** | Pointer to **[]float32** | The portion of the seller fee that each creator receives. Index 0 corresponds to creator at index 0 in the creator array, and so on. Length of share array must be the same as the length of the creator array.  | [optional] 
 **Symbol** | Pointer to **string** | The symbol of the NFT  | [optional] 
 **Uri** | Pointer to **string** | The URI of the NFT  | [optional] 
-**Verified** | Pointer to **[]int32** | Whether or not the respective creator has signed the minting transaction of the NFT. Index 0 corresponds to creator at index 0 in the creator array, and so on. Length of verified array must be the same as the length of the creator array.  | [optional] 
+**Verified** | Pointer to **[]float32** | Whether or not the respective creator has signed the minting transaction of the NFT. Index 0 corresponds to creator at index 0 in the creator array, and so on. Length of verified array must be the same as the length of the creator array.  | [optional] 
 
 ## Methods
 
@@ -157,20 +157,20 @@ HasUri returns a boolean if a field has been set.
 
 ### GetVerified
 
-`func (o *NFTData) GetVerified() []int32`
+`func (o *NFTData) GetVerified() []float32`
 
 GetVerified returns the Verified field if non-nil, zero value otherwise.
 
 ### GetVerifiedOk
 
-`func (o *NFTData) GetVerifiedOk() (*[]int32, bool)`
+`func (o *NFTData) GetVerifiedOk() (*[]float32, bool)`
 
 GetVerifiedOk returns a tuple with the Verified field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetVerified
 
-`func (o *NFTData) SetVerified(v []int32)`
+`func (o *NFTData) SetVerified(v []float32)`
 
 SetVerified sets Verified field to given value.
 
