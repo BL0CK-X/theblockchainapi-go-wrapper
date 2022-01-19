@@ -100,7 +100,7 @@ import (
 )
 
 func main() {
-    network := "mainnet-beta" // string | The network ID (devnet, mainnet-beta)
+    network := "mainnet-beta" // string | The network ID
     candyMachineId := "FmkrvXRenCGtwBHw3VtBcExp8eTdnau97upaewF4GUEX" // string | The ID of the candy machine
 
     configuration := openapiclient.NewConfiguration()
@@ -121,7 +121,7 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**network** | **string** | The network ID (devnet, mainnet-beta) | 
+**network** | **string** | The network ID | 
 **candyMachineId** | **string** | The ID of the candy machine | 
 
 ### Other Parameters

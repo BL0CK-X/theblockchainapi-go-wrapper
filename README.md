@@ -32,7 +32,7 @@ Got a feature request? Submit it as an issue on <a target=\"_blank\" href=\"http
             height=\"40px\" 
             src=\"https://theblockchainapi-docs.s3.amazonaws.com/icons/email.svg\"
         />
-        <figcaption style=\"textAlign:center;\">Email us: info@theblockchainapi.com</figcaption>
+        <figcaption style=\"textAlign:center;\">Email us: info@blockchainapi.com</figcaption>
     </figure>
 </a> <a href=\"https://discord.gg/d49yzrZRAF\" target=\"_blank\">
     <figure>
@@ -203,6 +203,10 @@ Class | Method | HTTP request | Description
 *SolanaNFTApi* | [**SolanaGetNFTOwner**](docs/SolanaNFTApi.md#solanagetnftowner) | **Get** /solana/nft/{network}/{mint_address}/owner | Get owner of an NFT
 *SolanaNFTApi* | [**SolanaGetNFTsCandyMachineId**](docs/SolanaNFTApi.md#solanagetnftscandymachineid) | **Post** /solana/nft/candy_machine_id | Get the ID of the candy machine of an NFT 
 *SolanaNFTApi* | [**SolanaSearchNFTs**](docs/SolanaNFTApi.md#solanasearchnfts) | **Post** /solana/nft/search | Search NFTs on Solana
+*SolanaNFTMarketplacesApi* | [**SolanaBuyNFT**](docs/SolanaNFTMarketplacesApi.md#solanabuynft) | **Post** /solana/nft/marketplaces/{exchange}/buy/{network}/{mint_address} | Buy
+*SolanaNFTMarketplacesApi* | [**SolanaDelistNFT**](docs/SolanaNFTMarketplacesApi.md#solanadelistnft) | **Post** /solana/nft/marketplaces/{exchange}/delist/{network}/{mint_address} | Delist
+*SolanaNFTMarketplacesApi* | [**SolanaGetNFTListing**](docs/SolanaNFTMarketplacesApi.md#solanagetnftlisting) | **Get** /solana/nft/marketplaces/listing/{network}/{mint_address} | Get NFT Listing
+*SolanaNFTMarketplacesApi* | [**SolanaListNFT**](docs/SolanaNFTMarketplacesApi.md#solanalistnft) | **Post** /solana/nft/marketplaces/{exchange}/list/{network}/{mint_address} | List
 *SolanaSPLTokenApi* | [**SolanaGetSPLToken**](docs/SolanaSPLTokenApi.md#solanagetspltoken) | **Get** /solana/spl-token/{network}/{public_key} | Get SPL token metadata
 *SolanaTransactionApi* | [**SolanaGetTransaction**](docs/SolanaTransactionApi.md#solanagettransaction) | **Get** /solana/transaction/{network}/{tx_signature} | Get the details of a transaction made on Solana
 *SolanaWalletApi* | [**SolanaDeriveAssociatedTokenAccountAddress**](docs/SolanaWalletApi.md#solanaderiveassociatedtokenaccountaddress) | **Get** /solana/wallet/{public_key}/associated_token_account/{mint_address} | Derive an associated token account address
@@ -229,9 +233,13 @@ Class | Method | HTTP request | Description
  - [B58PrivateKey](docs/B58PrivateKey.md)
  - [BalanceRequest](docs/BalanceRequest.md)
  - [BalanceResponse](docs/BalanceResponse.md)
+ - [BuyRequest](docs/BuyRequest.md)
+ - [BuyResponse](docs/BuyResponse.md)
  - [CandyMachineSearchRequest](docs/CandyMachineSearchRequest.md)
  - [CreateTestCandyMachineRequest](docs/CreateTestCandyMachineRequest.md)
  - [CreateTestCandyMachineResponse](docs/CreateTestCandyMachineResponse.md)
+ - [DelistRequest](docs/DelistRequest.md)
+ - [DelistResponse](docs/DelistResponse.md)
  - [GeneratePrivateKey](docs/GeneratePrivateKey.md)
  - [GetAllNFTsResponse](docs/GetAllNFTsResponse.md)
  - [GetAllNFTsResponseMintedNfts](docs/GetAllNFTsResponseMintedNfts.md)
@@ -243,9 +251,12 @@ Class | Method | HTTP request | Description
  - [GetCandyMetadataResponse](docs/GetCandyMetadataResponse.md)
  - [GetCandyMetadataResponseCreators](docs/GetCandyMetadataResponseCreators.md)
  - [GetFileResponse](docs/GetFileResponse.md)
+ - [GetNFTListingResponse](docs/GetNFTListingResponse.md)
  - [GetPublicKeyRequest](docs/GetPublicKeyRequest.md)
  - [GetSPLTokenResponse](docs/GetSPLTokenResponse.md)
  - [ListNFTsResponse](docs/ListNFTsResponse.md)
+ - [ListRequest](docs/ListRequest.md)
+ - [ListResponse](docs/ListResponse.md)
  - [MintNFTErrorResponse](docs/MintNFTErrorResponse.md)
  - [MintNFTRequest](docs/MintNFTRequest.md)
  - [MintNFTResponse](docs/MintNFTResponse.md)
