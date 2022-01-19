@@ -19,7 +19,7 @@ info:
     \ 4745 </figcaption>\n</figure> <a href=\"mailto:info@blockchainapi.com\" target=\"\
     _blank\">\n    <figure>\n        <img \n            width=\"40px\"\n         \
     \   height=\"40px\" \n            src=\"https://theblockchainapi-docs.s3.amazonaws.com/icons/email.svg\"\
-    \n        />\n        <figcaption style=\"textAlign:center;\">Email us: info@theblockchainapi.com</figcaption>\n\
+    \n        />\n        <figcaption style=\"textAlign:center;\">Email us: info@blockchainapi.com</figcaption>\n\
     \    </figure>\n</a> <a href=\"https://discord.gg/d49yzrZRAF\" target=\"_blank\"\
     >\n    <figure>\n        <img \n            width=\"40px\"\n            height=\"\
     40px\" \n            src=\"https://theblockchainapi-docs.s3.amazonaws.com/icons/discord.svg\"\
@@ -92,6 +92,9 @@ tags:
 - description: |
     Easily create a Solana NFT and see related fees for creating an NFT.
   name: Solana NFT
+- description: |
+    List, de-list, and buy NFTs from Solana NFT marketplaces.
+  name: Solana NFT Marketplaces
 - description: |
     Interact with the Metaplex Candy Machine smart contract on Solana.
   name: Solana Candy Machine
@@ -836,14 +839,19 @@ paths:
       - Solana Wallet
   /solana/nft:
     post:
-      description: |-
-        <a href="https://github.com/BL0CK-X/the-blockchain-api/tree/main/examples/solana-nft/create-an-nft" target="_blank">See examples (Python, JavaScript)</a>.
-
-        Create a Metaplex NFT on Solana. Read more on this <a href="https://blog.theblockchainapi.com/2021/11/16/a-note-on-nfts.html" target="_blank">here</a>.
-
-        To add attributes to the NFT, add them to a JSON file and upload that to Arweave/IPFS/Filecoin. The JSON file should follow this format: <a href="https://docs.metaplex.com/nft-standard" target="_blank">NFT Standard.</a> (See the "URI JSON Schema" section in that article). Then supply the link to the JSON file in `nft_url`. You don't need to use `nft_metadata`.
-
-        `Cost: 2 Credits` (<a href="#section/Pricing">See Pricing</a>)
+      description: "<a href=\"https://github.com/BL0CK-X/the-blockchain-api/tree/main/examples/solana-nft/create-an-nft\"\
+        \ target=\"_blank\">See examples (Python, JavaScript)</a>.\n\nCreate a Metaplex\
+        \ NFT on Solana. \n\nRead more on this <a href=\"https://blog.blockchainapi.com/2021/11/16/a-note-on-nfts.html\"\
+        \ target=\"_blank\">here</a>.\n\nNote: Please see <a href=\"https://blog.blockchainapi.com/2022/01/18/how-to-format-off-chain-nft-metadata.html\"\
+        \ target=\"_blank\">this article</a> to learn more about what `nft_upload_method`\
+        \ means and how storing the metadata of an NFT works.\n\nIf you're using `nft_upload_method\
+        \ = \"LINK\"`, then to add attributes to the NFT or an image, add them to\
+        \ a JSON file and upload that to Arweave/IPFS/Filecoin. See the JSON format\
+        \ <a href=\"https://blog.blockchainapi.com/2022/01/18/how-to-format-off-chain-nft-metadata.html\"\
+        >here</a>.\n\nThen supply the link to the JSON file in `nft_url`. \n\nNOTE:\
+        \ Don't use `nft_metadata`. Values provided here do not do anything at the\
+        \ moment. We are fixing this soon.\n\n`Cost: 2 Credits` (<a href=\"#section/Pricing\"\
+        >See Pricing</a>)"
       operationId: solanaCreateNFT
       requestBody:
         content:
@@ -929,13 +937,16 @@ paths:
         #section/Pricing\">See Pricing</a>)"
       operationId: solanaGetNFT
       parameters:
-      - description: The network ID (devnet, mainnet-beta)
+      - description: The network ID
         example: mainnet-beta
         explode: false
         in: path
         name: network
         required: true
         schema:
+          enum:
+          - devnet
+          - mainnet-beta
           type: string
         style: simple
       - description: The mint address of the NFT
@@ -981,13 +992,16 @@ paths:
         \n`Cost: 1 Credits` (<a href=\"#section/Pricing\">See Pricing</a>)"
       operationId: solanaGetNFTOwner
       parameters:
-      - description: The network ID (devnet, mainnet-beta)
-        example: mainnet-beta
+      - description: The network ID
+        example: devnet
         explode: false
         in: path
         name: network
         required: true
         schema:
+          enum:
+          - devnet
+          - mainnet-beta
           type: string
         style: simple
       - description: The mint address of the NFT
@@ -1085,6 +1099,292 @@ paths:
         Get the ID of the candy machine of an NFT
       tags:
       - Solana NFT
+  /solana/nft/marketplaces/listing/{network}/{mint_address}:
+    get:
+      description: |-
+        <a href="https://github.com/BL0CK-X/blockchain-api/tree/main/examples/solana-nft-marketplaces/get-nft-listing" target="_blank">See examples (Python, JavaScript)</a>.
+
+        Get the Marketplace listing of a Solana NFT.
+
+        Currently checks for the following Solana NFT martketplaces: SolSea, Magic Eden
+
+        `Cost: 1 Credits`, (<a href="#section/Pricing">See Pricing</a>)
+      operationId: solanaGetNFTListing
+      parameters:
+      - description: The network ID
+        example: devnet
+        explode: false
+        in: path
+        name: network
+        required: true
+        schema:
+          enum:
+          - devnet
+          - mainnet-beta
+          type: string
+        style: simple
+      - description: The mint address of the NFT you want to buy
+        example: 7GA16mQup7ESJbaD6n49VCwVG9kRkyQDzWKhBSLjbYqr
+        explode: false
+        in: path
+        name: mint_address
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetNFTListingResponse'
+          description: Successful Response
+        "400":
+          description: Bad request (check response message)
+        "401":
+          description: Invalid API key pair in headers
+        "402":
+          description: Payment required. Occurs when you run out of API requests.
+            Upgrade <a href="https://dashboard.theblockchainapi.com/billing" target="_blank">here</a>.
+        "403":
+          description: |
+            Our API will throw a 403 if you are providing a body in the GET request.  Such requests are insecure and rejected. The solution is not to provide any sort of body in any GET request.
+        "404":
+          description: No marketplace listing found for this NFT.
+      security:
+      - APIKeyID: []
+        APISecretKey: []
+      summary: Get NFT Listing
+      tags:
+      - Solana NFT Marketplaces
+  /solana/nft/marketplaces/{exchange}/buy/{network}/{mint_address}:
+    post:
+      description: |-
+        <a href="https://github.com/BL0CK-X/blockchain-api/tree/main/examples/solana-nft-marketplaces/buy-nft" target="_blank">See examples (Python, JavaScript)</a>.
+
+        Buy an NFT on a Solana Exchange.
+
+        Exchanges supported: SolSea, Magic Eden
+
+        **We are not responsible for any SOL or NFT lost.**
+
+        `Cost: 25 Credits`, `Cost: 3 Credits on Devnet`
+
+        Limited to $29/mo plans and above. (<a href="#section/Pricing">See Pricing</a>)
+
+        (You are able to try on the `Free` plan as well, until you run out of credits.)
+      operationId: solanaBuyNFT
+      parameters:
+      - description: The network ID
+        example: devnet
+        explode: false
+        in: path
+        name: network
+        required: true
+        schema:
+          enum:
+          - devnet
+          - mainnet-beta
+          type: string
+        style: simple
+      - description: The NFT exchange to interact with
+        example: solsea
+        explode: false
+        in: path
+        name: exchange
+        required: true
+        schema:
+          enum:
+          - solsea
+          - magic-eden
+          type: string
+        style: simple
+      - description: The mint address of the NFT you want to buy
+        example: 7GA16mQup7ESJbaD6n49VCwVG9kRkyQDzWKhBSLjbYqr
+        explode: false
+        in: path
+        name: mint_address
+        required: true
+        schema:
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/BuyRequest'
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BuyResponse'
+          description: Successful Response
+        "400":
+          description: Bad request (check response message)
+        "401":
+          description: Invalid API key pair in headers
+        "402":
+          description: Payment required. Occurs when you run out of API requests.
+            Upgrade <a href="https://dashboard.theblockchainapi.com/billing" target="_blank">here</a>.
+      security:
+      - APIKeyID: []
+        APISecretKey: []
+      summary: Buy
+      tags:
+      - Solana NFT Marketplaces
+  /solana/nft/marketplaces/{exchange}/list/{network}/{mint_address}:
+    post:
+      description: |-
+        <a href="https://github.com/BL0CK-X/blockchain-api/tree/main/examples/solana-nft-marketplaces/list-nft" target="_blank">See examples (Python, JavaScript)</a>.
+
+        List an NFT on a Solana Exchange.
+
+        Exchanges supported: SolSea, Magic Eden
+
+        **We are not responsible for any SOL or NFT lost.**
+
+        `Cost: 12 Credits`, `Cost: 3 Credits on Devnet`
+
+        Limited to $29/mo plans and above. (<a href="#section/Pricing">See Pricing</a>)
+
+        (You are able to try on the `Free` plan as well, until you run out of credits.)
+      operationId: solanaListNFT
+      parameters:
+      - description: The network ID
+        example: devnet
+        explode: false
+        in: path
+        name: network
+        required: true
+        schema:
+          enum:
+          - devnet
+          - mainnet-beta
+          type: string
+        style: simple
+      - description: The NFT exchange to interact with
+        example: solsea
+        explode: false
+        in: path
+        name: exchange
+        required: true
+        schema:
+          enum:
+          - solsea
+          - magic-eden
+          type: string
+        style: simple
+      - description: The mint address of the NFT you want to buy
+        example: 7GA16mQup7ESJbaD6n49VCwVG9kRkyQDzWKhBSLjbYqr
+        explode: false
+        in: path
+        name: mint_address
+        required: true
+        schema:
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ListRequest'
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListResponse'
+          description: Successful Response
+        "400":
+          description: Bad request (check response message)
+        "401":
+          description: Invalid API key pair in headers
+        "402":
+          description: Payment required. Occurs when you run out of API requests.
+            Upgrade <a href="https://dashboard.theblockchainapi.com/billing" target="_blank">here</a>.
+      security:
+      - APIKeyID: []
+        APISecretKey: []
+      summary: List
+      tags:
+      - Solana NFT Marketplaces
+  /solana/nft/marketplaces/{exchange}/delist/{network}/{mint_address}:
+    post:
+      description: |-
+        <a href="https://github.com/BL0CK-X/blockchain-api/tree/main/examples/solana-nft-marketplaces/delist-nft" target="_blank">See examples (Python, JavaScript)</a>.
+
+        Delist an NFT from a Solana Exchange.
+
+        Exchanges supported: SolSea, Magic Eden
+
+        **We are not responsible for any SOL or NFT lost.**
+
+        `Cost: 8 Credits`, `Cost: 3 Credits on Devnet`
+
+        Limited to $29/mo plans and above. (<a href="#section/Pricing">See Pricing</a>)
+
+        (You are able to try on the `Free` plan as well, until you run out of credits.)
+      operationId: solanaDelistNFT
+      parameters:
+      - description: The network ID
+        example: devnet
+        explode: false
+        in: path
+        name: network
+        required: true
+        schema:
+          enum:
+          - devnet
+          - mainnet-beta
+          type: string
+        style: simple
+      - description: The NFT exchange to interact with
+        example: solsea
+        explode: false
+        in: path
+        name: exchange
+        required: true
+        schema:
+          enum:
+          - solsea
+          - magic-eden
+          type: string
+        style: simple
+      - description: The mint address of the NFT you want to buy
+        example: 7GA16mQup7ESJbaD6n49VCwVG9kRkyQDzWKhBSLjbYqr
+        explode: false
+        in: path
+        name: mint_address
+        required: true
+        schema:
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DelistRequest'
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DelistResponse'
+          description: Successful Response
+        "400":
+          description: Bad request (check response message)
+        "401":
+          description: Invalid API key pair in headers
+        "402":
+          description: Payment required. Occurs when you run out of API requests.
+            Upgrade <a href="https://dashboard.theblockchainapi.com/billing" target="_blank">here</a>.
+      security:
+      - APIKeyID: []
+        APISecretKey: []
+      summary: Delist
+      tags:
+      - Solana NFT Marketplaces
   /solana/nft/candy_machine:
     post:
       description: "<a href=\"https://github.com/BL0CK-X/the-blockchain-api/tree/main/examples/solana-candy-machine/create-test-candy-machine\"\
@@ -1268,13 +1568,16 @@ paths:
         >See Pricing</a>)"
       operationId: solanaGetAllNFTsFromCandyMachine
       parameters:
-      - description: The network ID (devnet, mainnet-beta)
+      - description: The network ID
         example: mainnet-beta
         explode: false
         in: path
         name: network
         required: true
         schema:
+          enum:
+          - devnet
+          - mainnet-beta
           type: string
         style: simple
       - description: The ID of the candy machine
@@ -1377,7 +1680,9 @@ paths:
         \ verification is sufficient for further mints. In which case, after verifying\
         \ manually the first time, you can use our endpoint thereafter. \n\nYou can\
         \ check if the gatekeeper functionality is enabled with this <a href=\"#operation/solanaGetCandyMachineMetadata\"\
-        >endpoint</a>.\n\n`Cost: 2 Credits` (<a href=\"#section/Pricing\">See Pricing</a>)"
+        >endpoint</a>.\n\n\n`Cost: 8 Credits`\n\nLimited to $29/mo plans and above.\
+        \ (<a href=\"#section/Pricing\">See Pricing</a>)\n\n(You are able to try on\
+        \ the `Free` plan as well, until you run out of credits.)"
       operationId: solanaMintFromCandyMachine
       requestBody:
         content:
@@ -1672,6 +1977,11 @@ components:
             <a href="https://phantom.app" target="_blank">Phantom</a> is a popular wallet interface on Solana that allows you to export your private key in this format.
           type: string
     SecretRecoveryPhrase:
+      example:
+        secret_recovery_phrase: enter remember useful material soccer sense solution
+          alarm crowd drift burst tattoo
+        derivation_path: m/44/501/0/0
+        passphrase: ""
       properties:
         secret_recovery_phrase:
           description: "The twelve word phrase that can be used to derive many public\
@@ -2338,6 +2648,100 @@ components:
           - magic-eden-v1
           type: string
       type: object
+    GetNFTListingResponse:
+      example:
+        exchange: solsea
+        exchange_readable: SolSea
+        listing_transaction_signature: 4qXMwWbrftjt33Rz7kqnUjGc76rokHdHYxFV89UwQLVYV7RvYzEraAo1Ly4Ra4QHnXqfPCsToKQzC2tGmDYrUYqY
+        mint_address: 7GA16mQup7ESJbaD6n49VCwVG9kRkyQDzWKhBSLjbYqr
+        price: 1000000000
+      properties:
+        exchange:
+          description: |
+            The ID of the exchange where the NFT is listed
+          enum:
+          - solsea
+          type: string
+        exchange_readable:
+          description: |
+            A readable version of the exchange ID
+          type: string
+        listing_transaction_signature:
+          description: |
+            The signature of the listing transaction
+          type: string
+        mint_address:
+          description: |
+            The mint address of the NFT
+          type: string
+        price:
+          description: The price of the NFT in Lamports. Represented as an integer.
+          type: number
+      type: object
+    BuyRequest:
+      example:
+        nft_price: 10000000
+      properties:
+        wallet:
+          $ref: '#/components/schemas/Wallet'
+        nft_price:
+          description: |
+            The number of lamports you are expecting to purchase the NFT for. We check the price of the NFT before  purchasing it to ensure that it matches your expectation.
+            There are 1e9 (1 billion) Lamports in a SOL.
+          example: 10000000
+          type: number
+      required:
+      - nft_price
+      - wallet
+    BuyResponse:
+      example:
+        transaction_signature: 4r5LZb3u1gnwpw7RrposJL3iic5emt2rx9468xNvAeJKeQC2HAuCGvSwaSbVgWGmoa9BS2KJnQRMHZrfuTLrY8k9
+      properties:
+        transaction_signature:
+          description: |
+            The signature of the `buy` transaction
+          type: string
+      type: object
+    ListRequest:
+      example:
+        nft_price: 10000000
+      properties:
+        wallet:
+          $ref: '#/components/schemas/Wallet'
+        nft_price:
+          description: " The number of lamports you are expecting to sell the NFT\
+            \ for. \nThere are 1e9 (1 billion) Lamports in a SOL. \n\n Min price:\
+            \ 1\n\n Max price: 18446744073709551615 "
+          example: 10000000
+          type: number
+      required:
+      - nft_price
+      - wallet
+    ListResponse:
+      example:
+        transaction_signature: 4qXMwWbrftjt33Rz7kqnUjGc76rokHdHYxFV89UwQLVYV7RvYzEraAo1Ly4Ra4QHnXqfPCsToKQzC2tGmDYrUYqY
+      properties:
+        transaction_signature:
+          description: |
+            The signature of the `list` transaction
+          type: string
+      type: object
+    DelistRequest:
+      example: {}
+      properties:
+        wallet:
+          $ref: '#/components/schemas/Wallet'
+      required:
+      - wallet
+    DelistResponse:
+      example:
+        transaction_signature: 5Vv8sYgdYS9pDh4AgzspthR1mf1AfZkh4urm9emKywTiHS3N4Q3TikKkh3x9aAGJAGnxrHjx9TK1zaaBmA9NZxMr
+      properties:
+        transaction_signature:
+          description: |
+            The signature of the `delist` transaction
+          type: string
+      type: object
     CreateTestCandyMachineRequest:
       example:
         wallet:
@@ -2784,12 +3188,12 @@ components:
       type: object
   securitySchemes:
     APIKeyID:
-      description: Get a free API key pair <a target="_blank" href="https://dashboard.theblockchainapi.com/api-keys">here</a>.
+      description: Get a free API key pair <a target="_blank" href="https://dashboard.blockchainapi.com/api-keys">here</a>.
       in: header
       name: APIKeyID
       type: apiKey
     APISecretKey:
-      description: Get a free API key pair <a target="_blank" href="https://dashboard.theblockchainapi.com/api-keys">here</a>.
+      description: Get a free API key pair <a target="_blank" href="https://dashboard.blockchainapi.com/api-keys">here</a>.
       in: header
       name: APISecretKey
       type: apiKey
@@ -2798,6 +3202,7 @@ x-tagGroups:
   tags:
   - Solana Wallet
   - Solana NFT
+  - Solana NFT Marketplaces
   - Solana Candy Machine
   - Solana Transaction
   - Solana Account

@@ -100,7 +100,7 @@ import (
 )
 
 func main() {
-    network := "mainnet-beta" // string | The network ID (devnet, mainnet-beta)
+    network := "mainnet-beta" // string | The network ID
     mintAddress := "EEr5yQpNXf7Bru6Rt5podx56HGW9CEehXqgRGh2wa71w" // string | The mint address of the NFT
 
     configuration := openapiclient.NewConfiguration()
@@ -121,7 +121,7 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**network** | **string** | The network ID (devnet, mainnet-beta) | 
+**network** | **string** | The network ID | 
 **mintAddress** | **string** | The mint address of the NFT | 
 
 ### Other Parameters
@@ -234,7 +234,7 @@ import (
 )
 
 func main() {
-    network := "mainnet-beta" // string | The network ID (devnet, mainnet-beta)
+    network := "devnet" // string | The network ID
     mintAddress := "4zH3Rwm1QXdfTSUqsYmeUBY4QqQmQEXJVbv4ErSK736Q" // string | The mint address of the NFT
 
     configuration := openapiclient.NewConfiguration()
@@ -255,7 +255,7 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**network** | **string** | The network ID (devnet, mainnet-beta) | 
+**network** | **string** | The network ID | 
 **mintAddress** | **string** | The mint address of the NFT | 
 
 ### Other Parameters
