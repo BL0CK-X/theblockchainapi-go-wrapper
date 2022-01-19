@@ -28,7 +28,7 @@ type NFTData struct {
 	// The URI of the NFT 
 	Uri *string `json:"uri,omitempty"`
 	// Whether or not the respective creator has signed the minting transaction of the NFT. Index 0 corresponds to creator at index 0 in the creator array, and so on. Length of verified array must be the same as the length of the creator array. 
-	Verified *[]int32 `json:"verified,omitempty"`
+	Verified *[]float32 `json:"verified,omitempty"`
 }
 
 // NewNFTData instantiates a new NFTData object
@@ -209,9 +209,9 @@ func (o *NFTData) SetUri(v string) {
 }
 
 // GetVerified returns the Verified field value if set, zero value otherwise.
-func (o *NFTData) GetVerified() []int32 {
+func (o *NFTData) GetVerified() []float32 {
 	if o == nil || o.Verified == nil {
-		var ret []int32
+		var ret []float32
 		return ret
 	}
 	return *o.Verified
@@ -219,7 +219,7 @@ func (o *NFTData) GetVerified() []int32 {
 
 // GetVerifiedOk returns a tuple with the Verified field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *NFTData) GetVerifiedOk() (*[]int32, bool) {
+func (o *NFTData) GetVerifiedOk() (*[]float32, bool) {
 	if o == nil || o.Verified == nil {
 		return nil, false
 	}
@@ -235,8 +235,8 @@ func (o *NFTData) HasVerified() bool {
 	return false
 }
 
-// SetVerified gets a reference to the given []int32 and assigns it to the Verified field.
-func (o *NFTData) SetVerified(v []int32) {
+// SetVerified gets a reference to the given []float32 and assigns it to the Verified field.
+func (o *NFTData) SetVerified(v []float32) {
 	o.Verified = &v
 }
 
