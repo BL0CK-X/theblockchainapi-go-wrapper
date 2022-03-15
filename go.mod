@@ -1,7 +1,5 @@
-module github.com/GIT_USER_ID/GIT_REPO_ID
+module github.com/BL0CK-X/theblockchainapi-go-wrapper
 
 go 1.13
 
-require (
-	golang.org/x/oauth2 v0.0.0-20210218202405-ba52d332ba99
-)
+require golang.org/x/oauth2 v0.0.0-20210218202405-ba52d332ba99
