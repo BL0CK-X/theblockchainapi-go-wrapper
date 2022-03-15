@@ -13,6 +13,7 @@ Method | HTTP request | Description
 [**SolanaGetBalance**](SolanaWalletApi.md#SolanaGetBalance) | **Post** /solana/wallet/balance | Get wallet&#39;s balance in SOL or any SPL
 [**SolanaGetNFTsBelongingToWallet**](SolanaWalletApi.md#SolanaGetNFTsBelongingToWallet) | **Get** /solana/wallet/{network}/{public_key}/nfts | Get address&#39;s NFTs
 [**SolanaGetTokensBelongingToWallet**](SolanaWalletApi.md#SolanaGetTokensBelongingToWallet) | **Get** /solana/wallet/{network}/{public_key}/tokens | Get address&#39;s tokens and respective balances
+[**SolanaGetWalletTransactions**](SolanaWalletApi.md#SolanaGetWalletTransactions) | **Get** /solana/wallet/{network}/{public_key}/transactions | Get address&#39;s associated transaction signatures
 [**SolanaTransfer**](SolanaWalletApi.md#SolanaTransfer) | **Post** /solana/wallet/transfer | Transfer SOL, a token, or an NFT to another address
 
 
@@ -498,7 +499,7 @@ import (
 
 func main() {
     network := "mainnet-beta" // string | The network ID (devnet, mainnet-beta)
-    publicKey := "8WRsGBaDcs1X7bHWr4Ad5Nx3bW29BkcmEbyavrLXDC4i" // string | The public key of the account whose list of owned NFTs you want to get
+    publicKey := "HE3ZYk4aWfKD7R9EmFQbxjj75JdgHuDztNAsseKVan82" // string | The public key of the account whose list of owned NFTs you want to get
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
@@ -626,9 +627,82 @@ Name | Type | Description  | Notes
 [[Back to README]](../README.md)
 
 
+## SolanaGetWalletTransactions
+
+> []string SolanaGetWalletTransactions(ctx, network, publicKey).Execute()
+
+Get address's associated transaction signatures
+
+
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+    network := "mainnet-beta" // string | The network ID (devnet, mainnet-beta)
+    publicKey := "GKNcUmNacSJo4S2Kq3DuYRYRGw3sNUfJ4tyqd198t6vQ" // string | The public key of the account whose list of signatures you want to get
+
+    configuration := openapiclient.NewConfiguration()
+    api_client := openapiclient.NewAPIClient(configuration)
+    resp, r, err := api_client.SolanaWalletApi.SolanaGetWalletTransactions(context.Background(), network, publicKey).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `SolanaWalletApi.SolanaGetWalletTransactions``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `SolanaGetWalletTransactions`: []string
+    fmt.Fprintf(os.Stdout, "Response from `SolanaWalletApi.SolanaGetWalletTransactions`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**network** | **string** | The network ID (devnet, mainnet-beta) | 
+**publicKey** | **string** | The public key of the account whose list of signatures you want to get | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiSolanaGetWalletTransactionsRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+
+### Return type
+
+**[]string**
+
+### Authorization
+
+[APIKeyID](../README.md#APIKeyID), [APISecretKey](../README.md#APISecretKey)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
 ## SolanaTransfer
 
-> TransferResponse SolanaTransfer(ctx).TransferRequest(transferRequest).Execute()
+> DoubleTransferResponse SolanaTransfer(ctx).TransferRequest(transferRequest).Execute()
 
 Transfer SOL, a token, or an NFT to another address
 
@@ -647,7 +721,7 @@ import (
 )
 
 func main() {
-    transferRequest := *openapiclient.NewTransferRequest("RecipientAddress_example", openapiclient.Wallet{B58PrivateKey: openapiclient.NewB58PrivateKey("B58PrivateKey_example")}) // TransferRequest |  (optional)
+    transferRequest := *openapiclient.NewTransferRequest("RecipientAddress_example") // TransferRequest |  (optional)
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
@@ -656,7 +730,7 @@ func main() {
         fmt.Fprintf(os.Stderr, "Error when calling `SolanaWalletApi.SolanaTransfer``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
-    // response from `SolanaTransfer`: TransferResponse
+    // response from `SolanaTransfer`: DoubleTransferResponse
     fmt.Fprintf(os.Stdout, "Response from `SolanaWalletApi.SolanaTransfer`: %v\n", resp)
 }
 ```
@@ -676,7 +750,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**TransferResponse**](TransferResponse.md)
+[**DoubleTransferResponse**](DoubleTransferResponse.md)
 
 ### Authorization
 

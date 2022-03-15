@@ -9,6 +9,7 @@ Name | Type | Description | Notes
 **ListingTransactionSignature** | Pointer to **string** | The signature of the listing transaction  | [optional] 
 **MintAddress** | Pointer to **string** | The mint address of the NFT  | [optional] 
 **Price** | Pointer to **float32** | The price of the NFT in Lamports. Represented as an integer. | [optional] 
+**Seller** | Pointer to **string** | The public key of the seller | [optional] 
 
 ## Methods
 
@@ -153,6 +154,31 @@ SetPrice sets Price field to given value.
 `func (o *GetNFTListingResponse) HasPrice() bool`
 
 HasPrice returns a boolean if a field has been set.
+
+### GetSeller
+
+`func (o *GetNFTListingResponse) GetSeller() string`
+
+GetSeller returns the Seller field if non-nil, zero value otherwise.
+
+### GetSellerOk
+
+`func (o *GetNFTListingResponse) GetSellerOk() (*string, bool)`
+
+GetSellerOk returns a tuple with the Seller field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetSeller
+
+`func (o *GetNFTListingResponse) SetSeller(v string)`
+
+SetSeller sets Seller field to given value.
+
+### HasSeller
+
+`func (o *GetNFTListingResponse) HasSeller() bool`
+
+HasSeller returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

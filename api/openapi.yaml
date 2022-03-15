@@ -54,8 +54,12 @@ info:
     >here</a>.) Such harrassment and threats are not only harmful, but they are also\
     \ illegal, and we will report offenders. Do not harrass us. Rather, feel free\
     \ to discuss your concerns with us and we will be more than happy to work with\
-    \ you to come up with a solution.\n\n# Pricing\n\n<b>Each user receives 500 free\
-    \ credits.</b>\n\nYou can learn more about our pricing <a href=\"https://dashboard.blockchainapi.com/billing\"\
+    \ you to come up with a solution.\n\n# Pricing\n\n<b>Each user receives 100 free\
+    \ credits. Each user can call endpoints that cost 0 credits up to 50 requests/min\
+    \ before being rate-limited.</b> Thereafter, they can upgrade to have a higher\
+    \ rate limit. The purpose of this is to act like a free trial -- not to function\
+    \ like a freemium model where one can stay on the free tier indefinitely.\n\n\
+    You can learn more about our pricing <a href=\"https://dashboard.blockchainapi.com/billing\"\
     \ target=\"_blank\">here</a>. \n\nWe frequently do custom plans. If our pricing\
     \ doesn't work for you, <a href=\"#section/Contact\">contact us</a>.\n\nIf you\
     \ have questions, concerns, feedback, or ideas, <a href=\"#section/Contact\">contact\
@@ -73,8 +77,10 @@ info:
     \ target = \"_blank\">Kotlin</a>\n- <a href=\"https://github.com/BL0CK-X/theblockchainapi-php-wrapper\"\
     \ target = \"_blank\">PHP</a>\n- <a href=\"https://github.com/BL0CK-X/theblockchainapi-swift-wrapper\"\
     \ target = \"_blank\">Swift5</a>\n- <a href=\"https://github.com/BL0CK-X/theblockchainapi-typescript-wrapper\"\
-    \ target = \"_blank\">TypeScript</a>\n\nIf you would like a different language\
-    \ as well, submit an issue <a href=\"https://github.com/BL0CK-X/theblockchainapi-wrappers/issues/new\"\
+    \ target = \"_blank\">TypeScript</a>\n- <a href=\"https://github.com/BL0CK-X/theblockchainapi-csharp-wrapper\"\
+    \ target = \"_blank\">C#</a>\n- <a href=\"https://github.com/BL0CK-X/theblockchainapi-dart-wrapper\"\
+    \ target = \"_blank\">Dart</a>\n\nIf you would like a different language as well,\
+    \ submit an issue <a href=\"https://github.com/BL0CK-X/theblockchainapi-wrappers/issues/new\"\
     \ target=\"_blank\">here</a>.\n\nIf you run into any bugs with the wrappers, submit\
     \ an issue <a href=\"https://github.com/BL0CK-X/theblockchainapi-wrappers/issues/new\"\
     \ target=\"_blank\">here</a>."
@@ -107,6 +113,12 @@ tags:
 - description: |
     Upload to IPFS, Arweave, and Filecoin easily. In order to access this endpoint, please sign up for [the waitlist](https://forms.gle/N4KSqcptpSrHQ1427). This waitlist is unique for this endpoint. Feature requests are welcome on our [GitHub repository](https://github.com/BL0CK-X/the-blockchain-api/issues/new).
   name: Files
+- description: |
+    Create a project. A project is a mini-API that you can deploy super easily with our API. Even better, when other users use it, you make money! A complete example and walkthrough of the program can be found [here](https://github.com/BL0CK-X/api-developer-program).
+  name: Project
+- description: |
+    Create an endpoint
+  name: Endpoint
 paths:
   /file:
     post:
@@ -148,7 +160,7 @@ paths:
       description: "<a href=\"https://github.com/BL0CK-X/the-blockchain-api/tree/main/examples/solana-account/get-account\"\
         \ target=\"_blank\">See examples (Python, JavaScript)</a>.\n    \nGet the\
         \ details of an account on Solana. Learn more about accounts <a href=\"https://docs.solana.com/developing/programming-model/accounts\"\
-        \ target=\"_blank\">here</a>.\n\n`Cost: 1 Credit` (<a href=\"#section/Pricing\"\
+        \ target=\"_blank\">here</a>.\n\n`Cost: 0.25 Credit` (<a href=\"#section/Pricing\"\
         >See Pricing</a>)"
       operationId: solanaGetAccount
       parameters:
@@ -197,7 +209,7 @@ paths:
     get:
       description: "<a href=\"https://github.com/BL0CK-X/the-blockchain-api/tree/main/examples/solana-account/get-is-nft\"\
         \ target=\"_blank\">See examples (Python, JavaScript)</a>.\n    \nDetermine\
-        \ whether or not a public key is an NFT `mint address`\n\n`Cost: 1 Credit`\
+        \ whether or not a public key is an NFT `mint address`\n\n`Cost: 0.5 Credit`\
         \ (<a href=\"#section/Pricing\">See Pricing</a>)"
       operationId: solanaGetAccountIsNFT
       parameters:
@@ -356,7 +368,7 @@ paths:
     get:
       description: "<a href=\"https://github.com/BL0CK-X/the-blockchain-api/tree/main/examples/solana-transaction/get-transaction\"\
         \ target=\"_blank\">See examples (Python, JavaScript)</a>.\n    \nGet the\
-        \ details of a transaction made on Solana.\n\n`Cost: 1 Credit` (<a href=\"\
+        \ details of a transaction made on Solana.\n\n`Cost: 0.25 Credit` (<a href=\"\
         #section/Pricing\">See Pricing</a>)"
       operationId: solanaGetTransaction
       parameters:
@@ -407,7 +419,7 @@ paths:
       description: "<a href=\"https://github.com/BL0CK-X/the-blockchain-api/tree/main/examples/solana-wallet/generate-secret-phrase\"\
         \ target=\"_blank\">See examples (Python, JavaScript)</a>.\n\nUse this endpoint\
         \ to securely and randomly generate a secret recovery phrase for a Solana\
-        \ wallet. \n\n`Cost: 1 Credit` (<a href=\"#section/Pricing\">See Pricing</a>)"
+        \ wallet. \n\n`Cost: 0 Credit` (Free) (<a href=\"#section/Pricing\">See Pricing</a>)"
       operationId: solanaGenerateSecretRecoveryPhrase
       responses:
         "200":
@@ -436,7 +448,7 @@ paths:
 
         Use this endpoint to securely and randomly generate a private key for a Solana wallet.
 
-        `Cost: 1 Credit` (<a href="#section/Pricing">See Pricing</a>)
+        `Cost: 0 Credit` (Free) (<a href="#section/Pricing">See Pricing</a>)
       operationId: solanaGeneratePrivateKey
       responses:
         "200":
@@ -473,7 +485,7 @@ paths:
         \n*If you are trying to get a public key that already exists (e.g., created\
         \ in the Phantom wallet), make sure you use the correct derivation path and\
         \ passphrase. To read more about that, see the descriptions of those parameters\
-        \ below.*\n\n`Cost: 1 Credit` (<a href=\"#section/Pricing\">See Pricing</a>)"
+        \ below.*\n\n`Cost: 0 Credit` (Free) (<a href=\"#section/Pricing\">See Pricing</a>)"
       operationId: solanaDerivePrivateKey
       requestBody:
         content:
@@ -518,8 +530,8 @@ paths:
         >private key</a>.\n\n*If you are trying to get a public key that already exists\
         \ (e.g., created in the Phantom wallet), make sure you use the correct derivation\
         \ path and passphrase; or just use the private key. To read more about that,\
-        \ see the descriptions of those parameters below.*\n\n`Cost: 1 Credit` (<a\
-        \ href=\"#section/Pricing\">See Pricing</a>)"
+        \ see the descriptions of those parameters below.*\n\n`Cost: 0 Credit` (Free)\
+        \ (<a href=\"#section/Pricing\">See Pricing</a>)"
       operationId: solanaDerivePublicKey
       requestBody:
         content:
@@ -549,24 +561,24 @@ paths:
       - Solana Wallet
   /solana/wallet/transfer:
     post:
-      description: "<a href=\"https://github.com/BL0CK-X/the-blockchain-api/tree/main/examples/solana-wallet/transfer-sol\"\
-        \ target=\"_blank\">See transfer SOL example (Python, JavaScript)</a>.\n\n\
-        <a href=\"https://github.com/BL0CK-X/the-blockchain-api/tree/main/examples/solana-wallet/transfer-nft\"\
-        \ target=\"_blank\">See transfer NFT example (can also be used for SPL token)\
-        \ (Python, JavaScript)</a>.\n\nTransfer SOL, a token or an NFT to another\
-        \ address. If you're transferring an NFT, supply the `mint` (the address of\
-        \ the mint) for the `token_address`.\n\nSENDER: Note that the wallet information\
-        \ (`secret_recovery_phrase`, `passphrase`, `derivation_path`) is used to authorize\
-        \ the sending of the tokens and identifies the source of the tokens. \n\n\
-        RECEIVER: `recipient_address` identifies the receiver. This is entirely separate\
-        \ from the information used for the SENDER above. So, in this API call, there\
-        \ are two wallets involved, but only one (namely, the SENDER) is needed to\
-        \ authorize the transaction.\n\nIf you're transfering a token, supply the\
-        \ token address found on the explorer (e.g., see `SRMuApVNdxXokk5GT7XD5cUUgXMBCoAz2LHeuAoKWRt`\
-        \ for <a href=\"https://explorer.solana.com/address/SRMuApVNdxXokk5GT7XD5cUUgXMBCoAz2LHeuAoKWRt\"\
-        \ target=\"_blank\">Serum Token</a>) for the `token_address`. If you're transferring\
-        \ SOL, do not supply a value for `token_address`.\n\n`Cost: 1 Credit` (<a\
-        \ href=\"#section/Pricing\">See Pricing</a>)"
+      description: |-
+        <a href="https://github.com/BL0CK-X/the-blockchain-api/tree/main/examples/solana-wallet/transfer-sol" target="_blank">See transfer SOL example (Python, JavaScript)</a>.
+
+        <a href="https://github.com/BL0CK-X/the-blockchain-api/tree/main/examples/solana-wallet/transfer-nft" target="_blank">See transfer NFT example (can also be used for SPL token) (Python, JavaScript)</a>.
+
+        This is a powerful function. It might be slightly confusing because there are several optional parameters, so take some time to review it. This function can send SOL, send an SPL token, or send an NFT. You can set the fee payer of the transaction; you can sign and submit the transaction for confirmation; and you can select to simply return the compiled transaction so that you can submit it to the user for signing (e.g., via Phantom; no private keys required in this case).
+
+        Transfer SOL, a token or an NFT to another address. If you're transferring an NFT, supply the `mint` (the address of the mint) for the `token_address`.
+
+        SENDER: Note that the wallet information is used to authorize the sending of the tokens and identifies the source of the tokens. If `return_compiled_transaction = false`, we sign and submit the transaction (`wallet` is required in this case; do not provide a value for `sender_public_key`). If `return_compiled_transaction = true`, we compile the transaction (one of `wallet` or `sender_public_key` is required in this case; do not provide both).
+
+        RECIPIENT: `recipient_address` identifies the receiver. This is entirely separate from the information used for the SENDER above. So, in this API call, there are two wallets involved, but only one (namely, the SENDER) is needed to authorize the transaction.
+
+        FEE_PAYER: The fee payer of the transaction defaults to `wallet` (or `sender_public_key`). To set a different fee payer, provide a value for `fee_payer_wallet`.
+
+        If you're transfering a token, supply the token address found on the explorer (e.g., see `SRMuApVNdxXokk5GT7XD5cUUgXMBCoAz2LHeuAoKWRt` for <a href="https://explorer.solana.com/address/SRMuApVNdxXokk5GT7XD5cUUgXMBCoAz2LHeuAoKWRt" target="_blank">Serum Token</a>) for the `token_address`. If you're transferring SOL, do not supply a value for `token_address`.
+
+        `Cost: 2 Credit` (<a href="#section/Pricing">See Pricing</a>)
       operationId: solanaTransfer
       requestBody:
         content:
@@ -578,7 +590,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/TransferResponse'
+                $ref: '#/components/schemas/DoubleTransferResponse'
           description: Successful Response
         "400":
           description: Bad request (check response message)
@@ -603,8 +615,8 @@ paths:
         \ by the wallet. When you transfer an SPL token, such as Serum, or transfer\
         \ an NFT, you're transfering from an ATA you own to another person's ATA for\
         \ that specific token. With this endpoint, you can derive an associated token\
-        \ address given a wallet and a token address.*\n\n`Cost: 1 Credit` (<a href=\"\
-        #section/Pricing\">See Pricing</a>)"
+        \ address given a wallet and a token address.*\n\n`Cost: 0 Credit` (Free)\
+        \ (<a href=\"#section/Pricing\">See Pricing</a>)"
       operationId: solanaDeriveAssociatedTokenAccountAddress
       parameters:
       - description: The public key of the wallet
@@ -651,8 +663,8 @@ paths:
         \ target=\"_blank\">See examples (Python, JavaScript)</a>.\n    \nUse this\
         \ endpoint to get an airdrop of SOL on the devnet (not real SOL). Amount of\
         \ 0.015, \nwhich is the minimum amount of SOL you need to mint a Metaplex\
-        \ NFT and then transfer it to another wallet.\n\n`Cost: 1 Credit` (<a href=\"\
-        #section/Pricing\">See Pricing</a>)"
+        \ NFT and then transfer it to another wallet.\n\n`Cost: 0 Credit` (Free) (<a\
+        \ href=\"#section/Pricing\">See Pricing</a>)"
       operationId: solanaGetAirdrop
       requestBody:
         content:
@@ -693,7 +705,7 @@ paths:
         \ are aware of one edge case where a balance of \"0\" will show up for a person\
         \ who is actually the owner of the NFT. We just recommend using the <a href=\"\
         #operation/solanaGetNFTOwner\">getNFTOwner</a> endpoint and comparing that\
-        \ output to the expected address.\n\n`Cost: 1 Credit` (<a href=\"#section/Pricing\"\
+        \ output to the expected address.\n\n`Cost: 0.25 Credit` (<a href=\"#section/Pricing\"\
         >See Pricing</a>)"
       operationId: solanaGetBalance
       requestBody:
@@ -725,7 +737,7 @@ paths:
     get:
       description: "<a href=\"https://github.com/BL0CK-X/the-blockchain-api/tree/main/examples/solana-wallet/get-wallet-token-holdings\"\
         \ target=\"_blank\">See examples (Python, JavaScript)</a>.\n    \nSee the\
-        \ token holdings of a given public key address\n\n`Cost: 1 Credit` (<a href=\"\
+        \ token holdings of a given public key address\n\n`Cost: 2 Credits` (<a href=\"\
         #section/Pricing\">See Pricing</a>)"
       operationId: solanaGetTokensBelongingToWallet
       parameters:
@@ -790,12 +802,59 @@ paths:
       summary: Get address's tokens and respective balances
       tags:
       - Solana Wallet
+  /solana/wallet/{network}/{public_key}/transactions:
+    get:
+      description: "<a href=\"https://github.com/BL0CK-X/blockchain-api/tree/main/examples/solana-wallet/get-wallet-transactions\"\
+        \ target=\"_blank\">See examples (Python, JavaScript)</a>.\n    \nSee the\
+        \ transaction signatures of a given public key address\n\n`Cost: 1 Credits`\
+        \ (<a href=\"#section/Pricing\">See Pricing</a>)"
+      operationId: solanaGetWalletTransactions
+      parameters:
+      - description: The network ID (devnet, mainnet-beta)
+        example: mainnet-beta
+        explode: false
+        in: path
+        name: network
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: The public key of the account whose list of signatures you want
+          to get
+        example: GKNcUmNacSJo4S2Kq3DuYRYRGw3sNUfJ4tyqd198t6vQ
+        explode: false
+        in: path
+        name: public_key
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListTransactionsResponse'
+          description: Successful Response
+        "400":
+          description: Bad request (check response message)
+        "401":
+          description: Invalid API key pair in headers
+        "402":
+          description: Payment required. Occurs when you run out of API requests.
+            Upgrade <a href="https://dashboard.theblockchainapi.com/billing" target="_blank">here</a>.
+      security:
+      - APIKeyID: []
+        APISecretKey: []
+      summary: Get address's associated transaction signatures
+      tags:
+      - Solana Wallet
   /solana/wallet/{network}/{public_key}/nfts:
     get:
       description: "<a href=\"https://github.com/BL0CK-X/the-blockchain-api/tree/main/examples/solana-wallet/get-wallet-nfts\"\
         \ target=\"_blank\">See examples (Python, JavaScript)</a>.\n    \nSee the\
-        \ NFTs that belong to a given public key address\n\n`Cost: 1 Credit` (<a href=\"\
-        #section/Pricing\">See Pricing</a>)"
+        \ NFTs that belong to a given public key address\n\n`Cost: 3 Credits` (<a\
+        \ href=\"#section/Pricing\">See Pricing</a>)"
       operationId: solanaGetNFTsBelongingToWallet
       parameters:
       - description: The network ID (devnet, mainnet-beta)
@@ -809,7 +868,7 @@ paths:
         style: simple
       - description: The public key of the account whose list of owned NFTs you want
           to get
-        example: 8WRsGBaDcs1X7bHWr4Ad5Nx3bW29BkcmEbyavrLXDC4i
+        example: HE3ZYk4aWfKD7R9EmFQbxjj75JdgHuDztNAsseKVan82
         explode: false
         in: path
         name: public_key
@@ -850,7 +909,7 @@ paths:
         \ <a href=\"https://blog.blockchainapi.com/2022/01/18/how-to-format-off-chain-nft-metadata.html\"\
         >here</a>.\n\nThen supply the link to the JSON file in `nft_url`. \n\nNOTE:\
         \ Don't use `nft_metadata`. Values provided here do not do anything at the\
-        \ moment. We are fixing this soon.\n\n`Cost: 2 Credits` (<a href=\"#section/Pricing\"\
+        \ moment. We are fixing this soon.\n\n`Cost: 5 Credits` (<a href=\"#section/Pricing\"\
         >See Pricing</a>)"
       operationId: solanaCreateNFT
       requestBody:
@@ -933,7 +992,7 @@ paths:
         \ and others, you can retrieve them from the link in the URI field of the\
         \ NFT metadata returned. See the example on the right. The URI is an Arweave\
         \ URL. That contains the attributes and other information about the NFT. That\
-        \ URL is stored on the Solana blockchain.\n\n`Cost: 1 Credits` (<a href=\"\
+        \ URL is stored on the Solana blockchain.\n\n`Cost: 0.25 Credit` (<a href=\"\
         #section/Pricing\">See Pricing</a>)"
       operationId: solanaGetNFT
       parameters:
@@ -989,7 +1048,7 @@ paths:
         \ token account that literally owns the NFT, derive the associated token account\
         \ address from the public key returned and the NFT mint address using <a href=\"\
         #operation/solanaDeriveAssociatedTokenAccountAddress\">this endpoint</a>.\n\
-        \n`Cost: 1 Credits` (<a href=\"#section/Pricing\">See Pricing</a>)"
+        \n`Cost: 0.25 Credit` (<a href=\"#section/Pricing\">See Pricing</a>)"
       operationId: solanaGetNFTOwner
       parameters:
       - description: The network ID
@@ -1040,7 +1099,7 @@ paths:
       description: "<a href=\"https://github.com/BL0CK-X/the-blockchain-api/tree/main/examples/solana-nft/get-nft-mint-fee\"\
         \ target=\"_blank\">See examples (Python, JavaScript)</a>.\n    \nGet the\
         \ estimated fee for minting an NFT on the Solana blockchain using the Metaplex\
-        \ protocol.\n\n`Cost: 1 Credit` (<a href=\"#section/Pricing\">See Pricing</a>)"
+        \ protocol.\n\n`Cost: 0 Credit` (Free) (<a href=\"#section/Pricing\">See Pricing</a>)"
       operationId: solanaGetNFTMintFee
       responses:
         "200":
@@ -1106,7 +1165,7 @@ paths:
 
         Get the Marketplace listing of a Solana NFT.
 
-        Currently checks for the following Solana NFT martketplaces: SolSea, Magic Eden
+        Currently checks the following Solana NFT martketplaces: SolSea, Magic Eden, Solanart, Alpha Art, Digital Eyes, Exchange.art
 
         `Cost: 1 Credits`, (<a href="#section/Pricing">See Pricing</a>)
       operationId: solanaGetNFTListing
@@ -1164,15 +1223,9 @@ paths:
 
         Buy an NFT on a Solana Exchange.
 
-        Exchanges supported: SolSea, Magic Eden
+        Exchanges supported: SolSea, Magic Edennpm
 
-        **We are not responsible for any SOL or NFT lost.**
-
-        `Cost: 25 Credits`, `Cost: 3 Credits on Devnet`
-
-        Limited to $29/mo plans and above. (<a href="#section/Pricing">See Pricing</a>)
-
-        (You are able to try on the `Free` plan as well, until you run out of credits.)
+        `Cost: 25 Credits`, `Cost: 3 Credits on Devnet` (<a href="#section/Pricing">See Pricing</a>)
       operationId: solanaBuyNFT
       parameters:
       - description: The network ID
@@ -1242,13 +1295,7 @@ paths:
 
         Exchanges supported: SolSea, Magic Eden
 
-        **We are not responsible for any SOL or NFT lost.**
-
-        `Cost: 12 Credits`, `Cost: 3 Credits on Devnet`
-
-        Limited to $29/mo plans and above. (<a href="#section/Pricing">See Pricing</a>)
-
-        (You are able to try on the `Free` plan as well, until you run out of credits.)
+        `Cost: 12 Credits`, `Cost: 3 Credits on Devnet` (<a href="#section/Pricing">See Pricing</a>)
       operationId: solanaListNFT
       parameters:
       - description: The network ID
@@ -1318,13 +1365,7 @@ paths:
 
         Exchanges supported: SolSea, Magic Eden
 
-        **We are not responsible for any SOL or NFT lost.**
-
-        `Cost: 8 Credits`, `Cost: 3 Credits on Devnet`
-
-        Limited to $29/mo plans and above. (<a href="#section/Pricing">See Pricing</a>)
-
-        (You are able to try on the `Free` plan as well, until you run out of credits.)
+        `Cost: 8 Credits`, `Cost: 3 Credits on Devnet` (<a href="#section/Pricing">See Pricing</a>)
       operationId: solanaDelistNFT
       parameters:
       - description: The network ID
@@ -1383,6 +1424,135 @@ paths:
       - APIKeyID: []
         APISecretKey: []
       summary: Delist
+      tags:
+      - Solana NFT Marketplaces
+  /solana/nft/marketplaces/analytics:
+    post:
+      description: |-
+        <a href="https://github.com/BL0CK-X/blockchain-api/tree/main/examples/solana-nft-marketplaces/analytics" target="_blank">See examples (Python, JavaScript)</a>.
+
+        A collection is a list of NFTs.
+
+        Any collection can thus be defined as a list of mint addresses.
+
+        This endpoint takes in a list of mint addresses (effectively, a collection), a start time (optional), and an end time (optional) and outputs the floor for that period, the volume for that period, and the transaction history for each NFT in the list (buy, list, delist, update price) for that period.
+
+        We are currently compiling a dictionary of collection names to list of mint addresses for public use. Please contribute <a href="https://github.com/BL0CK-X/solana-nft-collection-mint-addresses" target="_blank">here</a>.
+
+        Currently scans the following Solana NFT martketplaces: SolSea, Magic Eden, Solanart, Alpha Art, Digital Eyes, Exchange.art
+
+        `Cost: 15 Credits`, (<a href="#section/Pricing">See Pricing</a>)
+      operationId: solanaGetNFTMarketplaceAnalytics
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/NFTAnalyticsRequest'
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NFTAnalyticsResponse'
+          description: Successful Response
+        "400":
+          description: Bad request (check response message)
+        "401":
+          description: Invalid API key pair in headers
+        "402":
+          description: Payment required. Occurs when you run out of API requests.
+            Upgrade <a href="https://dashboard.theblockchainapi.com/billing" target="_blank">here</a>.
+        "404":
+          description: No marketplace listing found for this NFT.
+      security:
+      - APIKeyID: []
+        APISecretKey: []
+      summary: Get NFT Analytics
+      tags:
+      - Solana NFT Marketplaces
+  /solana/nft/marketplaces/analytics/recent_transactions:
+    get:
+      description: |-
+        <a href="https://github.com/BL0CK-X/blockchain-api/tree/main/examples/solana-nft-marketplaces/recent-transactions" target="_blank">See examples (Python, JavaScript)</a>.
+
+        Get all NFT transactions across all major marketplaces in the last 30 minutes.
+
+        Currently checks for the following Solana NFT martketplaces: SolSea, Magic Eden, Solanart, Alpha Art, Digital Eyes, Exchange.art
+
+        `Cost: 15 Credits`, (<a href="#section/Pricing">See Pricing</a>)
+      operationId: solanaGetNFTMarketplaceRecentTransactions
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NFTRecentTransactions'
+          description: Successful Response
+        "400":
+          description: Bad request (check response message)
+        "401":
+          description: Invalid API key pair in headers
+        "402":
+          description: Payment required. Occurs when you run out of API requests.
+            Upgrade <a href="https://dashboard.theblockchainapi.com/billing" target="_blank">here</a>.
+        "403":
+          description: |
+            Our API will throw a 403 if you are providing a body in the GET request.  Such requests are insecure and rejected. The solution is not to provide any sort of body in any GET request.
+        "404":
+          description: No marketplace listing found for this NFT.
+      security:
+      - APIKeyID: []
+        APISecretKey: []
+      summary: Get Recent NFT Transactions
+      tags:
+      - Solana NFT Marketplaces
+  /solana/nft/marketplaces/analytics/market_share:
+    get:
+      description: |-
+        <a href="https://github.com/BL0CK-X/blockchain-api/tree/main/examples/solana-nft-marketplaces/market-share" target="_blank">See examples (Python, JavaScript)</a>.
+
+        Get the Marketplace listing of a Solana NFT.
+
+        Currently checks for the following Solana NFT martketplaces: SolSea, Magic Eden, Solanart, Alpha Art, Digital Eyes, Exchange.art
+
+        `Cost: 3 Credits`, (<a href="#section/Pricing">See Pricing</a>)
+      operationId: solanaGetNFTMarketplaceMarketShare
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                description: |
+                  A dictionary mapping an exchange ID to the volume of sales on the exchange over the last 30 minutes
+                example:
+                  alpha-art: 9
+                  digital-eyes: 0
+                  exchange-art: 2
+                  magic-eden: 1388
+                  solanart: 42
+                  solsea: 3
+                properties:
+                  exchange_str:
+                    description: |
+                      The string ID of the exchange (see right bar for example)
+                    type: number
+          description: Successful Response
+        "400":
+          description: Bad request (check response message)
+        "401":
+          description: Invalid API key pair in headers
+        "402":
+          description: Payment required. Occurs when you run out of API requests.
+            Upgrade <a href="https://dashboard.theblockchainapi.com/billing" target="_blank">here</a>.
+        "403":
+          description: |
+            Our API will throw a 403 if you are providing a body in the GET request.  Such requests are insecure and rejected. The solution is not to provide any sort of body in any GET request.
+        "404":
+          description: No marketplace listing found for this NFT.
+      security:
+      - APIKeyID: []
+        APISecretKey: []
+      summary: Get Marketplace Market Share
       tags:
       - Solana NFT Marketplaces
   /solana/nft/candy_machine:
@@ -1680,9 +1850,7 @@ paths:
         \ verification is sufficient for further mints. In which case, after verifying\
         \ manually the first time, you can use our endpoint thereafter. \n\nYou can\
         \ check if the gatekeeper functionality is enabled with this <a href=\"#operation/solanaGetCandyMachineMetadata\"\
-        >endpoint</a>.\n\n\n`Cost: 8 Credits`\n\nLimited to $29/mo plans and above.\
-        \ (<a href=\"#section/Pricing\">See Pricing</a>)\n\n(You are able to try on\
-        \ the `Free` plan as well, until you run out of credits.)"
+        >endpoint</a>.\n\n\n`Cost: 8 Credits` (<a href=\"#section/Pricing\">See Pricing</a>)"
       operationId: solanaMintFromCandyMachine
       requestBody:
         content:
@@ -1714,6 +1882,627 @@ paths:
       summary: Mint from a CM
       tags:
       - Solana Candy Machine
+  /project:
+    post:
+      description: |-
+        A complete example and walkthrough of the program can be found <a href="https://github.com/BL0CK-X/api-developer-program" target="_blank">here</a>.
+
+        A project is an entire mini-API.
+
+        When you create a project, this initializes the project in our database and the API documentation for the project.
+
+        After initialization, you can <a href="#operation/createEndpoint">add endpoints</a> to the documentation and deploy the project's mini-API to our servers. Learn more <a href="https://github.com/BL0CK-X/api-developer-program" target="_blank">here</a>.
+
+        `Cost: 0 Credit` (Free) (<a href="#section/Pricing">See Pricing</a>)
+      operationId: createProject
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ProjectCreateRequest'
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Project'
+          description: Successful Response
+        "400":
+          description: Bad request (check response message)
+        "401":
+          description: Invalid API key pair in headers
+        "402":
+          description: Payment required. Occurs when you run out of API requests.
+            Upgrade <a href="https://dashboard.theblockchainapi.com/billing" target="_blank">here</a>.
+      security:
+      - APIKeyID: []
+        APISecretKey: []
+      summary: |
+        Create a project
+      tags:
+      - Project
+  /project/{project_id}:
+    delete:
+      description: "A complete example and walkthrough of the program can be found\
+        \ <a href=\"https://github.com/BL0CK-X/api-developer-program\" target=\"_blank\"\
+        >here</a>.\n\nDeletes a project. This will remove the mini-API entirely from\
+        \ our system. \n\n`Cost: 0 Credit` (Free) (<a href=\"#section/Pricing\">See\
+        \ Pricing</a>)"
+      operationId: deleteProject
+      parameters:
+      - description: The ID of the project. Created and returned when a project is
+          created.
+        example: L3cPm0cJlf5MeDXzGLQJJ4vlzndJCC
+        explode: false
+        in: path
+        name: project_id
+        required: true
+        style: simple
+      responses:
+        "200":
+          description: |
+            Successful Response.
+        "400":
+          description: Bad request (check response message)
+        "401":
+          description: Invalid API key pair in headers
+        "402":
+          description: Payment required. Occurs when you run out of API requests.
+            Upgrade <a href="https://dashboard.theblockchainapi.com/billing" target="_blank">here</a>.
+      security:
+      - APIKeyID: []
+        APISecretKey: []
+      summary: |
+        Delete a project
+      tags:
+      - Project
+    get:
+      description: |-
+        A complete example and walkthrough of the program can be found <a href="https://github.com/BL0CK-X/api-developer-program" target="_blank">here</a>.
+
+        Update your project's metadata. None of these parameters are required. Just provide the parameters that you would like to update.
+
+        `Cost: 0 Credit` (Free) (<a href="#section/Pricing">See Pricing</a>)
+      operationId: getProject
+      parameters:
+      - description: The ID of the project. Created and returned when a project is
+          created.
+        example: L3cPm0cJlf5MeDXzGLQJJ4vlzndJCC
+        explode: false
+        in: path
+        name: project_id
+        required: true
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Project'
+          description: Successful Response
+        "400":
+          description: Bad request (check response message)
+        "401":
+          description: Invalid API key pair in headers
+        "402":
+          description: Payment required. Occurs when you run out of API requests.
+            Upgrade <a href="https://dashboard.theblockchainapi.com/billing" target="_blank">here</a>.
+      security:
+      - APIKeyID: []
+        APISecretKey: []
+      summary: |
+        Get a project's metadata
+      tags:
+      - Project
+    post:
+      description: |-
+        A complete example and walkthrough of the program can be found <a href="https://github.com/BL0CK-X/api-developer-program" target="_blank">here</a>.
+
+        Update your project's metadata. None of these parameters are required. Just provide the parameters that you would like to update.
+
+        `Cost: 0 Credit` (Free) (<a href="#section/Pricing">See Pricing</a>)
+      operationId: updateProject
+      parameters:
+      - description: The ID of the project. Created and returned when a project is
+          created.
+        example: L3cPm0cJlf5MeDXzGLQJJ4vlzndJCC
+        explode: false
+        in: path
+        name: project_id
+        required: true
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ProjectCreateRequest'
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Project'
+          description: Successful Response
+        "400":
+          description: Bad request (check response message)
+        "401":
+          description: Invalid API key pair in headers
+        "402":
+          description: Payment required. Occurs when you run out of API requests.
+            Upgrade <a href="https://dashboard.theblockchainapi.com/billing" target="_blank">here</a>.
+      security:
+      - APIKeyID: []
+        APISecretKey: []
+      summary: |
+        Update a project
+      tags:
+      - Project
+  /project/{project_id}/{version}:
+    delete:
+      description: |-
+        A complete example and walkthrough of the program can be found <a href="https://github.com/BL0CK-X/api-developer-program" target="_blank">here</a>.
+
+        Delete a version for the project. There must always be at least one version deployed, so you cannot delete the last remaining version of the project. This will auto-deploy the project and update its documentation, if necessary.
+
+        `Cost: 0 Credit` (Free) (<a href="#section/Pricing">See Pricing</a>)
+      operationId: deleteProjectVersion
+      parameters:
+      - description: The ID of the project. Created and returned when a project is
+          created.
+        example: L3cPm0cJlf5MeDXzGLQJJ4vlzndJCC
+        explode: false
+        in: path
+        name: project_id
+        required: true
+        style: simple
+      - description: The version of the project.
+        example: 2
+        explode: false
+        in: path
+        name: version
+        required: true
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Project'
+          description: |
+            Successful Response.
+        "400":
+          description: Bad request (check response message)
+        "401":
+          description: Invalid API key pair in headers
+        "402":
+          description: Payment required. Occurs when you run out of API requests.
+            Upgrade <a href="https://dashboard.theblockchainapi.com/billing" target="_blank">here</a>.
+      security:
+      - APIKeyID: []
+        APISecretKey: []
+      summary: |
+        Delete a project version
+      tags:
+      - Project
+    post:
+      description: |-
+        A complete example and walkthrough of the program can be found <a href="https://github.com/BL0CK-X/api-developer-program" target="_blank">here</a>.
+
+        Create a new version for the project. The version must be higher than all existing versions. This will duplicate the existing project's latest version and auto-deploy it. To update these endpoints, simply redeploy on this project's versions.
+
+        When a project is first created, it uses the default "0.0.1" version.
+
+        `Cost: 0 Credit` (Free) (<a href="#section/Pricing">See Pricing</a>)
+      operationId: createProjectVersion
+      parameters:
+      - description: The ID of the project. Created and returned when a project is
+          created.
+        example: L3cPm0cJlf5MeDXzGLQJJ4vlzndJCC
+        explode: false
+        in: path
+        name: project_id
+        required: true
+        style: simple
+      - description: The version of the project.
+        example: 2
+        explode: false
+        in: path
+        name: version
+        required: true
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Project'
+          description: |
+            Successful Response.
+        "400":
+          description: Bad request (check response message)
+        "401":
+          description: Invalid API key pair in headers
+        "402":
+          description: Payment required. Occurs when you run out of API requests.
+            Upgrade <a href="https://dashboard.theblockchainapi.com/billing" target="_blank">here</a>.
+      security:
+      - APIKeyID: []
+        APISecretKey: []
+      summary: |
+        Create a new project version
+      tags:
+      - Project
+  /project/{project_id}/deploy/url:
+    post:
+      description: |-
+        A complete example and walkthrough of the program can be found <a href="https://github.com/BL0CK-X/api-developer-program" target="_blank">here</a>.
+
+        Get the deployment URL for the project.
+
+        `Cost: 0 Credit` (Free) (<a href="#section/Pricing">See Pricing</a>)
+      operationId: getProjectDeploymentURL
+      parameters:
+      - description: The ID of the project. Created and returned when a project is
+          created.
+        example: L3cPm0cJlf5MeDXzGLQJJ4vlzndJCC
+        explode: false
+        in: path
+        name: project_id
+        required: true
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              example:
+                platform: Windows
+              properties:
+                platform:
+                  description: The platform for which the binary was compiled. Note
+                    that Darwin = Mac.
+                  enum:
+                  - Darwin
+                  - Linux
+                  - Windows
+                  type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProjectDeploymentURL'
+          description: Successful Response.
+        "400":
+          description: Bad request (check response message)
+        "401":
+          description: Invalid API key pair in headers
+        "402":
+          description: Payment required. Occurs when you run out of API requests.
+            Upgrade <a href="https://dashboard.theblockchainapi.com/billing" target="_blank">here</a>.
+      security:
+      - APIKeyID: []
+        APISecretKey: []
+      summary: |
+        Get the deployment URL
+      tags:
+      - Project
+  /project/{project_id}/deploy/status:
+    post:
+      description: |-
+        A complete example and walkthrough of the program can be found <a href="https://github.com/BL0CK-X/api-developer-program" target="_blank">here</a>.
+
+        Get the deployment status for the project after uploading the binary. Will be: `DEPLOYED` or NOT `DEPLOYED`.
+
+        After it is `DEPLOYED`, you can then make requests to your API.
+
+        `Cost: 0 Credit` (Free) (<a href="#section/Pricing">See Pricing</a>)
+      operationId: getProjectDeploymentStatus
+      parameters:
+      - description: The ID of the project. Created and returned when a project is
+          created.
+        example: L3cPm0cJlf5MeDXzGLQJJ4vlzndJCC
+        explode: false
+        in: path
+        name: project_id
+        required: true
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                properties:
+                  status:
+                    description: Whether or not the binary was successfully deployed
+                      and can now be called via the API
+                    enum:
+                    - DEPLOYED
+                    - NOT DEPLOYED
+                    type: string
+                  status_code:
+                    description: '`1` corresponds to `DEPLOYED`. `-1` corresponds
+                      to `NOT DEPLOYED`.'
+                    enum:
+                    - 1
+                    - -1
+                    type: number
+          description: Successful Response.
+        "400":
+          description: Bad request (check response message)
+        "401":
+          description: Invalid API key pair in headers
+        "402":
+          description: Payment required. Occurs when you run out of API requests.
+            Upgrade <a href="https://dashboard.theblockchainapi.com/billing" target="_blank">here</a>.
+      security:
+      - APIKeyID: []
+        APISecretKey: []
+      summary: |
+        Get deployment status
+      tags:
+      - Project
+  /project/{project_id}/stats:
+    get:
+      description: |-
+        A complete example and walkthrough of the program can be found <a href="https://github.com/BL0CK-X/api-developer-program" target="_blank">here</a>.
+
+        Get the usage stats for your mini-API.
+
+        `Cost: 0 Credit` (Free) (<a href="#section/Pricing">See Pricing</a>)
+      operationId: getProjectStats
+      parameters:
+      - description: The ID of the project. Created and returned when a project is
+          created.
+        example: L3cPm0cJlf5MeDXzGLQJJ4vlzndJCC
+        explode: false
+        in: path
+        name: project_id
+        required: true
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/StatItem'
+                type: array
+          description: |
+            Successful Response.
+        "400":
+          description: Bad request (check response message)
+        "401":
+          description: Invalid API key pair in headers
+        "402":
+          description: Payment required. Occurs when you run out of API requests.
+            Upgrade <a href="https://dashboard.theblockchainapi.com/billing" target="_blank">here</a>.
+      security:
+      - APIKeyID: []
+        APISecretKey: []
+      summary: |
+        Get a project's stats
+      tags:
+      - Project
+  /project/list:
+    get:
+      description: |-
+        A complete example and walkthrough of the program can be found <a href="https://github.com/BL0CK-X/api-developer-program" target="_blank">here</a>.
+
+        List all projects associated with your account.
+
+        `Cost: 0 Credit` (Free) (<a href="#section/Pricing">See Pricing</a>)
+      operationId: listProjects
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/Project'
+                type: array
+          description: |
+            Successful Response.
+        "400":
+          description: Bad request (check response message)
+        "401":
+          description: Invalid API key pair in headers
+        "402":
+          description: Payment required. Occurs when you run out of API requests.
+            Upgrade <a href="https://dashboard.theblockchainapi.com/billing" target="_blank">here</a>.
+      security:
+      - APIKeyID: []
+        APISecretKey: []
+      summary: |
+        List projects
+      tags:
+      - Project
+  /project/{project_id}/{version}/documentation:
+    post:
+      description: "A complete example and walkthrough of the program can be found\
+        \ <a href=\"https://github.com/BL0CK-X/api-developer-program\" target=\"_blank\"\
+        >here</a>.\n\nUpdate your project's documentation. \n\nYour project's documentation\
+        \ can only represent *one* version of your API.\n\nThus, when you call this,\
+        \ the `current_documentation_version` attribute of your project is set to\
+        \ the version supplied in the call.\n\n`Cost: 0 Credit` (Free) (<a href=\"\
+        #section/Pricing\">See Pricing</a>)"
+      operationId: updateProjectDocumentation
+      parameters:
+      - description: The ID of the project. Created and returned when a project is
+          created.
+        example: L3cPm0cJlf5MeDXzGLQJJ4vlzndJCC
+        explode: false
+        in: path
+        name: project_id
+        required: true
+        style: simple
+      - description: The version of the project.
+        example: 2
+        explode: false
+        in: path
+        name: version
+        required: true
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Project'
+          description: |
+            Successful Response.
+        "400":
+          description: Bad request (check response message)
+        "401":
+          description: Invalid API key pair in headers
+        "402":
+          description: Payment required. Occurs when you run out of API requests.
+            Upgrade <a href="https://dashboard.theblockchainapi.com/billing" target="_blank">here</a>.
+      security:
+      - APIKeyID: []
+        APISecretKey: []
+      summary: |
+        Update the project's documentation
+      tags:
+      - Project
+  /endpoint:
+    post:
+      description: "A complete example and walkthrough of the program can be found\
+        \ <a href=\"https://github.com/BL0CK-X/api-developer-program\" target=\"_blank\"\
+        >here</a>.\n\nCreate or update an `endpoint` for a `project`. \n\nAn `endpoint`\
+        \ is a function that is a part of a mini-API `project`.\n\nThis endpoint adds\
+        \ the `endpoint` to the `project`'s documentation. However, this does not\
+        \ deploy the `endpoint`. To do so, you must <a href=\"#operation/deployProject\"\
+        >deploy the project</a>.\n\nAll attributes except `group_name` are required\
+        \ if **creating** an `endpoint`.\n\nOnly `path`, `project_id`, and `version`\
+        \ are required if **updating** an `endpoint`.\n\n`Cost: 0 Credit` (Free) (<a\
+        \ href=\"#section/Pricing\">See Pricing</a>)"
+      operationId: setEndpoint
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Endpoint'
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Endpoint'
+          description: |
+            Successful Response.
+        "400":
+          description: Bad request (check response message)
+        "401":
+          description: Invalid API key pair in headers
+        "402":
+          description: Payment required. Occurs when you run out of API requests.
+            Upgrade <a href="https://dashboard.theblockchainapi.com/billing" target="_blank">here</a>.
+      security:
+      - APIKeyID: []
+        APISecretKey: []
+      summary: |
+        Create / update an endpoint
+      tags:
+      - Endpoint
+  /endpoint/metadata:
+    post:
+      description: "A complete example and walkthrough of the program can be found\
+        \ <a href=\"https://github.com/BL0CK-X/api-developer-program\" target=\"_blank\"\
+        >here</a>.\n\nGet an endpoint's metadata from a project. \n\n`Cost: 0 Credit`\
+        \ (Free) (<a href=\"#section/Pricing\">See Pricing</a>)"
+      operationId: getEndpoint
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/EndpointReference'
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Endpoint'
+          description: |
+            Successful Response.
+        "400":
+          description: Bad request (check response message)
+        "401":
+          description: Invalid API key pair in headers
+        "402":
+          description: Payment required. Occurs when you run out of API requests.
+            Upgrade <a href="https://dashboard.theblockchainapi.com/billing" target="_blank">here</a>.
+      security:
+      - APIKeyID: []
+        APISecretKey: []
+      summary: |
+        Get an endpoint's metadata
+      tags:
+      - Endpoint
+  /endpoint/delete:
+    post:
+      description: |-
+        A complete example and walkthrough of the program can be found <a href="https://github.com/BL0CK-X/api-developer-program" target="_blank">here</a>.
+
+        Deletes an endpoint from a project. This endpoint removes the endpoint from the project's documentation. However, this does un-deploy the endpoint. To do so, you must <a href="#operation/deployProject">deploy the project</a>.
+
+        `Cost: 0 Credit` (Free) (<a href="#section/Pricing">See Pricing</a>)
+      operationId: deleteEndpoint
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/EndpointReference'
+      responses:
+        "200":
+          description: |
+            Successful Response.
+        "400":
+          description: Bad request (check response message)
+        "401":
+          description: Invalid API key pair in headers
+        "402":
+          description: Payment required. Occurs when you run out of API requests.
+            Upgrade <a href="https://dashboard.theblockchainapi.com/billing" target="_blank">here</a>.
+      security:
+      - APIKeyID: []
+        APISecretKey: []
+      summary: |
+        Delete an endpoint
+      tags:
+      - Endpoint
+  /endpoint/list:
+    get:
+      description: |-
+        A complete example and walkthrough of the program can be found <a href="https://github.com/BL0CK-X/api-developer-program" target="_blank">here</a>.
+
+        List all endpoints that you have added under your account.
+
+        `Cost: 0 Credit` (Free) (<a href="#section/Pricing">See Pricing</a>)
+      operationId: listEndpoints
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/Endpoint'
+                type: array
+          description: |
+            Successful Response.
+        "400":
+          description: Bad request (check response message)
+        "401":
+          description: Invalid API key pair in headers
+        "402":
+          description: Payment required. Occurs when you run out of API requests.
+            Upgrade <a href="https://dashboard.theblockchainapi.com/billing" target="_blank">here</a>.
+      security:
+      - APIKeyID: []
+        APISecretKey: []
+      summary: |
+        List all endpoints
+      tags:
+      - Endpoint
 components:
   schemas:
     UploadFileRequest:
@@ -2045,7 +2834,7 @@ components:
       - b58_private_key
     Wallet:
       description: |
-        The wallet authentication information required to sign transactions.  Click the `>` arrow next to "wallet" on the left to see more details. See our Security section <a href="#section/Security">here</a>.
+        The wallet authentication information used to sign and submit the transaction.  Click the `>` arrow next to "wallet" on the left to see more details. See our Security section <a href="#section/Security">here</a>.
       oneOf:
       - $ref: '#/components/schemas/SecretRecoveryPhrase'
       - $ref: '#/components/schemas/PrivateKey'
@@ -2071,6 +2860,19 @@ components:
       required:
       - public_key
       type: object
+    FeePayerWallet:
+      description: "If you do NOT provide a wallet here, the fee payer of the transaction\
+        \ will be the `wallet` you provide or the `sender_public_key`.\n      \nIf\
+        \ you do provide a wallet, then the `fee_payer_wallet` will pay the fees of\
+        \ the transaction and any costs associated with creating a new associated\
+        \ token account (only if necessary; approx. 0.002 SOL when necessary). A new\
+        \ account is necessary if you are sending an NFT or SPL token to a user that\
+        \ has not received the same NFT or one of the SPL tokens before (thus, a new\
+        \ associated token account is needed)."
+      oneOf:
+      - $ref: '#/components/schemas/SecretRecoveryPhrase'
+      - $ref: '#/components/schemas/PrivateKey'
+      - $ref: '#/components/schemas/B58PrivateKey'
     TransferRequest:
       example:
         wallet:
@@ -2103,9 +2905,23 @@ components:
             - SPL Token: This must be an integer in string format. To convert from what you see on a wallet UI (e.g., 1 ATLAS, 1 USDC) to an integer value, you have to multiply that value by 10^<i>x</i> where <i>x</i> is the number of decimals. For example, to transfer 0.2 USDC, if USDC uses 6 decimals, then the amount is 0.2 * 10^6 = 200000. You can get the number of decimals for a given SPL token <a href="#operation/solanaGetSPLToken">here</a>.
             - SOL: Supply this value denominated in SOL in a string format. This does not need to be an integer. For example, if you want to send 0.0005 SOL, then amount = "0.0005".
           type: string
+        return_compiled_transaction:
+          default: false
+          description: |
+            If `false`, we sign and submit the transaction (`wallet` is required in this case; do not provide a value for `sender_public_key`).  If `true`, we compile the transaction (either `wallet` or `sender_public_key` is required in this case; do not provide both).
+          type: boolean
+        sender_public_key:
+          default: "null"
+          description: |
+            To understand the purpose of `sender_public_key` first note the following: There are two ways you can complete a transfer transaction: (1) we complete it for you with your `wallet` information or (2) we return the raw instruction data that you can sign and submit yourself (no private keys required).
+            When you provide your `wallet` authentication, we are able to determine your wallet's public key, which is the sender public key of the transaction.
+            When you are not providing your `wallet` as authentication, we still need the `sender_public_key` to be able to return the compiled transaction. Thus, you provide `sender_public_key` only if you are not providing `wallet` authentication information and you are returning a compiled transaction.
+            You will receive an error if you provide both `wallet` and `sender_public_key`. You will receive an error if you provide neither `wallet` nor `sender_public_key`.
+          type: string
+        fee_payer_wallet:
+          $ref: '#/components/schemas/FeePayerWallet'
       required:
       - recipient_address
-      - wallet
       type: object
     TransferResponse:
       example:
@@ -2115,6 +2931,205 @@ components:
           description: The signature of the transaction
           type: string
       type: object
+    TransferResponseCompiled:
+      example:
+        b58_compiled_transaction: 7HigsMhUk7SN2cW3GaQsZ86WyVbR3id8xbPELatuhvXio3kYKbqj5jw3x69K2nxHx2murn56RpngeSsFVnmkhFp4oBk8jn5Frm7sAJBES1kxqxMMwaoTCTSM3ReMUDUQm1P7mbpqoBmaf9Z21pKEKA8dUMmatBG9PHjJf5CaL6Np7SFaMBnjeq8W8SAgWi24QMSr3sju4ZtMDqguZXWm6WESunwMengWE8HSLVfSLTEWYK6GS2QsR
+        compiled_transaction:
+        - 1
+        - 1
+        - 1
+        - 4
+        - 29
+        - 205
+        - 57
+        - 150
+        - 42
+        - 213
+        - 65
+        - 12
+        - 25
+        - 150
+        - 135
+        - 62
+        - 35
+        - 196
+        - 233
+        - 175
+        - 24
+        - 155
+        - 204
+        - 168
+        - 75
+        - 12
+        - 36
+        - 253
+        - 47
+        - 241
+        - 134
+        - 90
+        - 51
+        - 130
+        - 194
+        - 136
+        - 121
+        - 239
+        - 163
+        - 213
+        - 230
+        - 16
+        - 137
+        - 176
+        - 180
+        - 69
+        - 106
+        - 51
+        - 200
+        - 194
+        - 8
+        - 119
+        - 211
+        - 158
+        - 228
+        - 142
+        - 29
+        - 64
+        - 32
+        - 220
+        - 208
+        - 35
+        - 113
+        - 150
+        - 175
+        - 122
+        - 137
+        - 8
+        - 127
+        - 136
+        - 122
+        - 194
+        - 223
+        - 10
+        - 132
+        - 244
+        - 5
+        - 186
+        - 85
+        - 172
+        - 32
+        - 234
+        - 226
+        - 128
+        - 115
+        - 127
+        - 138
+        - 169
+        - 67
+        - 227
+        - 70
+        - 170
+        - 154
+        - 79
+        - 60
+        - 157
+        - 100
+        - 207
+        - 214
+        - 209
+        - 6
+        - 221
+        - 246
+        - 225
+        - 215
+        - 101
+        - 161
+        - 147
+        - 217
+        - 203
+        - 225
+        - 70
+        - 206
+        - 235
+        - 121
+        - 172
+        - 28
+        - 180
+        - 133
+        - 237
+        - 95
+        - 91
+        - 55
+        - 145
+        - 58
+        - 140
+        - 245
+        - 133
+        - 126
+        - 255
+        - 0
+        - 169
+        - 152
+        - 93
+        - 5
+        - 155
+        - 108
+        - 35
+        - 158
+        - 6
+        - 224
+        - 54
+        - 73
+        - 165
+        - 50
+        - 99
+        - 160
+        - 15
+        - 28
+        - 214
+        - 60
+        - 127
+        - 114
+        - 136
+        - 28
+        - 105
+        - 215
+        - 227
+        - 205
+        - 16
+        - 21
+        - 39
+        - 9
+        - 227
+        - 1
+        - 3
+        - 3
+        - 1
+        - 2
+        - 0
+        - 9
+        - 3
+        - 1
+        - 0
+        - 0
+        - 0
+        - 0
+        - 0
+        - 0
+        - 0
+      properties:
+        b58_compiled_transaction:
+          description: A base58 encoded byte array in string representation. Really
+            easy to submit to Phantom. See <a href="https://github.com/BL0CK-X/blockchain-api/blob/main/examples/tutorials/phantom_tutorials/transfer_solana.html"
+            target="_blank">here</a> for an example on how to submit it to a Phantom
+            wallet for signing.
+          type: string
+        compiled_transaction:
+          description: An array of integers representing the bytes of the transaction
+          type: object
+      type: object
+    DoubleTransferResponse:
+      oneOf:
+      - $ref: '#/components/schemas/TransferResponse'
+      - $ref: '#/components/schemas/TransferResponseCompiled'
     ATAResponse:
       example:
         associated_token_address: CnW7tnQrfbSMkHYpvn5mtYw11qGpat6WM87D68cNT2hC
@@ -2260,28 +3275,119 @@ components:
             type: string
         type: object
       type: array
+    ListTransactionsResponse:
+      description: A list the wallet's of token positions
+      example:
+      - jLmcxEjRppamX1b98PRUN1Sutmqn6HD1HugP5VPoib7AruFC2D5pyh7UPHZ9FUBww6Q5SRagoqjQTG51tcGtDDW
+      - 5QEdoVR7u5dPLs8A2GLpF2F4f8rYKqJwZjAFsgNRPdgsfDuo1gRBQwCQPqpZk5aYM7eSg1uuq8cdmH5bH68GrFJ5
+      - 5mdZKo9tsJijncaiVmxqVfg7PUUpk5pHebyp9ZcM53kb4RWnBqnCX18GvoQhEsYywhFkHzrXZEQksLuWhvgso4HJ
+      - 2DzKmgTFZGH1aFue8wproBNZ3WGULxV6MaK9zTMZjbnL8hv3gKQ9fjpQAFAQXWeryYtgnTUfha3v4dfwMcpRcD6U
+      - vo19EnE97N2yhxwZaDSQjZFNsft7LxPBhbLeRnoVBGTam9SP91hWpBDvQ6oStkEhgXAvKDdz3poUCypU4jmpkFs
+      - 22D1YEiLn8oArCLWU23hDtRk4kbZmSUQkHwXk88eDrKLYkx5zWCeDZ8UadLaa1AMkwy6jNHiDo4mVRfqX4nmUrB3
+      - 3R6QjGex1TRhs62pvU78Ccg5gSNCox5K7qxemKM3zaxGWzkfJ7DoWwW4YzjSrh7ZDCxRjm9AXbfvu8Pj9w3Bs2SH
+      items:
+        description: |
+          The signature for the transaction. You can call `solanaGetTransaction` to get more details: https://docs.blockchainapi.com/#operation/solanaGetTransaction
+        type: string
+      type: array
+    NFT:
+      example:
+        data:
+          creators:
+          - HuAiZg55P557gdjr5jkq79YdMe9sbdHuPj5UN21XuSyK
+          - 5FzddvKbxE54KEg2WoeNiGWJYAUBabKVFg2MVCSacWiJ
+          name: 'Vox Punks Club #966'
+          seller_fee_basis_points: 500
+          share:
+          - 0
+          - 100
+          symbol: ""
+          uri: https://arweave.net/_Y8tETU3FbAFZSM1wXNeWPweWwrW9K6oSF1SYi_bH9A
+          verified:
+          - 1
+          - 1
+        is_mutable: true
+        mint: EEr5yQpNXf7Bru6Rt5podx56HGW9CEehXqgRGh2wa71w
+        primary_sale_happened: true
+        update_authority: 5FzddvKbxE54KEg2WoeNiGWJYAUBabKVFg2MVCSacWiJ
+      properties:
+        data:
+          $ref: '#/components/schemas/NFT_data'
+        is_mutable:
+          type: boolean
+        mint:
+          description: |
+            The public key address of the NFT
+          type: string
+        primary_sale_happened:
+          type: boolean
+        update_authority:
+          description: |
+            A public key address that is usually that of the person who minted the NFT
+          type: string
+        seller_fee_basis_points:
+          type: number
+        mint_secret_recovery_phrase:
+          type: string
+        explorer_url:
+          type: string
+      type: object
     ListNFTsResponse:
       example:
         nfts_owned:
-        - EEr5yQpNXf7Bru6Rt5podx56HGW9CEehXqgRGh2wa71w
-        - 7pFfMc3WougD7vntz3cFpfU2XLhWivWwP2czUzFvBcsz
-        - Afx3bYC8UjKStEe9RWsax1RNG8rbTha4oZ3TZV1CFk8K
-        - GYnqJEK9qCLQPqt2znXm6MS3sMGcfb1XLfFRUbh9uVnM
-        - E8TZyFJR2xcfZSWAQ7mEarhbE1rAJ5hZ4zVAcemKT3j8
-        - BMQniBDV3Km4AbWK3fDaiRMaiS4NBb1TLHtyLnWbY2ua
-        - 8aaSoLHdcBDRBSDjPJoTwBZkCYj9AEDJcM3atPYewMq1
-        - 2dav6k3iSJVxpyvcvU1ZUxdn9Z15gd3HxGo8qN7N2MTT
-        - 3mVEER8G8uaEMGi1AzH3SmiY8nTy7hwqYeBStbx5jn5K
-        - PFmjRgMTZYvvM8k6rWGHKemhkUFciYbB8ybEyJ3rqHy
-        - GXMeGFDnAwf5uC4uwjrBJAdb3wsHBd8KMc7FmnuDy6Td
-        - 51Dd17AtVVsp3Dv9VMJEJ5UKLSfrBWHyFHN4n3wZqHz4
-        - 5xsYQ1dughTssMr4T9FbcetFU2eUDoEocNr8XUqNTyGx
+        - 9ztsoyPz96SDUUfX4yh1QnxN9Yv2TAAKcY2dUuYcgtsv
+        - 5z2JAGTCDJ4KpzBDoFrapWGWcwKAjoZ2rkNqi5bvt9C3
+        nfts_metadata:
+        - data:
+            creators:
+            - 6NTtQY7ErW6tQVYGt6cpbcw3g7JwGrVSWmkMAJva8nM3
+            - GKCE4m2Bten4ygPAn4hNJGsFhkn1hiTFj7fEFMcbDPbP
+            name: 'Mechanic Wolf #1331'
+            seller_fee_basis_points: 600
+            share:
+            - 0
+            - 100
+            symbol: MCW
+            uri: https://arweave.net/Y1t2iok4cPcY5_vPbwkmPQwkkqWdwcusGK13eHttF6U
+            verified':
+            - 1
+            - 0
+          explorer_url: https://explorer.solana.com/address/9ztsoyPz96SDUUfX4yh1QnxN9Yv2TAAKcY2dUuYcgtsv
+          is_mutable: true
+          mint: 9ztsoyPz96SDUUfX4yh1QnxN9Yv2TAAKcY2dUuYcgtsv
+          primary_sale_happened: true
+          update_authority': GKCE4m2Bten4ygPAn4hNJGsFhkn1hiTFj7fEFMcbDPbP
+        - data:
+            creators:
+            - 7xRUqdB8WHiqMtXQm5eSNk4sM5nPhm68LJiC33Hr73vE
+            - HtpFSATcbbdGkDFXiExJtxBG1K1BpLrUVoxzSEwxuPgw
+            name: 'Millionaire Ape #647'
+            seller_fee_basis_points: 750
+            share:
+            - 0
+            - 100
+            symbol: YC
+            uri: https://arweave.net/Zp3CwpG_gu_FnShbMJ4gjSh9OKrOSpw-TuYl3lSTwzE
+            verified:
+            - 1
+            - 0
+          explorer_url: https://explorer.solana.com/address/5z2JAGTCDJ4KpzBDoFrapWGWcwKAjoZ2rkNqi5bvt9C3
+          is_mutable: true
+          mint: 5z2JAGTCDJ4KpzBDoFrapWGWcwKAjoZ2rkNqi5bvt9C3
+          primary_sale_happened: true
+          update_authority: HtpFSATcbbdGkDFXiExJtxBG1K1BpLrUVoxzSEwxuPgw
       properties:
         nfts_owned:
           description: A list of mint addresses represented by a string
           items:
             description: A mint address
             type: string
+          type: array
+        nfts_metadata:
+          description: A list of the dictionaries, where each dictionary is an NFT's
+            metadata
+          items:
+            $ref: '#/components/schemas/NFT'
           type: array
       type: object
     NFTMintRequest:
@@ -2401,48 +3507,6 @@ components:
           type: string
       required:
       - wallet
-      type: object
-    NFT:
-      example:
-        data:
-          creators:
-          - HuAiZg55P557gdjr5jkq79YdMe9sbdHuPj5UN21XuSyK
-          - 5FzddvKbxE54KEg2WoeNiGWJYAUBabKVFg2MVCSacWiJ
-          name: 'Vox Punks Club #966'
-          seller_fee_basis_points: 500
-          share:
-          - 0
-          - 100
-          symbol: ""
-          uri: https://arweave.net/_Y8tETU3FbAFZSM1wXNeWPweWwrW9K6oSF1SYi_bH9A
-          verified:
-          - 1
-          - 1
-        is_mutable: true
-        mint: EEr5yQpNXf7Bru6Rt5podx56HGW9CEehXqgRGh2wa71w
-        primary_sale_happened: true
-        update_authority: 5FzddvKbxE54KEg2WoeNiGWJYAUBabKVFg2MVCSacWiJ
-      properties:
-        data:
-          $ref: '#/components/schemas/NFT_data'
-        is_mutable:
-          type: boolean
-        mint:
-          description: |
-            The public key address of the NFT
-          type: string
-        primary_sale_happened:
-          type: boolean
-        update_authority:
-          description: |
-            A public key address that is usually that of the person who minted the NFT
-          type: string
-        seller_fee_basis_points:
-          type: number
-        mint_secret_recovery_phrase:
-          type: string
-        explorer_url:
-          type: string
       type: object
     NFTMintErrorResponse:
       example:
@@ -2655,6 +3719,7 @@ components:
         listing_transaction_signature: 4qXMwWbrftjt33Rz7kqnUjGc76rokHdHYxFV89UwQLVYV7RvYzEraAo1Ly4Ra4QHnXqfPCsToKQzC2tGmDYrUYqY
         mint_address: 7GA16mQup7ESJbaD6n49VCwVG9kRkyQDzWKhBSLjbYqr
         price: 1000000000
+        seller: 2FuQEmss657G89eJBe5mKX724qi1rfu6bUeUvGZQB2Jj
       properties:
         exchange:
           description: |
@@ -2677,6 +3742,9 @@ components:
         price:
           description: The price of the NFT in Lamports. Represented as an integer.
           type: number
+        seller:
+          description: The public key of the seller
+          type: string
       type: object
     BuyRequest:
       example:
@@ -2742,6 +3810,167 @@ components:
             The signature of the `delist` transaction
           type: string
       type: object
+    NFTAnalyticsRequest:
+      example:
+        mint_addresses:
+        - 2U9sJ1mD1Fk6gJZezLjM25YnVrvBiMfmpgpUNXFtsybe
+        - 2i4VfzbimyNYCqLLarH9e4ZTqMLwSAwXBvUMvGPuazTU
+        - BmR33Vpyd7FZc1AC9UFoJfqfT4YqLw1CCFBBQjBjZxXR
+        - DeAZpg1sjh1ga7JKXHU3zLU3deTPescwsbrEpxmTLG1e
+        start_time: 1643757115
+        end_time: 1644966734
+      properties:
+        mint_addresses:
+          description: The list of mint addresses. Each address must be a valid public
+            key.
+          example:
+          - 2U9sJ1mD1Fk6gJZezLjM25YnVrvBiMfmpgpUNXFtsybe
+          - 2i4VfzbimyNYCqLLarH9e4ZTqMLwSAwXBvUMvGPuazTU
+          - BmR33Vpyd7FZc1AC9UFoJfqfT4YqLw1CCFBBQjBjZxXR
+          - DeAZpg1sjh1ga7JKXHU3zLU3deTPescwsbrEpxmTLG1e
+          items:
+            description: A mint address
+            type: string
+          type: array
+        start_time:
+          description: |
+            Response will not include transactions before `start_time`. Set this to `-1` in order to get the entire history we have stored.
+          example: 1643757115
+          type: number
+        end_time:
+          description: "Response will not include transactions after `end_time` \n"
+          example: 1644966734
+          type: number
+      required:
+      - mint_addresses
+    NFTTransaction:
+      example:
+        block_time: 1644371872
+        seller: EmioriB6Y5nLaz1NzQTZu1T5XxJjBVHAxy6SsX9wzWTw
+        transaction_signature: 3EGfHHwxv935ULG3RXsj3PjHyJpMG1adzCQMs7ApgkMpfyyTFbpVzVnjMMBhFG2g15jrafDtVuiiTfR9Poc5mDfw
+        exchange: magic-eden
+        exchange_readable: magic-eden
+        operation: list
+        mint_address: mint_address
+        buyer: 5tCqPe7XNWSNy8aNLbBcqaf5i28RuEH8onsCHsUsvYmn
+      properties:
+        block_time:
+          description: |
+            An epoch time stamp in UTC time that represents the time of the block where the transaction was processed
+          example: 1644371872
+          type: number
+        exchange:
+          description: The NFT exchange on which the transaction occurred
+          enum:
+          - solsea
+          - magic-eden
+          - alpha-art
+          - digital-eyes
+          - solanart
+          - exchange-art
+          example: magic-eden
+          type: string
+        exchange_readable:
+          description: A readable version of the NFT exchange
+          enum:
+          - SolSea
+          - Magic Eden
+          - Alpha Art
+          - Digital Eyes
+          - Solanart
+          - Exchange.art
+          example: magic-eden
+          type: string
+        mint_address:
+          description: |
+            The mint address of the NFT
+          type: string
+        operation:
+          description: The operation of the transaction
+          enum:
+          - buy
+          - list
+          - de_list
+          - update_listing
+          example: list
+          type: string
+        seller:
+          description: The public key of the wallet that listed the NFT
+          example: EmioriB6Y5nLaz1NzQTZu1T5XxJjBVHAxy6SsX9wzWTw
+          type: string
+        buyer:
+          description: |
+            The public key of the buyer. This only exists in `buy` transactions.
+          example: 5tCqPe7XNWSNy8aNLbBcqaf5i28RuEH8onsCHsUsvYmn
+          type: string
+        transaction_signature:
+          description: |
+            The signature of the transaction. You can look up each transaction on explorer.solana.com
+          example: 3EGfHHwxv935ULG3RXsj3PjHyJpMG1adzCQMs7ApgkMpfyyTFbpVzVnjMMBhFG2g15jrafDtVuiiTfR9Poc5mDfw
+          type: string
+      type: object
+    NFTAnalyticsResponse:
+      example:
+        floor: 300000000
+        transaction_history:
+          "2U9sJ1mD1Fk6gJZezLjM25YnVrvBiMfmpgpUNXFtsybe": []
+          "2i4VfzbimyNYCqLLarH9e4ZTqMLwSAwXBvUMvGPuazTU": []
+          BmR33Vpyd7FZc1AC9UFoJfqfT4YqLw1CCFBBQjBjZxXR:
+          - block_time: 1644371872
+            exchange: magic-eden
+            exchange_readable: Magic Eden
+            mint_address: BmR33Vpyd7FZc1AC9UFoJfqfT4YqLw1CCFBBQjBjZxXR
+            operation: de_list
+            seller: EmioriB6Y5nLaz1NzQTZu1T5XxJjBVHAxy6SsX9wzWTw
+            transaction_signature: 3EGfHHwxv935ULG3RXsj3PjHyJpMG1adzCQMs7ApgkMpfyyTFbpVzVnjMMBhFG2g15jrafDtVuiiTfR9Poc5mDfw
+          - block_time: 1644372458
+            exchange: magic-eden
+            exchange_readable: Magic Eden
+            mint_address: BmR33Vpyd7FZc1AC9UFoJfqfT4YqLw1CCFBBQjBjZxXR
+            operation: list
+            price: 300000000
+            seller: EmioriB6Y5nLaz1NzQTZu1T5XxJjBVHAxy6SsX9wzWTw
+            transaction_signature: 3KGD9p2mgEBbTBfC7BNJRvvbUQ9qLNhFUoY3vfz93hM87z6yfdvuRz9dqhqKrrPtXggpzUPcEytASXMNx5CfJaTM
+          - block_time: 1644455774
+            exchange: magic-eden
+            exchange_readable: Magic Eden
+            mint_address: BmR33Vpyd7FZc1AC9UFoJfqfT4YqLw1CCFBBQjBjZxXR
+            operation: de_list
+            seller: EmioriB6Y5nLaz1NzQTZu1T5XxJjBVHAxy6SsX9wzWTw
+            transaction_signature: 2kHd4kHK3SRcYdrftJTKy79qseLyLMS74nPC4hDCq7bfWKUvUKAyZQh6Fn6xe2xkihYmLdiCGJNpDZ9TdmjbbcVM
+          - block_time: 1644558212
+            exchange: magic-eden
+            exchange_readable: Magic Eden
+            mint_address: BmR33Vpyd7FZc1AC9UFoJfqfT4YqLw1CCFBBQjBjZxXR
+            operation: list
+            price: 300000000
+            seller: EmioriB6Y5nLaz1NzQTZu1T5XxJjBVHAxy6SsX9wzWTw
+            transaction_signature: 32FwsXpbTbBsQmeRnGLPNJnq7ffFUwXUdZzfiKkkD29xLYTWBbDCQVMg4hDkfvgzvJFyuxQMEbZeeQ7JbJERg1h4
+          DeAZpg1sjh1ga7JKXHU3zLU3deTPescwsbrEpxmTLG1e: []
+        volume: 0
+      properties:
+        start_time:
+          description: |
+            The start time used in the API request.
+        end_time:
+          description: "The end time used in the API request. \n"
+        transaction_history:
+          $ref: '#/components/schemas/NFTAnalyticsResponse_transaction_history'
+        floor:
+          description: |
+            The minimum active listing price for the collection in the given time period. The listing must have been processed before `end_time` and still active (not delisted or purchased) by `end_time` in order to affect the floor calculation.
+          example: 1644964713
+          type: number
+        volume:
+          description: |
+            The sum of the sale prices for the given time period.
+          example: 1644964713
+          type: number
+    NFTRecentTransactions:
+      description: NFTs recent transactions
+      items:
+        $ref: '#/components/schemas/NFTTransaction'
+      type: array
     CreateTestCandyMachineRequest:
       example:
         wallet:
@@ -3090,6 +4319,313 @@ components:
       properties:
         error:
           type: string
+    Group:
+      description: |
+        A group is a group of endpoints.
+      properties:
+        section_name:
+          description: |
+            The name of the section under which this group is listed. A section contains several groups.
+          type: string
+        group_name:
+          description: |
+            The name of the group
+          type: string
+        group_description:
+          description: |
+            The description of the group
+          type: string
+    ProjectCreateRequest:
+      description: |
+        You can change any of these parameters after creating the project. None of these parameters are required.
+      example:
+        project_name: Serum Market Insights
+        project_description: |
+          This API provides several insights into serum markets including prices, momentum, and other activity.
+        contact_email: info@blockchainapi.com
+        groups:
+        - section_header: Trading
+          group_name: Price Routing
+          group_description: |
+            This API returns the best price routes for your swap.
+      properties:
+        project_name:
+          description: |
+            The name of the mini-API. This will be shown at the top of the mini-API's documentation.
+          type: string
+        project_description:
+          description: |
+            The description of the mini-API. This will be shown at the top of the mini-API's documentation, below the title.
+          type: string
+        contact_email:
+          description: |
+            The email where users of your mini-API can contact you. This will be shown at the top of the mini-API's documentation.
+          type: string
+        groups:
+          description: "A list of groups. A section contains groups, and groups contain\
+            \ API endpoints. \n"
+          items:
+            $ref: '#/components/schemas/Group'
+          type: array
+    ParameterSpecification:
+      example:
+        type: string
+        name: mint_address
+        description: The mint address of the NFT
+        required: true
+      properties:
+        type:
+          description: The type of the parameter
+          enum:
+          - string
+          - number
+          - boolean
+          - array
+          type: string
+        name:
+          description: The name of the parameter
+          type: string
+        description:
+          description: The name of the parameter
+          type: string
+        required:
+          description: Whether or not this parameter is required
+          type: boolean
+    Endpoint:
+      example:
+        readable_name: Get an NFT's rarity
+        version: 1.0.3
+        operation_id: getNFTRarity
+        path: nft/rarity
+        project_id: L3cPm0cJlf5MeDXzGLQJJ4vlzndJCC
+        summary: Get rarity
+        description: This endpoint allows you to get the rarity of an NFT. It will
+          automatically determine the collection and calculate the rarity based off
+          of its attributes.
+        credits: 5
+        input_specification:
+        - type: string
+          name: mint_address
+          description: The mint address of the NFT
+          required: true
+        input_examples:
+        - mint_address: D1NLfN6kfks5KRHAE66ti2qgmAtq9wqxwWdWdpbwm6p3
+        output_specification:
+        - type: string
+          name: rarity
+          description: The rarity of the NFT given the collection
+          required: true
+        output_examples:
+        - rarity: 0.01
+        group_name: NFT Rarity
+      properties:
+        project_id:
+          description: |
+            The ID of the project. This is auto-generated upon project creation and cannot currently be changed.
+          type: string
+        version:
+          description: |
+            The project version under which the endpoint exists
+          type: string
+        path:
+          description: |
+            The path of the endpoint
+          type: string
+        operation_id:
+          description: |
+            The operation ID of the endpoint.
+          type: string
+        readable_name:
+          description: |
+            The name of the endpoint formatted in a readable way (e.g., Get Endpoint Metadata).
+          type: string
+        summary:
+          description: |
+            The summary of the endpoint to be displayed in the sidebar on the left of the mini-API's documentation
+          type: string
+        description:
+          description: |
+            A description of what the endpoint does. This will be shown in the mini-API documentation.
+          type: string
+        credits:
+          description: |
+            The price of the endpoint. Valid values are integers from 1 to 100.
+          type: number
+        group_name:
+          description: |
+            The name of the group of endpoints that the endpoint comes from
+          type: string
+        input_specification:
+          description: A list of dictionaries. Each dictionary describes one parameter
+            for the input, including the name, type, required boolean, and description
+            values of that parameter.
+          items:
+            $ref: '#/components/schemas/ParameterSpecification'
+          type: array
+        input_examples:
+          description: |
+            An example of the JSON input that a user might send. Limited to one example currently.
+          type: object
+        output_specification:
+          description: A list of dictionaries. Each dictionary describes one parameter
+            for the input, including the name, type, required boolean, and description
+            values of that parameter.
+          items:
+            $ref: '#/components/schemas/ParameterSpecification'
+          type: array
+        output_examples:
+          description: |
+            An example of the JSON output that a user might send. Limited to one example currently.
+          type: object
+      required:
+      - credits
+      - input_examples
+      - input_specification
+      - operation_id
+      - output_examples
+      - output_specification
+      - path
+      - project_id
+      - readable_name
+      - version
+    Project:
+      example:
+        project_id: L3cPm0cJlf5MeDXzGLQJJ4vlzndJCC
+        project_name: Serum Market Insights
+        project_description: |
+          This API provides several insights into serum markets including prices, momentum, and other activity.
+        contact_email: info@blockchainapi.com
+        groups:
+        - section_header: Trading
+          group_name: Price Routing
+          group_description: |
+            This API returns the best price routes for your swap.
+        versions:
+        - 0.0.1
+        endpoints: []
+        current_documentation_version: 0.0.1
+      properties:
+        project_id:
+          description: |
+            The ID of the project. This is auto-generated upon project creation and cannot currently be changed.
+          type: string
+        project_name:
+          description: |
+            The name of the mini-API. This will be shown at the top of the mini-API's documentation.
+          type: string
+        project_description:
+          description: |
+            The description of the mini-API. This will be shown at the top of the mini-API's documentation, below the title.
+          type: string
+        contact_email:
+          description: |
+            The email where users of your mini-API can contact you. This will be shown at the top of the mini-API's documentation.
+          type: string
+        current_documentation_version:
+          description: |
+            The version of the API that the documentation is updated for. You can set the documentation version to any valid version. To see how to format the version string, see the description for `versions`.
+          type: string
+        versions:
+          description: |-
+            The live versions of the project. An array of strings. We use Python's `version` package to see if it's a valid version and to compare versions (to see which is higher).
+
+            Read more about this Python package <a href="https://packaging.pypa.io/en/latest/version.html#packaging.version.parse" target="_blank">here</a>.
+          items:
+            description: Version of the project.
+            type: string
+          type: array
+        groups:
+          description: "A list of groups. A section contains groups, and groups contain\
+            \ API endpoints. \n"
+          items:
+            $ref: '#/components/schemas/Group'
+          type: array
+        endpoints:
+          description: "A list of groups. A section contains groups, and groups contain\
+            \ API endpoints. \n"
+          items:
+            $ref: '#/components/schemas/Endpoint'
+          type: array
+      type: object
+    ProjectDeploymentURL:
+      example:
+        url: https://blockchain-api-third-party-project-binaries-unencrypted.s3.amazonaws.com/
+        deployment_version: "1"
+        fields:
+          AWSAccessKeyId: TOPATIPH2VUYQ6OLXK4M
+          key: AgoxbzME8A1TRgrbnglM
+          policy: eyJleHBpcmF0aW9uIjogIjIwMjItMDMtMTFUMjA6MjQ6NTlaIiwgImNvbmRpdGlvbnMiOiBbWyJjb250ZW50LWxlbmd0aC1yYW5nZSIsIDEsIDUyNDI4ODAwMF0sIFsiZXEiLCAiJHgtYW16LW1ldGEtdmVyc2lvbiIsICIxIl0sIFsiZXEiLCAiJHgtYW16LW1ldGEtcGxhdGZvcm0iLCAiV2luZG93cyJdLCBbImVxIiwgIiR4LWFtei1tZXRhLWlkIiwgIkFnb3hiek1FOEExVFJncmJuZ2xNIl0sIHsiYnVja2V0IjogImJsb2NrY2hhaW4tYXBpLXRoaXJkLXBhcnR5LXByb2plY3QtYmluYXJpZXMtdW5lbmNyeXB0ZWQifSwgeyJrZXkiOiAiQWdveGJ6TUU4QTFUUmdyYm5nbE0ifV19
+          signature: iJgfQd9zveVYWEE94GRJNe/apk8=
+          x-amz-meta-id: AgoxbzME8A1TRgrbnglM
+          x-amz-meta-platform: Windows
+          x-amz-meta-version: "1"
+      properties:
+        url:
+          description: |
+            The URL of the bucket where you will upload your binary
+          type: string
+        deployment_version:
+          description: |
+            An internal version tracking the version of the binary uploaded
+          type: string
+        fields:
+          description: |
+            Information necessary to sign the upload URL
+          type: object
+    StatItem:
+      example:
+        time_stamp: 1642491000
+        uid: aPzh80wU3oaiTh2esdIk7NqdIYs1
+        endpoint_id: POST:/L3cPm0cJlf5MeDXzGLQJJ4vlzndJCC/v1.0.3/nft/rarity
+        api_calls: 11
+        version: 1.0.3
+        path: nft/rarity
+      properties:
+        uid:
+          description: |
+            The anonymous ID of the user who called your endpoint
+          type: string
+        time_stamp:
+          description: |
+            The time stamp of the ten-minute interval
+          type: number
+        endpoint_id:
+          description: |
+            The full path of the endpoint (e.g., `project_id`/`version`/`path`)
+          type: string
+        api_calls:
+          description: |
+            The number of API calls by this user to this endpoint for the ten-minute interval
+          type: number
+        version:
+          description: The version of the endpoint
+          type: string
+        path:
+          description: The path of the endpoint (not inclusive of the `version` or
+            `project_id`)
+          type: string
+    EndpointReference:
+      example:
+        version: 1.0.3
+        project_id: L3cPm0cJlf5MeDXzGLQJJ4vlzndJCC
+        path: nft/rarity
+      properties:
+        project_id:
+          description: |
+            The ID of the project. This is auto-generated upon project creation and cannot currently be changed.
+          type: string
+        version:
+          description: |
+            The project version under which the endpoint exists
+          type: string
+        path:
+          description: |
+            The path of the endpoint
+          type: string
+      required:
+      - path
+      - project_id
+      - version
     Account_context:
       properties:
         slot:
@@ -3157,7 +4693,21 @@ components:
             description: The share of the seller fee
             maximum: 1
             minimum: 0
-            type: float
+            type: integer
+          type: array
+      type: object
+    NFTAnalyticsResponse_transaction_history:
+      description: "A dictionary that maps each mint address to its transaction history.\
+        \ See the example to the right (click \"Expand All\").\nThe transaction history\
+        \ consists of a list of transactions. \nEach transaction is represented by\
+        \ an object with the following properties: `block_time`, `exchange`, `exchange_readable`,\
+        \ `mint_address`, `operation`, `seller`, `buyer`, and `transaction_signature`.\n"
+      properties:
+        mint_address:
+          description: |
+            The address of the NFT
+          items:
+            $ref: '#/components/schemas/NFTTransaction'
           type: array
       type: object
     GetAllNFTsResponse_minted_nfts:
@@ -3210,3 +4760,7 @@ x-tagGroups:
 - name: Files
   tags:
   - File
+- name: API Developer Program
+  tags:
+  - Project
+  - Endpoint
