@@ -86,7 +86,7 @@ Name | Type | Description  | Notes
 
 ## CreateProjectVersion
 
-> Project CreateProjectVersion(ctx, UNKNOWN_PARAMETER_NAME, UNKNOWN_PARAMETER_NAME2).Execute()
+> Project CreateProjectVersion(ctx, projectId, version).Execute()
 
 Create a new project version 
 
@@ -105,12 +105,12 @@ import (
 )
 
 func main() {
-    UNKNOWN_PARAMETER_NAME := TODO //  | The ID of the project. Created and returned when a project is created.
-    UNKNOWN_PARAMETER_NAME2 := TODO //  | The version of the project.
+    projectId := "L3cPm0cJlf5MeDXzGLQJJ4vlzndJCC" // string | The ID of the project. Created and returned when a project is created.
+    version := "2" // string | The version of the project.
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.ProjectApi.CreateProjectVersion(context.Background(), UNKNOWN_PARAMETER_NAME, UNKNOWN_PARAMETER_NAME2).Execute()
+    resp, r, err := api_client.ProjectApi.CreateProjectVersion(context.Background(), projectId, version).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `ProjectApi.CreateProjectVersion``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -126,8 +126,8 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**UNKNOWN_PARAMETER_NAME** | [****](.md) | The ID of the project. Created and returned when a project is created. | 
-**UNKNOWN_PARAMETER_NAME2** | [****](.md) | The version of the project. | 
+**projectId** | **string** | The ID of the project. Created and returned when a project is created. | 
+**version** | **string** | The version of the project. | 
 
 ### Other Parameters
 
@@ -159,7 +159,7 @@ Name | Type | Description  | Notes
 
 ## DeleteProject
 
-> DeleteProject(ctx, UNKNOWN_PARAMETER_NAME).Execute()
+> DeleteProject(ctx, projectId).Execute()
 
 Delete a project 
 
@@ -178,11 +178,11 @@ import (
 )
 
 func main() {
-    UNKNOWN_PARAMETER_NAME := TODO //  | The ID of the project. Created and returned when a project is created.
+    projectId := "L3cPm0cJlf5MeDXzGLQJJ4vlzndJCC" // string | The ID of the project. Created and returned when a project is created.
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.ProjectApi.DeleteProject(context.Background(), UNKNOWN_PARAMETER_NAME).Execute()
+    resp, r, err := api_client.ProjectApi.DeleteProject(context.Background(), projectId).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `ProjectApi.DeleteProject``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -196,7 +196,7 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**UNKNOWN_PARAMETER_NAME** | [****](.md) | The ID of the project. Created and returned when a project is created. | 
+**projectId** | **string** | The ID of the project. Created and returned when a project is created. | 
 
 ### Other Parameters
 
@@ -227,7 +227,7 @@ Name | Type | Description  | Notes
 
 ## DeleteProjectVersion
 
-> Project DeleteProjectVersion(ctx, UNKNOWN_PARAMETER_NAME, UNKNOWN_PARAMETER_NAME2).Execute()
+> Project DeleteProjectVersion(ctx, projectId, version).Execute()
 
 Delete a project version 
 
@@ -246,12 +246,12 @@ import (
 )
 
 func main() {
-    UNKNOWN_PARAMETER_NAME := TODO //  | The ID of the project. Created and returned when a project is created.
-    UNKNOWN_PARAMETER_NAME2 := TODO //  | The version of the project.
+    projectId := "L3cPm0cJlf5MeDXzGLQJJ4vlzndJCC" // string | The ID of the project. Created and returned when a project is created.
+    version := "2" // string | The version of the project.
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.ProjectApi.DeleteProjectVersion(context.Background(), UNKNOWN_PARAMETER_NAME, UNKNOWN_PARAMETER_NAME2).Execute()
+    resp, r, err := api_client.ProjectApi.DeleteProjectVersion(context.Background(), projectId, version).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `ProjectApi.DeleteProjectVersion``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -267,8 +267,8 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**UNKNOWN_PARAMETER_NAME** | [****](.md) | The ID of the project. Created and returned when a project is created. | 
-**UNKNOWN_PARAMETER_NAME2** | [****](.md) | The version of the project. | 
+**projectId** | **string** | The ID of the project. Created and returned when a project is created. | 
+**version** | **string** | The version of the project. | 
 
 ### Other Parameters
 
@@ -300,7 +300,7 @@ Name | Type | Description  | Notes
 
 ## GetProject
 
-> Project GetProject(ctx, UNKNOWN_PARAMETER_NAME).Execute()
+> Project GetProject(ctx, projectId).Execute()
 
 Get a project's metadata 
 
@@ -319,11 +319,11 @@ import (
 )
 
 func main() {
-    UNKNOWN_PARAMETER_NAME := TODO //  | The ID of the project. Created and returned when a project is created.
+    projectId := "L3cPm0cJlf5MeDXzGLQJJ4vlzndJCC" // string | The ID of the project. Created and returned when a project is created.
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.ProjectApi.GetProject(context.Background(), UNKNOWN_PARAMETER_NAME).Execute()
+    resp, r, err := api_client.ProjectApi.GetProject(context.Background(), projectId).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `ProjectApi.GetProject``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -339,7 +339,7 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**UNKNOWN_PARAMETER_NAME** | [****](.md) | The ID of the project. Created and returned when a project is created. | 
+**projectId** | **string** | The ID of the project. Created and returned when a project is created. | 
 
 ### Other Parameters
 
@@ -370,7 +370,7 @@ Name | Type | Description  | Notes
 
 ## GetProjectDeploymentStatus
 
-> interface{} GetProjectDeploymentStatus(ctx, UNKNOWN_PARAMETER_NAME).Execute()
+> interface{} GetProjectDeploymentStatus(ctx, projectId).Execute()
 
 Get deployment status 
 
@@ -389,11 +389,11 @@ import (
 )
 
 func main() {
-    UNKNOWN_PARAMETER_NAME := TODO //  | The ID of the project. Created and returned when a project is created.
+    projectId := "L3cPm0cJlf5MeDXzGLQJJ4vlzndJCC" // string | The ID of the project. Created and returned when a project is created.
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.ProjectApi.GetProjectDeploymentStatus(context.Background(), UNKNOWN_PARAMETER_NAME).Execute()
+    resp, r, err := api_client.ProjectApi.GetProjectDeploymentStatus(context.Background(), projectId).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `ProjectApi.GetProjectDeploymentStatus``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -409,7 +409,7 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**UNKNOWN_PARAMETER_NAME** | [****](.md) | The ID of the project. Created and returned when a project is created. | 
+**projectId** | **string** | The ID of the project. Created and returned when a project is created. | 
 
 ### Other Parameters
 
@@ -440,7 +440,7 @@ Name | Type | Description  | Notes
 
 ## GetProjectDeploymentURL
 
-> ProjectDeploymentURL GetProjectDeploymentURL(ctx, UNKNOWN_PARAMETER_NAME).UNKNOWNBASETYPE(uNKNOWNBASETYPE).Execute()
+> ProjectDeploymentURL GetProjectDeploymentURL(ctx, projectId).InlineObject(inlineObject).Execute()
 
 Get the deployment URL 
 
@@ -459,12 +459,12 @@ import (
 )
 
 func main() {
-    UNKNOWN_PARAMETER_NAME := TODO //  | The ID of the project. Created and returned when a project is created.
-    uNKNOWNBASETYPE := TODO // UNKNOWN_BASE_TYPE |  (optional)
+    projectId := "L3cPm0cJlf5MeDXzGLQJJ4vlzndJCC" // string | The ID of the project. Created and returned when a project is created.
+    inlineObject := *openapiclient.NewInlineObject() // InlineObject |  (optional)
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.ProjectApi.GetProjectDeploymentURL(context.Background(), UNKNOWN_PARAMETER_NAME).UNKNOWNBASETYPE(uNKNOWNBASETYPE).Execute()
+    resp, r, err := api_client.ProjectApi.GetProjectDeploymentURL(context.Background(), projectId).InlineObject(inlineObject).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `ProjectApi.GetProjectDeploymentURL``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -480,7 +480,7 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**UNKNOWN_PARAMETER_NAME** | [****](.md) | The ID of the project. Created and returned when a project is created. | 
+**projectId** | **string** | The ID of the project. Created and returned when a project is created. | 
 
 ### Other Parameters
 
@@ -490,7 +490,7 @@ Other parameters are passed through a pointer to a apiGetProjectDeploymentURLReq
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
- **uNKNOWNBASETYPE** | [**UNKNOWN_BASE_TYPE**](UNKNOWN_BASE_TYPE.md) |  | 
+ **inlineObject** | [**InlineObject**](InlineObject.md) |  | 
 
 ### Return type
 
@@ -512,7 +512,7 @@ Name | Type | Description  | Notes
 
 ## GetProjectStats
 
-> []StatItem GetProjectStats(ctx, UNKNOWN_PARAMETER_NAME).Execute()
+> []StatItem GetProjectStats(ctx, projectId).Execute()
 
 Get a project's stats 
 
@@ -531,11 +531,11 @@ import (
 )
 
 func main() {
-    UNKNOWN_PARAMETER_NAME := TODO //  | The ID of the project. Created and returned when a project is created.
+    projectId := "L3cPm0cJlf5MeDXzGLQJJ4vlzndJCC" // string | The ID of the project. Created and returned when a project is created.
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.ProjectApi.GetProjectStats(context.Background(), UNKNOWN_PARAMETER_NAME).Execute()
+    resp, r, err := api_client.ProjectApi.GetProjectStats(context.Background(), projectId).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `ProjectApi.GetProjectStats``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -551,7 +551,7 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**UNKNOWN_PARAMETER_NAME** | [****](.md) | The ID of the project. Created and returned when a project is created. | 
+**projectId** | **string** | The ID of the project. Created and returned when a project is created. | 
 
 ### Other Parameters
 
@@ -643,7 +643,7 @@ Other parameters are passed through a pointer to a apiListProjectsRequest struct
 
 ## UpdateProject
 
-> Project UpdateProject(ctx, UNKNOWN_PARAMETER_NAME).ProjectCreateRequest(projectCreateRequest).Execute()
+> Project UpdateProject(ctx, projectId).ProjectCreateRequest(projectCreateRequest).Execute()
 
 Update a project 
 
@@ -662,12 +662,12 @@ import (
 )
 
 func main() {
-    UNKNOWN_PARAMETER_NAME := TODO //  | The ID of the project. Created and returned when a project is created.
+    projectId := "L3cPm0cJlf5MeDXzGLQJJ4vlzndJCC" // string | The ID of the project. Created and returned when a project is created.
     projectCreateRequest := *openapiclient.NewProjectCreateRequest() // ProjectCreateRequest |  (optional)
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.ProjectApi.UpdateProject(context.Background(), UNKNOWN_PARAMETER_NAME).ProjectCreateRequest(projectCreateRequest).Execute()
+    resp, r, err := api_client.ProjectApi.UpdateProject(context.Background(), projectId).ProjectCreateRequest(projectCreateRequest).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `ProjectApi.UpdateProject``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -683,7 +683,7 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**UNKNOWN_PARAMETER_NAME** | [****](.md) | The ID of the project. Created and returned when a project is created. | 
+**projectId** | **string** | The ID of the project. Created and returned when a project is created. | 
 
 ### Other Parameters
 
@@ -715,7 +715,7 @@ Name | Type | Description  | Notes
 
 ## UpdateProjectDocumentation
 
-> Project UpdateProjectDocumentation(ctx, UNKNOWN_PARAMETER_NAME, UNKNOWN_PARAMETER_NAME2).Execute()
+> Project UpdateProjectDocumentation(ctx, projectId, version).Execute()
 
 Update the project's documentation 
 
@@ -734,12 +734,12 @@ import (
 )
 
 func main() {
-    UNKNOWN_PARAMETER_NAME := TODO //  | The ID of the project. Created and returned when a project is created.
-    UNKNOWN_PARAMETER_NAME2 := TODO //  | The version of the project.
+    projectId := "L3cPm0cJlf5MeDXzGLQJJ4vlzndJCC" // string | The ID of the project. Created and returned when a project is created.
+    version := "2" // string | The version of the project.
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.ProjectApi.UpdateProjectDocumentation(context.Background(), UNKNOWN_PARAMETER_NAME, UNKNOWN_PARAMETER_NAME2).Execute()
+    resp, r, err := api_client.ProjectApi.UpdateProjectDocumentation(context.Background(), projectId, version).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `ProjectApi.UpdateProjectDocumentation``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -755,8 +755,8 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**UNKNOWN_PARAMETER_NAME** | [****](.md) | The ID of the project. Created and returned when a project is created. | 
-**UNKNOWN_PARAMETER_NAME2** | [****](.md) | The version of the project. | 
+**projectId** | **string** | The ID of the project. Created and returned when a project is created. | 
+**version** | **string** | The version of the project. | 
 
 ### Other Parameters
 

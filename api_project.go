@@ -176,8 +176,8 @@ func (a *ProjectApiService) CreateProjectExecute(r ApiCreateProjectRequest) (Pro
 type ApiCreateProjectVersionRequest struct {
 	ctx _context.Context
 	ApiService *ProjectApiService
-	UNKNOWN_PARAMETER_NAME 
-	UNKNOWN_PARAMETER_NAME2 
+	projectId string
+	version string
 }
 
 
@@ -197,16 +197,16 @@ When a project is first created, it uses the default "0.0.1" version.
 `Cost: 0 Credit` (Free) (<a href="#section/Pricing">See Pricing</a>)
 
  @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param UNKNOWN_PARAMETER_NAME The ID of the project. Created and returned when a project is created.
- @param UNKNOWN_PARAMETER_NAME2 The version of the project.
+ @param projectId The ID of the project. Created and returned when a project is created.
+ @param version The version of the project.
  @return ApiCreateProjectVersionRequest
 */
-func (a *ProjectApiService) CreateProjectVersion(ctx _context.Context, UNKNOWN_PARAMETER_NAME , UNKNOWN_PARAMETER_NAME2 ) ApiCreateProjectVersionRequest {
+func (a *ProjectApiService) CreateProjectVersion(ctx _context.Context, projectId string, version string) ApiCreateProjectVersionRequest {
 	return ApiCreateProjectVersionRequest{
 		ApiService: a,
 		ctx: ctx,
-		UNKNOWN_PARAMETER_NAME: UNKNOWN_PARAMETER_NAME,
-		UNKNOWN_PARAMETER_NAME2: UNKNOWN_PARAMETER_NAME2,
+		projectId: projectId,
+		version: version,
 	}
 }
 
@@ -228,8 +228,8 @@ func (a *ProjectApiService) CreateProjectVersionExecute(r ApiCreateProjectVersio
 	}
 
 	localVarPath := localBasePath + "/project/{project_id}/{version}"
-	localVarPath = strings.Replace(localVarPath, "{"+"project_id"+"}", _neturl.PathEscape(parameterToString(r.UNKNOWN_PARAMETER_NAME, "")), -1)
-	localVarPath = strings.Replace(localVarPath, "{"+"version"+"}", _neturl.PathEscape(parameterToString(r.UNKNOWN_PARAMETER_NAME2, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"project_id"+"}", _neturl.PathEscape(parameterToString(r.projectId, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"version"+"}", _neturl.PathEscape(parameterToString(r.version, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := _neturl.Values{}
@@ -320,7 +320,7 @@ func (a *ProjectApiService) CreateProjectVersionExecute(r ApiCreateProjectVersio
 type ApiDeleteProjectRequest struct {
 	ctx _context.Context
 	ApiService *ProjectApiService
-	UNKNOWN_PARAMETER_NAME 
+	projectId string
 }
 
 
@@ -338,14 +338,14 @@ Deletes a project. This will remove the mini-API entirely from our system.
 `Cost: 0 Credit` (Free) (<a href="#section/Pricing">See Pricing</a>)
 
  @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param UNKNOWN_PARAMETER_NAME The ID of the project. Created and returned when a project is created.
+ @param projectId The ID of the project. Created and returned when a project is created.
  @return ApiDeleteProjectRequest
 */
-func (a *ProjectApiService) DeleteProject(ctx _context.Context, UNKNOWN_PARAMETER_NAME ) ApiDeleteProjectRequest {
+func (a *ProjectApiService) DeleteProject(ctx _context.Context, projectId string) ApiDeleteProjectRequest {
 	return ApiDeleteProjectRequest{
 		ApiService: a,
 		ctx: ctx,
-		UNKNOWN_PARAMETER_NAME: UNKNOWN_PARAMETER_NAME,
+		projectId: projectId,
 	}
 }
 
@@ -365,7 +365,7 @@ func (a *ProjectApiService) DeleteProjectExecute(r ApiDeleteProjectRequest) (*_n
 	}
 
 	localVarPath := localBasePath + "/project/{project_id}"
-	localVarPath = strings.Replace(localVarPath, "{"+"project_id"+"}", _neturl.PathEscape(parameterToString(r.UNKNOWN_PARAMETER_NAME, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"project_id"+"}", _neturl.PathEscape(parameterToString(r.projectId, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := _neturl.Values{}
@@ -447,8 +447,8 @@ func (a *ProjectApiService) DeleteProjectExecute(r ApiDeleteProjectRequest) (*_n
 type ApiDeleteProjectVersionRequest struct {
 	ctx _context.Context
 	ApiService *ProjectApiService
-	UNKNOWN_PARAMETER_NAME 
-	UNKNOWN_PARAMETER_NAME2 
+	projectId string
+	version string
 }
 
 
@@ -466,16 +466,16 @@ Delete a version for the project. There must always be at least one version depl
 `Cost: 0 Credit` (Free) (<a href="#section/Pricing">See Pricing</a>)
 
  @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param UNKNOWN_PARAMETER_NAME The ID of the project. Created and returned when a project is created.
- @param UNKNOWN_PARAMETER_NAME2 The version of the project.
+ @param projectId The ID of the project. Created and returned when a project is created.
+ @param version The version of the project.
  @return ApiDeleteProjectVersionRequest
 */
-func (a *ProjectApiService) DeleteProjectVersion(ctx _context.Context, UNKNOWN_PARAMETER_NAME , UNKNOWN_PARAMETER_NAME2 ) ApiDeleteProjectVersionRequest {
+func (a *ProjectApiService) DeleteProjectVersion(ctx _context.Context, projectId string, version string) ApiDeleteProjectVersionRequest {
 	return ApiDeleteProjectVersionRequest{
 		ApiService: a,
 		ctx: ctx,
-		UNKNOWN_PARAMETER_NAME: UNKNOWN_PARAMETER_NAME,
-		UNKNOWN_PARAMETER_NAME2: UNKNOWN_PARAMETER_NAME2,
+		projectId: projectId,
+		version: version,
 	}
 }
 
@@ -497,8 +497,8 @@ func (a *ProjectApiService) DeleteProjectVersionExecute(r ApiDeleteProjectVersio
 	}
 
 	localVarPath := localBasePath + "/project/{project_id}/{version}"
-	localVarPath = strings.Replace(localVarPath, "{"+"project_id"+"}", _neturl.PathEscape(parameterToString(r.UNKNOWN_PARAMETER_NAME, "")), -1)
-	localVarPath = strings.Replace(localVarPath, "{"+"version"+"}", _neturl.PathEscape(parameterToString(r.UNKNOWN_PARAMETER_NAME2, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"project_id"+"}", _neturl.PathEscape(parameterToString(r.projectId, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"version"+"}", _neturl.PathEscape(parameterToString(r.version, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := _neturl.Values{}
@@ -589,7 +589,7 @@ func (a *ProjectApiService) DeleteProjectVersionExecute(r ApiDeleteProjectVersio
 type ApiGetProjectRequest struct {
 	ctx _context.Context
 	ApiService *ProjectApiService
-	UNKNOWN_PARAMETER_NAME 
+	projectId string
 }
 
 
@@ -607,14 +607,14 @@ Update your project's metadata. None of these parameters are required. Just prov
 `Cost: 0 Credit` (Free) (<a href="#section/Pricing">See Pricing</a>)
 
  @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param UNKNOWN_PARAMETER_NAME The ID of the project. Created and returned when a project is created.
+ @param projectId The ID of the project. Created and returned when a project is created.
  @return ApiGetProjectRequest
 */
-func (a *ProjectApiService) GetProject(ctx _context.Context, UNKNOWN_PARAMETER_NAME ) ApiGetProjectRequest {
+func (a *ProjectApiService) GetProject(ctx _context.Context, projectId string) ApiGetProjectRequest {
 	return ApiGetProjectRequest{
 		ApiService: a,
 		ctx: ctx,
-		UNKNOWN_PARAMETER_NAME: UNKNOWN_PARAMETER_NAME,
+		projectId: projectId,
 	}
 }
 
@@ -636,7 +636,7 @@ func (a *ProjectApiService) GetProjectExecute(r ApiGetProjectRequest) (Project, 
 	}
 
 	localVarPath := localBasePath + "/project/{project_id}"
-	localVarPath = strings.Replace(localVarPath, "{"+"project_id"+"}", _neturl.PathEscape(parameterToString(r.UNKNOWN_PARAMETER_NAME, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"project_id"+"}", _neturl.PathEscape(parameterToString(r.projectId, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := _neturl.Values{}
@@ -727,7 +727,7 @@ func (a *ProjectApiService) GetProjectExecute(r ApiGetProjectRequest) (Project, 
 type ApiGetProjectDeploymentStatusRequest struct {
 	ctx _context.Context
 	ApiService *ProjectApiService
-	UNKNOWN_PARAMETER_NAME 
+	projectId string
 }
 
 
@@ -747,14 +747,14 @@ After it is `DEPLOYED`, you can then make requests to your API.
 `Cost: 0 Credit` (Free) (<a href="#section/Pricing">See Pricing</a>)
 
  @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param UNKNOWN_PARAMETER_NAME The ID of the project. Created and returned when a project is created.
+ @param projectId The ID of the project. Created and returned when a project is created.
  @return ApiGetProjectDeploymentStatusRequest
 */
-func (a *ProjectApiService) GetProjectDeploymentStatus(ctx _context.Context, UNKNOWN_PARAMETER_NAME ) ApiGetProjectDeploymentStatusRequest {
+func (a *ProjectApiService) GetProjectDeploymentStatus(ctx _context.Context, projectId string) ApiGetProjectDeploymentStatusRequest {
 	return ApiGetProjectDeploymentStatusRequest{
 		ApiService: a,
 		ctx: ctx,
-		UNKNOWN_PARAMETER_NAME: UNKNOWN_PARAMETER_NAME,
+		projectId: projectId,
 	}
 }
 
@@ -776,7 +776,7 @@ func (a *ProjectApiService) GetProjectDeploymentStatusExecute(r ApiGetProjectDep
 	}
 
 	localVarPath := localBasePath + "/project/{project_id}/deploy/status"
-	localVarPath = strings.Replace(localVarPath, "{"+"project_id"+"}", _neturl.PathEscape(parameterToString(r.UNKNOWN_PARAMETER_NAME, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"project_id"+"}", _neturl.PathEscape(parameterToString(r.projectId, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := _neturl.Values{}
@@ -867,12 +867,12 @@ func (a *ProjectApiService) GetProjectDeploymentStatusExecute(r ApiGetProjectDep
 type ApiGetProjectDeploymentURLRequest struct {
 	ctx _context.Context
 	ApiService *ProjectApiService
-	UNKNOWN_PARAMETER_NAME 
-	uNKNOWNBASETYPE *UNKNOWN_BASE_TYPE
+	projectId string
+	inlineObject *InlineObject
 }
 
-func (r ApiGetProjectDeploymentURLRequest) UNKNOWNBASETYPE(uNKNOWNBASETYPE UNKNOWN_BASE_TYPE) ApiGetProjectDeploymentURLRequest {
-	r.uNKNOWNBASETYPE = &uNKNOWNBASETYPE
+func (r ApiGetProjectDeploymentURLRequest) InlineObject(inlineObject InlineObject) ApiGetProjectDeploymentURLRequest {
+	r.inlineObject = &inlineObject
 	return r
 }
 
@@ -890,14 +890,14 @@ Get the deployment URL for the project.
 `Cost: 0 Credit` (Free) (<a href="#section/Pricing">See Pricing</a>)
 
  @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param UNKNOWN_PARAMETER_NAME The ID of the project. Created and returned when a project is created.
+ @param projectId The ID of the project. Created and returned when a project is created.
  @return ApiGetProjectDeploymentURLRequest
 */
-func (a *ProjectApiService) GetProjectDeploymentURL(ctx _context.Context, UNKNOWN_PARAMETER_NAME ) ApiGetProjectDeploymentURLRequest {
+func (a *ProjectApiService) GetProjectDeploymentURL(ctx _context.Context, projectId string) ApiGetProjectDeploymentURLRequest {
 	return ApiGetProjectDeploymentURLRequest{
 		ApiService: a,
 		ctx: ctx,
-		UNKNOWN_PARAMETER_NAME: UNKNOWN_PARAMETER_NAME,
+		projectId: projectId,
 	}
 }
 
@@ -919,7 +919,7 @@ func (a *ProjectApiService) GetProjectDeploymentURLExecute(r ApiGetProjectDeploy
 	}
 
 	localVarPath := localBasePath + "/project/{project_id}/deploy/url"
-	localVarPath = strings.Replace(localVarPath, "{"+"project_id"+"}", _neturl.PathEscape(parameterToString(r.UNKNOWN_PARAMETER_NAME, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"project_id"+"}", _neturl.PathEscape(parameterToString(r.projectId, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := _neturl.Values{}
@@ -943,7 +943,7 @@ func (a *ProjectApiService) GetProjectDeploymentURLExecute(r ApiGetProjectDeploy
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	// body params
-	localVarPostBody = r.uNKNOWNBASETYPE
+	localVarPostBody = r.inlineObject
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
@@ -1012,7 +1012,7 @@ func (a *ProjectApiService) GetProjectDeploymentURLExecute(r ApiGetProjectDeploy
 type ApiGetProjectStatsRequest struct {
 	ctx _context.Context
 	ApiService *ProjectApiService
-	UNKNOWN_PARAMETER_NAME 
+	projectId string
 }
 
 
@@ -1030,14 +1030,14 @@ Get the usage stats for your mini-API.
 `Cost: 0 Credit` (Free) (<a href="#section/Pricing">See Pricing</a>)
 
  @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param UNKNOWN_PARAMETER_NAME The ID of the project. Created and returned when a project is created.
+ @param projectId The ID of the project. Created and returned when a project is created.
  @return ApiGetProjectStatsRequest
 */
-func (a *ProjectApiService) GetProjectStats(ctx _context.Context, UNKNOWN_PARAMETER_NAME ) ApiGetProjectStatsRequest {
+func (a *ProjectApiService) GetProjectStats(ctx _context.Context, projectId string) ApiGetProjectStatsRequest {
 	return ApiGetProjectStatsRequest{
 		ApiService: a,
 		ctx: ctx,
-		UNKNOWN_PARAMETER_NAME: UNKNOWN_PARAMETER_NAME,
+		projectId: projectId,
 	}
 }
 
@@ -1059,7 +1059,7 @@ func (a *ProjectApiService) GetProjectStatsExecute(r ApiGetProjectStatsRequest) 
 	}
 
 	localVarPath := localBasePath + "/project/{project_id}/stats"
-	localVarPath = strings.Replace(localVarPath, "{"+"project_id"+"}", _neturl.PathEscape(parameterToString(r.UNKNOWN_PARAMETER_NAME, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"project_id"+"}", _neturl.PathEscape(parameterToString(r.projectId, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := _neturl.Values{}
@@ -1284,7 +1284,7 @@ func (a *ProjectApiService) ListProjectsExecute(r ApiListProjectsRequest) ([]Pro
 type ApiUpdateProjectRequest struct {
 	ctx _context.Context
 	ApiService *ProjectApiService
-	UNKNOWN_PARAMETER_NAME 
+	projectId string
 	projectCreateRequest *ProjectCreateRequest
 }
 
@@ -1307,14 +1307,14 @@ Update your project's metadata. None of these parameters are required. Just prov
 `Cost: 0 Credit` (Free) (<a href="#section/Pricing">See Pricing</a>)
 
  @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param UNKNOWN_PARAMETER_NAME The ID of the project. Created and returned when a project is created.
+ @param projectId The ID of the project. Created and returned when a project is created.
  @return ApiUpdateProjectRequest
 */
-func (a *ProjectApiService) UpdateProject(ctx _context.Context, UNKNOWN_PARAMETER_NAME ) ApiUpdateProjectRequest {
+func (a *ProjectApiService) UpdateProject(ctx _context.Context, projectId string) ApiUpdateProjectRequest {
 	return ApiUpdateProjectRequest{
 		ApiService: a,
 		ctx: ctx,
-		UNKNOWN_PARAMETER_NAME: UNKNOWN_PARAMETER_NAME,
+		projectId: projectId,
 	}
 }
 
@@ -1336,7 +1336,7 @@ func (a *ProjectApiService) UpdateProjectExecute(r ApiUpdateProjectRequest) (Pro
 	}
 
 	localVarPath := localBasePath + "/project/{project_id}"
-	localVarPath = strings.Replace(localVarPath, "{"+"project_id"+"}", _neturl.PathEscape(parameterToString(r.UNKNOWN_PARAMETER_NAME, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"project_id"+"}", _neturl.PathEscape(parameterToString(r.projectId, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := _neturl.Values{}
@@ -1429,8 +1429,8 @@ func (a *ProjectApiService) UpdateProjectExecute(r ApiUpdateProjectRequest) (Pro
 type ApiUpdateProjectDocumentationRequest struct {
 	ctx _context.Context
 	ApiService *ProjectApiService
-	UNKNOWN_PARAMETER_NAME 
-	UNKNOWN_PARAMETER_NAME2 
+	projectId string
+	version string
 }
 
 
@@ -1452,16 +1452,16 @@ Thus, when you call this, the `current_documentation_version` attribute of your 
 `Cost: 0 Credit` (Free) (<a href="#section/Pricing">See Pricing</a>)
 
  @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param UNKNOWN_PARAMETER_NAME The ID of the project. Created and returned when a project is created.
- @param UNKNOWN_PARAMETER_NAME2 The version of the project.
+ @param projectId The ID of the project. Created and returned when a project is created.
+ @param version The version of the project.
  @return ApiUpdateProjectDocumentationRequest
 */
-func (a *ProjectApiService) UpdateProjectDocumentation(ctx _context.Context, UNKNOWN_PARAMETER_NAME , UNKNOWN_PARAMETER_NAME2 ) ApiUpdateProjectDocumentationRequest {
+func (a *ProjectApiService) UpdateProjectDocumentation(ctx _context.Context, projectId string, version string) ApiUpdateProjectDocumentationRequest {
 	return ApiUpdateProjectDocumentationRequest{
 		ApiService: a,
 		ctx: ctx,
-		UNKNOWN_PARAMETER_NAME: UNKNOWN_PARAMETER_NAME,
-		UNKNOWN_PARAMETER_NAME2: UNKNOWN_PARAMETER_NAME2,
+		projectId: projectId,
+		version: version,
 	}
 }
 
@@ -1483,8 +1483,8 @@ func (a *ProjectApiService) UpdateProjectDocumentationExecute(r ApiUpdateProject
 	}
 
 	localVarPath := localBasePath + "/project/{project_id}/{version}/documentation"
-	localVarPath = strings.Replace(localVarPath, "{"+"project_id"+"}", _neturl.PathEscape(parameterToString(r.UNKNOWN_PARAMETER_NAME, "")), -1)
-	localVarPath = strings.Replace(localVarPath, "{"+"version"+"}", _neturl.PathEscape(parameterToString(r.UNKNOWN_PARAMETER_NAME2, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"project_id"+"}", _neturl.PathEscape(parameterToString(r.projectId, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"version"+"}", _neturl.PathEscape(parameterToString(r.version, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := _neturl.Values{}

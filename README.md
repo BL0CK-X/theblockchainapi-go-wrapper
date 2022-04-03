@@ -280,6 +280,7 @@ Class | Method | HTTP request | Description
  - [GetPublicKeyRequest](docs/GetPublicKeyRequest.md)
  - [GetSPLTokenResponse](docs/GetSPLTokenResponse.md)
  - [Group](docs/Group.md)
+ - [InlineObject](docs/InlineObject.md)
  - [ListNFTsResponse](docs/ListNFTsResponse.md)
  - [ListRequest](docs/ListRequest.md)
  - [ListResponse](docs/ListResponse.md)

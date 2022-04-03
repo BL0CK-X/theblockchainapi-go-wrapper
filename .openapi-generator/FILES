@@ -52,6 +52,7 @@ docs/GetNFTListingResponse.md
 docs/GetPublicKeyRequest.md
 docs/GetSPLTokenResponse.md
 docs/Group.md
+docs/InlineObject.md
 docs/ListNFTsResponse.md
 docs/ListRequest.md
 docs/ListResponse.md
@@ -133,6 +134,7 @@ model_get_nft_listing_response.go
 model_get_public_key_request.go
 model_get_spl_token_response.go
 model_group.go
+model_inline_object.go
 model_list_nfts_response.go
 model_list_request.go
 model_list_response.go
