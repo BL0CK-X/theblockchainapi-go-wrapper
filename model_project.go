@@ -28,11 +28,11 @@ type Project struct {
 	// The version of the API that the documentation is updated for. You can set the documentation version to any valid version. To see how to format the version string, see the description for `versions`. 
 	CurrentDocumentationVersion *string `json:"current_documentation_version,omitempty"`
 	// The live versions of the project. An array of strings. We use Python's `version` package to see if it's a valid version and to compare versions (to see which is higher).  Read more about this Python package <a href=\"https://packaging.pypa.io/en/latest/version.html#packaging.version.parse\" target=\"_blank\">here</a>.
-	Versions *[]string `json:"versions,omitempty"`
+	Versions []string `json:"versions,omitempty"`
 	// A list of groups. A section contains groups, and groups contain API endpoints.  
-	Groups *[]Group `json:"groups,omitempty"`
+	Groups []Group `json:"groups,omitempty"`
 	// A list of groups. A section contains groups, and groups contain API endpoints.  
-	Endpoints *[]Endpoint `json:"endpoints,omitempty"`
+	Endpoints []Endpoint `json:"endpoints,omitempty"`
 }
 
 // NewProject instantiates a new Project object
@@ -218,12 +218,12 @@ func (o *Project) GetVersions() []string {
 		var ret []string
 		return ret
 	}
-	return *o.Versions
+	return o.Versions
 }
 
 // GetVersionsOk returns a tuple with the Versions field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *Project) GetVersionsOk() (*[]string, bool) {
+func (o *Project) GetVersionsOk() ([]string, bool) {
 	if o == nil || o.Versions == nil {
 		return nil, false
 	}
@@ -241,7 +241,7 @@ func (o *Project) HasVersions() bool {
 
 // SetVersions gets a reference to the given []string and assigns it to the Versions field.
 func (o *Project) SetVersions(v []string) {
-	o.Versions = &v
+	o.Versions = v
 }
 
 // GetGroups returns the Groups field value if set, zero value otherwise.
@@ -250,12 +250,12 @@ func (o *Project) GetGroups() []Group {
 		var ret []Group
 		return ret
 	}
-	return *o.Groups
+	return o.Groups
 }
 
 // GetGroupsOk returns a tuple with the Groups field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *Project) GetGroupsOk() (*[]Group, bool) {
+func (o *Project) GetGroupsOk() ([]Group, bool) {
 	if o == nil || o.Groups == nil {
 		return nil, false
 	}
@@ -273,7 +273,7 @@ func (o *Project) HasGroups() bool {
 
 // SetGroups gets a reference to the given []Group and assigns it to the Groups field.
 func (o *Project) SetGroups(v []Group) {
-	o.Groups = &v
+	o.Groups = v
 }
 
 // GetEndpoints returns the Endpoints field value if set, zero value otherwise.
@@ -282,12 +282,12 @@ func (o *Project) GetEndpoints() []Endpoint {
 		var ret []Endpoint
 		return ret
 	}
-	return *o.Endpoints
+	return o.Endpoints
 }
 
 // GetEndpointsOk returns a tuple with the Endpoints field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *Project) GetEndpointsOk() (*[]Endpoint, bool) {
+func (o *Project) GetEndpointsOk() ([]Endpoint, bool) {
 	if o == nil || o.Endpoints == nil {
 		return nil, false
 	}
@@ -305,7 +305,7 @@ func (o *Project) HasEndpoints() bool {
 
 // SetEndpoints gets a reference to the given []Endpoint and assigns it to the Endpoints field.
 func (o *Project) SetEndpoints(v []Endpoint) {
-	o.Endpoints = &v
+	o.Endpoints = v
 }
 
 func (o Project) MarshalJSON() ([]byte, error) {

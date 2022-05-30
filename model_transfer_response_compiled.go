@@ -20,7 +20,7 @@ type TransferResponseCompiled struct {
 	// A base58 encoded byte array in string representation. Really easy to submit to Phantom. See <a href=\"https://github.com/BL0CK-X/blockchain-api/blob/main/examples/tutorials/phantom_tutorials/transfer_solana.html\" target=\"_blank\">here</a> for an example on how to submit it to a Phantom wallet for signing.
 	B58CompiledTransaction *string `json:"b58_compiled_transaction,omitempty"`
 	// An array of integers representing the bytes of the transaction
-	CompiledTransaction *map[string]interface{} `json:"compiled_transaction,omitempty"`
+	CompiledTransaction map[string]interface{} `json:"compiled_transaction,omitempty"`
 }
 
 // NewTransferResponseCompiled instantiates a new TransferResponseCompiled object
@@ -78,12 +78,12 @@ func (o *TransferResponseCompiled) GetCompiledTransaction() map[string]interface
 		var ret map[string]interface{}
 		return ret
 	}
-	return *o.CompiledTransaction
+	return o.CompiledTransaction
 }
 
 // GetCompiledTransactionOk returns a tuple with the CompiledTransaction field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *TransferResponseCompiled) GetCompiledTransactionOk() (*map[string]interface{}, bool) {
+func (o *TransferResponseCompiled) GetCompiledTransactionOk() (map[string]interface{}, bool) {
 	if o == nil || o.CompiledTransaction == nil {
 		return nil, false
 	}
@@ -101,7 +101,7 @@ func (o *TransferResponseCompiled) HasCompiledTransaction() bool {
 
 // SetCompiledTransaction gets a reference to the given map[string]interface{} and assigns it to the CompiledTransaction field.
 func (o *TransferResponseCompiled) SetCompiledTransaction(v map[string]interface{}) {
-	o.CompiledTransaction = &v
+	o.CompiledTransaction = v
 }
 
 func (o TransferResponseCompiled) MarshalJSON() ([]byte, error) {

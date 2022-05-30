@@ -18,9 +18,9 @@ import (
 // TransactionResult struct for TransactionResult
 type TransactionResult struct {
 	BlockTime *float32 `json:"block_time,omitempty"`
-	Meta *map[string]interface{} `json:"meta,omitempty"`
+	Meta map[string]interface{} `json:"meta,omitempty"`
 	Slot *float32 `json:"slot,omitempty"`
-	Transaction *map[string]interface{} `json:"transaction,omitempty"`
+	Transaction map[string]interface{} `json:"transaction,omitempty"`
 }
 
 // NewTransactionResult instantiates a new TransactionResult object
@@ -78,12 +78,12 @@ func (o *TransactionResult) GetMeta() map[string]interface{} {
 		var ret map[string]interface{}
 		return ret
 	}
-	return *o.Meta
+	return o.Meta
 }
 
 // GetMetaOk returns a tuple with the Meta field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *TransactionResult) GetMetaOk() (*map[string]interface{}, bool) {
+func (o *TransactionResult) GetMetaOk() (map[string]interface{}, bool) {
 	if o == nil || o.Meta == nil {
 		return nil, false
 	}
@@ -101,7 +101,7 @@ func (o *TransactionResult) HasMeta() bool {
 
 // SetMeta gets a reference to the given map[string]interface{} and assigns it to the Meta field.
 func (o *TransactionResult) SetMeta(v map[string]interface{}) {
-	o.Meta = &v
+	o.Meta = v
 }
 
 // GetSlot returns the Slot field value if set, zero value otherwise.
@@ -142,12 +142,12 @@ func (o *TransactionResult) GetTransaction() map[string]interface{} {
 		var ret map[string]interface{}
 		return ret
 	}
-	return *o.Transaction
+	return o.Transaction
 }
 
 // GetTransactionOk returns a tuple with the Transaction field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *TransactionResult) GetTransactionOk() (*map[string]interface{}, bool) {
+func (o *TransactionResult) GetTransactionOk() (map[string]interface{}, bool) {
 	if o == nil || o.Transaction == nil {
 		return nil, false
 	}
@@ -165,7 +165,7 @@ func (o *TransactionResult) HasTransaction() bool {
 
 // SetTransaction gets a reference to the given map[string]interface{} and assigns it to the Transaction field.
 func (o *TransactionResult) SetTransaction(v map[string]interface{}) {
-	o.Transaction = &v
+	o.Transaction = v
 }
 
 func (o TransactionResult) MarshalJSON() ([]byte, error) {

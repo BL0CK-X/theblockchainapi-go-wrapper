@@ -25,17 +25,23 @@ type Wallet struct {
 
 // B58PrivateKeyAsWallet is a convenience function that returns B58PrivateKey wrapped in Wallet
 func B58PrivateKeyAsWallet(v *B58PrivateKey) Wallet {
-	return Wallet{ B58PrivateKey: v}
+	return Wallet{
+		B58PrivateKey: v,
+	}
 }
 
 // PrivateKeyAsWallet is a convenience function that returns PrivateKey wrapped in Wallet
 func PrivateKeyAsWallet(v *PrivateKey) Wallet {
-	return Wallet{ PrivateKey: v}
+	return Wallet{
+		PrivateKey: v,
+	}
 }
 
 // SecretRecoveryPhraseAsWallet is a convenience function that returns SecretRecoveryPhrase wrapped in Wallet
 func SecretRecoveryPhraseAsWallet(v *SecretRecoveryPhrase) Wallet {
-	return Wallet{ SecretRecoveryPhrase: v}
+	return Wallet{
+		SecretRecoveryPhrase: v,
+	}
 }
 
 
@@ -44,7 +50,7 @@ func (dst *Wallet) UnmarshalJSON(data []byte) error {
 	var err error
 	match := 0
 	// try to unmarshal data into B58PrivateKey
-	err = json.Unmarshal(data, &dst.B58PrivateKey)
+	err = newStrictDecoder(data).Decode(&dst.B58PrivateKey)
 	if err == nil {
 		jsonB58PrivateKey, _ := json.Marshal(dst.B58PrivateKey)
 		if string(jsonB58PrivateKey) == "{}" { // empty struct
@@ -57,7 +63,7 @@ func (dst *Wallet) UnmarshalJSON(data []byte) error {
 	}
 
 	// try to unmarshal data into PrivateKey
-	err = json.Unmarshal(data, &dst.PrivateKey)
+	err = newStrictDecoder(data).Decode(&dst.PrivateKey)
 	if err == nil {
 		jsonPrivateKey, _ := json.Marshal(dst.PrivateKey)
 		if string(jsonPrivateKey) == "{}" { // empty struct
@@ -70,7 +76,7 @@ func (dst *Wallet) UnmarshalJSON(data []byte) error {
 	}
 
 	// try to unmarshal data into SecretRecoveryPhrase
-	err = json.Unmarshal(data, &dst.SecretRecoveryPhrase)
+	err = newStrictDecoder(data).Decode(&dst.SecretRecoveryPhrase)
 	if err == nil {
 		jsonSecretRecoveryPhrase, _ := json.Marshal(dst.SecretRecoveryPhrase)
 		if string(jsonSecretRecoveryPhrase) == "{}" { // empty struct
@@ -115,6 +121,9 @@ func (src Wallet) MarshalJSON() ([]byte, error) {
 
 // Get the actual instance
 func (obj *Wallet) GetActualInstance() (interface{}) {
+	if obj == nil {
+		return nil
+	}
 	if obj.B58PrivateKey != nil {
 		return obj.B58PrivateKey
 	}

@@ -18,17 +18,17 @@ import (
 // NFTData struct for NFTData
 type NFTData struct {
 	// The creators of the NFT 
-	Creators *[]string `json:"creators,omitempty"`
+	Creators []string `json:"creators,omitempty"`
 	// The name of the NFT 
 	Name *string `json:"name,omitempty"`
 	// The portion of the seller fee that each creator receives. Index 0 corresponds to creator at index 0 in the creator array, and so on. Length of share array must be the same as the length of the creator array. 
-	Share *[]float32 `json:"share,omitempty"`
+	Share []float32 `json:"share,omitempty"`
 	// The symbol of the NFT 
 	Symbol *string `json:"symbol,omitempty"`
 	// The URI of the NFT 
 	Uri *string `json:"uri,omitempty"`
 	// Whether or not the respective creator has signed the minting transaction of the NFT. Index 0 corresponds to creator at index 0 in the creator array, and so on. Length of verified array must be the same as the length of the creator array. 
-	Verified *[]int32 `json:"verified,omitempty"`
+	Verified []int32 `json:"verified,omitempty"`
 }
 
 // NewNFTData instantiates a new NFTData object
@@ -54,12 +54,12 @@ func (o *NFTData) GetCreators() []string {
 		var ret []string
 		return ret
 	}
-	return *o.Creators
+	return o.Creators
 }
 
 // GetCreatorsOk returns a tuple with the Creators field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *NFTData) GetCreatorsOk() (*[]string, bool) {
+func (o *NFTData) GetCreatorsOk() ([]string, bool) {
 	if o == nil || o.Creators == nil {
 		return nil, false
 	}
@@ -77,7 +77,7 @@ func (o *NFTData) HasCreators() bool {
 
 // SetCreators gets a reference to the given []string and assigns it to the Creators field.
 func (o *NFTData) SetCreators(v []string) {
-	o.Creators = &v
+	o.Creators = v
 }
 
 // GetName returns the Name field value if set, zero value otherwise.
@@ -118,12 +118,12 @@ func (o *NFTData) GetShare() []float32 {
 		var ret []float32
 		return ret
 	}
-	return *o.Share
+	return o.Share
 }
 
 // GetShareOk returns a tuple with the Share field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *NFTData) GetShareOk() (*[]float32, bool) {
+func (o *NFTData) GetShareOk() ([]float32, bool) {
 	if o == nil || o.Share == nil {
 		return nil, false
 	}
@@ -141,7 +141,7 @@ func (o *NFTData) HasShare() bool {
 
 // SetShare gets a reference to the given []float32 and assigns it to the Share field.
 func (o *NFTData) SetShare(v []float32) {
-	o.Share = &v
+	o.Share = v
 }
 
 // GetSymbol returns the Symbol field value if set, zero value otherwise.
@@ -214,12 +214,12 @@ func (o *NFTData) GetVerified() []int32 {
 		var ret []int32
 		return ret
 	}
-	return *o.Verified
+	return o.Verified
 }
 
 // GetVerifiedOk returns a tuple with the Verified field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *NFTData) GetVerifiedOk() (*[]int32, bool) {
+func (o *NFTData) GetVerifiedOk() ([]int32, bool) {
 	if o == nil || o.Verified == nil {
 		return nil, false
 	}
@@ -237,7 +237,7 @@ func (o *NFTData) HasVerified() bool {
 
 // SetVerified gets a reference to the given []int32 and assigns it to the Verified field.
 func (o *NFTData) SetVerified(v []int32) {
-	o.Verified = &v
+	o.Verified = v
 }
 
 func (o NFTData) MarshalJSON() ([]byte, error) {

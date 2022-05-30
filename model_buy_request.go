@@ -18,6 +18,10 @@ import (
 // BuyRequest struct for BuyRequest
 type BuyRequest struct {
 	Wallet Wallet `json:"wallet"`
+	// Whether or not to skip the provided checks (e.g., Is this NFT not listed? Is this NFT listed for a different price than you set?) and proceed with the transaction. 
+	SkipChecks *bool `json:"skip_checks,omitempty"`
+	// The public key of the seller. Only required if providing `skip_checks`. Otherwise, don't provide it. 
+	SellerPublicKey *string `json:"seller_public_key,omitempty"`
 	// The number of lamports you are expecting to purchase the NFT for. We check the price of the NFT before  purchasing it to ensure that it matches your expectation. There are 1e9 (1 billion) Lamports in a SOL. 
 	NftPrice float32 `json:"nft_price"`
 }
@@ -29,6 +33,10 @@ type BuyRequest struct {
 func NewBuyRequest(wallet Wallet, nftPrice float32) *BuyRequest {
 	this := BuyRequest{}
 	this.Wallet = wallet
+	var skipChecks bool = false
+	this.SkipChecks = &skipChecks
+	var sellerPublicKey string = "null"
+	this.SellerPublicKey = &sellerPublicKey
 	this.NftPrice = nftPrice
 	return &this
 }
@@ -38,6 +46,10 @@ func NewBuyRequest(wallet Wallet, nftPrice float32) *BuyRequest {
 // but it doesn't guarantee that properties required by API are set
 func NewBuyRequestWithDefaults() *BuyRequest {
 	this := BuyRequest{}
+	var skipChecks bool = false
+	this.SkipChecks = &skipChecks
+	var sellerPublicKey string = "null"
+	this.SellerPublicKey = &sellerPublicKey
 	return &this
 }
 
@@ -63,6 +75,70 @@ func (o *BuyRequest) GetWalletOk() (*Wallet, bool) {
 // SetWallet sets field value
 func (o *BuyRequest) SetWallet(v Wallet) {
 	o.Wallet = v
+}
+
+// GetSkipChecks returns the SkipChecks field value if set, zero value otherwise.
+func (o *BuyRequest) GetSkipChecks() bool {
+	if o == nil || o.SkipChecks == nil {
+		var ret bool
+		return ret
+	}
+	return *o.SkipChecks
+}
+
+// GetSkipChecksOk returns a tuple with the SkipChecks field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *BuyRequest) GetSkipChecksOk() (*bool, bool) {
+	if o == nil || o.SkipChecks == nil {
+		return nil, false
+	}
+	return o.SkipChecks, true
+}
+
+// HasSkipChecks returns a boolean if a field has been set.
+func (o *BuyRequest) HasSkipChecks() bool {
+	if o != nil && o.SkipChecks != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetSkipChecks gets a reference to the given bool and assigns it to the SkipChecks field.
+func (o *BuyRequest) SetSkipChecks(v bool) {
+	o.SkipChecks = &v
+}
+
+// GetSellerPublicKey returns the SellerPublicKey field value if set, zero value otherwise.
+func (o *BuyRequest) GetSellerPublicKey() string {
+	if o == nil || o.SellerPublicKey == nil {
+		var ret string
+		return ret
+	}
+	return *o.SellerPublicKey
+}
+
+// GetSellerPublicKeyOk returns a tuple with the SellerPublicKey field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *BuyRequest) GetSellerPublicKeyOk() (*string, bool) {
+	if o == nil || o.SellerPublicKey == nil {
+		return nil, false
+	}
+	return o.SellerPublicKey, true
+}
+
+// HasSellerPublicKey returns a boolean if a field has been set.
+func (o *BuyRequest) HasSellerPublicKey() bool {
+	if o != nil && o.SellerPublicKey != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetSellerPublicKey gets a reference to the given string and assigns it to the SellerPublicKey field.
+func (o *BuyRequest) SetSellerPublicKey(v string) {
+	o.SellerPublicKey = &v
 }
 
 // GetNftPrice returns the NftPrice field value
@@ -93,6 +169,12 @@ func (o BuyRequest) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
 	if true {
 		toSerialize["wallet"] = o.Wallet
+	}
+	if o.SkipChecks != nil {
+		toSerialize["skip_checks"] = o.SkipChecks
+	}
+	if o.SellerPublicKey != nil {
+		toSerialize["seller_public_key"] = o.SellerPublicKey
 	}
 	if true {
 		toSerialize["nft_price"] = o.NftPrice

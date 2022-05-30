@@ -42,8 +42,8 @@ func main() {
     projectCreateRequest := *openapiclient.NewProjectCreateRequest() // ProjectCreateRequest |  (optional)
 
     configuration := openapiclient.NewConfiguration()
-    api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.ProjectApi.CreateProject(context.Background()).ProjectCreateRequest(projectCreateRequest).Execute()
+    apiClient := openapiclient.NewAPIClient(configuration)
+    resp, r, err := apiClient.ProjectApi.CreateProject(context.Background()).ProjectCreateRequest(projectCreateRequest).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `ProjectApi.CreateProject``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -109,8 +109,8 @@ func main() {
     version := "2" // string | The version of the project.
 
     configuration := openapiclient.NewConfiguration()
-    api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.ProjectApi.CreateProjectVersion(context.Background(), projectId, version).Execute()
+    apiClient := openapiclient.NewAPIClient(configuration)
+    resp, r, err := apiClient.ProjectApi.CreateProjectVersion(context.Background(), projectId, version).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `ProjectApi.CreateProjectVersion``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -181,8 +181,8 @@ func main() {
     projectId := "L3cPm0cJlf5MeDXzGLQJJ4vlzndJCC" // string | The ID of the project. Created and returned when a project is created.
 
     configuration := openapiclient.NewConfiguration()
-    api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.ProjectApi.DeleteProject(context.Background(), projectId).Execute()
+    apiClient := openapiclient.NewAPIClient(configuration)
+    resp, r, err := apiClient.ProjectApi.DeleteProject(context.Background(), projectId).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `ProjectApi.DeleteProject``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -250,8 +250,8 @@ func main() {
     version := "2" // string | The version of the project.
 
     configuration := openapiclient.NewConfiguration()
-    api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.ProjectApi.DeleteProjectVersion(context.Background(), projectId, version).Execute()
+    apiClient := openapiclient.NewAPIClient(configuration)
+    resp, r, err := apiClient.ProjectApi.DeleteProjectVersion(context.Background(), projectId, version).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `ProjectApi.DeleteProjectVersion``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -322,8 +322,8 @@ func main() {
     projectId := "L3cPm0cJlf5MeDXzGLQJJ4vlzndJCC" // string | The ID of the project. Created and returned when a project is created.
 
     configuration := openapiclient.NewConfiguration()
-    api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.ProjectApi.GetProject(context.Background(), projectId).Execute()
+    apiClient := openapiclient.NewAPIClient(configuration)
+    resp, r, err := apiClient.ProjectApi.GetProject(context.Background(), projectId).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `ProjectApi.GetProject``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -392,8 +392,8 @@ func main() {
     projectId := "L3cPm0cJlf5MeDXzGLQJJ4vlzndJCC" // string | The ID of the project. Created and returned when a project is created.
 
     configuration := openapiclient.NewConfiguration()
-    api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.ProjectApi.GetProjectDeploymentStatus(context.Background(), projectId).Execute()
+    apiClient := openapiclient.NewAPIClient(configuration)
+    resp, r, err := apiClient.ProjectApi.GetProjectDeploymentStatus(context.Background(), projectId).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `ProjectApi.GetProjectDeploymentStatus``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -463,8 +463,8 @@ func main() {
     inlineObject := *openapiclient.NewInlineObject() // InlineObject |  (optional)
 
     configuration := openapiclient.NewConfiguration()
-    api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.ProjectApi.GetProjectDeploymentURL(context.Background(), projectId).InlineObject(inlineObject).Execute()
+    apiClient := openapiclient.NewAPIClient(configuration)
+    resp, r, err := apiClient.ProjectApi.GetProjectDeploymentURL(context.Background(), projectId).InlineObject(inlineObject).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `ProjectApi.GetProjectDeploymentURL``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -534,8 +534,8 @@ func main() {
     projectId := "L3cPm0cJlf5MeDXzGLQJJ4vlzndJCC" // string | The ID of the project. Created and returned when a project is created.
 
     configuration := openapiclient.NewConfiguration()
-    api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.ProjectApi.GetProjectStats(context.Background(), projectId).Execute()
+    apiClient := openapiclient.NewAPIClient(configuration)
+    resp, r, err := apiClient.ProjectApi.GetProjectStats(context.Background(), projectId).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `ProjectApi.GetProjectStats``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -603,8 +603,8 @@ import (
 func main() {
 
     configuration := openapiclient.NewConfiguration()
-    api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.ProjectApi.ListProjects(context.Background()).Execute()
+    apiClient := openapiclient.NewAPIClient(configuration)
+    resp, r, err := apiClient.ProjectApi.ListProjects(context.Background()).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `ProjectApi.ListProjects``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -666,8 +666,8 @@ func main() {
     projectCreateRequest := *openapiclient.NewProjectCreateRequest() // ProjectCreateRequest |  (optional)
 
     configuration := openapiclient.NewConfiguration()
-    api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.ProjectApi.UpdateProject(context.Background(), projectId).ProjectCreateRequest(projectCreateRequest).Execute()
+    apiClient := openapiclient.NewAPIClient(configuration)
+    resp, r, err := apiClient.ProjectApi.UpdateProject(context.Background(), projectId).ProjectCreateRequest(projectCreateRequest).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `ProjectApi.UpdateProject``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -738,8 +738,8 @@ func main() {
     version := "2" // string | The version of the project.
 
     configuration := openapiclient.NewConfiguration()
-    api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.ProjectApi.UpdateProjectDocumentation(context.Background(), projectId, version).Execute()
+    apiClient := openapiclient.NewAPIClient(configuration)
+    resp, r, err := apiClient.ProjectApi.UpdateProjectDocumentation(context.Background(), projectId, version).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `ProjectApi.UpdateProjectDocumentation``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)

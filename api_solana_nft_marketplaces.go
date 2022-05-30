@@ -13,23 +13,23 @@ package openapi
 
 import (
 	"bytes"
-	_context "context"
-	_ioutil "io/ioutil"
-	_nethttp "net/http"
-	_neturl "net/url"
+	"context"
+	"io/ioutil"
+	"net/http"
+	"net/url"
 	"strings"
 )
 
 // Linger please
 var (
-	_ _context.Context
+	_ context.Context
 )
 
 // SolanaNFTMarketplacesApiService SolanaNFTMarketplacesApi service
 type SolanaNFTMarketplacesApiService service
 
 type ApiSolanaBuyNFTRequest struct {
-	ctx _context.Context
+	ctx context.Context
 	ApiService *SolanaNFTMarketplacesApiService
 	network string
 	exchange string
@@ -42,7 +42,7 @@ func (r ApiSolanaBuyNFTRequest) BuyRequest(buyRequest BuyRequest) ApiSolanaBuyNF
 	return r
 }
 
-func (r ApiSolanaBuyNFTRequest) Execute() (BuyResponse, *_nethttp.Response, error) {
+func (r ApiSolanaBuyNFTRequest) Execute() (*BuyResponse, *http.Response, error) {
 	return r.ApiService.SolanaBuyNFTExecute(r)
 }
 
@@ -53,17 +53,17 @@ SolanaBuyNFT Buy
 
 Buy an NFT on a Solana Exchange.
 
-Exchanges supported: SolSea, Magic Edennpm
+Exchanges supported: SolSea, Magic Eden
 
 `Cost: 25 Credits`, `Cost: 3 Credits on Devnet` (<a href="#section/Pricing">See Pricing</a>)
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param network The network ID
  @param exchange The NFT exchange to interact with
  @param mintAddress The mint address of the NFT you want to buy
  @return ApiSolanaBuyNFTRequest
 */
-func (a *SolanaNFTMarketplacesApiService) SolanaBuyNFT(ctx _context.Context, network string, exchange string, mintAddress string) ApiSolanaBuyNFTRequest {
+func (a *SolanaNFTMarketplacesApiService) SolanaBuyNFT(ctx context.Context, network string, exchange string, mintAddress string) ApiSolanaBuyNFTRequest {
 	return ApiSolanaBuyNFTRequest{
 		ApiService: a,
 		ctx: ctx,
@@ -75,29 +75,27 @@ func (a *SolanaNFTMarketplacesApiService) SolanaBuyNFT(ctx _context.Context, net
 
 // Execute executes the request
 //  @return BuyResponse
-func (a *SolanaNFTMarketplacesApiService) SolanaBuyNFTExecute(r ApiSolanaBuyNFTRequest) (BuyResponse, *_nethttp.Response, error) {
+func (a *SolanaNFTMarketplacesApiService) SolanaBuyNFTExecute(r ApiSolanaBuyNFTRequest) (*BuyResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodPost
+		localVarHTTPMethod   = http.MethodPost
 		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  BuyResponse
+		formFiles            []formFile
+		localVarReturnValue  *BuyResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "SolanaNFTMarketplacesApiService.SolanaBuyNFT")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/solana/nft/marketplaces/{exchange}/buy/{network}/{mint_address}"
-	localVarPath = strings.Replace(localVarPath, "{"+"network"+"}", _neturl.PathEscape(parameterToString(r.network, "")), -1)
-	localVarPath = strings.Replace(localVarPath, "{"+"exchange"+"}", _neturl.PathEscape(parameterToString(r.exchange, "")), -1)
-	localVarPath = strings.Replace(localVarPath, "{"+"mint_address"+"}", _neturl.PathEscape(parameterToString(r.mintAddress, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"network"+"}", url.PathEscape(parameterToString(r.network, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"exchange"+"}", url.PathEscape(parameterToString(r.exchange, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"mint_address"+"}", url.PathEscape(parameterToString(r.mintAddress, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{"application/json"}
@@ -146,7 +144,7 @@ func (a *SolanaNFTMarketplacesApiService) SolanaBuyNFTExecute(r ApiSolanaBuyNFTR
 			}
 		}
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -156,15 +154,15 @@ func (a *SolanaNFTMarketplacesApiService) SolanaBuyNFTExecute(r ApiSolanaBuyNFTR
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -173,7 +171,7 @@ func (a *SolanaNFTMarketplacesApiService) SolanaBuyNFTExecute(r ApiSolanaBuyNFTR
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -184,7 +182,7 @@ func (a *SolanaNFTMarketplacesApiService) SolanaBuyNFTExecute(r ApiSolanaBuyNFTR
 }
 
 type ApiSolanaDelistNFTRequest struct {
-	ctx _context.Context
+	ctx context.Context
 	ApiService *SolanaNFTMarketplacesApiService
 	network string
 	exchange string
@@ -197,7 +195,7 @@ func (r ApiSolanaDelistNFTRequest) DelistRequest(delistRequest DelistRequest) Ap
 	return r
 }
 
-func (r ApiSolanaDelistNFTRequest) Execute() (DelistResponse, *_nethttp.Response, error) {
+func (r ApiSolanaDelistNFTRequest) Execute() (*DelistResponse, *http.Response, error) {
 	return r.ApiService.SolanaDelistNFTExecute(r)
 }
 
@@ -212,13 +210,13 @@ Exchanges supported: SolSea, Magic Eden
 
 `Cost: 8 Credits`, `Cost: 3 Credits on Devnet` (<a href="#section/Pricing">See Pricing</a>)
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param network The network ID
  @param exchange The NFT exchange to interact with
  @param mintAddress The mint address of the NFT you want to buy
  @return ApiSolanaDelistNFTRequest
 */
-func (a *SolanaNFTMarketplacesApiService) SolanaDelistNFT(ctx _context.Context, network string, exchange string, mintAddress string) ApiSolanaDelistNFTRequest {
+func (a *SolanaNFTMarketplacesApiService) SolanaDelistNFT(ctx context.Context, network string, exchange string, mintAddress string) ApiSolanaDelistNFTRequest {
 	return ApiSolanaDelistNFTRequest{
 		ApiService: a,
 		ctx: ctx,
@@ -230,29 +228,27 @@ func (a *SolanaNFTMarketplacesApiService) SolanaDelistNFT(ctx _context.Context, 
 
 // Execute executes the request
 //  @return DelistResponse
-func (a *SolanaNFTMarketplacesApiService) SolanaDelistNFTExecute(r ApiSolanaDelistNFTRequest) (DelistResponse, *_nethttp.Response, error) {
+func (a *SolanaNFTMarketplacesApiService) SolanaDelistNFTExecute(r ApiSolanaDelistNFTRequest) (*DelistResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodPost
+		localVarHTTPMethod   = http.MethodPost
 		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  DelistResponse
+		formFiles            []formFile
+		localVarReturnValue  *DelistResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "SolanaNFTMarketplacesApiService.SolanaDelistNFT")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/solana/nft/marketplaces/{exchange}/delist/{network}/{mint_address}"
-	localVarPath = strings.Replace(localVarPath, "{"+"network"+"}", _neturl.PathEscape(parameterToString(r.network, "")), -1)
-	localVarPath = strings.Replace(localVarPath, "{"+"exchange"+"}", _neturl.PathEscape(parameterToString(r.exchange, "")), -1)
-	localVarPath = strings.Replace(localVarPath, "{"+"mint_address"+"}", _neturl.PathEscape(parameterToString(r.mintAddress, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"network"+"}", url.PathEscape(parameterToString(r.network, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"exchange"+"}", url.PathEscape(parameterToString(r.exchange, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"mint_address"+"}", url.PathEscape(parameterToString(r.mintAddress, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{"application/json"}
@@ -301,7 +297,7 @@ func (a *SolanaNFTMarketplacesApiService) SolanaDelistNFTExecute(r ApiSolanaDeli
 			}
 		}
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -311,15 +307,15 @@ func (a *SolanaNFTMarketplacesApiService) SolanaDelistNFTExecute(r ApiSolanaDeli
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -328,7 +324,7 @@ func (a *SolanaNFTMarketplacesApiService) SolanaDelistNFTExecute(r ApiSolanaDeli
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -339,14 +335,14 @@ func (a *SolanaNFTMarketplacesApiService) SolanaDelistNFTExecute(r ApiSolanaDeli
 }
 
 type ApiSolanaGetNFTListingRequest struct {
-	ctx _context.Context
+	ctx context.Context
 	ApiService *SolanaNFTMarketplacesApiService
 	network string
 	mintAddress string
 }
 
 
-func (r ApiSolanaGetNFTListingRequest) Execute() (GetNFTListingResponse, *_nethttp.Response, error) {
+func (r ApiSolanaGetNFTListingRequest) Execute() (*GetNFTListingResponse, *http.Response, error) {
 	return r.ApiService.SolanaGetNFTListingExecute(r)
 }
 
@@ -361,12 +357,12 @@ Currently checks the following Solana NFT martketplaces: SolSea, Magic Eden, Sol
 
 `Cost: 1 Credits`, (<a href="#section/Pricing">See Pricing</a>)
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param network The network ID
  @param mintAddress The mint address of the NFT you want to buy
  @return ApiSolanaGetNFTListingRequest
 */
-func (a *SolanaNFTMarketplacesApiService) SolanaGetNFTListing(ctx _context.Context, network string, mintAddress string) ApiSolanaGetNFTListingRequest {
+func (a *SolanaNFTMarketplacesApiService) SolanaGetNFTListing(ctx context.Context, network string, mintAddress string) ApiSolanaGetNFTListingRequest {
 	return ApiSolanaGetNFTListingRequest{
 		ApiService: a,
 		ctx: ctx,
@@ -377,28 +373,26 @@ func (a *SolanaNFTMarketplacesApiService) SolanaGetNFTListing(ctx _context.Conte
 
 // Execute executes the request
 //  @return GetNFTListingResponse
-func (a *SolanaNFTMarketplacesApiService) SolanaGetNFTListingExecute(r ApiSolanaGetNFTListingRequest) (GetNFTListingResponse, *_nethttp.Response, error) {
+func (a *SolanaNFTMarketplacesApiService) SolanaGetNFTListingExecute(r ApiSolanaGetNFTListingRequest) (*GetNFTListingResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodGet
+		localVarHTTPMethod   = http.MethodGet
 		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  GetNFTListingResponse
+		formFiles            []formFile
+		localVarReturnValue  *GetNFTListingResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "SolanaNFTMarketplacesApiService.SolanaGetNFTListing")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/solana/nft/marketplaces/listing/{network}/{mint_address}"
-	localVarPath = strings.Replace(localVarPath, "{"+"network"+"}", _neturl.PathEscape(parameterToString(r.network, "")), -1)
-	localVarPath = strings.Replace(localVarPath, "{"+"mint_address"+"}", _neturl.PathEscape(parameterToString(r.mintAddress, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"network"+"}", url.PathEscape(parameterToString(r.network, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"mint_address"+"}", url.PathEscape(parameterToString(r.mintAddress, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -445,7 +439,7 @@ func (a *SolanaNFTMarketplacesApiService) SolanaGetNFTListingExecute(r ApiSolana
 			}
 		}
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -455,15 +449,15 @@ func (a *SolanaNFTMarketplacesApiService) SolanaGetNFTListingExecute(r ApiSolana
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -472,428 +466,7 @@ func (a *SolanaNFTMarketplacesApiService) SolanaGetNFTListingExecute(r ApiSolana
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
-			body:  localVarBody,
-			error: err.Error(),
-		}
-		return localVarReturnValue, localVarHTTPResponse, newErr
-	}
-
-	return localVarReturnValue, localVarHTTPResponse, nil
-}
-
-type ApiSolanaGetNFTMarketplaceAnalyticsRequest struct {
-	ctx _context.Context
-	ApiService *SolanaNFTMarketplacesApiService
-	nFTAnalyticsRequest *NFTAnalyticsRequest
-}
-
-func (r ApiSolanaGetNFTMarketplaceAnalyticsRequest) NFTAnalyticsRequest(nFTAnalyticsRequest NFTAnalyticsRequest) ApiSolanaGetNFTMarketplaceAnalyticsRequest {
-	r.nFTAnalyticsRequest = &nFTAnalyticsRequest
-	return r
-}
-
-func (r ApiSolanaGetNFTMarketplaceAnalyticsRequest) Execute() (NFTAnalyticsResponse, *_nethttp.Response, error) {
-	return r.ApiService.SolanaGetNFTMarketplaceAnalyticsExecute(r)
-}
-
-/*
-SolanaGetNFTMarketplaceAnalytics Get NFT Analytics
-
-<a href="https://github.com/BL0CK-X/blockchain-api/tree/main/examples/solana-nft-marketplaces/analytics" target="_blank">See examples (Python, JavaScript)</a>.
-
-A collection is a list of NFTs.
-
-Any collection can thus be defined as a list of mint addresses.
-
-This endpoint takes in a list of mint addresses (effectively, a collection), a start time (optional), and an end time (optional) and outputs the floor for that period, the volume for that period, and the transaction history for each NFT in the list (buy, list, delist, update price) for that period.
-
-We are currently compiling a dictionary of collection names to list of mint addresses for public use. Please contribute <a href="https://github.com/BL0CK-X/solana-nft-collection-mint-addresses" target="_blank">here</a>.
-
-Currently scans the following Solana NFT martketplaces: SolSea, Magic Eden, Solanart, Alpha Art, Digital Eyes, Exchange.art
-
-`Cost: 15 Credits`, (<a href="#section/Pricing">See Pricing</a>)
-
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiSolanaGetNFTMarketplaceAnalyticsRequest
-*/
-func (a *SolanaNFTMarketplacesApiService) SolanaGetNFTMarketplaceAnalytics(ctx _context.Context) ApiSolanaGetNFTMarketplaceAnalyticsRequest {
-	return ApiSolanaGetNFTMarketplaceAnalyticsRequest{
-		ApiService: a,
-		ctx: ctx,
-	}
-}
-
-// Execute executes the request
-//  @return NFTAnalyticsResponse
-func (a *SolanaNFTMarketplacesApiService) SolanaGetNFTMarketplaceAnalyticsExecute(r ApiSolanaGetNFTMarketplaceAnalyticsRequest) (NFTAnalyticsResponse, *_nethttp.Response, error) {
-	var (
-		localVarHTTPMethod   = _nethttp.MethodPost
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  NFTAnalyticsResponse
-	)
-
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "SolanaNFTMarketplacesApiService.SolanaGetNFTMarketplaceAnalytics")
-	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
-	}
-
-	localVarPath := localBasePath + "/solana/nft/marketplaces/analytics"
-
-	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
-
-	// to determine the Content-Type header
-	localVarHTTPContentTypes := []string{"application/json"}
-
-	// set Content-Type header
-	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
-	if localVarHTTPContentType != "" {
-		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
-	}
-
-	// to determine the Accept header
-	localVarHTTPHeaderAccepts := []string{"application/json"}
-
-	// set Accept header
-	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
-	if localVarHTTPHeaderAccept != "" {
-		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
-	}
-	// body params
-	localVarPostBody = r.nFTAnalyticsRequest
-	if r.ctx != nil {
-		// API Key Authentication
-		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
-			if apiKey, ok := auth["APIKeyID"]; ok {
-				var key string
-				if apiKey.Prefix != "" {
-					key = apiKey.Prefix + " " + apiKey.Key
-				} else {
-					key = apiKey.Key
-				}
-				localVarHeaderParams["APIKeyID"] = key
-			}
-		}
-	}
-	if r.ctx != nil {
-		// API Key Authentication
-		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
-			if apiKey, ok := auth["APISecretKey"]; ok {
-				var key string
-				if apiKey.Prefix != "" {
-					key = apiKey.Prefix + " " + apiKey.Key
-				} else {
-					key = apiKey.Key
-				}
-				localVarHeaderParams["APISecretKey"] = key
-			}
-		}
-	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
-	if err != nil {
-		return localVarReturnValue, nil, err
-	}
-
-	localVarHTTPResponse, err := a.client.callAPI(req)
-	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
-	}
-
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
-	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
-	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
-	}
-
-	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
-			body:  localVarBody,
-			error: localVarHTTPResponse.Status,
-		}
-		return localVarReturnValue, localVarHTTPResponse, newErr
-	}
-
-	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-	if err != nil {
-		newErr := GenericOpenAPIError{
-			body:  localVarBody,
-			error: err.Error(),
-		}
-		return localVarReturnValue, localVarHTTPResponse, newErr
-	}
-
-	return localVarReturnValue, localVarHTTPResponse, nil
-}
-
-type ApiSolanaGetNFTMarketplaceMarketShareRequest struct {
-	ctx _context.Context
-	ApiService *SolanaNFTMarketplacesApiService
-}
-
-
-func (r ApiSolanaGetNFTMarketplaceMarketShareRequest) Execute() (interface{}, *_nethttp.Response, error) {
-	return r.ApiService.SolanaGetNFTMarketplaceMarketShareExecute(r)
-}
-
-/*
-SolanaGetNFTMarketplaceMarketShare Get Marketplace Market Share
-
-<a href="https://github.com/BL0CK-X/blockchain-api/tree/main/examples/solana-nft-marketplaces/market-share" target="_blank">See examples (Python, JavaScript)</a>.
-
-Get the Marketplace listing of a Solana NFT.
-
-Currently checks for the following Solana NFT martketplaces: SolSea, Magic Eden, Solanart, Alpha Art, Digital Eyes, Exchange.art
-
-`Cost: 3 Credits`, (<a href="#section/Pricing">See Pricing</a>)
-
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiSolanaGetNFTMarketplaceMarketShareRequest
-*/
-func (a *SolanaNFTMarketplacesApiService) SolanaGetNFTMarketplaceMarketShare(ctx _context.Context) ApiSolanaGetNFTMarketplaceMarketShareRequest {
-	return ApiSolanaGetNFTMarketplaceMarketShareRequest{
-		ApiService: a,
-		ctx: ctx,
-	}
-}
-
-// Execute executes the request
-//  @return interface{}
-func (a *SolanaNFTMarketplacesApiService) SolanaGetNFTMarketplaceMarketShareExecute(r ApiSolanaGetNFTMarketplaceMarketShareRequest) (interface{}, *_nethttp.Response, error) {
-	var (
-		localVarHTTPMethod   = _nethttp.MethodGet
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  interface{}
-	)
-
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "SolanaNFTMarketplacesApiService.SolanaGetNFTMarketplaceMarketShare")
-	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
-	}
-
-	localVarPath := localBasePath + "/solana/nft/marketplaces/analytics/market_share"
-
-	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
-
-	// to determine the Content-Type header
-	localVarHTTPContentTypes := []string{}
-
-	// set Content-Type header
-	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
-	if localVarHTTPContentType != "" {
-		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
-	}
-
-	// to determine the Accept header
-	localVarHTTPHeaderAccepts := []string{"application/json"}
-
-	// set Accept header
-	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
-	if localVarHTTPHeaderAccept != "" {
-		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
-	}
-	if r.ctx != nil {
-		// API Key Authentication
-		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
-			if apiKey, ok := auth["APIKeyID"]; ok {
-				var key string
-				if apiKey.Prefix != "" {
-					key = apiKey.Prefix + " " + apiKey.Key
-				} else {
-					key = apiKey.Key
-				}
-				localVarHeaderParams["APIKeyID"] = key
-			}
-		}
-	}
-	if r.ctx != nil {
-		// API Key Authentication
-		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
-			if apiKey, ok := auth["APISecretKey"]; ok {
-				var key string
-				if apiKey.Prefix != "" {
-					key = apiKey.Prefix + " " + apiKey.Key
-				} else {
-					key = apiKey.Key
-				}
-				localVarHeaderParams["APISecretKey"] = key
-			}
-		}
-	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
-	if err != nil {
-		return localVarReturnValue, nil, err
-	}
-
-	localVarHTTPResponse, err := a.client.callAPI(req)
-	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
-	}
-
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
-	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
-	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
-	}
-
-	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
-			body:  localVarBody,
-			error: localVarHTTPResponse.Status,
-		}
-		return localVarReturnValue, localVarHTTPResponse, newErr
-	}
-
-	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-	if err != nil {
-		newErr := GenericOpenAPIError{
-			body:  localVarBody,
-			error: err.Error(),
-		}
-		return localVarReturnValue, localVarHTTPResponse, newErr
-	}
-
-	return localVarReturnValue, localVarHTTPResponse, nil
-}
-
-type ApiSolanaGetNFTMarketplaceRecentTransactionsRequest struct {
-	ctx _context.Context
-	ApiService *SolanaNFTMarketplacesApiService
-}
-
-
-func (r ApiSolanaGetNFTMarketplaceRecentTransactionsRequest) Execute() ([]NFTTransaction, *_nethttp.Response, error) {
-	return r.ApiService.SolanaGetNFTMarketplaceRecentTransactionsExecute(r)
-}
-
-/*
-SolanaGetNFTMarketplaceRecentTransactions Get Recent NFT Transactions
-
-<a href="https://github.com/BL0CK-X/blockchain-api/tree/main/examples/solana-nft-marketplaces/recent-transactions" target="_blank">See examples (Python, JavaScript)</a>.
-
-Get all NFT transactions across all major marketplaces in the last 30 minutes.
-
-Currently checks for the following Solana NFT martketplaces: SolSea, Magic Eden, Solanart, Alpha Art, Digital Eyes, Exchange.art
-
-`Cost: 15 Credits`, (<a href="#section/Pricing">See Pricing</a>)
-
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiSolanaGetNFTMarketplaceRecentTransactionsRequest
-*/
-func (a *SolanaNFTMarketplacesApiService) SolanaGetNFTMarketplaceRecentTransactions(ctx _context.Context) ApiSolanaGetNFTMarketplaceRecentTransactionsRequest {
-	return ApiSolanaGetNFTMarketplaceRecentTransactionsRequest{
-		ApiService: a,
-		ctx: ctx,
-	}
-}
-
-// Execute executes the request
-//  @return []NFTTransaction
-func (a *SolanaNFTMarketplacesApiService) SolanaGetNFTMarketplaceRecentTransactionsExecute(r ApiSolanaGetNFTMarketplaceRecentTransactionsRequest) ([]NFTTransaction, *_nethttp.Response, error) {
-	var (
-		localVarHTTPMethod   = _nethttp.MethodGet
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  []NFTTransaction
-	)
-
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "SolanaNFTMarketplacesApiService.SolanaGetNFTMarketplaceRecentTransactions")
-	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
-	}
-
-	localVarPath := localBasePath + "/solana/nft/marketplaces/analytics/recent_transactions"
-
-	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
-
-	// to determine the Content-Type header
-	localVarHTTPContentTypes := []string{}
-
-	// set Content-Type header
-	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
-	if localVarHTTPContentType != "" {
-		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
-	}
-
-	// to determine the Accept header
-	localVarHTTPHeaderAccepts := []string{"application/json"}
-
-	// set Accept header
-	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
-	if localVarHTTPHeaderAccept != "" {
-		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
-	}
-	if r.ctx != nil {
-		// API Key Authentication
-		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
-			if apiKey, ok := auth["APIKeyID"]; ok {
-				var key string
-				if apiKey.Prefix != "" {
-					key = apiKey.Prefix + " " + apiKey.Key
-				} else {
-					key = apiKey.Key
-				}
-				localVarHeaderParams["APIKeyID"] = key
-			}
-		}
-	}
-	if r.ctx != nil {
-		// API Key Authentication
-		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
-			if apiKey, ok := auth["APISecretKey"]; ok {
-				var key string
-				if apiKey.Prefix != "" {
-					key = apiKey.Prefix + " " + apiKey.Key
-				} else {
-					key = apiKey.Key
-				}
-				localVarHeaderParams["APISecretKey"] = key
-			}
-		}
-	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
-	if err != nil {
-		return localVarReturnValue, nil, err
-	}
-
-	localVarHTTPResponse, err := a.client.callAPI(req)
-	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
-	}
-
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
-	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
-	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
-	}
-
-	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
-			body:  localVarBody,
-			error: localVarHTTPResponse.Status,
-		}
-		return localVarReturnValue, localVarHTTPResponse, newErr
-	}
-
-	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -904,7 +477,7 @@ func (a *SolanaNFTMarketplacesApiService) SolanaGetNFTMarketplaceRecentTransacti
 }
 
 type ApiSolanaListNFTRequest struct {
-	ctx _context.Context
+	ctx context.Context
 	ApiService *SolanaNFTMarketplacesApiService
 	network string
 	exchange string
@@ -917,7 +490,7 @@ func (r ApiSolanaListNFTRequest) ListRequest(listRequest ListRequest) ApiSolanaL
 	return r
 }
 
-func (r ApiSolanaListNFTRequest) Execute() (ListResponse, *_nethttp.Response, error) {
+func (r ApiSolanaListNFTRequest) Execute() (*ListResponse, *http.Response, error) {
 	return r.ApiService.SolanaListNFTExecute(r)
 }
 
@@ -932,13 +505,13 @@ Exchanges supported: SolSea, Magic Eden
 
 `Cost: 12 Credits`, `Cost: 3 Credits on Devnet` (<a href="#section/Pricing">See Pricing</a>)
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param network The network ID
  @param exchange The NFT exchange to interact with
  @param mintAddress The mint address of the NFT you want to buy
  @return ApiSolanaListNFTRequest
 */
-func (a *SolanaNFTMarketplacesApiService) SolanaListNFT(ctx _context.Context, network string, exchange string, mintAddress string) ApiSolanaListNFTRequest {
+func (a *SolanaNFTMarketplacesApiService) SolanaListNFT(ctx context.Context, network string, exchange string, mintAddress string) ApiSolanaListNFTRequest {
 	return ApiSolanaListNFTRequest{
 		ApiService: a,
 		ctx: ctx,
@@ -950,29 +523,27 @@ func (a *SolanaNFTMarketplacesApiService) SolanaListNFT(ctx _context.Context, ne
 
 // Execute executes the request
 //  @return ListResponse
-func (a *SolanaNFTMarketplacesApiService) SolanaListNFTExecute(r ApiSolanaListNFTRequest) (ListResponse, *_nethttp.Response, error) {
+func (a *SolanaNFTMarketplacesApiService) SolanaListNFTExecute(r ApiSolanaListNFTRequest) (*ListResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodPost
+		localVarHTTPMethod   = http.MethodPost
 		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  ListResponse
+		formFiles            []formFile
+		localVarReturnValue  *ListResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "SolanaNFTMarketplacesApiService.SolanaListNFT")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/solana/nft/marketplaces/{exchange}/list/{network}/{mint_address}"
-	localVarPath = strings.Replace(localVarPath, "{"+"network"+"}", _neturl.PathEscape(parameterToString(r.network, "")), -1)
-	localVarPath = strings.Replace(localVarPath, "{"+"exchange"+"}", _neturl.PathEscape(parameterToString(r.exchange, "")), -1)
-	localVarPath = strings.Replace(localVarPath, "{"+"mint_address"+"}", _neturl.PathEscape(parameterToString(r.mintAddress, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"network"+"}", url.PathEscape(parameterToString(r.network, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"exchange"+"}", url.PathEscape(parameterToString(r.exchange, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"mint_address"+"}", url.PathEscape(parameterToString(r.mintAddress, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{"application/json"}
@@ -1021,7 +592,7 @@ func (a *SolanaNFTMarketplacesApiService) SolanaListNFTExecute(r ApiSolanaListNF
 			}
 		}
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -1031,15 +602,15 @@ func (a *SolanaNFTMarketplacesApiService) SolanaListNFTExecute(r ApiSolanaListNF
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -1048,7 +619,7 @@ func (a *SolanaNFTMarketplacesApiService) SolanaListNFTExecute(r ApiSolanaListNF
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}

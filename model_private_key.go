@@ -51,11 +51,11 @@ func (o *PrivateKey) GetPrivateKey() map[string]interface{} {
 
 // GetPrivateKeyOk returns a tuple with the PrivateKey field value
 // and a boolean to check if the value has been set.
-func (o *PrivateKey) GetPrivateKeyOk() (*map[string]interface{}, bool) {
+func (o *PrivateKey) GetPrivateKeyOk() (map[string]interface{}, bool) {
 	if o == nil  {
 		return nil, false
 	}
-	return &o.PrivateKey, true
+	return o.PrivateKey, true
 }
 
 // SetPrivateKey sets field value

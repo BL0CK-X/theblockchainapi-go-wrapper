@@ -24,12 +24,16 @@ type DoubleTransferResponse struct {
 
 // TransferResponseAsDoubleTransferResponse is a convenience function that returns TransferResponse wrapped in DoubleTransferResponse
 func TransferResponseAsDoubleTransferResponse(v *TransferResponse) DoubleTransferResponse {
-	return DoubleTransferResponse{ TransferResponse: v}
+	return DoubleTransferResponse{
+		TransferResponse: v,
+	}
 }
 
 // TransferResponseCompiledAsDoubleTransferResponse is a convenience function that returns TransferResponseCompiled wrapped in DoubleTransferResponse
 func TransferResponseCompiledAsDoubleTransferResponse(v *TransferResponseCompiled) DoubleTransferResponse {
-	return DoubleTransferResponse{ TransferResponseCompiled: v}
+	return DoubleTransferResponse{
+		TransferResponseCompiled: v,
+	}
 }
 
 
@@ -38,7 +42,7 @@ func (dst *DoubleTransferResponse) UnmarshalJSON(data []byte) error {
 	var err error
 	match := 0
 	// try to unmarshal data into TransferResponse
-	err = json.Unmarshal(data, &dst.TransferResponse)
+	err = newStrictDecoder(data).Decode(&dst.TransferResponse)
 	if err == nil {
 		jsonTransferResponse, _ := json.Marshal(dst.TransferResponse)
 		if string(jsonTransferResponse) == "{}" { // empty struct
@@ -51,7 +55,7 @@ func (dst *DoubleTransferResponse) UnmarshalJSON(data []byte) error {
 	}
 
 	// try to unmarshal data into TransferResponseCompiled
-	err = json.Unmarshal(data, &dst.TransferResponseCompiled)
+	err = newStrictDecoder(data).Decode(&dst.TransferResponseCompiled)
 	if err == nil {
 		jsonTransferResponseCompiled, _ := json.Marshal(dst.TransferResponseCompiled)
 		if string(jsonTransferResponseCompiled) == "{}" { // empty struct
@@ -91,6 +95,9 @@ func (src DoubleTransferResponse) MarshalJSON() ([]byte, error) {
 
 // Get the actual instance
 func (obj *DoubleTransferResponse) GetActualInstance() (interface{}) {
+	if obj == nil {
+		return nil
+	}
 	if obj.TransferResponse != nil {
 		return obj.TransferResponse
 	}

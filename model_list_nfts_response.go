@@ -18,9 +18,9 @@ import (
 // ListNFTsResponse struct for ListNFTsResponse
 type ListNFTsResponse struct {
 	// A list of mint addresses represented by a string
-	NftsOwned *[]string `json:"nfts_owned,omitempty"`
+	NftsOwned []string `json:"nfts_owned,omitempty"`
 	// A list of the dictionaries, where each dictionary is an NFT's metadata
-	NftsMetadata *[]NFT `json:"nfts_metadata,omitempty"`
+	NftsMetadata []NFT `json:"nfts_metadata,omitempty"`
 }
 
 // NewListNFTsResponse instantiates a new ListNFTsResponse object
@@ -46,12 +46,12 @@ func (o *ListNFTsResponse) GetNftsOwned() []string {
 		var ret []string
 		return ret
 	}
-	return *o.NftsOwned
+	return o.NftsOwned
 }
 
 // GetNftsOwnedOk returns a tuple with the NftsOwned field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *ListNFTsResponse) GetNftsOwnedOk() (*[]string, bool) {
+func (o *ListNFTsResponse) GetNftsOwnedOk() ([]string, bool) {
 	if o == nil || o.NftsOwned == nil {
 		return nil, false
 	}
@@ -69,7 +69,7 @@ func (o *ListNFTsResponse) HasNftsOwned() bool {
 
 // SetNftsOwned gets a reference to the given []string and assigns it to the NftsOwned field.
 func (o *ListNFTsResponse) SetNftsOwned(v []string) {
-	o.NftsOwned = &v
+	o.NftsOwned = v
 }
 
 // GetNftsMetadata returns the NftsMetadata field value if set, zero value otherwise.
@@ -78,12 +78,12 @@ func (o *ListNFTsResponse) GetNftsMetadata() []NFT {
 		var ret []NFT
 		return ret
 	}
-	return *o.NftsMetadata
+	return o.NftsMetadata
 }
 
 // GetNftsMetadataOk returns a tuple with the NftsMetadata field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *ListNFTsResponse) GetNftsMetadataOk() (*[]NFT, bool) {
+func (o *ListNFTsResponse) GetNftsMetadataOk() ([]NFT, bool) {
 	if o == nil || o.NftsMetadata == nil {
 		return nil, false
 	}
@@ -101,7 +101,7 @@ func (o *ListNFTsResponse) HasNftsMetadata() bool {
 
 // SetNftsMetadata gets a reference to the given []NFT and assigns it to the NftsMetadata field.
 func (o *ListNFTsResponse) SetNftsMetadata(v []NFT) {
-	o.NftsMetadata = &v
+	o.NftsMetadata = v
 }
 
 func (o ListNFTsResponse) MarshalJSON() ([]byte, error) {

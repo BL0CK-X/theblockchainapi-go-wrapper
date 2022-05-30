@@ -55,11 +55,11 @@ func (o *NFTAnalyticsRequest) GetMintAddresses() []string {
 
 // GetMintAddressesOk returns a tuple with the MintAddresses field value
 // and a boolean to check if the value has been set.
-func (o *NFTAnalyticsRequest) GetMintAddressesOk() (*[]string, bool) {
+func (o *NFTAnalyticsRequest) GetMintAddressesOk() ([]string, bool) {
 	if o == nil  {
 		return nil, false
 	}
-	return &o.MintAddresses, true
+	return o.MintAddresses, true
 }
 
 // SetMintAddresses sets field value

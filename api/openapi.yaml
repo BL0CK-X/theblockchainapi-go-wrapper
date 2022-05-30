@@ -90,6 +90,18 @@ servers:
 - url: https://api.blockchainapi.com/v1
 tags:
 - description: |
+    Functions for using wallets, supported across several chains.
+  name: Wallet
+- description: |
+    Functions for interacting with transactions, supported across several chains.
+  name: Transaction
+- description: |
+    Functions for interacting with name services.
+  name: Name Service
+- description: |
+    Functions for interacting with tokens.
+  name: Token
+- description: |
     The results of any asynchronous tasks that have been launched. You can poll this endpoint to see when tasks have completed.
   name: Tasks
 - description: |
@@ -111,8 +123,21 @@ tags:
     Work with Solana transactions.
   name: Solana Transaction
 - description: |
-    Upload to IPFS, Arweave, and Filecoin easily. In order to access this endpoint, please sign up for [the waitlist](https://forms.gle/N4KSqcptpSrHQ1427). This waitlist is unique for this endpoint. Feature requests are welcome on our [GitHub repository](https://github.com/BL0CK-X/the-blockchain-api/issues/new).
-  name: Files
+    Accept one-time and recurring payments with CryptoCheckout.
+    We currently use our own product to accept crypto payments. You can view our acceptance page [here](https://checkout.blockchainapi.com/project/project_z5SY1HpZWENEluvnxOee/product/product_VJBYSkISQbDfquZ). You can easily set this up with our API. We have a frontend interface coming soon.
+  name: CC Project
+- description: |
+    A product represents a specific product or service that your project/company is selling. You can create various prices for this products by creating plans.
+  name: CC Product
+- description: |
+    A plan consists of a price (in USDC only at the moment) and a recurring frequency (e.g., every 6 hours or 1 month). For one-time payments, do not supply a value for `period`.
+  name: CC Plan
+- description: |
+    A payment represents a payment in crypto for your product made by a user.
+  name: CC Payment
+- description: |
+    A webhook is a request sent to your server to notify you of a new payment. When you receive the webhook, you can allow access to your product or service to the customer who paid you.
+  name: CC Webhook
 - description: |
     Create a project. A project is a mini-API that you can deploy super easily with our API. Even better, when other users use it, you make money! A complete example and walkthrough of the program can be found [here](https://github.com/BL0CK-X/api-developer-program).
   name: Project
@@ -120,41 +145,715 @@ tags:
     Create an endpoint
   name: Endpoint
 paths:
-  /file:
+  /{blockchain}/wallet/generate/secret_recovery_phrase:
     post:
-      description: Easily upload a file to any of IPFS, Arweave, and Filecoin. Not
-        publicly available. Please sign up for <a href="https://forms.gle/N4KSqcptpSrHQ1427"
-        target="_blank">the waitlist</a>.
-      operationId: uploadFile
+      description: "<a href=\"https://github.com/BL0CK-X/blockchain-api/tree/main/examples/wallet/generate-secret-phrase\"\
+        \ target=\"_blank\">See examples (Python, JavaScript)</a>.\n\nUse this endpoint\
+        \ to securely and randomly generate a seed phrase for a wallet. \n\n`Cost:\
+        \ 0 Credit` (Free) (<a href=\"#section/Pricing\">See Pricing</a>)"
+      operationId: generateSeedPhrase
+      parameters:
+      - description: |
+          The blockchain you want to use
+        explode: false
+        in: path
+        name: blockchain
+        required: true
+        schema:
+          enum:
+          - avalanche
+          - binance_smart_chain
+          - ethereum
+          - near
+          - solana
+          type: string
+        style: simple
       requestBody:
         content:
-          multipart/form-data:
-            schema:
-              type: object
           application/json:
             schema:
-              $ref: '#/components/schemas/UploadFileRequest'
+              $ref: '#/components/schemas/GenerateSeedPhraseRequest'
       responses:
         "200":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/GetFileResponse'
+                $ref: '#/components/schemas/GeneralSecretPhrase'
           description: Successful Response
         "400":
           description: Bad request (check response message)
+        "401":
+          description: Invalid API key pair in headers
         "402":
           description: Payment required. Occurs when you run out of API requests.
             Upgrade <a href="https://dashboard.theblockchainapi.com/billing" target="_blank">here</a>.
-        "403":
-          description: Access denied. Must sign up and be approved for beta. See link
-            for application in the description below the "File Upload" header.
       security:
       - APIKeyID: []
         APISecretKey: []
-      summary: Upload a file
+      summary: Generate seed phrase
       tags:
-      - File
+      - Wallet
+  /{blockchain}/wallet/generate/private_key:
+    post:
+      description: "<a href=\"https://github.com/BL0CK-X/blockchain-api/tree/main/examples/wallet/generate-private-key\"\
+        \ target=\"_blank\">See examples (Python, JavaScript)</a>.\n\nUse this endpoint\
+        \ to securely and randomly generate a private key for a wallet. \n\n`Cost:\
+        \ 0 Credit` (Free) (<a href=\"#section/Pricing\">See Pricing</a>)"
+      operationId: generatePrivateKey
+      parameters:
+      - description: |
+          The blockchain you want to use
+        explode: false
+        in: path
+        name: blockchain
+        required: true
+        schema:
+          enum:
+          - avalanche
+          - binance_smart_chain
+          - ethereum
+          - near
+          - solana
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GeneralGeneratePrivateKeyResponse'
+          description: Successful Response
+        "400":
+          description: Bad request (check response message)
+        "401":
+          description: Invalid API key pair in headers
+        "402":
+          description: Payment required. Occurs when you run out of API requests.
+            Upgrade <a href="https://dashboard.theblockchainapi.com/billing" target="_blank">here</a>.
+      security:
+      - APIKeyID: []
+        APISecretKey: []
+      summary: Generate private key
+      tags:
+      - Wallet
+  /{blockchain}/wallet/private_key:
+    post:
+      description: "<a href=\"https://github.com/BL0CK-X/blockchain-api/tree/main/examples/wallet/derive-private-key\"\
+        \ target=\"_blank\">See examples (Python, JavaScript)</a>.\n\nUse this endpoint\
+        \ to securely derive a private key for a wallet. \n\nFor example, if you have\
+        \ a seed phrase and want to derive the corresponding private key, use this\
+        \ endpoint.\n\n`Cost: 0 Credit` (Free) (<a href=\"#section/Pricing\">See Pricing</a>)"
+      operationId: derivePrivateKey
+      parameters:
+      - description: |
+          The blockchain you want to use
+        explode: false
+        in: path
+        name: blockchain
+        required: true
+        schema:
+          enum:
+          - avalanche
+          - binance_smart_chain
+          - ethereum
+          - near
+          - solana
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SupplyWalletRequest'
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GeneralGeneratePrivateKeyResponse'
+          description: Successful Response
+        "400":
+          description: Bad request (check response message)
+        "401":
+          description: Invalid API key pair in headers
+        "402":
+          description: Payment required. Occurs when you run out of API requests.
+            Upgrade <a href="https://dashboard.theblockchainapi.com/billing" target="_blank">here</a>.
+      security:
+      - APIKeyID: []
+        APISecretKey: []
+      summary: Derive private key
+      tags:
+      - Wallet
+  /{blockchain}/wallet/identifier:
+    post:
+      description: |-
+        <a href="https://github.com/BL0CK-X/blockchain-api/tree/main/examples/wallet/derive-wallet-identifier" target="_blank">See examples (Python, JavaScript)</a>.
+
+        Derive the identifier for a wallet.
+
+        `Cost: 0 Credit` (Free) (<a href="#section/Pricing">See Pricing</a>)
+      operationId: deriveWalletIdentifier
+      parameters:
+      - description: |
+          The blockchain you want to use
+        explode: false
+        in: path
+        name: blockchain
+        required: true
+        schema:
+          enum:
+          - avalanche
+          - binance_smart_chain
+          - ethereum
+          - near
+          - solana
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SupplyWalletRequest'
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WalletIdentifiers'
+          description: Successful Response
+        "400":
+          description: Bad request (check response message)
+        "401":
+          description: Invalid API key pair in headers
+        "402":
+          description: Payment required. Occurs when you run out of API requests.
+            Upgrade <a href="https://dashboard.theblockchainapi.com/billing" target="_blank">here</a>.
+      security:
+      - APIKeyID: []
+        APISecretKey: []
+      summary: Derive wallet identifier
+      tags:
+      - Wallet
+  /{blockchain}/wallet/balance:
+    post:
+      description: "<a href=\"https://github.com/BL0CK-X/blockchain-api/tree/main/examples/wallet/get-wallet-balance\"\
+        \ target=\"_blank\">See examples (Python, JavaScript)</a>.\n    \nSee the\
+        \ balance of a wallet in the native blockchain currency (e.g., ETH, SOL) or\
+        \ any token (e.g., ERC-20, NFTs, SPL, etc.).\n\nTo get the balance of a specific\
+        \ token, supply the `token_blockchain_identifier` of the token. \n\nYou can\
+        \ also use this endpoint to see whether or not a person owns an NFT. Just\
+        \ supply the `token_blockchain_identifier` of the NFT. A balance of \"1\"\
+        \ means the person owns the NFT, and a balance of \"0\" means the person does\
+        \ not own the NFT.\n\n`Cost: 0.25 Credit` (<a href=\"#section/Pricing\">See\
+        \ Pricing</a>)"
+      operationId: getBalance
+      parameters:
+      - description: |
+          The blockchain you want to use
+        explode: false
+        in: path
+        name: blockchain
+        required: true
+        schema:
+          enum:
+          - ethereum
+          - solana
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GeneralBalanceRequest'
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GeneralBalanceResponse'
+          description: Successful Response
+        "400":
+          description: Bad request (check response message)
+        "401":
+          description: Invalid API key pair in headers
+        "402":
+          description: Payment required. Occurs when you run out of API requests.
+            Upgrade <a href="https://dashboard.theblockchainapi.com/billing" target="_blank">here</a>.
+      security:
+      - APIKeyID: []
+        APISecretKey: []
+      summary: Get wallet's balance of X
+      tags:
+      - Wallet
+  /{blockchain}/wallet/airdrop:
+    post:
+      description: "<a href=\"https://github.com/BL0CK-X/blockchain-api/tree/main/examples/wallet/get-airdrop\"\
+        \ target=\"_blank\">See examples (Python, JavaScript)</a>.\n    \n- Ethereum:\
+        \ Receive an airdrop of 0.001 ETH on Ropsten (not real ETH). \n- Solana: Use\
+        \ this endpoint to get an airdrop of SOL on the devnet (not real SOL). Amount\
+        \ of 0.015, which is the minimum amount of SOL you need to mint an NFT and\
+        \ then transfer it to another wallet.\n\n`Cost: 0 Credit` (Free) (<a href=\"\
+        #section/Pricing\">See Pricing</a>)"
+      operationId: getAirdrop
+      parameters:
+      - description: |
+          The blockchain you want to use
+        explode: false
+        in: path
+        name: blockchain
+        required: true
+        schema:
+          enum:
+          - ethereum
+          - solana
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GeneralAirdropRequest'
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GeneralTransactionMadeResponse'
+          description: Successful Response
+        "400":
+          description: Bad request (check response message)
+        "401":
+          description: Invalid API key pair in headers
+        "402":
+          description: Payment required. Occurs when you run out of API requests.
+            Upgrade <a href="https://dashboard.theblockchainapi.com/billing" target="_blank">here</a>.
+      security:
+      - APIKeyID: []
+        APISecretKey: []
+      summary: Get an airdrop
+      tags:
+      - Wallet
+  /{blockchain}/wallet/transfer:
+    post:
+      description: "<a href=\"https://github.com/BL0CK-X/blockchain-api/tree/main/examples/wallet/transfer-crypto-token-or-nft\"\
+        \ target=\"_blank\">See transfer ETH/SOL/crypto example (Python, JavaScript)</a>.\n\
+        \n<a href=\"https://github.com/BL0CK-X/blockchain-api/tree/main/examples/wallet/transfer-crypto-token-or-nft\"\
+        \ target=\"_blank\">See transfer NFT/token example (Python, JavaScript)</a>.\n\
+        \nThis is a powerful function. It might be slightly confusing because there\
+        \ are several optional parameters, so take some time to review it. \n\nThis\
+        \ function can send\n- The native currency of the selected blockchain (e.g.,\
+        \ SOL, ETH, BNB, etc.)\n- A token (e.g., an SPL token, ERC-20 token, etc.)\n\
+        - An NFT\n\nYou can sign and submit the transaction for confirmation; and\
+        \ you can select to simply return the compiled transaction so that you can\
+        \ submit it to the user for signing (e.g., via Phantom or Metamask; no private\
+        \ keys required in this case).\n\nIf you're transferring an NFT or a token,\
+        \ supply its respective `token_blockchain_identifier`.\n\nSENDER: Note that\
+        \ the wallet information is used to authorize the sending of the tokens and\
+        \ identifies the source of the tokens. If `return_compiled_transaction = false`,\
+        \ we sign and submit the transaction (`wallet` is required in this case; do\
+        \ not provide a value for `sender_blockchain_identifier`). If `return_compiled_transaction\
+        \ = true`, we compile the transaction (`sender_blockchain_identifier` is required\
+        \ in this case; do not provide `wallet`).\n\nRECIPIENT: `recipient_blockchain_identifier`\
+        \ identifies the receiver. This is entirely separate from the information\
+        \ used for the SENDER above. So, in this API call, there are two wallets involved,\
+        \ but only one (namely, the SENDER) is needed to authorize the transaction\
+        \ (if you want us to sign and submitting it).\n\nFEE_PAYER (Solana only):\
+        \ The fee payer of the transaction defaults to `wallet` (or `sender_blockchain_identifier`).\
+        \ To set a different fee payer, provide a value for `fee_payer_wallet`.\n\n\
+        `Cost: 2 Credit` (<a href=\"#section/Pricing\">See Pricing</a>)"
+      operationId: transfer
+      parameters:
+      - description: |
+          The blockchain you want to use
+        explode: false
+        in: path
+        name: blockchain
+        required: true
+        schema:
+          enum:
+          - ethereum
+          - solana
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GeneralTransferRequest'
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GeneralTransactionResponse'
+          description: Successful Response
+        "400":
+          description: Bad request (check response message)
+        "401":
+          description: Invalid API key pair in headers
+        "402":
+          description: Payment required. Occurs when you run out of API requests.
+            Upgrade <a href="https://dashboard.theblockchainapi.com/billing" target="_blank">here</a>.
+      security:
+      - APIKeyID: []
+        APISecretKey: []
+      summary: Transfer crypto, a token, or an NFT to another wallet
+      tags:
+      - Wallet
+  /{blockchain}/transaction/{network}/{transaction_blockchain_identifier}:
+    get:
+      description: "<a href=\"https://github.com/BL0CK-X/blockchain-api/tree/main/examples/transaction/get-transaction\"\
+        \ target=\"_blank\">See examples (Python, JavaScript)</a>.\n    \nGet the\
+        \ details of a transaction made on the specified blockchain.\n\n`Cost: 0.25\
+        \ Credit` (<a href=\"#section/Pricing\">See Pricing</a>)"
+      operationId: getTransaction
+      parameters:
+      - description: |
+          The blockchain you want to use
+        explode: false
+        in: path
+        name: blockchain
+        required: true
+        schema:
+          enum:
+          - ethereum
+          - solana
+          type: string
+        style: simple
+      - description: |-
+          The network of the blockchain you selected
+
+          - Solana: `devnet`, `mainnet-beta`
+          - Ethereum: `ropsten`, `mainnet`
+
+          Defaults when not provided (not applicable to path parameters):
+          - Solana: `devnet`
+          - Ethereum: `ropsten`
+        example: ropsten
+        explode: false
+        in: path
+        name: network
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: |-
+          The transaction signature of the transaction.
+
+          Examples:
+          - Solana: `5wHu1qwD7q5ifaN5nwdcDqNFo53GJqa7nLp2BeeEpcHCusb4GzARz4GjgzsEHMkBMgCJMGa6GSQ1VG96Exv8kt2W`
+          - Ethereum: `0x5f36b787daa57bfe8568d69e24eae54ccb00720c6edfc826bd4a7b19c525eef4`
+        example: 0x5f36b787daa57bfe8568d69e24eae54ccb00720c6edfc826bd4a7b19c525eef4
+        explode: false
+        in: path
+        name: transaction_blockchain_identifier
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GeneralTransaction'
+          description: Transaction found. Details in response. Click "Expand All"
+            in the documentation sidebar to the right to view an example.
+        "400":
+          description: Invalid input or issue retrieving transaction. See response
+            for details
+        "401":
+          description: Invalid API key pair in headers
+        "402":
+          description: Payment required. Occurs when you run out of API requests.
+            Upgrade <a href="https://dashboard.theblockchainapi.com/billing" target="_blank">here</a>.
+        "404":
+          description: Task not found.
+      security:
+      - APIKeyID: []
+        APISecretKey: []
+      summary: Get the details of a transaction made on a blockchain
+      tags:
+      - Transaction
+  /{blockchain}/{network}/name_service/name_to_blockchain_identifier:
+    post:
+      description: "<a href=\"https://github.com/BL0CK-X/blockchain-api\" target=\"\
+        _blank\">See examples (Python, JavaScript) [Coming Soon]</a>.\n    \nGet the\
+        \ blockchain identifier from a name.\n\ne.g., Input `vitalik.eth` and output\
+        \ `0xd8dA6BF26964aF9D7eEd9e03E53415D37aA96045`\n\n`Cost: 0.25 Credit` (<a\
+        \ href=\"#section/Pricing\">See Pricing</a>)"
+      operationId: getBlockchainIdentifierFromName
+      parameters:
+      - description: |
+          The blockchain you want to use
+        explode: false
+        in: path
+        name: blockchain
+        required: true
+        schema:
+          enum:
+          - ethereum
+          - solana
+          type: string
+        style: simple
+      - description: |-
+          The network of the blockchain you selected
+
+          - Solana: `devnet`, `mainnet-beta`
+          - Ethereum: `ropsten`, `mainnet`
+
+          Defaults when not provided (not applicable to path parameters):
+          - Solana: `devnet`
+          - Ethereum: `ropsten`
+        example: ropsten
+        explode: false
+        in: path
+        name: network
+        required: true
+        schema:
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/InputName'
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InputBlockchainIdentifier'
+          description: Successful Response
+        "400":
+          description: Invalid input or issue retrieving transaction. See response
+            for details
+        "401":
+          description: Invalid API key pair in headers
+        "402":
+          description: Payment required. Occurs when you run out of API requests.
+            Upgrade <a href="https://dashboard.theblockchainapi.com/billing" target="_blank">here</a>.
+        "404":
+          description: Task not found.
+      security:
+      - APIKeyID: []
+        APISecretKey: []
+      summary: Get the identifier
+      tags:
+      - Name Service
+  /{blockchain}/{network}/name_service/blockchain_identifier_to_name:
+    post:
+      description: "<a href=\"https://github.com/BL0CK-X/blockchain-api\" target=\"\
+        _blank\">See examples (Python, JavaScript) [Coming Soon]</a>.\n    \nGet the\
+        \ name from a blockchain identifier.\n\ne.g., Input `0xd8dA6BF26964aF9D7eEd9e03E53415D37aA96045`\
+        \ and output `vitalik.eth`\n\n`Cost: 0.25 Credit` (<a href=\"#section/Pricing\"\
+        >See Pricing</a>)"
+      operationId: getNameForBlockchainIdentifier
+      parameters:
+      - description: |
+          The blockchain you want to use
+        explode: false
+        in: path
+        name: blockchain
+        required: true
+        schema:
+          enum:
+          - ethereum
+          - solana
+          type: string
+        style: simple
+      - description: |-
+          The network of the blockchain you selected
+
+          - Solana: `devnet`, `mainnet-beta`
+          - Ethereum: `ropsten`, `mainnet`
+
+          Defaults when not provided (not applicable to path parameters):
+          - Solana: `devnet`
+          - Ethereum: `ropsten`
+        example: ropsten
+        explode: false
+        in: path
+        name: network
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: |
+          The identifier of the token (e.g., `mint_address` on `Solana` or `token_address` on `Ethereum`)
+        explode: false
+        in: path
+        name: blockchain_identifier
+        required: true
+        schema:
+          enum:
+          - ethereum
+          - solana
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/InputBlockchainIdentifier'
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InputName'
+          description: Successful Response
+        "400":
+          description: Invalid input or issue retrieving transaction. See response
+            for details
+        "401":
+          description: Invalid API key pair in headers
+        "402":
+          description: Payment required. Occurs when you run out of API requests.
+            Upgrade <a href="https://dashboard.theblockchainapi.com/billing" target="_blank">here</a>.
+        "404":
+          description: Task not found.
+      security:
+      - APIKeyID: []
+        APISecretKey: []
+      summary: Get the name
+      tags:
+      - Name Service
+  /{blockchain}/{network}/token/{token_blockchain_identifier}:
+    get:
+      description: "<a href=\"https://github.com/BL0CK-X/blockchain-api\" target=\"\
+        _blank\">See examples (Python, JavaScript) [Coming Soon]</a>.\n    \nGet the\
+        \ metadata of a token.\n\n`Cost: 0.25 Credit` (<a href=\"#section/Pricing\"\
+        >See Pricing</a>)"
+      operationId: getTokenMetadata
+      parameters:
+      - description: |
+          The blockchain you want to use
+        explode: false
+        in: path
+        name: blockchain
+        required: true
+        schema:
+          enum:
+          - ethereum
+          - solana
+          type: string
+        style: simple
+      - description: |-
+          The network of the blockchain you selected
+
+          - Solana: `devnet`, `mainnet-beta`
+          - Ethereum: `ropsten`, `mainnet`
+
+          Defaults when not provided (not applicable to path parameters):
+          - Solana: `devnet`
+          - Ethereum: `ropsten`
+        example: ropsten
+        explode: false
+        in: path
+        name: network
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: |
+          The identifier of the token (e.g., `mint_address` on `Solana` or `token_address` on `Ethereum`)
+        explode: false
+        in: path
+        name: token_blockchain_identifier
+        required: true
+        schema:
+          enum:
+          - ethereum
+          - solana
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TokenMetadataResponse'
+          description: Successful Response
+        "400":
+          description: Invalid input or issue retrieving transaction. See response
+            for details
+        "401":
+          description: Invalid API key pair in headers
+        "402":
+          description: Payment required. Occurs when you run out of API requests.
+            Upgrade <a href="https://dashboard.theblockchainapi.com/billing" target="_blank">here</a>.
+        "404":
+          description: Task not found.
+      security:
+      - APIKeyID: []
+        APISecretKey: []
+      summary: Get a token's metadata
+      tags:
+      - Token
+  /{blockchain}/{network}/all_tokens:
+    post:
+      description: "<a href=\"https://github.com/BL0CK-X/blockchain-api\" target=\"\
+        _blank\">See examples (Python, JavaScript) [Coming Soon]</a>.\n    \nList\
+        \ all tokens.\n\n`Cost: 1 Credit` (<a href=\"#section/Pricing\">See Pricing</a>)"
+      operationId: listAllTokens
+      parameters:
+      - description: |
+          The blockchain you want to use
+        explode: false
+        in: path
+        name: blockchain
+        required: true
+        schema:
+          enum:
+          - solana
+          type: string
+        style: simple
+      - description: |-
+          The network of the blockchain you selected
+
+          - Solana: `devnet`, `mainnet-beta`
+          - Ethereum: `ropsten`, `mainnet`
+
+          Defaults when not provided (not applicable to path parameters):
+          - Solana: `devnet`
+          - Ethereum: `ropsten`
+        example: ropsten
+        explode: false
+        in: path
+        name: network
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/TokenMetadataResponse'
+                type: array
+          description: Successful Response
+        "400":
+          description: Invalid input or issue retrieving transaction. See response
+            for details
+        "401":
+          description: Invalid API key pair in headers
+        "402":
+          description: Payment required. Occurs when you run out of API requests.
+            Upgrade <a href="https://dashboard.theblockchainapi.com/billing" target="_blank">here</a>.
+        "404":
+          description: Task not found.
+      security:
+      - APIKeyID: []
+        APISecretKey: []
+      summary: List all tokens
+      tags:
+      - Token
   /solana/account/{network}/{public_key}:
     get:
       description: "<a href=\"https://github.com/BL0CK-X/the-blockchain-api/tree/main/examples/solana-account/get-account\"\
@@ -1223,7 +1922,7 @@ paths:
 
         Buy an NFT on a Solana Exchange.
 
-        Exchanges supported: SolSea, Magic Edennpm
+        Exchanges supported: SolSea, Magic Eden
 
         `Cost: 25 Credits`, `Cost: 3 Credits on Devnet` (<a href="#section/Pricing">See Pricing</a>)
       operationId: solanaBuyNFT
@@ -1241,14 +1940,13 @@ paths:
           type: string
         style: simple
       - description: The NFT exchange to interact with
-        example: solsea
+        example: magic-eden
         explode: false
         in: path
         name: exchange
         required: true
         schema:
           enum:
-          - solsea
           - magic-eden
           type: string
         style: simple
@@ -1311,14 +2009,13 @@ paths:
           type: string
         style: simple
       - description: The NFT exchange to interact with
-        example: solsea
+        example: magic-eden
         explode: false
         in: path
         name: exchange
         required: true
         schema:
           enum:
-          - solsea
           - magic-eden
           type: string
         style: simple
@@ -1381,14 +2078,13 @@ paths:
           type: string
         style: simple
       - description: The NFT exchange to interact with
-        example: solsea
+        example: magic-eden
         explode: false
         in: path
         name: exchange
         required: true
         schema:
           enum:
-          - solsea
           - magic-eden
           type: string
         style: simple
@@ -1424,135 +2120,6 @@ paths:
       - APIKeyID: []
         APISecretKey: []
       summary: Delist
-      tags:
-      - Solana NFT Marketplaces
-  /solana/nft/marketplaces/analytics:
-    post:
-      description: |-
-        <a href="https://github.com/BL0CK-X/blockchain-api/tree/main/examples/solana-nft-marketplaces/analytics" target="_blank">See examples (Python, JavaScript)</a>.
-
-        A collection is a list of NFTs.
-
-        Any collection can thus be defined as a list of mint addresses.
-
-        This endpoint takes in a list of mint addresses (effectively, a collection), a start time (optional), and an end time (optional) and outputs the floor for that period, the volume for that period, and the transaction history for each NFT in the list (buy, list, delist, update price) for that period.
-
-        We are currently compiling a dictionary of collection names to list of mint addresses for public use. Please contribute <a href="https://github.com/BL0CK-X/solana-nft-collection-mint-addresses" target="_blank">here</a>.
-
-        Currently scans the following Solana NFT martketplaces: SolSea, Magic Eden, Solanart, Alpha Art, Digital Eyes, Exchange.art
-
-        `Cost: 15 Credits`, (<a href="#section/Pricing">See Pricing</a>)
-      operationId: solanaGetNFTMarketplaceAnalytics
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/NFTAnalyticsRequest'
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/NFTAnalyticsResponse'
-          description: Successful Response
-        "400":
-          description: Bad request (check response message)
-        "401":
-          description: Invalid API key pair in headers
-        "402":
-          description: Payment required. Occurs when you run out of API requests.
-            Upgrade <a href="https://dashboard.theblockchainapi.com/billing" target="_blank">here</a>.
-        "404":
-          description: No marketplace listing found for this NFT.
-      security:
-      - APIKeyID: []
-        APISecretKey: []
-      summary: Get NFT Analytics
-      tags:
-      - Solana NFT Marketplaces
-  /solana/nft/marketplaces/analytics/recent_transactions:
-    get:
-      description: |-
-        <a href="https://github.com/BL0CK-X/blockchain-api/tree/main/examples/solana-nft-marketplaces/recent-transactions" target="_blank">See examples (Python, JavaScript)</a>.
-
-        Get all NFT transactions across all major marketplaces in the last 30 minutes.
-
-        Currently checks for the following Solana NFT martketplaces: SolSea, Magic Eden, Solanart, Alpha Art, Digital Eyes, Exchange.art
-
-        `Cost: 15 Credits`, (<a href="#section/Pricing">See Pricing</a>)
-      operationId: solanaGetNFTMarketplaceRecentTransactions
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/NFTRecentTransactions'
-          description: Successful Response
-        "400":
-          description: Bad request (check response message)
-        "401":
-          description: Invalid API key pair in headers
-        "402":
-          description: Payment required. Occurs when you run out of API requests.
-            Upgrade <a href="https://dashboard.theblockchainapi.com/billing" target="_blank">here</a>.
-        "403":
-          description: |
-            Our API will throw a 403 if you are providing a body in the GET request.  Such requests are insecure and rejected. The solution is not to provide any sort of body in any GET request.
-        "404":
-          description: No marketplace listing found for this NFT.
-      security:
-      - APIKeyID: []
-        APISecretKey: []
-      summary: Get Recent NFT Transactions
-      tags:
-      - Solana NFT Marketplaces
-  /solana/nft/marketplaces/analytics/market_share:
-    get:
-      description: |-
-        <a href="https://github.com/BL0CK-X/blockchain-api/tree/main/examples/solana-nft-marketplaces/market-share" target="_blank">See examples (Python, JavaScript)</a>.
-
-        Get the Marketplace listing of a Solana NFT.
-
-        Currently checks for the following Solana NFT martketplaces: SolSea, Magic Eden, Solanart, Alpha Art, Digital Eyes, Exchange.art
-
-        `Cost: 3 Credits`, (<a href="#section/Pricing">See Pricing</a>)
-      operationId: solanaGetNFTMarketplaceMarketShare
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                description: |
-                  A dictionary mapping an exchange ID to the volume of sales on the exchange over the last 30 minutes
-                example:
-                  alpha-art: 9
-                  digital-eyes: 0
-                  exchange-art: 2
-                  magic-eden: 1388
-                  solanart: 42
-                  solsea: 3
-                properties:
-                  exchange_str:
-                    description: |
-                      The string ID of the exchange (see right bar for example)
-                    type: number
-          description: Successful Response
-        "400":
-          description: Bad request (check response message)
-        "401":
-          description: Invalid API key pair in headers
-        "402":
-          description: Payment required. Occurs when you run out of API requests.
-            Upgrade <a href="https://dashboard.theblockchainapi.com/billing" target="_blank">here</a>.
-        "403":
-          description: |
-            Our API will throw a 403 if you are providing a body in the GET request.  Such requests are insecure and rejected. The solution is not to provide any sort of body in any GET request.
-        "404":
-          description: No marketplace listing found for this NFT.
-      security:
-      - APIKeyID: []
-        APISecretKey: []
-      summary: Get Marketplace Market Share
       tags:
       - Solana NFT Marketplaces
   /solana/nft/candy_machine:
@@ -2537,29 +3104,951 @@ components:
           schema:
             $ref: '#/components/schemas/inline_object'
   schemas:
-    UploadFileRequest:
+    GenerateSeedPhraseRequest:
+      example:
+        n_words: 12
       properties:
-        upload_method:
-          default: IPFS
-          enum:
-          - IPFS
-          - Arweave
-          - Filecoin
+        n_words:
+          description: |
+            The number of words to generate. Must be one of: 12, 15, 18, 21, or 24.
+            Avalanche's default is 24. All other chains we support default to 12.
+          example: 12
+          type: number
+    GeneralSecretPhrase:
+      example:
+        secret_recovery_phrase: fire owner display success half rescue pledge oval
+          foam gossip window once
+      properties:
+        secret_recovery_phrase:
+          description: "The 12, 15, 18, 21, or 24 word phrase that can be used to\
+            \ derive many public key addresses (e.g., bottom army bless castle alter\
+            \ habit dish embody child flame smooth zone).\n\nTo derive a wallet identifier\
+            \ (e.g., public key, public address, etc.), you need a secret recovery\
+            \ phrase, a derivation path, and an optional passphrase. \n\nAlternatively,\
+            \ you can derive a wallet identifier with a private key.\n\nDefault Lengths:\n\
+            - Avalanche (C): 24\n- Avalanche (X, P): 24\n- Binance: 12\n- Ethereum:\
+            \ 12\n- Near: 12\n- Solana: 12\n\nYou can use `secret_recovery_phrase`\
+            \ for Chains: `avalanche`, `binance`, `ethereum`, `near`, `solana`."
+          type: string
+    HexPrivateKey:
+      example:
+        hex_private_key: 0x200b9e5baa38b0dc7551645be11b394e9bf2b04532e4af8824bed2b3de2e0dc0
+      properties:
+        hex_private_key:
+          description: |-
+            A hex private key is the typical private key used on Ethereum, for example. It looks like this: `0x200b9e5baa38b0dc7551645be11b394e9bf2b04532e4af8824bed2b3de2e0dc0`.
+
+            You can use `hex_private_key` for chains: `avalanche`, `binance_smart_chain`, `ethereum`.
+          type: string
+      required:
+      - hex_private_key
+    GeneralPrivateKey:
+      example:
+        private_key:
+        - 185
+        - 108
+        - 153
+        - 165
+        - 57
+        - 193
+        - 166
+        - 167
+        - 58
+        - 148
+        - 133
+        - 121
+        - 92
+        - 252
+        - 242
+        - 13
+        - 233
+        - 246
+        - 35
+        - 103
+        - 185
+        - 20
+        - 27
+        - 56
+        - 111
+        - 169
+        - 12
+        - 50
+        - 50
+        - 36
+        - 83
+        - 156
+        - 173
+        - 195
+        - 143
+        - 75
+        - 135
+        - 78
+        - 204
+        - 129
+        - 217
+        - 231
+        - 58
+        - 129
+        - 69
+        - 180
+        - 185
+        - 86
+        - 119
+        - 43
+        - 200
+        - 193
+        - 94
+        - 112
+        - 31
+        - 135
+        - 68
+        - 128
+        - 207
+        - 26
+        - 85
+        - 150
+        - 68
+        - 181
+      properties:
+        private_key:
+          description: |-
+            A private key corresponds to exactly one public key address. A private key can be used to move assets out of the wallet and sign transaction with the corresponding public key.
+
+            A private key is an array of integers (e.g.,   `[185,108,153,165,57,193,166,167,58,148,133,121,92,252,242,13,233,246,35,103,185,20,27,56,111,169,12,50,50,36,83,156,173,195,143,75,135,78,204,129,217,231,58,129,69,180,185,86,119,43,200,193,94,112,31,135,68,128,207,26,85,150,68,181]`).
+
+            <a href="https://solflare.com" target="_blank">Solflare</a> is a popular wallet interface on Solana that allows you to export your private key in this format.
+
+            You can use `private_key` for Chains: `avalanche`, `binance_smart_chain`, `ethereum`, `solana`, `near`.
+          type: object
+      required:
+      - private_key
+    GeneralB58PrivateKey:
+      example:
+        b58_private_key: 4waBTVeAVWEAczSdx36uMrR19668ACgQDs7r386vrUes3UCzvXCQ2FPSCVGb1zJrwcULgpNzgABreyQaWSpGBwfx
+      properties:
+        b58_private_key:
+          description: |-
+            A private key corresponds to exactly one public key address. A private key can be used to move assets out of the wallet and sign transaction with the corresponding public key.
+
+            A base58-encoded private key is a base58-encoded version of the typical private key. It is represented as a string (e.g., `4waBTVeAVWEAczSdx36uMrR19668ACgQDs7r386vrUes3UCzvXCQ2FPSCVGb1zJrwcULgpNzgABreyQaWSpGBwfx`).
+
+            <a href="https://phantom.app" target="_blank">Phantom</a> is a popular wallet interface on Solana that allows you to export your private key in this format.
+
+            You can use `b58_private_key` for Chains: `solana`, `near`
+          type: string
+      required:
+      - b58_private_key
+    GeneralGeneratePrivateKeyResponse:
+      oneOf:
+      - $ref: '#/components/schemas/HexPrivateKey'
+      - $ref: '#/components/schemas/GeneralPrivateKey'
+      - $ref: '#/components/schemas/GeneralB58PrivateKey'
+    GeneralSecretRecoveryPhrase:
+      example:
+        secret_recovery_phrase: enter remember useful material soccer sense solution
+          alarm crowd drift burst tattoo
+        derivation_path: m/44/501/0/0
+        passphrase: ""
+      properties:
+        secret_recovery_phrase:
+          description: "The 12, 15, 18, 21, or 24 word phrase that can be used to\
+            \ derive many public key addresses (e.g., bottom army bless castle alter\
+            \ habit dish embody child flame smooth zone).\n\nTo derive a wallet identifier\
+            \ (e.g., public key, public address, etc.), you need a secret recovery\
+            \ phrase, a derivation path, and an optional passphrase. \n\nAlternatively,\
+            \ you can derive a wallet identifier with a private key.\n\nDefault Lengths:\n\
+            - Avalanche (C): 24\n- Avalanche (X, P): 24\n- Binance: 12\n- Ethereum:\
+            \ 12\n- Near: 12\n- Solana: 12\n\nYou can use `secret_recovery_phrase`\
+            \ for Chains: `avalanche`, `binance`, `ethereum`, `near`, `solana`."
+          type: string
+        derivation_path:
+          description: |-
+            Derivation paths are used to derive the wallet identifier from the secret recovery phrase. Only correctly typed paths are accepted.
+
+            Defaults:
+            - Avalanche (C): m/44'/60'/0'/0/0
+            - Avalanche (X, P): m/44'/60'/0'/0/0
+            - Binance: m/44'/60'/0'/0/0
+            - Ethereum: m/44'/60'/0'/0/0
+            - Near: m/44/397/0
+            - Solana: m/44/501/0/0
+
+            *Solana Behavior*
+
+            If you provide the empty string "" as the value for the derivation path, then we will derive your public key with the same behavior as the default behavior of the Solana CLI.
+
+            By default, we use "m/44/501/0/0". This is the path that the Phantom and Sollet wallets use.
+
+            You can also arbitrarily increment the default path ("m/44/501/0/0") to generate more wallets (e.g., "m/44/501/0/1", "m/44/501/0/2", ... AND/OR "m/44/501/1/0", "m/44/501/2/0", ...).
+
+            Phantom's Wallet increments the first digit (e.g., "m/44/501/0/0", "m/44/501/1/0", "m/44/501/2/0", ...) to generate more public key addresses.
+
+            The SolFlare recommended path is "m/44/501/0".
+
+            To learn more about derivation paths, check out <a href="https://learnmeabitcoin.com/technical/derivation-paths" target="_blank">this tutorial</a>.
+          type: string
+        passphrase:
+          default: ""
+          description: 'PASSPHRASE != PASSWORD. This is NOT your Phantom password
+            or any other password. It is an optional string you use when creating
+            a wallet. This provides an additional layer of security because a hacker
+            would need both the secret recovery phrase and the passphrase to access
+            the output public key. By default, most wallet UI extensions do not use
+            a passphrase. (You probably did not use a passphrase.) Limited to 500
+            characters. '
+          type: string
+      required:
+      - secret_recovery_phrase
+    GeneralWallet:
+      description: |
+        The wallet authentication information used to sign and submit the transaction.  Click the `>` arrow next to "wallet" on the left to see more details. See our Security section <a href="#section/Security">here</a>.
+      oneOf:
+      - $ref: '#/components/schemas/GeneralSecretRecoveryPhrase'
+      - $ref: '#/components/schemas/HexPrivateKey'
+      - $ref: '#/components/schemas/GeneralPrivateKey'
+      - $ref: '#/components/schemas/GeneralB58PrivateKey'
+    SupplyWalletRequest:
+      example:
+        wallet:
+          secret_recovery_phrase: fire owner display success half rescue pledge oval
+            foam gossip window once
+          derivation_path: m/44/501/0/0
+          passphrase: water
+      properties:
+        wallet:
+          $ref: '#/components/schemas/GeneralWallet'
+      required:
+      - wallet
+    AvalancheCChainPublicAddress:
+      properties:
+        hex_public_address:
+          description: |
+            The public address in hex form of the wallet. This is commonly used in Ethereum, Binance, and Avalanche C-Chain. (e.g., `0xB2b2d42C3adA171633E36b427F062f85A642F453`)
+          example: 0xB2b2d42C3adA171633E36b427F062f85A642F453
+          type: string
+        hex_public_key:
+          description: |
+            To public key in hex form of the wallet. This is hashed to get the hex public address. (e.g., `0x0f7182c2c2f79aca13847bed68c67662c021df868ee5d20a78df6095e4cd162610c63ec9050989a3755a18255cdd707e50678bfd762db3f0feea647610e974c4`)
+          example: 0x0f7182c2c2f79aca13847bed68c67662c021df868ee5d20a78df6095e4cd162610c63ec9050989a3755a18255cdd707e50678bfd762db3f0feea647610e974c4
           type: string
       type: object
-    GetFileResponse:
-      example:
-        uri: https://ipfs.io/ipfs/QmXoypizjW3WknFiJnKLwHCnL72vedxjQkDDP1mXWo6uco/wiki/Aardvark.html
-        size: "1024"
-        upload_time: "1634073275"
+    AvalancheXPChainPublicAddress:
       properties:
-        uri:
+        bech_public_address:
+          description: |
+            The bech-32 encoded public address of the wallet, commonly used for the X and P chains of Avalanche. (e.g., `X-avax1rlxm7ygahlzfjgj4s965t0lk0ucm8v48rc9r5r`)
+          example: X-avax1rlxm7ygahlzfjgj4s965t0lk0ucm8v48rc9r5r
           type: string
-        size:
-          description: File size in kilobytes
+        hex_public_address:
+          description: |
+            The public address in hex form of the wallet. This is commonly used in Ethereum, Binance, and Avalanche C-Chain. (e.g., `0xB2b2d42C3adA171633E36b427F062f85A642F453`)
+          example: 0xB2b2d42C3adA171633E36b427F062f85A642F453
           type: string
-        upload_time:
-          description: The time when the file was uploaded
+      type: object
+    BSCPublicAddress:
+      properties:
+        hex_public_address:
+          description: |
+            The public address in hex form of the wallet. This is commonly used in Ethereum, Binance, and Avalanche C-Chain. (e.g., `0xB2b2d42C3adA171633E36b427F062f85A642F453`)
+          example: 0xB2b2d42C3adA171633E36b427F062f85A642F453
+          type: string
+        hex_public_key:
+          description: |
+            To public key in hex form of the wallet. This is hashed to get the hex public address. (e.g, `0x0f7182c2c2f79aca13847bed68c67662c021df868ee5d20a78df6095e4cd162610c63ec9050989a3755a18255cdd707e50678bfd762db3f0feea647610e974c4`)
+          example: 0x0f7182c2c2f79aca13847bed68c67662c021df868ee5d20a78df6095e4cd162610c63ec9050989a3755a18255cdd707e50678bfd762db3f0feea647610e974c4
+          type: string
+      type: object
+    EthereumPublicAddress:
+      properties:
+        hex_public_address:
+          description: |
+            The public address in hex form of the wallet. This is commonly used in Ethereum, Binance, and Avalanche C-Chain. (e.g., `0xB2b2d42C3adA171633E36b427F062f85A642F453`)
+          example: 0xB2b2d42C3adA171633E36b427F062f85A642F453
+          type: string
+        hex_public_key:
+          description: |
+            To public key in hex form of the wallet. This is hashed to get the hex public address. (e.g., `0x0f7182c2c2f79aca13847bed68c67662c021df868ee5d20a78df6095e4cd162610c63ec9050989a3755a18255cdd707e50678bfd762db3f0feea647610e974c4`)
+          example: 0x0f7182c2c2f79aca13847bed68c67662c021df868ee5d20a78df6095e4cd162610c63ec9050989a3755a18255cdd707e50678bfd762db3f0feea647610e974c4
+          type: string
+      type: object
+    NearPublicKey:
+      properties:
+        hex_public_key:
+          description: |
+            The public key in hex form. This is used in the Near blockchain. (e.g., `0xdf96e3094ab33558dbe14e743aceded3779307b931e12bd6f526fe450db70910`)
+          example: 0xdf96e3094ab33558dbe14e743aceded3779307b931e12bd6f526fe450db70910
+          type: string
+        hex_public_address:
+          description: |
+            The public address in hex form of the wallet. This is commonly used in Ethereum, Binance, and Avalanche C-Chain. (e.g., `0xB2b2d42C3adA171633E36b427F062f85A642F453`)
+          example: 0xB2b2d42C3adA171633E36b427F062f85A642F453
+          type: string
+        public_key:
+          description: |
+            The public key in base58 form. This is used in the Solana blockchain. (e.g., `3Gdu3Uf97jw4Kac8xHEm5Hqmob3BrvJhf3We8s9t5Q2c`)
+          example: 3Gdu3Uf97jw4Kac8xHEm5Hqmob3BrvJhf3We8s9t5Q2c
+          type: string
+      type: object
+    SolanaPublicKey:
+      properties:
+        public_key:
+          description: |
+            The public key in base58 form. This is used in the Solana blockchain. (e.g., `3Gdu3Uf97jw4Kac8xHEm5Hqmob3BrvJhf3We8s9t5Q2c`)
+          example: 3Gdu3Uf97jw4Kac8xHEm5Hqmob3BrvJhf3We8s9t5Q2c
+          type: string
+        hex_public_key:
+          description: |
+            The public key in hex form. This is used in the Near blockchain. (e.g., `0xdf96e3094ab33558dbe14e743aceded3779307b931e12bd6f526fe450db70910`)
+          example: 0xdf96e3094ab33558dbe14e743aceded3779307b931e12bd6f526fe450db70910
+          type: string
+        hex_public_address:
+          description: |
+            The public address in hex form of the wallet. This is commonly used in Ethereum, Binance, and Avalanche C-Chain. (e.g., `0xB2b2d42C3adA171633E36b427F062f85A642F453`)
+          example: 0xB2b2d42C3adA171633E36b427F062f85A642F453
+          type: string
+      type: object
+    WalletIdentifiers:
+      description: |
+        The wallet indentification information. Click the `>` arrow next to "wallet" on the left to see more details.
+      oneOf:
+      - $ref: '#/components/schemas/AvalancheCChainPublicAddress'
+      - $ref: '#/components/schemas/AvalancheXPChainPublicAddress'
+      - $ref: '#/components/schemas/BSCPublicAddress'
+      - $ref: '#/components/schemas/EthereumPublicAddress'
+      - $ref: '#/components/schemas/NearPublicKey'
+      - $ref: '#/components/schemas/SolanaPublicKey'
+    GeneralBalanceRequest:
+      example:
+        blockchain_identifier: GKNcUmNacSJo4S2Kq3DuYRYRGw3sNUfJ4tyqd198t6vQ
+        network: mainnet-beta
+        token_blockchain_identifier: EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v
+      properties:
+        blockchain_identifier:
+          description: |-
+            The address / public key of the wallet you're querying.
+
+            Examples:
+            - Solana: `GKNcUmNacSJo4S2Kq3DuYRYRGw3sNUfJ4tyqd198t6vQ`
+            - Ethereum: `0xa84b9478d203cd25dF722e83C87590f8028f6aAA`
+          type: string
+        unit:
+          description: "The `unit` parameter is only applicable if you are trying\
+            \ to retrieve the balance of the native token (e.g., SOL, ETH, BNB). \n\
+            \nApplicable units:\n- Solana: `lamport`, `sol` (1 SOL = 1e9 Lamports)\n\
+            - Ethereum: `wei`, `gwei`, `eth`"
+          type: string
+        network:
+          description: |-
+            The network of the blockchain you selected
+
+            - Solana: `devnet`, `mainnet-beta`
+            - Ethereum: `ropsten`, `mainnet`
+
+            Defaults when not provided (not applicable to path parameters):
+            - Solana: `devnet`
+            - Ethereum: `ropsten`
+          type: string
+        token_blockchain_identifier:
+          default: "null"
+          description: |-
+            The `token_blockchain_identifier` identifies the token you wish to transfer.
+
+            - If you're transferring a native blockchain currency (e.g., SOL, ETH, BNB), then simply do not supply this value.
+            - If you're transfering an NFT, then supply the token address of the NFT. On Solana, this is the `mint_address` or `mint` (the address of the mint).
+            - If you're transfering a token, supply the token address. For Solana, you can find on this on the Solana Explorer (e.g., see `SRMuApVNdxXokk5GT7XD5cUUgXMBCoAz2LHeuAoKWRt` for <a href="https://explorer.solana.com/address/SRMuApVNdxXokk5GT7XD5cUUgXMBCoAz2LHeuAoKWRt" target="_blank">Serum Token</a>) for the `token_address`.
+
+            Examples:
+            - Ethereum: `0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48`
+            - Solana: `CK1LHEANTu7RFqN3XMzo2AnZhyus2W1vue1njrxLEM1d`
+          type: string
+      required:
+      - public_key
+      type: object
+    GeneralBalanceResponse:
+      example:
+        balance: 3.322105
+        decimals: 6
+        integer_balance: 3322105
+        network: mainnet-beta
+      properties:
+        balance:
+          description: |
+            The balance of the token in the wallet
+          type: number
+        integer_balance:
+          description: |
+            Not included if retreiving native token (e.g., SOL, ETH, BNB, etc.) balance
+          type: number
+        decimals:
+          description: |
+            Not included if retreiving native token (e.g., SOL, ETH, BNB, etc.) balance.
+          type: number
+        network:
+          description: |-
+            The network of the blockchain you selected
+
+            - Solana: `devnet`, `mainnet-beta`
+            - Ethereum: `ropsten`, `mainnet`
+
+            Defaults when not provided (not applicable to path parameters):
+            - Solana: `devnet`
+            - Ethereum: `ropsten`
+          type: string
+        unit:
+          description: |
+            Not included if retreiving a token / NFT balance
+          type: string
+      required:
+      - balance
+      - network
+    GeneralAirdropRequest:
+      example:
+        recipient_blockchain_identifier: GKNcUmNacSJo4S2Kq3DuYRYRGw3sNUfJ4tyqd198t6vQ
+      properties:
+        recipient_blockchain_identifier:
+          description: |-
+            The address/public key to which to send the airdrop.
+
+            Examples:
+            - Solana: `GKNcUmNacSJo4S2Kq3DuYRYRGw3sNUfJ4tyqd198t6vQ`
+            - Ethereum: `0xa84b9478d203cd25dF722e83C87590f8028f6aAA`
+          type: string
+      required:
+      - recipient_blockchain_identifier
+      type: object
+    SolanaTransactionMadeResponse:
+      example:
+        transaction_blockchain_identifier: 38jivwh89t38hkN4dS2M585NZFRHbsGfmnuFb2MVDwrfTXdvYBamQPRo7QQNGdx8mfYahfkUV6s822nH3K7ej5nj
+        transaction_confirmed: true
+      properties:
+        transaction_blockchain_identifier:
+          description: The identifier of the transaction
+          type: string
+        transaction_confirmed:
+          description: Whether or not the transaction was confirmed
+          type: boolean
+      type: object
+    EthereumTransactionMadeResponse:
+      example:
+        transaction_blockchain_identifier: 0x96130a1cad6bf919e7ef15a5fc5232f34f89f3c107acca3387f002e83c2142ca
+        transaction_confirmed: true
+      properties:
+        transaction_blockchain_identifier:
+          description: The identifier of the transaction
+          type: string
+        transaction_confirmed:
+          description: Whether or not the transaction was confirmed
+          type: boolean
+      type: object
+    GeneralTransactionMadeResponse:
+      oneOf:
+      - $ref: '#/components/schemas/SolanaTransactionMadeResponse'
+      - $ref: '#/components/schemas/EthereumTransactionMadeResponse'
+    GeneralFeePayerWallet:
+      description: "This feature is only supported for `solana`.\n\nIf you do NOT\
+        \ provide a wallet here, the fee payer of the transaction will be the `wallet`\
+        \ you provide or the `sender_blockchain_identifier`.\n      \nIf you do provide\
+        \ a wallet, then the `fee_payer_wallet` will pay the fees of the transaction\
+        \ and any costs associated with creating a new associated token account (only\
+        \ if necessary; approx. 0.002 SOL when necessary). A new account is necessary\
+        \ if you are sending an NFT or SPL token to a user that has not received the\
+        \ same NFT or one of the SPL tokens before (thus, a new associated token account\
+        \ is needed)."
+      oneOf:
+      - $ref: '#/components/schemas/GeneralSecretRecoveryPhrase'
+      - $ref: '#/components/schemas/HexPrivateKey'
+      - $ref: '#/components/schemas/GeneralPrivateKey'
+      - $ref: '#/components/schemas/GeneralB58PrivateKey'
+    GeneralTransferRequest:
+      example:
+        wallet:
+          secret_recovery_phrase: fire owner display success half rescue pledge oval
+            foam gossip window once
+        token_blockchain_identifier: CK1LHEANTu7RFqN3XMzo2AnZhyus2W1vue1njrxLEM1d
+      properties:
+        recipient_blockchain_identifier:
+          description: |
+            The blockchain identifier of the recipient to whom you want to send a token or NFT.
+
+            On Ethereum, this is the hex public address of the recipient (e.g., `0x150865ca659204a9a0cd0da00296c6b5db441172`)
+
+            On Solana, this is the public key of the recipient (e.g., `EW3nXn7X4NTWFKWaJgxKrFNoTSkop1cBUVHA21zrfF6u`).
+          type: string
+        wallet:
+          $ref: '#/components/schemas/GeneralWallet'
+        token_blockchain_identifier:
+          description: |-
+            The `token_blockchain_identifier` identifies the token you wish to transfer.
+
+            - If you're transferring a native blockchain currency (e.g., SOL, ETH, BNB), then simply do not supply this value.
+            - If you're transfering an NFT, then supply the token address of the NFT. On Solana, this is the `mint_address` or `mint` (the address of the mint).
+            - If you're transfering a token, supply the token address. For Solana, you can find on this on the Solana Explorer (e.g., see `SRMuApVNdxXokk5GT7XD5cUUgXMBCoAz2LHeuAoKWRt` for <a href="https://explorer.solana.com/address/SRMuApVNdxXokk5GT7XD5cUUgXMBCoAz2LHeuAoKWRt" target="_blank">Serum Token</a>) for the `token_address`.
+
+            Examples:
+            - Ethereum: `0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48`
+            - Solana: `CK1LHEANTu7RFqN3XMzo2AnZhyus2W1vue1njrxLEM1d`
+          type: string
+        network:
+          description: |-
+            The network of the blockchain you selected
+
+            - Solana: `devnet`, `mainnet-beta`
+            - Ethereum: `ropsten`, `mainnet`
+
+            Defaults when not provided (not applicable to path parameters):
+            - Solana: `devnet`
+            - Ethereum: `ropsten`
+          type: string
+        amount:
+          default: "1"
+          description: "This value must be a string. What you provide here depends\
+            \ on if you are sending an NFT, an SPL token, or SOL.\n\n- Native Currency\
+            \ (e.g., SOL, ETH, BNB): Supply this value denominated in the native currency\
+            \ (e.g., in SOL (but not in Lamports), or in ETH (but not in Wei)) in\
+            \ a string format. This does not need to be an integer. For example, if\
+            \ you want to send 0.0005 SOL, then `amount = \"0.0005\"`. If you want\
+            \ to send 0.0005 ETH, then `amount = \"0.0005\"`.\n- NFT: This must be\
+            \ `1`.\n- Token: This must be an integer in string format. To convert\
+            \ from what you see on a wallet UI (e.g., 1 ATLAS, 1 USDC) to an integer\
+            \ value, you have to multiply that value by 10^<i>x</i> where <i>x</i>\
+            \ is the number of decimals. For example, to transfer 0.2 USDC, if USDC\
+            \ uses 6 decimals, then the amount is 0.2 * 10^6 = 200000. \n  - For Solana,\
+            \ you can get the number of decimals for a given SPL token <a href=\"\
+            #operation/solanaGetSPLToken\">here</a>. We are working on analogues of\
+            \ this endpoint for other blockchains."
+          type: string
+        return_compiled_transaction:
+          default: false
+          description: "- If `false`, we sign and submit the transaction (`wallet`\
+            \ is required in this case; do not provide a value for `sender_blockchain_identifier`).\
+            \ \n- If `true`, we compile the transaction (either `wallet` or `sender_blockchain_identifier`\
+            \ is required in this case; do not provide both).\n  "
+          type: boolean
+        sender_blockchain_identifier:
+          default: "null"
+          description: "To understand the purpose of `sender_blockchain_identifier`\
+            \ first note the following: There are two ways you can complete a transfer\
+            \ transaction: \n- (1) we complete it for you with your `wallet` information\
+            \ or \n- (2) we return the raw instruction data that you can sign and\
+            \ submit yourself (no private keys required).\n\nWhen you provide your\
+            \ `wallet` authentication, we are able to determine your wallet's blockchain\
+            \ identifier (public key or address) which is the sender public key of\
+            \ the transaction.\n\nWhen you are not providing your `wallet` as authentication,\
+            \ we still need the `sender_blockchain_identifier` to be able to return\
+            \ the compiled transaction. Thus, you provide `sender_blockchain_identifier`\
+            \ if and only if you are not providing `wallet` authentication information\
+            \ **and** you are returning a compiled transaction.\n\nYou will receive\
+            \ an error if you provide both `wallet` and `sender_blockchain_identifier`.\
+            \ You will receive an error if you provide neither `wallet` nor `sender_blockchain_identifier`."
+          type: string
+        fee_payer_wallet:
+          $ref: '#/components/schemas/GeneralFeePayerWallet'
+      required:
+      - recipient_blockchain_identifier
+      type: object
+    SolanaTransactionCompiledResponse:
+      example:
+        b58_compiled_transaction: 7HigsMhUk7SN2cW3GaQsZ86WyVbR3id8xbPELatuhvXio3kYKbqj5jw3x69K2nxHx2murn56RpngeSsFVnmkhFp4oBk8jn5Frm7sAJBES1kxqxMMwaoTCTSM3ReMUDUQm1P7mbpqoBmaf9Z21pKEKA8dUMmatBG9PHjJf5CaL6Np7SFaMBnjeq8W8SAgWi24QMSr3sju4ZtMDqguZXWm6WESunwMengWE8HSLVfSLTEWYK6GS2QsR
+        compiled_transaction:
+        - 1
+        - 1
+        - 1
+        - 4
+        - 29
+        - 205
+        - 57
+        - 150
+        - 42
+        - 213
+        - 65
+        - 12
+        - 25
+        - 150
+        - 135
+        - 62
+        - 35
+        - 196
+        - 233
+        - 175
+        - 24
+        - 155
+        - 204
+        - 168
+        - 75
+        - 12
+        - 36
+        - 253
+        - 47
+        - 241
+        - 134
+        - 90
+        - 51
+        - 130
+        - 194
+        - 136
+        - 121
+        - 239
+        - 163
+        - 213
+        - 230
+        - 16
+        - 137
+        - 176
+        - 180
+        - 69
+        - 106
+        - 51
+        - 200
+        - 194
+        - 8
+        - 119
+        - 211
+        - 158
+        - 228
+        - 142
+        - 29
+        - 64
+        - 32
+        - 220
+        - 208
+        - 35
+        - 113
+        - 150
+        - 175
+        - 122
+        - 137
+        - 8
+        - 127
+        - 136
+        - 122
+        - 194
+        - 223
+        - 10
+        - 132
+        - 244
+        - 5
+        - 186
+        - 85
+        - 172
+        - 32
+        - 234
+        - 226
+        - 128
+        - 115
+        - 127
+        - 138
+        - 169
+        - 67
+        - 227
+        - 70
+        - 170
+        - 154
+        - 79
+        - 60
+        - 157
+        - 100
+        - 207
+        - 214
+        - 209
+        - 6
+        - 221
+        - 246
+        - 225
+        - 215
+        - 101
+        - 161
+        - 147
+        - 217
+        - 203
+        - 225
+        - 70
+        - 206
+        - 235
+        - 121
+        - 172
+        - 28
+        - 180
+        - 133
+        - 237
+        - 95
+        - 91
+        - 55
+        - 145
+        - 58
+        - 140
+        - 245
+        - 133
+        - 126
+        - 255
+        - 0
+        - 169
+        - 152
+        - 93
+        - 5
+        - 155
+        - 108
+        - 35
+        - 158
+        - 6
+        - 224
+        - 54
+        - 73
+        - 165
+        - 50
+        - 99
+        - 160
+        - 15
+        - 28
+        - 214
+        - 60
+        - 127
+        - 114
+        - 136
+        - 28
+        - 105
+        - 215
+        - 227
+        - 205
+        - 16
+        - 21
+        - 39
+        - 9
+        - 227
+        - 1
+        - 3
+        - 3
+        - 1
+        - 2
+        - 0
+        - 9
+        - 3
+        - 1
+        - 0
+        - 0
+        - 0
+        - 0
+        - 0
+        - 0
+        - 0
+      properties:
+        b58_compiled_transaction:
+          description: A base58 encoded byte array in string representation. Really
+            easy to submit to Phantom. See <a href="https://github.com/BL0CK-X/blockchain-api/blob/main/examples/tutorials/phantom_tutorials/transfer_solana.html"
+            target="_blank">here</a> for an example on how to submit it to a Phantom
+            wallet for signing.
+          type: string
+        compiled_transaction:
+          description: An array of integers representing the bytes of the transaction
+          type: object
+      type: object
+    EthereumTransactionCompiledResponse:
+      example:
+        chain_id: 3
+        data: 0xa9059cbb00000000000000000000000001df6f797cc34957c9764e0043aba35b073b9ae50000000000000000000000000000000000000000000000000000000000000001
+        from: 0xa84b9478d203cd25dF722e83C87590f8028f6aAA
+        to: 0x07865c6E87B9F70255377e024ace6630C1Eaa37F
+        gas: 66115
+        max_fee_per_gas: 1500000024
+        max_priority_fee_per_gas: 1500000000
+        nonce: 46
+        value: 0
+      properties:
+        chain_id:
+          description: |
+            Indicates the chain that the transaction was compiled for (e.g., ropsten or mainnet).
+          type: string
+        data:
+          description: |
+            The transaction data
+          type: string
+        from:
+          description: |
+            The address expected to sign and submit the transaction
+          type: string
+        to:
+          description: |
+            The contract. This should match your provided value for `token_blockchain_identifier`.
+          type: string
+        gas:
+          type: number
+        max_fee_per_gas:
+          type: number
+        max_priority_fee_per_gas:
+          type: number
+        nonce:
+          type: number
+        value:
+          type: number
+      type: object
+    GeneralTransactionResponse:
+      oneOf:
+      - $ref: '#/components/schemas/SolanaTransactionMadeResponse'
+      - $ref: '#/components/schemas/SolanaTransactionCompiledResponse'
+      - $ref: '#/components/schemas/EthereumTransactionMadeResponse'
+      - $ref: '#/components/schemas/EthereumTransactionCompiledResponse'
+    EthereumTransaction:
+      example:
+        access_list: []
+        block_hash: 0x8d8880edf38aaf197c12418154e3ca8e0f41e68810f6c17e58b35e4cf107c1e7
+        block_number: 0xe23e90
+        chain_id: 0x1
+        from: 0xd8da6bf26964af9d7eed9e03e53415d37aa96045
+        gas: 0x18a78
+        gas_price: 0x5eabd7e14
+        hash: 0xc28efff0334292eaac09fa611eba7e721970eb7a7b7dc3dd411a521869ec9810
+        input: 0x6a761202000000000000000000000000a0b86991c6218b36c1d19d4a2e9eb0ce3606eb480000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000014000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000001c00000000000000000000000000000000000000000000000000000000000000044a9059cbb0000000000000000000000007364c516a0e6e784733e5700617ec99b174ffc710000000000000000000000000000000000000000000000000000000000989680000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000082cea0ebf9aa3df7daf8509150ff0366878a6110d1107858eec076d210d5ba45197845be2ce0b89444307bc85e16609bf3ef4adb1ea941ac4070f4be8b3c1018ce1c000000000000000000000000d8da6bf26964af9d7eed9e03e53415d37aa96045000000000000000000000000000000000000000000000000000000000000000001000000000000000000000000000000000000000000000000000000000000
+        max_fee_per_gas: 0x746a528800
+        max_priority_fee_per_gas: 0x77359400
+        nonce: 0x31f
+        r: 0xc22d414961cfadb11943c16326b5e8bd29620ef5e764cfa8ef6f4a31509f9751
+        s: 0x190e71ef0bcb26e01f982ded821aeec4ff5548a4edd4648a7336fb5e2ea06dec
+        to: 0xa06c2b67e7435ce25a5969e49983ec3304d8e787
+        transaction_index: 0x3b
+        type: 0x2
+        v: 0x0
+        value: 0x0
+      properties:
+        access_list:
+          type: object
+        block_hash:
+          type: string
+        block_number:
+          type: string
+        chain_id:
+          type: string
+        from:
+          type: string
+        gas:
+          type: string
+        gas_price:
+          type: string
+        hash:
+          type: string
+        input:
+          type: string
+        max_fee_per_gas:
+          type: string
+        max_priority_fee_per_gas:
+          type: string
+        nonce:
+          type: string
+        r:
+          type: string
+        s:
+          type: string
+        to:
+          type: string
+        transaction_index:
+          type: string
+        type:
+          type: string
+        v:
+          type: string
+        value:
+          type: string
+      type: object
+    SolanaTransaction:
+      example:
+        block_time: 1634782875
+        meta:
+          err: {}
+          fee: 5000
+          inner_instructions: []
+          log_messages:
+          - Program 11111111111111111111111111111111 invoke [1]
+          - Program 11111111111111111111111111111111 success
+          post_balances:
+          - 1263499110
+          - 10000000
+          - 1
+          post_token_balances: []
+          pre_balances:
+          - 1273504110
+          - 0
+          - 1
+          pre_token_balances: []
+          rewards: []
+          status:
+            _ok: {}
+        slot: 102654672
+        transaction:
+          message: null
+          account_keys:
+          - pubkey:
+              _bn: dee6a11fcc1dc31f0ed939f826fbade9c01c1a911e023cd6bd2cd9a089144a69
+            signer: true
+            writable: true
+          - pubkey:
+              _bn: 1dcd39962ad5410c1996873e23c4e9af189bcca84b0c24fd2ff1865a3382c288
+            signer: false
+            writable: true
+          - pubkey:
+              _bn: "00"
+            signer: false
+            writable: false
+          instructions:
+          - parsed:
+              info:
+                destination: 31LKs39pjT5oj6fWjC3F76dHWf9489asCthmgj8wu7pj
+                lamports: 10000000
+                source: G17UmNGnMJ851x3M1JXocgpft1afcYedjPuFpo1ohhCk
+              type: transfer
+            program: system
+            program_id:
+              _bn: "00"
+          recent_blockhash: B4HW8uQT3VddawYKhsoHbhSYYARfWFCxJwaoAZBYBo1Y
+          signatures:
+          - 5MB3KY9Dps7Z9E9gJNykfaDHD8cwgxXhszxoeXEdcpUqsLm4BMjpwKWRKr4ojGg7s7wfpLwEPXLACZxhzAFBg4nz
+      properties:
+        block_time:
+          type: number
+        meta:
+          type: object
+        slot:
+          type: number
+        transaction:
+          type: object
+    GeneralTransaction:
+      oneOf:
+      - $ref: '#/components/schemas/EthereumTransaction'
+      - $ref: '#/components/schemas/SolanaTransaction'
+    InputName:
+      example:
+        name: vitalik.eth
+      properties:
+        name:
+          type: string
+      type: object
+    InputBlockchainIdentifier:
+      example:
+        blockchain_identifier: 0xd8dA6BF26964aF9D7eEd9e03E53415D37aA96045
+      properties:
+        blockchain_identifier:
+          type: string
+      type: object
+    TokenMetadataResponse:
+      example:
+        symbol: USDC
+        name: USD Coin
+        decimals: 9
+        minter_blockchain_identifier: null
+        total_supply: 1273041820
+      properties:
+        symbol:
+          description: |
+            The symbol of the coin
+          type: string
+        name:
+          description: |
+            The name of the coin
+          type: string
+        decimals:
+          type: number
+        minter_blockchain_identifier:
+          description: |
+            The `mint_authority` (Solana) or `master_minter` (Ethereum)
+          type: string
+        total_supply:
           type: string
       type: object
     Account:
@@ -3342,6 +4831,13 @@ components:
         mint: EEr5yQpNXf7Bru6Rt5podx56HGW9CEehXqgRGh2wa71w
         primary_sale_happened: true
         update_authority: 5FzddvKbxE54KEg2WoeNiGWJYAUBabKVFg2MVCSacWiJ
+        metadata_account: HTu4wUU4WxL48AdQM3nQuHeY8iAqgV9aKwbes4P6Y1c4
+        edition_nonce: 255
+        token_standard: 0
+        collection:
+          verified: 0
+          key: "11111111111111111111111111111111"
+        uses: 0
       properties:
         data:
           $ref: '#/components/schemas/NFT_data'
@@ -3363,6 +4859,18 @@ components:
           type: string
         explorer_url:
           type: string
+        metadata_account:
+          description: |
+            The metadata account of the NFT
+          type: string
+        edition_nonce:
+          type: number
+        token_standard:
+          type: number
+        collection:
+          $ref: '#/components/schemas/NFT_collection'
+        uses:
+          type: number
       type: object
     ListNFTsResponse:
       example:
@@ -3427,56 +4935,105 @@ components:
         wallet:
           secret_recovery_phrase: fire owner display success half rescue pledge oval
             foam gossip window once
-        nft_name: Super Musk
-        nft_symbol: MUSK
-        nft_description: Buy this image of Super Musk!
-        nft_url: https://static01.nyt.com/images/2021/03/11/business/00china-musk/00china-musk-superJumbo.jpg
-        nft_metadata: '{"cleverness": 100, "data": ["foo", {"bar": ["baz", null, 1.0,
-          2]}]}'
-        nft_upload_method: S3
+        return_compiled_transaction: false
+        name: Super Musk
+        symbol: MUSK
+        description: Buy this image of Super Musk!
+        image_url: https://static01.nyt.com/images/2021/03/11/business/00china-musk/00china-musk-superJumbo.jpg
+        uri_metadata:
+          animation_url: https://www.arweave.net/efgh1234?ext=mp4
+          attributes:
+          - trait_type: is_curious
+            value: "true"
+          - trait_type: name
+            value: george
+        upload_method: S3
         is_mutable: true
         is_master_edition: true
         seller_fee_basis_points: 100
-        creators: '["31LKs39pjT5oj6fWjC3F76dHWf9489asCthmgj8wu7pj", "G17UmNGnMJ851x3M1JXocgpft1afcYedjPuFpo1ohhCk"]'
-        share: '[40, 60]'
+        creators:
+        - 31LKs39pjT5oj6fWjC3F76dHWf9489asCthmgj8wu7pj
+        - G17UmNGnMJ851x3M1JXocgpft1afcYedjPuFpo1ohhCk
+        share:
+        - 40
+        - 60
         network: devnet
       properties:
         wallet:
           $ref: '#/components/schemas/Wallet'
-        nft_name:
+        return_compiled_transaction:
+          default: false
+          description: |
+            If `true`, the transaction to mint the NFT will not be submitted or signed. It will be returned to you in a raw form that you can then sign with a wallet (e.g., Phantom) or code. No `wallet` authentication information is required (thus, you do you have to supply a seed phrase or private key). See a Python example [here](https://github.com/BL0CK-X/blockchain-api/blob/main/third-party-api-examples/me-buy-sell.py).
+            If `false` (the default option), then `wallet` is required. We sign and submit the transaction for you, which uses your wallet to mint the NFT. No further action is required on your part, and the NFT is minted. Read more on security [here](#section/Security).
+          type: boolean
+        name:
           default: ""
           description: The name of the token. Limited to 32 characters. Stored on
             the blockchain.
           type: string
-        nft_symbol:
+        symbol:
           default: ""
           description: The symbol of the token. Limited to 10 characters. Stored on
             the blockchain.
           type: string
-        nft_description:
+        description:
           default: ""
-          description: |
-            The description of the token. Limited to 2000 characters. Not stored on the blockchain.  This is stored in S3 in a bucket we own, and the link to that file is stored on the blockchain.  If you provide your own link, the link is also stored in that S3 file, which is publicly accessible. However, if you choose the NFT upload method "LINK" instead of "S3", then we upload the link you  provide for nft_url directly to the blockchain, and S3 is not used at all. Thus, when you provide the "LINK" option, the value nft_description is ignored and not used. The Metaplex API does not provide functionality to store any data about your NFT besides a URL.
+          description: "The description of the NFT. Limited to 2000 characters. Not\
+            \ stored on the blockchain. \n      \nIf you are providing your own `uri`\
+            \ (see above), then you do not need to provide this.\n\nIf you are not\
+            \ providing your own `uri` and you do not provide this, then there wills\
+            \ simply be no description.\n\nOnly provide a value for `description`\
+            \ if the `upload_method` is set to `S3` (see the description for `upload_method`\
+            \ above)."
           type: string
-        nft_url:
-          default: ""
-          description: |
-            The URL you provided. Limited to 200 characters. This does not need to be a valid URL. Whether or not this is  stored on the blockchain depends on which upload method you choose. If you choose LINK, then this is stored on the  blockchain directly. If you choose S3, then this link is embedded in a public S3 text file that also contains the metadata, the name,  the symbol, and the description of the NFT.
-          type: string
-        nft_metadata:
-          default: '{}'
-          description: |
-            Any data you provide. Must be a string and properly encoded json. Will be viewable on S3. Limited to 2000 bytes. Not stored on the blockchain.  This is stored in S3 in a bucket we own, and the link to that file is stored on the blockchain.  If you provide your own link, the link is also stored in that S3 file, which is publicly accessible. However, if you choose the NFT upload method "LINK" instead of "S3", then we upload the link you  provide for nft_url directly to the blockchain, and S3 is not used at all. Thus, when you provide the "LINK" option, the value nft_metadata is ignored and not used. The Metaplex API does not provide functionality to store any data about your NFT besides a URL.
-          type: string
-        nft_upload_method:
+        upload_method:
           default: S3
-          description: |
-            When you choose S3, all of the nft_description, nft_name, nft_symbol, nft_metadata, and nft_url are put into a json dictionary and uploaded to S3 as a text file.  This is uploaded to an AWS S3 bucket we own, and is an option we provide at no charge. The S3 link to this file is stored on the NFT on the blockchain.
-              When you choose LINK, the nft_url you provide is stored on the blockchain, and the nft_metadata and nft_description are ignored and not stored anywhere. S3 is then NOT used.
+          description: "When you choose `S3`, all of the `name`, `description`, `symbol`,\
+            \ `uri_metadata`, and `image_url` are put into a JSON dictionary and uploaded\
+            \ to S3 as a JSON file.\n\nThis is uploaded to an AWS S3 bucket we own,\
+            \ and is an option we provide at no charge. The S3 link to this file is\
+            \ stored in the NFT's account on the blockchain. Learn more  <a href=\"\
+            https://blockchainapi.com/2022/01/18/how-to-format-off-chain-nft-metadata.html\"\
+            \ target=\"_blank\">here</a>.\n\nWhen you choose `URI`, the `uri` you\
+            \ provide is stored on the blockchain, and the `uri_metadata`, `description`,\
+            \ and `image_url` are ignored and not stored anywhere. `S3` is NOT involved\
+            \ in this case. \n\nAn example of a `uri` you would provide is an Arweave\
+            \ URL, like this: `https://arweave.net/_Y8tETU3FbAFZSM1wXNeWPweWwrW9K6oSF1SYi_bH9A`."
           enum:
           - S3
-          - LINK
+          - URI
           type: string
+        uri:
+          default: ""
+          description: "The `uri` you provide is stored on the blockchain, and the\
+            \ `uri_metadata`, `description`, and `image_url` are ignored and not stored\
+            \ anywhere. `S3` is NOT involved in this case. \n\nRead more <a href=\"\
+            https://blockchainapi.com/2022/01/18/how-to-format-off-chain-nft-metadata.html\"\
+            \ target=\"_blank\">here</a>.\n\nAn example of a `uri` you would provide\
+            \ is an Arweave URL, like this: `https://arweave.net/_Y8tETU3FbAFZSM1wXNeWPweWwrW9K6oSF1SYi_bH9A`.\n\
+            \nOnly provide a value for `uri` if the `upload_method` is set to `URI`\
+            \ (see the description for `upload_method` above)."
+          type: string
+        image_url:
+          default: ""
+          description: "The URL of the image of the NFT. \n      \nIf you are providing\
+            \ your own `uri` (see above), then you do not need to provide this.\n\n\
+            If you are not providing your own `uri` and you do not provide this, then\
+            \ there wills simply be no image.\n\nOnly provide a value for `image_url`\
+            \ if the `upload_method` is set to `S3` (see the description for `upload_method`\
+            \ above)."
+          type: string
+        uri_metadata:
+          default: {}
+          description: "The off-chain metadata.\n      \nIf you are providing your\
+            \ own `uri` (see above), then you do not need to provide this.\n\nIf you\
+            \ are not providing your own `uri` and you do not provide this, then there\
+            \ wills simply be no image.\n\nOnly provide a value for `uri_metadata`\
+            \ if the `upload_method` is set to `S3` (see the description for `upload_method`\
+            \ above).\n\nLearn more about how to format this metadata <a href=\"https://blockchainapi.com/2022/01/18/how-to-format-off-chain-nft-metadata.html\"\
+            \ target=\"_blank\">here</a>."
+          type: object
         is_mutable:
           default: true
           description: |
@@ -3489,23 +5046,33 @@ components:
           type: boolean
         seller_fee_basis_points:
           default: 0
-          description: |
-            Valid values from 0 to 10000. Must be an integer.  Represents the number of basis points that the seller receives as a fee upon sale.  E.g., 100 indicates a 1% seller fee. Seller does not receive a fee when "primary_sale_has_happened" is set to true.  Will be set to false after first sale has occurred.
+          description: "Valid values from 0 to 10000. Must be an integer. \nRepresents\
+            \ the number of basis points that the seller receives as a fee upon sale.\
+            \ \nE.g., 100 indicates a 1% seller fee.\nSeller does not receive a fee\
+            \ when \"primary_sale_has_happened\" is set to true. \nWill be set to\
+            \ false after first sale has occurred.\n"
           type: number
         creators:
           default:
           - The Public Key Corresponding to The Seed Phrase, Path, and Passphrase
             Provided
-          description: |
-            A JSON encoded string representing an array / list.  The designated creators of the NFT. Length of the creator list must match length of the list of share.  Valid lengths of the list range from 1 to 5. Each item in the list must be a valid public key address.    Only the public key corresponding to the seed phrase provided will be marked as verified. Any other creators supplied will be marked as unverified.
+          description: "A JSON encoded string representing an array / list. \nThe\
+            \ designated creators of the NFT.\nLength of the creator list must match\
+            \ length of the list of share. \nValid lengths of the list range from\
+            \ 1 to 5.\nEach item in the list must be a valid public key address. \
+            \  \nOnly the public key corresponding to the seed phrase provided will\
+            \ be marked as verified. Any other creators supplied will be marked as\
+            \ unverified.\n"
           items:
             type: string
           type: array
         share:
           default:
           - 100
-          description: |
-            A JSON encoded string representing an array / list.  The share of the royalty that each creator gets. Valid values range from 0 to 100.  Sum of the values must equal 100.  Only integer value accepted. Length of the share list must match length of the list of creators.
+          description: "A JSON encoded string representing an array / list. \nThe\
+            \ share of the royalty that each creator gets. Valid values range from\
+            \ 0 to 100.\nSum of the values must equal 100. \nOnly integer value accepted.\
+            \ Length of the share list must match length of the list of creators.\n"
           items:
             type: integer
           type: array
@@ -3537,8 +5104,6 @@ components:
           - devnet
           - mainnet-beta
           type: string
-      required:
-      - wallet
       type: object
     NFTMintErrorResponse:
       example:
@@ -3780,10 +5345,22 @@ components:
       type: object
     BuyRequest:
       example:
+        skip_checks: false
+        seller_public_key: "null"
         nft_price: 10000000
       properties:
         wallet:
           $ref: '#/components/schemas/Wallet'
+        skip_checks:
+          default: false
+          description: |
+            Whether or not to skip the provided checks (e.g., Is this NFT not listed? Is this NFT listed for a different price than you set?) and proceed with the transaction.
+          type: boolean
+        seller_public_key:
+          default: "null"
+          description: |
+            The public key of the seller. Only required if providing `skip_checks`. Otherwise, don't provide it.
+          type: string
         nft_price:
           description: |
             The number of lamports you are expecting to purchase the NFT for. We check the price of the NFT before  purchasing it to ensure that it matches your expectation.
@@ -3842,167 +5419,6 @@ components:
             The signature of the `delist` transaction
           type: string
       type: object
-    NFTAnalyticsRequest:
-      example:
-        mint_addresses:
-        - 2U9sJ1mD1Fk6gJZezLjM25YnVrvBiMfmpgpUNXFtsybe
-        - 2i4VfzbimyNYCqLLarH9e4ZTqMLwSAwXBvUMvGPuazTU
-        - BmR33Vpyd7FZc1AC9UFoJfqfT4YqLw1CCFBBQjBjZxXR
-        - DeAZpg1sjh1ga7JKXHU3zLU3deTPescwsbrEpxmTLG1e
-        start_time: 1643757115
-        end_time: 1644966734
-      properties:
-        mint_addresses:
-          description: The list of mint addresses. Each address must be a valid public
-            key.
-          example:
-          - 2U9sJ1mD1Fk6gJZezLjM25YnVrvBiMfmpgpUNXFtsybe
-          - 2i4VfzbimyNYCqLLarH9e4ZTqMLwSAwXBvUMvGPuazTU
-          - BmR33Vpyd7FZc1AC9UFoJfqfT4YqLw1CCFBBQjBjZxXR
-          - DeAZpg1sjh1ga7JKXHU3zLU3deTPescwsbrEpxmTLG1e
-          items:
-            description: A mint address
-            type: string
-          type: array
-        start_time:
-          description: |
-            Response will not include transactions before `start_time`. Set this to `-1` in order to get the entire history we have stored.
-          example: 1643757115
-          type: number
-        end_time:
-          description: "Response will not include transactions after `end_time` \n"
-          example: 1644966734
-          type: number
-      required:
-      - mint_addresses
-    NFTTransaction:
-      example:
-        block_time: 1644371872
-        seller: EmioriB6Y5nLaz1NzQTZu1T5XxJjBVHAxy6SsX9wzWTw
-        transaction_signature: 3EGfHHwxv935ULG3RXsj3PjHyJpMG1adzCQMs7ApgkMpfyyTFbpVzVnjMMBhFG2g15jrafDtVuiiTfR9Poc5mDfw
-        exchange: magic-eden
-        exchange_readable: magic-eden
-        operation: list
-        mint_address: mint_address
-        buyer: 5tCqPe7XNWSNy8aNLbBcqaf5i28RuEH8onsCHsUsvYmn
-      properties:
-        block_time:
-          description: |
-            An epoch time stamp in UTC time that represents the time of the block where the transaction was processed
-          example: 1644371872
-          type: number
-        exchange:
-          description: The NFT exchange on which the transaction occurred
-          enum:
-          - solsea
-          - magic-eden
-          - alpha-art
-          - digital-eyes
-          - solanart
-          - exchange-art
-          example: magic-eden
-          type: string
-        exchange_readable:
-          description: A readable version of the NFT exchange
-          enum:
-          - SolSea
-          - Magic Eden
-          - Alpha Art
-          - Digital Eyes
-          - Solanart
-          - Exchange.art
-          example: magic-eden
-          type: string
-        mint_address:
-          description: |
-            The mint address of the NFT
-          type: string
-        operation:
-          description: The operation of the transaction
-          enum:
-          - buy
-          - list
-          - de_list
-          - update_listing
-          example: list
-          type: string
-        seller:
-          description: The public key of the wallet that listed the NFT
-          example: EmioriB6Y5nLaz1NzQTZu1T5XxJjBVHAxy6SsX9wzWTw
-          type: string
-        buyer:
-          description: |
-            The public key of the buyer. This only exists in `buy` transactions.
-          example: 5tCqPe7XNWSNy8aNLbBcqaf5i28RuEH8onsCHsUsvYmn
-          type: string
-        transaction_signature:
-          description: |
-            The signature of the transaction. You can look up each transaction on explorer.solana.com
-          example: 3EGfHHwxv935ULG3RXsj3PjHyJpMG1adzCQMs7ApgkMpfyyTFbpVzVnjMMBhFG2g15jrafDtVuiiTfR9Poc5mDfw
-          type: string
-      type: object
-    NFTAnalyticsResponse:
-      example:
-        floor: 300000000
-        transaction_history:
-          "2U9sJ1mD1Fk6gJZezLjM25YnVrvBiMfmpgpUNXFtsybe": []
-          "2i4VfzbimyNYCqLLarH9e4ZTqMLwSAwXBvUMvGPuazTU": []
-          BmR33Vpyd7FZc1AC9UFoJfqfT4YqLw1CCFBBQjBjZxXR:
-          - block_time: 1644371872
-            exchange: magic-eden
-            exchange_readable: Magic Eden
-            mint_address: BmR33Vpyd7FZc1AC9UFoJfqfT4YqLw1CCFBBQjBjZxXR
-            operation: de_list
-            seller: EmioriB6Y5nLaz1NzQTZu1T5XxJjBVHAxy6SsX9wzWTw
-            transaction_signature: 3EGfHHwxv935ULG3RXsj3PjHyJpMG1adzCQMs7ApgkMpfyyTFbpVzVnjMMBhFG2g15jrafDtVuiiTfR9Poc5mDfw
-          - block_time: 1644372458
-            exchange: magic-eden
-            exchange_readable: Magic Eden
-            mint_address: BmR33Vpyd7FZc1AC9UFoJfqfT4YqLw1CCFBBQjBjZxXR
-            operation: list
-            price: 300000000
-            seller: EmioriB6Y5nLaz1NzQTZu1T5XxJjBVHAxy6SsX9wzWTw
-            transaction_signature: 3KGD9p2mgEBbTBfC7BNJRvvbUQ9qLNhFUoY3vfz93hM87z6yfdvuRz9dqhqKrrPtXggpzUPcEytASXMNx5CfJaTM
-          - block_time: 1644455774
-            exchange: magic-eden
-            exchange_readable: Magic Eden
-            mint_address: BmR33Vpyd7FZc1AC9UFoJfqfT4YqLw1CCFBBQjBjZxXR
-            operation: de_list
-            seller: EmioriB6Y5nLaz1NzQTZu1T5XxJjBVHAxy6SsX9wzWTw
-            transaction_signature: 2kHd4kHK3SRcYdrftJTKy79qseLyLMS74nPC4hDCq7bfWKUvUKAyZQh6Fn6xe2xkihYmLdiCGJNpDZ9TdmjbbcVM
-          - block_time: 1644558212
-            exchange: magic-eden
-            exchange_readable: Magic Eden
-            mint_address: BmR33Vpyd7FZc1AC9UFoJfqfT4YqLw1CCFBBQjBjZxXR
-            operation: list
-            price: 300000000
-            seller: EmioriB6Y5nLaz1NzQTZu1T5XxJjBVHAxy6SsX9wzWTw
-            transaction_signature: 32FwsXpbTbBsQmeRnGLPNJnq7ffFUwXUdZzfiKkkD29xLYTWBbDCQVMg4hDkfvgzvJFyuxQMEbZeeQ7JbJERg1h4
-          DeAZpg1sjh1ga7JKXHU3zLU3deTPescwsbrEpxmTLG1e: []
-        volume: 0
-      properties:
-        start_time:
-          description: |
-            The start time used in the API request.
-        end_time:
-          description: "The end time used in the API request. \n"
-        transaction_history:
-          $ref: '#/components/schemas/NFTAnalyticsResponse_transaction_history'
-        floor:
-          description: |
-            The minimum active listing price for the collection in the given time period. The listing must have been processed before `end_time` and still active (not delisted or purchased) by `end_time` in order to affect the floor calculation.
-          example: 1644964713
-          type: number
-        volume:
-          description: |
-            The sum of the sale prices for the given time period.
-          example: 1644964713
-          type: number
-    NFTRecentTransactions:
-      description: NFTs recent transactions
-      items:
-        $ref: '#/components/schemas/NFTTransaction'
-      type: array
     CreateTestCandyMachineRequest:
       example:
         wallet:
@@ -4740,22 +6156,20 @@ components:
             description: The share of the seller fee
             maximum: 1
             minimum: 0
-            type: integer
+            type: number
           type: array
       type: object
-    NFTAnalyticsResponse_transaction_history:
-      description: "A dictionary that maps each mint address to its transaction history.\
-        \ See the example to the right (click \"Expand All\").\nThe transaction history\
-        \ consists of a list of transactions. \nEach transaction is represented by\
-        \ an object with the following properties: `block_time`, `exchange`, `exchange_readable`,\
-        \ `mint_address`, `operation`, `seller`, `buyer`, and `transaction_signature`.\n"
+    NFT_collection:
       properties:
-        mint_address:
+        verified:
           description: |
-            The address of the NFT
-          items:
-            $ref: '#/components/schemas/NFTTransaction'
-          type: array
+            A `0` or `1` indicating whether or not the associated collection is verified.
+          type: number
+        key:
+          description: |
+            Will return `11111111111111111111111111111111` if no associated `collection_id`.
+            Otherwise it will return the `collection_id`, which is a public key representing the verified Metaplex collection. See more [here](https://collections.metaplex.com).
+          type: string
       type: object
     GetAllNFTsResponse_minted_nfts:
       properties:
@@ -4795,6 +6209,12 @@ components:
       name: APISecretKey
       type: apiKey
 x-tagGroups:
+- name: Cross-chain
+  tags:
+  - Wallet
+  - Transaction
+  - Name Service
+  - Token
 - name: Solana
   tags:
   - Solana Wallet
@@ -4804,9 +6224,13 @@ x-tagGroups:
   - Solana Transaction
   - Solana Account
   - Solana SPL Token
-- name: Files
+- name: CryptoCheckout
   tags:
-  - File
+  - CC Project
+  - CC Product
+  - CC Plan
+  - CC Payment
+  - CC Webhook
 - name: API Developer Program
   tags:
   - Project

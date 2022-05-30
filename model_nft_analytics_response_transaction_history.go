@@ -18,7 +18,7 @@ import (
 // NFTAnalyticsResponseTransactionHistory A dictionary that maps each mint address to its transaction history. See the example to the right (click \"Expand All\"). The transaction history consists of a list of transactions.  Each transaction is represented by an object with the following properties: `block_time`, `exchange`, `exchange_readable`, `mint_address`, `operation`, `seller`, `buyer`, and `transaction_signature`. 
 type NFTAnalyticsResponseTransactionHistory struct {
 	// The address of the NFT 
-	MintAddress *[]NFTTransaction `json:"mint_address,omitempty"`
+	MintAddress []NFTTransaction `json:"mint_address,omitempty"`
 }
 
 // NewNFTAnalyticsResponseTransactionHistory instantiates a new NFTAnalyticsResponseTransactionHistory object
@@ -44,12 +44,12 @@ func (o *NFTAnalyticsResponseTransactionHistory) GetMintAddress() []NFTTransacti
 		var ret []NFTTransaction
 		return ret
 	}
-	return *o.MintAddress
+	return o.MintAddress
 }
 
 // GetMintAddressOk returns a tuple with the MintAddress field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *NFTAnalyticsResponseTransactionHistory) GetMintAddressOk() (*[]NFTTransaction, bool) {
+func (o *NFTAnalyticsResponseTransactionHistory) GetMintAddressOk() ([]NFTTransaction, bool) {
 	if o == nil || o.MintAddress == nil {
 		return nil, false
 	}
@@ -67,7 +67,7 @@ func (o *NFTAnalyticsResponseTransactionHistory) HasMintAddress() bool {
 
 // SetMintAddress gets a reference to the given []NFTTransaction and assigns it to the MintAddress field.
 func (o *NFTAnalyticsResponseTransactionHistory) SetMintAddress(v []NFTTransaction) {
-	o.MintAddress = &v
+	o.MintAddress = v
 }
 
 func (o NFTAnalyticsResponseTransactionHistory) MarshalJSON() ([]byte, error) {

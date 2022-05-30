@@ -324,11 +324,11 @@ func (o *Endpoint) GetInputSpecification() []ParameterSpecification {
 
 // GetInputSpecificationOk returns a tuple with the InputSpecification field value
 // and a boolean to check if the value has been set.
-func (o *Endpoint) GetInputSpecificationOk() (*[]ParameterSpecification, bool) {
+func (o *Endpoint) GetInputSpecificationOk() ([]ParameterSpecification, bool) {
 	if o == nil  {
 		return nil, false
 	}
-	return &o.InputSpecification, true
+	return o.InputSpecification, true
 }
 
 // SetInputSpecification sets field value
@@ -348,11 +348,11 @@ func (o *Endpoint) GetInputExamples() map[string]interface{} {
 
 // GetInputExamplesOk returns a tuple with the InputExamples field value
 // and a boolean to check if the value has been set.
-func (o *Endpoint) GetInputExamplesOk() (*map[string]interface{}, bool) {
+func (o *Endpoint) GetInputExamplesOk() (map[string]interface{}, bool) {
 	if o == nil  {
 		return nil, false
 	}
-	return &o.InputExamples, true
+	return o.InputExamples, true
 }
 
 // SetInputExamples sets field value
@@ -372,11 +372,11 @@ func (o *Endpoint) GetOutputSpecification() []ParameterSpecification {
 
 // GetOutputSpecificationOk returns a tuple with the OutputSpecification field value
 // and a boolean to check if the value has been set.
-func (o *Endpoint) GetOutputSpecificationOk() (*[]ParameterSpecification, bool) {
+func (o *Endpoint) GetOutputSpecificationOk() ([]ParameterSpecification, bool) {
 	if o == nil  {
 		return nil, false
 	}
-	return &o.OutputSpecification, true
+	return o.OutputSpecification, true
 }
 
 // SetOutputSpecification sets field value
@@ -396,11 +396,11 @@ func (o *Endpoint) GetOutputExamples() map[string]interface{} {
 
 // GetOutputExamplesOk returns a tuple with the OutputExamples field value
 // and a boolean to check if the value has been set.
-func (o *Endpoint) GetOutputExamplesOk() (*map[string]interface{}, bool) {
+func (o *Endpoint) GetOutputExamplesOk() (map[string]interface{}, bool) {
 	if o == nil  {
 		return nil, false
 	}
-	return &o.OutputExamples, true
+	return o.OutputExamples, true
 }
 
 // SetOutputExamples sets field value

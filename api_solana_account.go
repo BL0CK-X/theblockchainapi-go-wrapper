@@ -13,30 +13,30 @@ package openapi
 
 import (
 	"bytes"
-	_context "context"
-	_ioutil "io/ioutil"
-	_nethttp "net/http"
-	_neturl "net/url"
+	"context"
+	"io/ioutil"
+	"net/http"
+	"net/url"
 	"strings"
 )
 
 // Linger please
 var (
-	_ _context.Context
+	_ context.Context
 )
 
 // SolanaAccountApiService SolanaAccountApi service
 type SolanaAccountApiService service
 
 type ApiSolanaGetAccountRequest struct {
-	ctx _context.Context
+	ctx context.Context
 	ApiService *SolanaAccountApiService
 	network string
 	publicKey string
 }
 
 
-func (r ApiSolanaGetAccountRequest) Execute() (Account, *_nethttp.Response, error) {
+func (r ApiSolanaGetAccountRequest) Execute() (*Account, *http.Response, error) {
 	return r.ApiService.SolanaGetAccountExecute(r)
 }
 
@@ -49,12 +49,12 @@ Get the details of an account on Solana. Learn more about accounts <a href="http
 
 `Cost: 0.25 Credit` (<a href="#section/Pricing">See Pricing</a>)
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param network The network ID (devnet, mainnet-beta)
  @param publicKey The public key of the account
  @return ApiSolanaGetAccountRequest
 */
-func (a *SolanaAccountApiService) SolanaGetAccount(ctx _context.Context, network string, publicKey string) ApiSolanaGetAccountRequest {
+func (a *SolanaAccountApiService) SolanaGetAccount(ctx context.Context, network string, publicKey string) ApiSolanaGetAccountRequest {
 	return ApiSolanaGetAccountRequest{
 		ApiService: a,
 		ctx: ctx,
@@ -65,28 +65,26 @@ func (a *SolanaAccountApiService) SolanaGetAccount(ctx _context.Context, network
 
 // Execute executes the request
 //  @return Account
-func (a *SolanaAccountApiService) SolanaGetAccountExecute(r ApiSolanaGetAccountRequest) (Account, *_nethttp.Response, error) {
+func (a *SolanaAccountApiService) SolanaGetAccountExecute(r ApiSolanaGetAccountRequest) (*Account, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodGet
+		localVarHTTPMethod   = http.MethodGet
 		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  Account
+		formFiles            []formFile
+		localVarReturnValue  *Account
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "SolanaAccountApiService.SolanaGetAccount")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/solana/account/{network}/{public_key}"
-	localVarPath = strings.Replace(localVarPath, "{"+"network"+"}", _neturl.PathEscape(parameterToString(r.network, "")), -1)
-	localVarPath = strings.Replace(localVarPath, "{"+"public_key"+"}", _neturl.PathEscape(parameterToString(r.publicKey, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"network"+"}", url.PathEscape(parameterToString(r.network, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"public_key"+"}", url.PathEscape(parameterToString(r.publicKey, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -133,7 +131,7 @@ func (a *SolanaAccountApiService) SolanaGetAccountExecute(r ApiSolanaGetAccountR
 			}
 		}
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -143,15 +141,15 @@ func (a *SolanaAccountApiService) SolanaGetAccountExecute(r ApiSolanaGetAccountR
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -160,7 +158,7 @@ func (a *SolanaAccountApiService) SolanaGetAccountExecute(r ApiSolanaGetAccountR
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -171,14 +169,14 @@ func (a *SolanaAccountApiService) SolanaGetAccountExecute(r ApiSolanaGetAccountR
 }
 
 type ApiSolanaGetAccountIsCandyMachineRequest struct {
-	ctx _context.Context
+	ctx context.Context
 	ApiService *SolanaAccountApiService
 	network string
 	publicKey string
 }
 
 
-func (r ApiSolanaGetAccountIsCandyMachineRequest) Execute() (AccountIsCandyMachine, *_nethttp.Response, error) {
+func (r ApiSolanaGetAccountIsCandyMachineRequest) Execute() (*AccountIsCandyMachine, *http.Response, error) {
 	return r.ApiService.SolanaGetAccountIsCandyMachineExecute(r)
 }
 
@@ -191,12 +189,12 @@ Determine whether or not a public key address corresponds to a candy machine ID 
 
 `Cost: 1 Credit` (<a href="#section/Pricing">See Pricing</a>)
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param network The network ID (devnet, mainnet-beta)
  @param publicKey The public key of the account
  @return ApiSolanaGetAccountIsCandyMachineRequest
 */
-func (a *SolanaAccountApiService) SolanaGetAccountIsCandyMachine(ctx _context.Context, network string, publicKey string) ApiSolanaGetAccountIsCandyMachineRequest {
+func (a *SolanaAccountApiService) SolanaGetAccountIsCandyMachine(ctx context.Context, network string, publicKey string) ApiSolanaGetAccountIsCandyMachineRequest {
 	return ApiSolanaGetAccountIsCandyMachineRequest{
 		ApiService: a,
 		ctx: ctx,
@@ -207,28 +205,26 @@ func (a *SolanaAccountApiService) SolanaGetAccountIsCandyMachine(ctx _context.Co
 
 // Execute executes the request
 //  @return AccountIsCandyMachine
-func (a *SolanaAccountApiService) SolanaGetAccountIsCandyMachineExecute(r ApiSolanaGetAccountIsCandyMachineRequest) (AccountIsCandyMachine, *_nethttp.Response, error) {
+func (a *SolanaAccountApiService) SolanaGetAccountIsCandyMachineExecute(r ApiSolanaGetAccountIsCandyMachineRequest) (*AccountIsCandyMachine, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodGet
+		localVarHTTPMethod   = http.MethodGet
 		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  AccountIsCandyMachine
+		formFiles            []formFile
+		localVarReturnValue  *AccountIsCandyMachine
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "SolanaAccountApiService.SolanaGetAccountIsCandyMachine")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/solana/account/{network}/{public_key}/is_candy_machine"
-	localVarPath = strings.Replace(localVarPath, "{"+"network"+"}", _neturl.PathEscape(parameterToString(r.network, "")), -1)
-	localVarPath = strings.Replace(localVarPath, "{"+"public_key"+"}", _neturl.PathEscape(parameterToString(r.publicKey, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"network"+"}", url.PathEscape(parameterToString(r.network, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"public_key"+"}", url.PathEscape(parameterToString(r.publicKey, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -275,7 +271,7 @@ func (a *SolanaAccountApiService) SolanaGetAccountIsCandyMachineExecute(r ApiSol
 			}
 		}
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -285,15 +281,15 @@ func (a *SolanaAccountApiService) SolanaGetAccountIsCandyMachineExecute(r ApiSol
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -302,7 +298,7 @@ func (a *SolanaAccountApiService) SolanaGetAccountIsCandyMachineExecute(r ApiSol
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -313,14 +309,14 @@ func (a *SolanaAccountApiService) SolanaGetAccountIsCandyMachineExecute(r ApiSol
 }
 
 type ApiSolanaGetAccountIsNFTRequest struct {
-	ctx _context.Context
+	ctx context.Context
 	ApiService *SolanaAccountApiService
 	network string
 	publicKey string
 }
 
 
-func (r ApiSolanaGetAccountIsNFTRequest) Execute() (AccountIsNFT, *_nethttp.Response, error) {
+func (r ApiSolanaGetAccountIsNFTRequest) Execute() (*AccountIsNFT, *http.Response, error) {
 	return r.ApiService.SolanaGetAccountIsNFTExecute(r)
 }
 
@@ -333,12 +329,12 @@ Determine whether or not a public key is an NFT `mint address`
 
 `Cost: 0.5 Credit` (<a href="#section/Pricing">See Pricing</a>)
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param network The network ID (devnet, mainnet-beta)
  @param publicKey The public key of the account
  @return ApiSolanaGetAccountIsNFTRequest
 */
-func (a *SolanaAccountApiService) SolanaGetAccountIsNFT(ctx _context.Context, network string, publicKey string) ApiSolanaGetAccountIsNFTRequest {
+func (a *SolanaAccountApiService) SolanaGetAccountIsNFT(ctx context.Context, network string, publicKey string) ApiSolanaGetAccountIsNFTRequest {
 	return ApiSolanaGetAccountIsNFTRequest{
 		ApiService: a,
 		ctx: ctx,
@@ -349,28 +345,26 @@ func (a *SolanaAccountApiService) SolanaGetAccountIsNFT(ctx _context.Context, ne
 
 // Execute executes the request
 //  @return AccountIsNFT
-func (a *SolanaAccountApiService) SolanaGetAccountIsNFTExecute(r ApiSolanaGetAccountIsNFTRequest) (AccountIsNFT, *_nethttp.Response, error) {
+func (a *SolanaAccountApiService) SolanaGetAccountIsNFTExecute(r ApiSolanaGetAccountIsNFTRequest) (*AccountIsNFT, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodGet
+		localVarHTTPMethod   = http.MethodGet
 		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  AccountIsNFT
+		formFiles            []formFile
+		localVarReturnValue  *AccountIsNFT
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "SolanaAccountApiService.SolanaGetAccountIsNFT")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/solana/account/{network}/{public_key}/is_nft"
-	localVarPath = strings.Replace(localVarPath, "{"+"network"+"}", _neturl.PathEscape(parameterToString(r.network, "")), -1)
-	localVarPath = strings.Replace(localVarPath, "{"+"public_key"+"}", _neturl.PathEscape(parameterToString(r.publicKey, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"network"+"}", url.PathEscape(parameterToString(r.network, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"public_key"+"}", url.PathEscape(parameterToString(r.publicKey, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -417,7 +411,7 @@ func (a *SolanaAccountApiService) SolanaGetAccountIsNFTExecute(r ApiSolanaGetAcc
 			}
 		}
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -427,15 +421,15 @@ func (a *SolanaAccountApiService) SolanaGetAccountIsNFTExecute(r ApiSolanaGetAcc
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -444,7 +438,7 @@ func (a *SolanaAccountApiService) SolanaGetAccountIsNFTExecute(r ApiSolanaGetAcc
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}

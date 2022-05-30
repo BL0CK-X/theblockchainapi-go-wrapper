@@ -24,7 +24,7 @@ type GetCandyMetadataResponse struct {
 	CandyMachineId *string `json:"candy_machine_id,omitempty"`
 	// The configuration public key address of the candy machine 
 	ConfigAddress *string `json:"config_address,omitempty"`
-	Creators *[]GetCandyMetadataResponseCreators `json:"creators,omitempty"`
+	Creators []GetCandyMetadataResponseCreators `json:"creators,omitempty"`
 	// The unix timestamp of the start date of the candy machine 
 	GoLiveDate *float32 `json:"go_live_date,omitempty"`
 	IsMutable *bool `json:"is_mutable,omitempty"`
@@ -198,12 +198,12 @@ func (o *GetCandyMetadataResponse) GetCreators() []GetCandyMetadataResponseCreat
 		var ret []GetCandyMetadataResponseCreators
 		return ret
 	}
-	return *o.Creators
+	return o.Creators
 }
 
 // GetCreatorsOk returns a tuple with the Creators field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *GetCandyMetadataResponse) GetCreatorsOk() (*[]GetCandyMetadataResponseCreators, bool) {
+func (o *GetCandyMetadataResponse) GetCreatorsOk() ([]GetCandyMetadataResponseCreators, bool) {
 	if o == nil || o.Creators == nil {
 		return nil, false
 	}
@@ -221,7 +221,7 @@ func (o *GetCandyMetadataResponse) HasCreators() bool {
 
 // SetCreators gets a reference to the given []GetCandyMetadataResponseCreators and assigns it to the Creators field.
 func (o *GetCandyMetadataResponse) SetCreators(v []GetCandyMetadataResponseCreators) {
-	o.Creators = &v
+	o.Creators = v
 }
 
 // GetGoLiveDate returns the GoLiveDate field value if set, zero value otherwise.

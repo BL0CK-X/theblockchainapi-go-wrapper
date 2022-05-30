@@ -22,7 +22,7 @@ type ProjectDeploymentURL struct {
 	// An internal version tracking the version of the binary uploaded 
 	DeploymentVersion *string `json:"deployment_version,omitempty"`
 	// Information necessary to sign the upload URL 
-	Fields *map[string]interface{} `json:"fields,omitempty"`
+	Fields map[string]interface{} `json:"fields,omitempty"`
 }
 
 // NewProjectDeploymentURL instantiates a new ProjectDeploymentURL object
@@ -112,12 +112,12 @@ func (o *ProjectDeploymentURL) GetFields() map[string]interface{} {
 		var ret map[string]interface{}
 		return ret
 	}
-	return *o.Fields
+	return o.Fields
 }
 
 // GetFieldsOk returns a tuple with the Fields field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *ProjectDeploymentURL) GetFieldsOk() (*map[string]interface{}, bool) {
+func (o *ProjectDeploymentURL) GetFieldsOk() (map[string]interface{}, bool) {
 	if o == nil || o.Fields == nil {
 		return nil, false
 	}
@@ -135,7 +135,7 @@ func (o *ProjectDeploymentURL) HasFields() bool {
 
 // SetFields gets a reference to the given map[string]interface{} and assigns it to the Fields field.
 func (o *ProjectDeploymentURL) SetFields(v map[string]interface{}) {
-	o.Fields = &v
+	o.Fields = v
 }
 
 func (o ProjectDeploymentURL) MarshalJSON() ([]byte, error) {

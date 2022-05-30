@@ -33,8 +33,8 @@ func main() {
     network := "mainnet-beta" // string | The network ID (devnet, mainnet-beta)
 
     configuration := openapiclient.NewConfiguration()
-    api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.SolanaSPLTokenApi.SolanaGetSPLToken(context.Background(), publicKey, network).Execute()
+    apiClient := openapiclient.NewAPIClient(configuration)
+    resp, r, err := apiClient.SolanaSPLTokenApi.SolanaGetSPLToken(context.Background(), publicKey, network).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `SolanaSPLTokenApi.SolanaGetSPLToken``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)

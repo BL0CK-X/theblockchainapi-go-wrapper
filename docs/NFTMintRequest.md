@@ -4,18 +4,20 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Wallet** | [**Wallet**](Wallet.md) |  | 
-**NftName** | Pointer to **string** | The name of the token. Limited to 32 characters. Stored on the blockchain. | [optional] [default to ""]
-**NftSymbol** | Pointer to **string** | The symbol of the token. Limited to 10 characters. Stored on the blockchain. | [optional] [default to ""]
-**NftDescription** | Pointer to **string** | The description of the token. Limited to 2000 characters. Not stored on the blockchain.  This is stored in S3 in a bucket we own, and the link to that file is stored on the blockchain.  If you provide your own link, the link is also stored in that S3 file, which is publicly accessible. However, if you choose the NFT upload method \&quot;LINK\&quot; instead of \&quot;S3\&quot;, then we upload the link you  provide for nft_url directly to the blockchain, and S3 is not used at all. Thus, when you provide the \&quot;LINK\&quot; option, the value nft_description is ignored and not used. The Metaplex API does not provide functionality to store any data about your NFT besides a URL.  | [optional] [default to ""]
-**NftUrl** | Pointer to **string** | The URL you provided. Limited to 200 characters. This does not need to be a valid URL. Whether or not this is  stored on the blockchain depends on which upload method you choose. If you choose LINK, then this is stored on the  blockchain directly. If you choose S3, then this link is embedded in a public S3 text file that also contains the metadata, the name,  the symbol, and the description of the NFT.  | [optional] [default to ""]
-**NftMetadata** | Pointer to **string** | Any data you provide. Must be a string and properly encoded json. Will be viewable on S3. Limited to 2000 bytes. Not stored on the blockchain.  This is stored in S3 in a bucket we own, and the link to that file is stored on the blockchain.  If you provide your own link, the link is also stored in that S3 file, which is publicly accessible. However, if you choose the NFT upload method \&quot;LINK\&quot; instead of \&quot;S3\&quot;, then we upload the link you  provide for nft_url directly to the blockchain, and S3 is not used at all. Thus, when you provide the \&quot;LINK\&quot; option, the value nft_metadata is ignored and not used. The Metaplex API does not provide functionality to store any data about your NFT besides a URL.  | [optional] [default to "{}"]
-**NftUploadMethod** | Pointer to **string** | When you choose S3, all of the nft_description, nft_name, nft_symbol, nft_metadata, and nft_url are put into a json dictionary and uploaded to S3 as a text file.  This is uploaded to an AWS S3 bucket we own, and is an option we provide at no charge. The S3 link to this file is stored on the NFT on the blockchain.   When you choose LINK, the nft_url you provide is stored on the blockchain, and the nft_metadata and nft_description are ignored and not stored anywhere. S3 is then NOT used.  | [optional] [default to "S3"]
+**Wallet** | Pointer to [**Wallet**](Wallet.md) |  | [optional] 
+**ReturnCompiledTransaction** | Pointer to **bool** | If &#x60;true&#x60;, the transaction to mint the NFT will not be submitted or signed. It will be returned to you in a raw form that you can then sign with a wallet (e.g., Phantom) or code. No &#x60;wallet&#x60; authentication information is required (thus, you do you have to supply a seed phrase or private key). See a Python example [here](https://github.com/BL0CK-X/blockchain-api/blob/main/third-party-api-examples/me-buy-sell.py). If &#x60;false&#x60; (the default option), then &#x60;wallet&#x60; is required. We sign and submit the transaction for you, which uses your wallet to mint the NFT. No further action is required on your part, and the NFT is minted. Read more on security [here](#section/Security).  | [optional] [default to false]
+**Name** | Pointer to **string** | The name of the token. Limited to 32 characters. Stored on the blockchain. | [optional] [default to ""]
+**Symbol** | Pointer to **string** | The symbol of the token. Limited to 10 characters. Stored on the blockchain. | [optional] [default to ""]
+**Description** | Pointer to **string** | The description of the NFT. Limited to 2000 characters. Not stored on the blockchain.         If you are providing your own &#x60;uri&#x60; (see above), then you do not need to provide this.  If you are not providing your own &#x60;uri&#x60; and you do not provide this, then there wills simply be no description.  Only provide a value for &#x60;description&#x60; if the &#x60;upload_method&#x60; is set to &#x60;S3&#x60; (see the description for &#x60;upload_method&#x60; above). | [optional] [default to ""]
+**UploadMethod** | Pointer to **string** | When you choose &#x60;S3&#x60;, all of the &#x60;name&#x60;, &#x60;description&#x60;, &#x60;symbol&#x60;, &#x60;uri_metadata&#x60;, and &#x60;image_url&#x60; are put into a JSON dictionary and uploaded to S3 as a JSON file.  This is uploaded to an AWS S3 bucket we own, and is an option we provide at no charge. The S3 link to this file is stored in the NFT&#39;s account on the blockchain. Learn more  &lt;a href&#x3D;\&quot;https://blockchainapi.com/2022/01/18/how-to-format-off-chain-nft-metadata.html\&quot; target&#x3D;\&quot;_blank\&quot;&gt;here&lt;/a&gt;.  When you choose &#x60;URI&#x60;, the &#x60;uri&#x60; you provide is stored on the blockchain, and the &#x60;uri_metadata&#x60;, &#x60;description&#x60;, and &#x60;image_url&#x60; are ignored and not stored anywhere. &#x60;S3&#x60; is NOT involved in this case.   An example of a &#x60;uri&#x60; you would provide is an Arweave URL, like this: &#x60;https://arweave.net/_Y8tETU3FbAFZSM1wXNeWPweWwrW9K6oSF1SYi_bH9A&#x60;. | [optional] [default to "S3"]
+**Uri** | Pointer to **string** | The &#x60;uri&#x60; you provide is stored on the blockchain, and the &#x60;uri_metadata&#x60;, &#x60;description&#x60;, and &#x60;image_url&#x60; are ignored and not stored anywhere. &#x60;S3&#x60; is NOT involved in this case.   Read more &lt;a href&#x3D;\&quot;https://blockchainapi.com/2022/01/18/how-to-format-off-chain-nft-metadata.html\&quot; target&#x3D;\&quot;_blank\&quot;&gt;here&lt;/a&gt;.  An example of a &#x60;uri&#x60; you would provide is an Arweave URL, like this: &#x60;https://arweave.net/_Y8tETU3FbAFZSM1wXNeWPweWwrW9K6oSF1SYi_bH9A&#x60;.  Only provide a value for &#x60;uri&#x60; if the &#x60;upload_method&#x60; is set to &#x60;URI&#x60; (see the description for &#x60;upload_method&#x60; above). | [optional] [default to ""]
+**ImageUrl** | Pointer to **string** | The URL of the image of the NFT.         If you are providing your own &#x60;uri&#x60; (see above), then you do not need to provide this.  If you are not providing your own &#x60;uri&#x60; and you do not provide this, then there wills simply be no image.  Only provide a value for &#x60;image_url&#x60; if the &#x60;upload_method&#x60; is set to &#x60;S3&#x60; (see the description for &#x60;upload_method&#x60; above). | [optional] [default to ""]
+**UriMetadata** | Pointer to **map[string]interface{}** | The off-chain metadata.        If you are providing your own &#x60;uri&#x60; (see above), then you do not need to provide this.  If you are not providing your own &#x60;uri&#x60; and you do not provide this, then there wills simply be no image.  Only provide a value for &#x60;uri_metadata&#x60; if the &#x60;upload_method&#x60; is set to &#x60;S3&#x60; (see the description for &#x60;upload_method&#x60; above).  Learn more about how to format this metadata &lt;a href&#x3D;\&quot;https://blockchainapi.com/2022/01/18/how-to-format-off-chain-nft-metadata.html\&quot; target&#x3D;\&quot;_blank\&quot;&gt;here&lt;/a&gt;. | [optional] [default to {}]
 **IsMutable** | Pointer to **bool** | Indicates whether or not the NFT created is mutable. If mutable, the NFT can be updated later. Once set to immutable, the NFT is unable to be changed.  | [optional] [default to true]
 **IsMasterEdition** | Pointer to **bool** | Whether or not the NFT is a master edition NFT. Saves about 0.001 SOL in transaction costs when set to false.  | [optional] [default to true]
 **SellerFeeBasisPoints** | Pointer to **float32** | Valid values from 0 to 10000. Must be an integer.  Represents the number of basis points that the seller receives as a fee upon sale.  E.g., 100 indicates a 1% seller fee. Seller does not receive a fee when \&quot;primary_sale_has_happened\&quot; is set to true.  Will be set to false after first sale has occurred.  | [optional] [default to 0]
 **Creators** | Pointer to **[]string** | A JSON encoded string representing an array / list.  The designated creators of the NFT. Length of the creator list must match length of the list of share.  Valid lengths of the list range from 1 to 5. Each item in the list must be a valid public key address.    Only the public key corresponding to the seed phrase provided will be marked as verified. Any other creators supplied will be marked as unverified.  | [optional] [default to ["The Public Key Corresponding to The Seed Phrase, Path, and Passphrase Provided"]]
-**Share** | Pointer to **[]int32** | A JSON encoded string representing an array / list.  The share of the royalty that each creator gets. Valid values range from 0 to 100.  Sum of the values must equal 100.  Only integer value accepted. Length of the share list must match length of the list of creators.  | [optional] [default to [100]]
+**Share** | Pointer to **[]int32** | A JSON encoded string representing an array / list.  The share of the royalty that each creator gets. Valid values range from 0 to 100. Sum of the values must equal 100.  Only integer value accepted. Length of the share list must match length of the list of creators.  | [optional] [default to [100]]
 **MintToPublicKey** | Pointer to **string** | Assign ownership of the NFT to the public key address given by &#x60;mint_to_public_key&#x60;  | [optional] [default to "The public key of the wallet provided"]
 **Network** | Pointer to **string** | This determines which network you choose to run the API calls on. We recommend first testing on the devnet, because minting an NFT costs a little above 0.01 SOL, which is about $1.60 at the time of this writing.  When you run on the mainnet-beta, each successful call will deduct approximately that much. When you run on the devnet, that amount is deducted from a simulated amount, so you are not paying with real SOL. To get SOL on the devnet,   airdrop SOL to this address using the CLI. Keep in mind that you can only do this every so often. If you are rate-limited, consider using a VPN and trying again, or just waiting. To get SOL on the mainnet-beta, you    must transfer real SOL to this account from another wallet (e.g., from another wallet you own, from an exchange, etc.). We hope to make this process easier in the future, and if you have any suggestions, please add them    as an issue on our &lt;a href&#x3D;\&quot;https://github.com/BL0CK-X/the-blockchain-api\&quot; target&#x3D;\&quot;_blank\&quot;&gt;GitHub repository&lt;/a&gt; for the API. To get a fee estimate, make a GET requests to the &lt;a href&#x3D;\&quot;#tag/Solana-NFT/paths/~1solana~1nft~1mint~1fee/get\&quot;&gt;v1/solana/nft/mint/fee endpoint&lt;/a&gt; (details in sidebar).  | [optional] [default to "devnet"]
 
@@ -23,7 +25,7 @@ Name | Type | Description | Notes
 
 ### NewNFTMintRequest
 
-`func NewNFTMintRequest(wallet Wallet, ) *NFTMintRequest`
+`func NewNFTMintRequest() *NFTMintRequest`
 
 NewNFTMintRequest instantiates a new NFTMintRequest object
 This constructor will assign default values to properties that have it defined,
@@ -57,156 +59,211 @@ and a boolean to check if the value has been set.
 
 SetWallet sets Wallet field to given value.
 
+### HasWallet
 
-### GetNftName
+`func (o *NFTMintRequest) HasWallet() bool`
 
-`func (o *NFTMintRequest) GetNftName() string`
+HasWallet returns a boolean if a field has been set.
 
-GetNftName returns the NftName field if non-nil, zero value otherwise.
+### GetReturnCompiledTransaction
 
-### GetNftNameOk
+`func (o *NFTMintRequest) GetReturnCompiledTransaction() bool`
 
-`func (o *NFTMintRequest) GetNftNameOk() (*string, bool)`
+GetReturnCompiledTransaction returns the ReturnCompiledTransaction field if non-nil, zero value otherwise.
 
-GetNftNameOk returns a tuple with the NftName field if it's non-nil, zero value otherwise
+### GetReturnCompiledTransactionOk
+
+`func (o *NFTMintRequest) GetReturnCompiledTransactionOk() (*bool, bool)`
+
+GetReturnCompiledTransactionOk returns a tuple with the ReturnCompiledTransaction field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
-### SetNftName
+### SetReturnCompiledTransaction
 
-`func (o *NFTMintRequest) SetNftName(v string)`
+`func (o *NFTMintRequest) SetReturnCompiledTransaction(v bool)`
 
-SetNftName sets NftName field to given value.
+SetReturnCompiledTransaction sets ReturnCompiledTransaction field to given value.
 
-### HasNftName
+### HasReturnCompiledTransaction
 
-`func (o *NFTMintRequest) HasNftName() bool`
+`func (o *NFTMintRequest) HasReturnCompiledTransaction() bool`
 
-HasNftName returns a boolean if a field has been set.
+HasReturnCompiledTransaction returns a boolean if a field has been set.
 
-### GetNftSymbol
+### GetName
 
-`func (o *NFTMintRequest) GetNftSymbol() string`
+`func (o *NFTMintRequest) GetName() string`
 
-GetNftSymbol returns the NftSymbol field if non-nil, zero value otherwise.
+GetName returns the Name field if non-nil, zero value otherwise.
 
-### GetNftSymbolOk
+### GetNameOk
 
-`func (o *NFTMintRequest) GetNftSymbolOk() (*string, bool)`
+`func (o *NFTMintRequest) GetNameOk() (*string, bool)`
 
-GetNftSymbolOk returns a tuple with the NftSymbol field if it's non-nil, zero value otherwise
+GetNameOk returns a tuple with the Name field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
-### SetNftSymbol
+### SetName
 
-`func (o *NFTMintRequest) SetNftSymbol(v string)`
+`func (o *NFTMintRequest) SetName(v string)`
 
-SetNftSymbol sets NftSymbol field to given value.
+SetName sets Name field to given value.
 
-### HasNftSymbol
+### HasName
 
-`func (o *NFTMintRequest) HasNftSymbol() bool`
+`func (o *NFTMintRequest) HasName() bool`
 
-HasNftSymbol returns a boolean if a field has been set.
+HasName returns a boolean if a field has been set.
 
-### GetNftDescription
+### GetSymbol
 
-`func (o *NFTMintRequest) GetNftDescription() string`
+`func (o *NFTMintRequest) GetSymbol() string`
 
-GetNftDescription returns the NftDescription field if non-nil, zero value otherwise.
+GetSymbol returns the Symbol field if non-nil, zero value otherwise.
 
-### GetNftDescriptionOk
+### GetSymbolOk
 
-`func (o *NFTMintRequest) GetNftDescriptionOk() (*string, bool)`
+`func (o *NFTMintRequest) GetSymbolOk() (*string, bool)`
 
-GetNftDescriptionOk returns a tuple with the NftDescription field if it's non-nil, zero value otherwise
+GetSymbolOk returns a tuple with the Symbol field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
-### SetNftDescription
+### SetSymbol
 
-`func (o *NFTMintRequest) SetNftDescription(v string)`
+`func (o *NFTMintRequest) SetSymbol(v string)`
 
-SetNftDescription sets NftDescription field to given value.
+SetSymbol sets Symbol field to given value.
 
-### HasNftDescription
+### HasSymbol
 
-`func (o *NFTMintRequest) HasNftDescription() bool`
+`func (o *NFTMintRequest) HasSymbol() bool`
 
-HasNftDescription returns a boolean if a field has been set.
+HasSymbol returns a boolean if a field has been set.
 
-### GetNftUrl
+### GetDescription
 
-`func (o *NFTMintRequest) GetNftUrl() string`
+`func (o *NFTMintRequest) GetDescription() string`
 
-GetNftUrl returns the NftUrl field if non-nil, zero value otherwise.
+GetDescription returns the Description field if non-nil, zero value otherwise.
 
-### GetNftUrlOk
+### GetDescriptionOk
 
-`func (o *NFTMintRequest) GetNftUrlOk() (*string, bool)`
+`func (o *NFTMintRequest) GetDescriptionOk() (*string, bool)`
 
-GetNftUrlOk returns a tuple with the NftUrl field if it's non-nil, zero value otherwise
+GetDescriptionOk returns a tuple with the Description field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
-### SetNftUrl
+### SetDescription
 
-`func (o *NFTMintRequest) SetNftUrl(v string)`
+`func (o *NFTMintRequest) SetDescription(v string)`
 
-SetNftUrl sets NftUrl field to given value.
+SetDescription sets Description field to given value.
 
-### HasNftUrl
+### HasDescription
 
-`func (o *NFTMintRequest) HasNftUrl() bool`
+`func (o *NFTMintRequest) HasDescription() bool`
 
-HasNftUrl returns a boolean if a field has been set.
+HasDescription returns a boolean if a field has been set.
 
-### GetNftMetadata
+### GetUploadMethod
 
-`func (o *NFTMintRequest) GetNftMetadata() string`
+`func (o *NFTMintRequest) GetUploadMethod() string`
 
-GetNftMetadata returns the NftMetadata field if non-nil, zero value otherwise.
+GetUploadMethod returns the UploadMethod field if non-nil, zero value otherwise.
 
-### GetNftMetadataOk
+### GetUploadMethodOk
 
-`func (o *NFTMintRequest) GetNftMetadataOk() (*string, bool)`
+`func (o *NFTMintRequest) GetUploadMethodOk() (*string, bool)`
 
-GetNftMetadataOk returns a tuple with the NftMetadata field if it's non-nil, zero value otherwise
+GetUploadMethodOk returns a tuple with the UploadMethod field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
-### SetNftMetadata
+### SetUploadMethod
 
-`func (o *NFTMintRequest) SetNftMetadata(v string)`
+`func (o *NFTMintRequest) SetUploadMethod(v string)`
 
-SetNftMetadata sets NftMetadata field to given value.
+SetUploadMethod sets UploadMethod field to given value.
 
-### HasNftMetadata
+### HasUploadMethod
 
-`func (o *NFTMintRequest) HasNftMetadata() bool`
+`func (o *NFTMintRequest) HasUploadMethod() bool`
 
-HasNftMetadata returns a boolean if a field has been set.
+HasUploadMethod returns a boolean if a field has been set.
 
-### GetNftUploadMethod
+### GetUri
 
-`func (o *NFTMintRequest) GetNftUploadMethod() string`
+`func (o *NFTMintRequest) GetUri() string`
 
-GetNftUploadMethod returns the NftUploadMethod field if non-nil, zero value otherwise.
+GetUri returns the Uri field if non-nil, zero value otherwise.
 
-### GetNftUploadMethodOk
+### GetUriOk
 
-`func (o *NFTMintRequest) GetNftUploadMethodOk() (*string, bool)`
+`func (o *NFTMintRequest) GetUriOk() (*string, bool)`
 
-GetNftUploadMethodOk returns a tuple with the NftUploadMethod field if it's non-nil, zero value otherwise
+GetUriOk returns a tuple with the Uri field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
-### SetNftUploadMethod
+### SetUri
 
-`func (o *NFTMintRequest) SetNftUploadMethod(v string)`
+`func (o *NFTMintRequest) SetUri(v string)`
 
-SetNftUploadMethod sets NftUploadMethod field to given value.
+SetUri sets Uri field to given value.
 
-### HasNftUploadMethod
+### HasUri
 
-`func (o *NFTMintRequest) HasNftUploadMethod() bool`
+`func (o *NFTMintRequest) HasUri() bool`
 
-HasNftUploadMethod returns a boolean if a field has been set.
+HasUri returns a boolean if a field has been set.
+
+### GetImageUrl
+
+`func (o *NFTMintRequest) GetImageUrl() string`
+
+GetImageUrl returns the ImageUrl field if non-nil, zero value otherwise.
+
+### GetImageUrlOk
+
+`func (o *NFTMintRequest) GetImageUrlOk() (*string, bool)`
+
+GetImageUrlOk returns a tuple with the ImageUrl field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetImageUrl
+
+`func (o *NFTMintRequest) SetImageUrl(v string)`
+
+SetImageUrl sets ImageUrl field to given value.
+
+### HasImageUrl
+
+`func (o *NFTMintRequest) HasImageUrl() bool`
+
+HasImageUrl returns a boolean if a field has been set.
+
+### GetUriMetadata
+
+`func (o *NFTMintRequest) GetUriMetadata() map[string]interface{}`
+
+GetUriMetadata returns the UriMetadata field if non-nil, zero value otherwise.
+
+### GetUriMetadataOk
+
+`func (o *NFTMintRequest) GetUriMetadataOk() (*map[string]interface{}, bool)`
+
+GetUriMetadataOk returns a tuple with the UriMetadata field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetUriMetadata
+
+`func (o *NFTMintRequest) SetUriMetadata(v map[string]interface{})`
+
+SetUriMetadata sets UriMetadata field to given value.
+
+### HasUriMetadata
+
+`func (o *NFTMintRequest) HasUriMetadata() bool`
+
+HasUriMetadata returns a boolean if a field has been set.
 
 ### GetIsMutable
 

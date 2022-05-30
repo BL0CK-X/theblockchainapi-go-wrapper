@@ -13,30 +13,30 @@ package openapi
 
 import (
 	"bytes"
-	_context "context"
-	_ioutil "io/ioutil"
-	_nethttp "net/http"
-	_neturl "net/url"
+	"context"
+	"io/ioutil"
+	"net/http"
+	"net/url"
 	"strings"
 )
 
 // Linger please
 var (
-	_ _context.Context
+	_ context.Context
 )
 
 // SolanaSPLTokenApiService SolanaSPLTokenApi service
 type SolanaSPLTokenApiService service
 
 type ApiSolanaGetSPLTokenRequest struct {
-	ctx _context.Context
+	ctx context.Context
 	ApiService *SolanaSPLTokenApiService
 	publicKey string
 	network string
 }
 
 
-func (r ApiSolanaGetSPLTokenRequest) Execute() (GetSPLTokenResponse, *_nethttp.Response, error) {
+func (r ApiSolanaGetSPLTokenRequest) Execute() (*GetSPLTokenResponse, *http.Response, error) {
 	return r.ApiService.SolanaGetSPLTokenExecute(r)
 }
 
@@ -59,12 +59,12 @@ Some example mint addresses of SPL tokens:
 
 `Cost: 1 Credit` (<a href="#section/Pricing">See Pricing</a>)
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param publicKey The public key of the token
  @param network The network ID (devnet, mainnet-beta)
  @return ApiSolanaGetSPLTokenRequest
 */
-func (a *SolanaSPLTokenApiService) SolanaGetSPLToken(ctx _context.Context, publicKey string, network string) ApiSolanaGetSPLTokenRequest {
+func (a *SolanaSPLTokenApiService) SolanaGetSPLToken(ctx context.Context, publicKey string, network string) ApiSolanaGetSPLTokenRequest {
 	return ApiSolanaGetSPLTokenRequest{
 		ApiService: a,
 		ctx: ctx,
@@ -75,28 +75,26 @@ func (a *SolanaSPLTokenApiService) SolanaGetSPLToken(ctx _context.Context, publi
 
 // Execute executes the request
 //  @return GetSPLTokenResponse
-func (a *SolanaSPLTokenApiService) SolanaGetSPLTokenExecute(r ApiSolanaGetSPLTokenRequest) (GetSPLTokenResponse, *_nethttp.Response, error) {
+func (a *SolanaSPLTokenApiService) SolanaGetSPLTokenExecute(r ApiSolanaGetSPLTokenRequest) (*GetSPLTokenResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodGet
+		localVarHTTPMethod   = http.MethodGet
 		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  GetSPLTokenResponse
+		formFiles            []formFile
+		localVarReturnValue  *GetSPLTokenResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "SolanaSPLTokenApiService.SolanaGetSPLToken")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/solana/spl-token/{network}/{public_key}"
-	localVarPath = strings.Replace(localVarPath, "{"+"public_key"+"}", _neturl.PathEscape(parameterToString(r.publicKey, "")), -1)
-	localVarPath = strings.Replace(localVarPath, "{"+"network"+"}", _neturl.PathEscape(parameterToString(r.network, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"public_key"+"}", url.PathEscape(parameterToString(r.publicKey, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"network"+"}", url.PathEscape(parameterToString(r.network, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -143,7 +141,7 @@ func (a *SolanaSPLTokenApiService) SolanaGetSPLTokenExecute(r ApiSolanaGetSPLTok
 			}
 		}
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -153,15 +151,15 @@ func (a *SolanaSPLTokenApiService) SolanaGetSPLTokenExecute(r ApiSolanaGetSPLTok
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -170,7 +168,7 @@ func (a *SolanaSPLTokenApiService) SolanaGetSPLTokenExecute(r ApiSolanaGetSPLTok
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}

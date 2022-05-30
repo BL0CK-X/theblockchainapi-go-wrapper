@@ -18,7 +18,7 @@ import (
 // GeneratePrivateKey struct for GeneratePrivateKey
 type GeneratePrivateKey struct {
 	// A private key corresponds to exactly one public key address. A private key can be used to move assets out of the wallet and sign transaction with the corresponding public key.  A private key is an array of integers (e.g.,   `[185,108,153,165,57,193,166,167,58,148,133,121,92,252,242,13,233,246,35,103,185,20,27,56,111,169,12,50,50,36,83,156,173,195,143,75,135,78,204,129,217,231,58,129,69,180,185,86,119,43,200,193,94,112,31,135,68,128,207,26,85,150,68,181]`).  <a href=\"https://solflare.com\" target=\"_blank\">Solflare</a> is a popular wallet interface on Solana that allows you to export your private key in this format.
-	PrivateKey *map[string]interface{} `json:"private_key,omitempty"`
+	PrivateKey map[string]interface{} `json:"private_key,omitempty"`
 	// A private key corresponds to exactly one public key address. A private key can be used to move assets out of the wallet and sign transaction with the corresponding public key.  A base58-encoded private key is a base58-encoded version of the typical private key. It is represented as a string (e.g., `4waBTVeAVWEAczSdx36uMrR19668ACgQDs7r386vrUes3UCzvXCQ2FPSCVGb1zJrwcULgpNzgABreyQaWSpGBwfx`).  <a href=\"https://phantom.app\" target=\"_blank\">Phantom</a> is a popular wallet interface on Solana that allows you to export your private key in this format.
 	B58PrivateKey *string `json:"b58_private_key,omitempty"`
 }
@@ -46,12 +46,12 @@ func (o *GeneratePrivateKey) GetPrivateKey() map[string]interface{} {
 		var ret map[string]interface{}
 		return ret
 	}
-	return *o.PrivateKey
+	return o.PrivateKey
 }
 
 // GetPrivateKeyOk returns a tuple with the PrivateKey field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *GeneratePrivateKey) GetPrivateKeyOk() (*map[string]interface{}, bool) {
+func (o *GeneratePrivateKey) GetPrivateKeyOk() (map[string]interface{}, bool) {
 	if o == nil || o.PrivateKey == nil {
 		return nil, false
 	}
@@ -69,7 +69,7 @@ func (o *GeneratePrivateKey) HasPrivateKey() bool {
 
 // SetPrivateKey gets a reference to the given map[string]interface{} and assigns it to the PrivateKey field.
 func (o *GeneratePrivateKey) SetPrivateKey(v map[string]interface{}) {
-	o.PrivateKey = &v
+	o.PrivateKey = v
 }
 
 // GetB58PrivateKey returns the B58PrivateKey field value if set, zero value otherwise.

@@ -33,8 +33,8 @@ func main() {
     txSignature := "5wHu1qwD7q5ifaN5nwdcDqNFo53GJqa7nLp2BeeEpcHCusb4GzARz4GjgzsEHMkBMgCJMGa6GSQ1VG96Exv8kt2W" // string | The transaction signature of the transaction
 
     configuration := openapiclient.NewConfiguration()
-    api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.SolanaTransactionApi.SolanaGetTransaction(context.Background(), network, txSignature).Execute()
+    apiClient := openapiclient.NewAPIClient(configuration)
+    resp, r, err := apiClient.SolanaTransactionApi.SolanaGetTransaction(context.Background(), network, txSignature).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `SolanaTransactionApi.SolanaGetTransaction``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)

@@ -18,7 +18,7 @@ import (
 // AccountValue struct for AccountValue
 type AccountValue struct {
 	// More info about the account. What are included depends on the type of account. See examples.
-	Data *map[string]interface{} `json:"data,omitempty"`
+	Data map[string]interface{} `json:"data,omitempty"`
 	// Whether or not this account is marked as executable
 	Executable *bool `json:"executable,omitempty"`
 	// The owner of the account
@@ -49,12 +49,12 @@ func (o *AccountValue) GetData() map[string]interface{} {
 		var ret map[string]interface{}
 		return ret
 	}
-	return *o.Data
+	return o.Data
 }
 
 // GetDataOk returns a tuple with the Data field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *AccountValue) GetDataOk() (*map[string]interface{}, bool) {
+func (o *AccountValue) GetDataOk() (map[string]interface{}, bool) {
 	if o == nil || o.Data == nil {
 		return nil, false
 	}
@@ -72,7 +72,7 @@ func (o *AccountValue) HasData() bool {
 
 // SetData gets a reference to the given map[string]interface{} and assigns it to the Data field.
 func (o *AccountValue) SetData(v map[string]interface{}) {
-	o.Data = &v
+	o.Data = v
 }
 
 // GetExecutable returns the Executable field value if set, zero value otherwise.

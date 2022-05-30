@@ -35,8 +35,8 @@ func main() {
     publicKey := "EEr5yQpNXf7Bru6Rt5podx56HGW9CEehXqgRGh2wa71w" // string | The public key of the account
 
     configuration := openapiclient.NewConfiguration()
-    api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.SolanaAccountApi.SolanaGetAccount(context.Background(), network, publicKey).Execute()
+    apiClient := openapiclient.NewAPIClient(configuration)
+    resp, r, err := apiClient.SolanaAccountApi.SolanaGetAccount(context.Background(), network, publicKey).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `SolanaAccountApi.SolanaGetAccount``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -108,8 +108,8 @@ func main() {
     publicKey := "EEr5yQpNXf7Bru6Rt5podx56HGW9CEehXqgRGh2wa71w" // string | The public key of the account
 
     configuration := openapiclient.NewConfiguration()
-    api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.SolanaAccountApi.SolanaGetAccountIsCandyMachine(context.Background(), network, publicKey).Execute()
+    apiClient := openapiclient.NewAPIClient(configuration)
+    resp, r, err := apiClient.SolanaAccountApi.SolanaGetAccountIsCandyMachine(context.Background(), network, publicKey).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `SolanaAccountApi.SolanaGetAccountIsCandyMachine``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -181,8 +181,8 @@ func main() {
     publicKey := "EEr5yQpNXf7Bru6Rt5podx56HGW9CEehXqgRGh2wa71w" // string | The public key of the account
 
     configuration := openapiclient.NewConfiguration()
-    api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.SolanaAccountApi.SolanaGetAccountIsNFT(context.Background(), network, publicKey).Execute()
+    apiClient := openapiclient.NewAPIClient(configuration)
+    resp, r, err := apiClient.SolanaAccountApi.SolanaGetAccountIsNFT(context.Background(), network, publicKey).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `SolanaAccountApi.SolanaGetAccountIsNFT``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)

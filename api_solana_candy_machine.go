@@ -13,23 +13,23 @@ package openapi
 
 import (
 	"bytes"
-	_context "context"
-	_ioutil "io/ioutil"
-	_nethttp "net/http"
-	_neturl "net/url"
+	"context"
+	"io/ioutil"
+	"net/http"
+	"net/url"
 	"strings"
 )
 
 // Linger please
 var (
-	_ _context.Context
+	_ context.Context
 )
 
 // SolanaCandyMachineApiService SolanaCandyMachineApi service
 type SolanaCandyMachineApiService service
 
 type ApiSolanaCreateTestCandyMachineRequest struct {
-	ctx _context.Context
+	ctx context.Context
 	ApiService *SolanaCandyMachineApiService
 	createTestCandyMachineRequest *CreateTestCandyMachineRequest
 }
@@ -39,7 +39,7 @@ func (r ApiSolanaCreateTestCandyMachineRequest) CreateTestCandyMachineRequest(cr
 	return r
 }
 
-func (r ApiSolanaCreateTestCandyMachineRequest) Execute() (CreateTestCandyMachineResponse, *_nethttp.Response, error) {
+func (r ApiSolanaCreateTestCandyMachineRequest) Execute() (*CreateTestCandyMachineResponse, *http.Response, error) {
 	return r.ApiService.SolanaCreateTestCandyMachineExecute(r)
 }
 
@@ -52,10 +52,10 @@ Use this endpoint to create a test candy machine so that you can test your minti
 
 `Cost: 1 Credit` (<a href="#section/Pricing">See Pricing</a>)
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiSolanaCreateTestCandyMachineRequest
 */
-func (a *SolanaCandyMachineApiService) SolanaCreateTestCandyMachine(ctx _context.Context) ApiSolanaCreateTestCandyMachineRequest {
+func (a *SolanaCandyMachineApiService) SolanaCreateTestCandyMachine(ctx context.Context) ApiSolanaCreateTestCandyMachineRequest {
 	return ApiSolanaCreateTestCandyMachineRequest{
 		ApiService: a,
 		ctx: ctx,
@@ -64,26 +64,24 @@ func (a *SolanaCandyMachineApiService) SolanaCreateTestCandyMachine(ctx _context
 
 // Execute executes the request
 //  @return CreateTestCandyMachineResponse
-func (a *SolanaCandyMachineApiService) SolanaCreateTestCandyMachineExecute(r ApiSolanaCreateTestCandyMachineRequest) (CreateTestCandyMachineResponse, *_nethttp.Response, error) {
+func (a *SolanaCandyMachineApiService) SolanaCreateTestCandyMachineExecute(r ApiSolanaCreateTestCandyMachineRequest) (*CreateTestCandyMachineResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodPost
+		localVarHTTPMethod   = http.MethodPost
 		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  CreateTestCandyMachineResponse
+		formFiles            []formFile
+		localVarReturnValue  *CreateTestCandyMachineResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "SolanaCandyMachineApiService.SolanaCreateTestCandyMachine")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/solana/nft/candy_machine"
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{"application/json"}
@@ -132,7 +130,7 @@ func (a *SolanaCandyMachineApiService) SolanaCreateTestCandyMachineExecute(r Api
 			}
 		}
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -142,15 +140,15 @@ func (a *SolanaCandyMachineApiService) SolanaCreateTestCandyMachineExecute(r Api
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -159,7 +157,7 @@ func (a *SolanaCandyMachineApiService) SolanaCreateTestCandyMachineExecute(r Api
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -170,14 +168,14 @@ func (a *SolanaCandyMachineApiService) SolanaCreateTestCandyMachineExecute(r Api
 }
 
 type ApiSolanaGetAllNFTsFromCandyMachineRequest struct {
-	ctx _context.Context
+	ctx context.Context
 	ApiService *SolanaCandyMachineApiService
 	network string
 	candyMachineId string
 }
 
 
-func (r ApiSolanaGetAllNFTsFromCandyMachineRequest) Execute() (GetAllNFTsResponse, *_nethttp.Response, error) {
+func (r ApiSolanaGetAllNFTsFromCandyMachineRequest) Execute() (*GetAllNFTsResponse, *http.Response, error) {
 	return r.ApiService.SolanaGetAllNFTsFromCandyMachineExecute(r)
 }
 
@@ -200,12 +198,12 @@ See example for how to get the list of NFT hashes <a href="https://github.com/BL
 
 `Cost: 2 Credits` (<a href="#section/Pricing">See Pricing</a>)
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param network The network ID
  @param candyMachineId The ID of the candy machine
  @return ApiSolanaGetAllNFTsFromCandyMachineRequest
 */
-func (a *SolanaCandyMachineApiService) SolanaGetAllNFTsFromCandyMachine(ctx _context.Context, network string, candyMachineId string) ApiSolanaGetAllNFTsFromCandyMachineRequest {
+func (a *SolanaCandyMachineApiService) SolanaGetAllNFTsFromCandyMachine(ctx context.Context, network string, candyMachineId string) ApiSolanaGetAllNFTsFromCandyMachineRequest {
 	return ApiSolanaGetAllNFTsFromCandyMachineRequest{
 		ApiService: a,
 		ctx: ctx,
@@ -216,28 +214,26 @@ func (a *SolanaCandyMachineApiService) SolanaGetAllNFTsFromCandyMachine(ctx _con
 
 // Execute executes the request
 //  @return GetAllNFTsResponse
-func (a *SolanaCandyMachineApiService) SolanaGetAllNFTsFromCandyMachineExecute(r ApiSolanaGetAllNFTsFromCandyMachineRequest) (GetAllNFTsResponse, *_nethttp.Response, error) {
+func (a *SolanaCandyMachineApiService) SolanaGetAllNFTsFromCandyMachineExecute(r ApiSolanaGetAllNFTsFromCandyMachineRequest) (*GetAllNFTsResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodGet
+		localVarHTTPMethod   = http.MethodGet
 		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  GetAllNFTsResponse
+		formFiles            []formFile
+		localVarReturnValue  *GetAllNFTsResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "SolanaCandyMachineApiService.SolanaGetAllNFTsFromCandyMachine")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/solana/nft/candy_machine/{network}/{candy_machine_id}/nfts"
-	localVarPath = strings.Replace(localVarPath, "{"+"network"+"}", _neturl.PathEscape(parameterToString(r.network, "")), -1)
-	localVarPath = strings.Replace(localVarPath, "{"+"candy_machine_id"+"}", _neturl.PathEscape(parameterToString(r.candyMachineId, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"network"+"}", url.PathEscape(parameterToString(r.network, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"candy_machine_id"+"}", url.PathEscape(parameterToString(r.candyMachineId, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -284,7 +280,7 @@ func (a *SolanaCandyMachineApiService) SolanaGetAllNFTsFromCandyMachineExecute(r
 			}
 		}
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -294,15 +290,15 @@ func (a *SolanaCandyMachineApiService) SolanaGetAllNFTsFromCandyMachineExecute(r
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -311,7 +307,7 @@ func (a *SolanaCandyMachineApiService) SolanaGetAllNFTsFromCandyMachineExecute(r
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -322,7 +318,7 @@ func (a *SolanaCandyMachineApiService) SolanaGetAllNFTsFromCandyMachineExecute(r
 }
 
 type ApiSolanaGetCandyMachineMetadataRequest struct {
-	ctx _context.Context
+	ctx context.Context
 	ApiService *SolanaCandyMachineApiService
 	getCandyMetadataRequest *GetCandyMetadataRequest
 }
@@ -332,7 +328,7 @@ func (r ApiSolanaGetCandyMachineMetadataRequest) GetCandyMetadataRequest(getCand
 	return r
 }
 
-func (r ApiSolanaGetCandyMachineMetadataRequest) Execute() (GetCandyMetadataResponse, *_nethttp.Response, error) {
+func (r ApiSolanaGetCandyMachineMetadataRequest) Execute() (*GetCandyMetadataResponse, *http.Response, error) {
 	return r.ApiService.SolanaGetCandyMachineMetadataExecute(r)
 }
 
@@ -348,10 +344,10 @@ NOTE: Supply exactly one of `candy_machine_id`, `config_address`, or `uuid`. If 
 
 `Cost: 2 Credits` (<a href="#section/Pricing">See Pricing</a>)
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiSolanaGetCandyMachineMetadataRequest
 */
-func (a *SolanaCandyMachineApiService) SolanaGetCandyMachineMetadata(ctx _context.Context) ApiSolanaGetCandyMachineMetadataRequest {
+func (a *SolanaCandyMachineApiService) SolanaGetCandyMachineMetadata(ctx context.Context) ApiSolanaGetCandyMachineMetadataRequest {
 	return ApiSolanaGetCandyMachineMetadataRequest{
 		ApiService: a,
 		ctx: ctx,
@@ -360,26 +356,24 @@ func (a *SolanaCandyMachineApiService) SolanaGetCandyMachineMetadata(ctx _contex
 
 // Execute executes the request
 //  @return GetCandyMetadataResponse
-func (a *SolanaCandyMachineApiService) SolanaGetCandyMachineMetadataExecute(r ApiSolanaGetCandyMachineMetadataRequest) (GetCandyMetadataResponse, *_nethttp.Response, error) {
+func (a *SolanaCandyMachineApiService) SolanaGetCandyMachineMetadataExecute(r ApiSolanaGetCandyMachineMetadataRequest) (*GetCandyMetadataResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodPost
+		localVarHTTPMethod   = http.MethodPost
 		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  GetCandyMetadataResponse
+		formFiles            []formFile
+		localVarReturnValue  *GetCandyMetadataResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "SolanaCandyMachineApiService.SolanaGetCandyMachineMetadata")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/solana/nft/candy_machine/metadata"
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{"application/json"}
@@ -428,7 +422,7 @@ func (a *SolanaCandyMachineApiService) SolanaGetCandyMachineMetadataExecute(r Ap
 			}
 		}
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -438,15 +432,15 @@ func (a *SolanaCandyMachineApiService) SolanaGetCandyMachineMetadataExecute(r Ap
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -465,7 +459,7 @@ func (a *SolanaCandyMachineApiService) SolanaGetCandyMachineMetadataExecute(r Ap
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -476,12 +470,12 @@ func (a *SolanaCandyMachineApiService) SolanaGetCandyMachineMetadataExecute(r Ap
 }
 
 type ApiSolanaListAllCandyMachinesRequest struct {
-	ctx _context.Context
+	ctx context.Context
 	ApiService *SolanaCandyMachineApiService
 }
 
 
-func (r ApiSolanaListAllCandyMachinesRequest) Execute() (interface{}, *_nethttp.Response, error) {
+func (r ApiSolanaListAllCandyMachinesRequest) Execute() (interface{}, *http.Response, error) {
 	return r.ApiService.SolanaListAllCandyMachinesExecute(r)
 }
 
@@ -498,10 +492,10 @@ The output is a list of config addresses, currently about 17000 in length.
 
 `Cost: 2 Credits` (<a href="#section/Pricing">See Pricing</a>)
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiSolanaListAllCandyMachinesRequest
 */
-func (a *SolanaCandyMachineApiService) SolanaListAllCandyMachines(ctx _context.Context) ApiSolanaListAllCandyMachinesRequest {
+func (a *SolanaCandyMachineApiService) SolanaListAllCandyMachines(ctx context.Context) ApiSolanaListAllCandyMachinesRequest {
 	return ApiSolanaListAllCandyMachinesRequest{
 		ApiService: a,
 		ctx: ctx,
@@ -510,26 +504,24 @@ func (a *SolanaCandyMachineApiService) SolanaListAllCandyMachines(ctx _context.C
 
 // Execute executes the request
 //  @return interface{}
-func (a *SolanaCandyMachineApiService) SolanaListAllCandyMachinesExecute(r ApiSolanaListAllCandyMachinesRequest) (interface{}, *_nethttp.Response, error) {
+func (a *SolanaCandyMachineApiService) SolanaListAllCandyMachinesExecute(r ApiSolanaListAllCandyMachinesRequest) (interface{}, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodGet
+		localVarHTTPMethod   = http.MethodGet
 		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
+		formFiles            []formFile
 		localVarReturnValue  interface{}
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "SolanaCandyMachineApiService.SolanaListAllCandyMachines")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/solana/nft/candy_machine/list"
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -576,7 +568,7 @@ func (a *SolanaCandyMachineApiService) SolanaListAllCandyMachinesExecute(r ApiSo
 			}
 		}
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -586,15 +578,15 @@ func (a *SolanaCandyMachineApiService) SolanaListAllCandyMachinesExecute(r ApiSo
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -603,7 +595,7 @@ func (a *SolanaCandyMachineApiService) SolanaListAllCandyMachinesExecute(r ApiSo
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -614,7 +606,7 @@ func (a *SolanaCandyMachineApiService) SolanaListAllCandyMachinesExecute(r ApiSo
 }
 
 type ApiSolanaMintFromCandyMachineRequest struct {
-	ctx _context.Context
+	ctx context.Context
 	ApiService *SolanaCandyMachineApiService
 	mintNFTRequest *MintNFTRequest
 }
@@ -624,7 +616,7 @@ func (r ApiSolanaMintFromCandyMachineRequest) MintNFTRequest(mintNFTRequest Mint
 	return r
 }
 
-func (r ApiSolanaMintFromCandyMachineRequest) Execute() (MintNFTResponse, *_nethttp.Response, error) {
+func (r ApiSolanaMintFromCandyMachineRequest) Execute() (*MintNFTResponse, *http.Response, error) {
 	return r.ApiService.SolanaMintFromCandyMachineExecute(r)
 }
 
@@ -646,10 +638,10 @@ You can check if the gatekeeper functionality is enabled with this <a href="#ope
 
 `Cost: 8 Credits` (<a href="#section/Pricing">See Pricing</a>)
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiSolanaMintFromCandyMachineRequest
 */
-func (a *SolanaCandyMachineApiService) SolanaMintFromCandyMachine(ctx _context.Context) ApiSolanaMintFromCandyMachineRequest {
+func (a *SolanaCandyMachineApiService) SolanaMintFromCandyMachine(ctx context.Context) ApiSolanaMintFromCandyMachineRequest {
 	return ApiSolanaMintFromCandyMachineRequest{
 		ApiService: a,
 		ctx: ctx,
@@ -658,26 +650,24 @@ func (a *SolanaCandyMachineApiService) SolanaMintFromCandyMachine(ctx _context.C
 
 // Execute executes the request
 //  @return MintNFTResponse
-func (a *SolanaCandyMachineApiService) SolanaMintFromCandyMachineExecute(r ApiSolanaMintFromCandyMachineRequest) (MintNFTResponse, *_nethttp.Response, error) {
+func (a *SolanaCandyMachineApiService) SolanaMintFromCandyMachineExecute(r ApiSolanaMintFromCandyMachineRequest) (*MintNFTResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodPost
+		localVarHTTPMethod   = http.MethodPost
 		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  MintNFTResponse
+		formFiles            []formFile
+		localVarReturnValue  *MintNFTResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "SolanaCandyMachineApiService.SolanaMintFromCandyMachine")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/solana/nft/candy_machine/mint"
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{"application/json"}
@@ -726,7 +716,7 @@ func (a *SolanaCandyMachineApiService) SolanaMintFromCandyMachineExecute(r ApiSo
 			}
 		}
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -736,15 +726,15 @@ func (a *SolanaCandyMachineApiService) SolanaMintFromCandyMachineExecute(r ApiSo
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -763,7 +753,7 @@ func (a *SolanaCandyMachineApiService) SolanaMintFromCandyMachineExecute(r ApiSo
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -774,7 +764,7 @@ func (a *SolanaCandyMachineApiService) SolanaMintFromCandyMachineExecute(r ApiSo
 }
 
 type ApiSolanaSearchCandyMachinesRequest struct {
-	ctx _context.Context
+	ctx context.Context
 	ApiService *SolanaCandyMachineApiService
 	candyMachineSearchRequest *CandyMachineSearchRequest
 }
@@ -784,7 +774,7 @@ func (r ApiSolanaSearchCandyMachinesRequest) CandyMachineSearchRequest(candyMach
 	return r
 }
 
-func (r ApiSolanaSearchCandyMachinesRequest) Execute() ([]string, *_nethttp.Response, error) {
+func (r ApiSolanaSearchCandyMachinesRequest) Execute() ([]string, *http.Response, error) {
 	return r.ApiService.SolanaSearchCandyMachinesExecute(r)
 }
 
@@ -801,10 +791,10 @@ You can also provide multiple search clauses, such as the update authority (`upd
 
 `Cost: 2 Credits` (<a href="#section/Pricing">See Pricing</a>)
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiSolanaSearchCandyMachinesRequest
 */
-func (a *SolanaCandyMachineApiService) SolanaSearchCandyMachines(ctx _context.Context) ApiSolanaSearchCandyMachinesRequest {
+func (a *SolanaCandyMachineApiService) SolanaSearchCandyMachines(ctx context.Context) ApiSolanaSearchCandyMachinesRequest {
 	return ApiSolanaSearchCandyMachinesRequest{
 		ApiService: a,
 		ctx: ctx,
@@ -813,26 +803,24 @@ func (a *SolanaCandyMachineApiService) SolanaSearchCandyMachines(ctx _context.Co
 
 // Execute executes the request
 //  @return []string
-func (a *SolanaCandyMachineApiService) SolanaSearchCandyMachinesExecute(r ApiSolanaSearchCandyMachinesRequest) ([]string, *_nethttp.Response, error) {
+func (a *SolanaCandyMachineApiService) SolanaSearchCandyMachinesExecute(r ApiSolanaSearchCandyMachinesRequest) ([]string, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodPost
+		localVarHTTPMethod   = http.MethodPost
 		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
+		formFiles            []formFile
 		localVarReturnValue  []string
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "SolanaCandyMachineApiService.SolanaSearchCandyMachines")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/solana/nft/candy_machine/search"
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{"application/json"}
@@ -881,7 +869,7 @@ func (a *SolanaCandyMachineApiService) SolanaSearchCandyMachinesExecute(r ApiSol
 			}
 		}
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -891,15 +879,15 @@ func (a *SolanaCandyMachineApiService) SolanaSearchCandyMachinesExecute(r ApiSol
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -908,7 +896,7 @@ func (a *SolanaCandyMachineApiService) SolanaSearchCandyMachinesExecute(r ApiSol
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}

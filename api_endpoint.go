@@ -13,22 +13,22 @@ package openapi
 
 import (
 	"bytes"
-	_context "context"
-	_ioutil "io/ioutil"
-	_nethttp "net/http"
-	_neturl "net/url"
+	"context"
+	"io/ioutil"
+	"net/http"
+	"net/url"
 )
 
 // Linger please
 var (
-	_ _context.Context
+	_ context.Context
 )
 
 // EndpointApiService EndpointApi service
 type EndpointApiService service
 
 type ApiDeleteEndpointRequest struct {
-	ctx _context.Context
+	ctx context.Context
 	ApiService *EndpointApiService
 	endpointReference *EndpointReference
 }
@@ -38,7 +38,7 @@ func (r ApiDeleteEndpointRequest) EndpointReference(endpointReference EndpointRe
 	return r
 }
 
-func (r ApiDeleteEndpointRequest) Execute() (*_nethttp.Response, error) {
+func (r ApiDeleteEndpointRequest) Execute() (*http.Response, error) {
 	return r.ApiService.DeleteEndpointExecute(r)
 }
 
@@ -51,10 +51,10 @@ Deletes an endpoint from a project. This endpoint removes the endpoint from the 
 
 `Cost: 0 Credit` (Free) (<a href="#section/Pricing">See Pricing</a>)
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiDeleteEndpointRequest
 */
-func (a *EndpointApiService) DeleteEndpoint(ctx _context.Context) ApiDeleteEndpointRequest {
+func (a *EndpointApiService) DeleteEndpoint(ctx context.Context) ApiDeleteEndpointRequest {
 	return ApiDeleteEndpointRequest{
 		ApiService: a,
 		ctx: ctx,
@@ -62,25 +62,23 @@ func (a *EndpointApiService) DeleteEndpoint(ctx _context.Context) ApiDeleteEndpo
 }
 
 // Execute executes the request
-func (a *EndpointApiService) DeleteEndpointExecute(r ApiDeleteEndpointRequest) (*_nethttp.Response, error) {
+func (a *EndpointApiService) DeleteEndpointExecute(r ApiDeleteEndpointRequest) (*http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodPost
+		localVarHTTPMethod   = http.MethodPost
 		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
+		formFiles            []formFile
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "EndpointApiService.DeleteEndpoint")
 	if err != nil {
-		return nil, GenericOpenAPIError{error: err.Error()}
+		return nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/endpoint/delete"
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{"application/json"}
@@ -129,7 +127,7 @@ func (a *EndpointApiService) DeleteEndpointExecute(r ApiDeleteEndpointRequest) (
 			}
 		}
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return nil, err
 	}
@@ -139,15 +137,15 @@ func (a *EndpointApiService) DeleteEndpointExecute(r ApiDeleteEndpointRequest) (
 		return localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -158,7 +156,7 @@ func (a *EndpointApiService) DeleteEndpointExecute(r ApiDeleteEndpointRequest) (
 }
 
 type ApiGetEndpointRequest struct {
-	ctx _context.Context
+	ctx context.Context
 	ApiService *EndpointApiService
 	endpointReference *EndpointReference
 }
@@ -168,7 +166,7 @@ func (r ApiGetEndpointRequest) EndpointReference(endpointReference EndpointRefer
 	return r
 }
 
-func (r ApiGetEndpointRequest) Execute() (Endpoint, *_nethttp.Response, error) {
+func (r ApiGetEndpointRequest) Execute() (*Endpoint, *http.Response, error) {
 	return r.ApiService.GetEndpointExecute(r)
 }
 
@@ -181,10 +179,10 @@ Get an endpoint's metadata from a project.
 
 `Cost: 0 Credit` (Free) (<a href="#section/Pricing">See Pricing</a>)
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiGetEndpointRequest
 */
-func (a *EndpointApiService) GetEndpoint(ctx _context.Context) ApiGetEndpointRequest {
+func (a *EndpointApiService) GetEndpoint(ctx context.Context) ApiGetEndpointRequest {
 	return ApiGetEndpointRequest{
 		ApiService: a,
 		ctx: ctx,
@@ -193,26 +191,24 @@ func (a *EndpointApiService) GetEndpoint(ctx _context.Context) ApiGetEndpointReq
 
 // Execute executes the request
 //  @return Endpoint
-func (a *EndpointApiService) GetEndpointExecute(r ApiGetEndpointRequest) (Endpoint, *_nethttp.Response, error) {
+func (a *EndpointApiService) GetEndpointExecute(r ApiGetEndpointRequest) (*Endpoint, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodPost
+		localVarHTTPMethod   = http.MethodPost
 		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  Endpoint
+		formFiles            []formFile
+		localVarReturnValue  *Endpoint
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "EndpointApiService.GetEndpoint")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/endpoint/metadata"
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{"application/json"}
@@ -261,7 +257,7 @@ func (a *EndpointApiService) GetEndpointExecute(r ApiGetEndpointRequest) (Endpoi
 			}
 		}
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -271,15 +267,15 @@ func (a *EndpointApiService) GetEndpointExecute(r ApiGetEndpointRequest) (Endpoi
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -288,7 +284,7 @@ func (a *EndpointApiService) GetEndpointExecute(r ApiGetEndpointRequest) (Endpoi
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -299,12 +295,12 @@ func (a *EndpointApiService) GetEndpointExecute(r ApiGetEndpointRequest) (Endpoi
 }
 
 type ApiListEndpointsRequest struct {
-	ctx _context.Context
+	ctx context.Context
 	ApiService *EndpointApiService
 }
 
 
-func (r ApiListEndpointsRequest) Execute() ([]Endpoint, *_nethttp.Response, error) {
+func (r ApiListEndpointsRequest) Execute() ([]Endpoint, *http.Response, error) {
 	return r.ApiService.ListEndpointsExecute(r)
 }
 
@@ -317,10 +313,10 @@ List all endpoints that you have added under your account.
 
 `Cost: 0 Credit` (Free) (<a href="#section/Pricing">See Pricing</a>)
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiListEndpointsRequest
 */
-func (a *EndpointApiService) ListEndpoints(ctx _context.Context) ApiListEndpointsRequest {
+func (a *EndpointApiService) ListEndpoints(ctx context.Context) ApiListEndpointsRequest {
 	return ApiListEndpointsRequest{
 		ApiService: a,
 		ctx: ctx,
@@ -329,26 +325,24 @@ func (a *EndpointApiService) ListEndpoints(ctx _context.Context) ApiListEndpoint
 
 // Execute executes the request
 //  @return []Endpoint
-func (a *EndpointApiService) ListEndpointsExecute(r ApiListEndpointsRequest) ([]Endpoint, *_nethttp.Response, error) {
+func (a *EndpointApiService) ListEndpointsExecute(r ApiListEndpointsRequest) ([]Endpoint, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodGet
+		localVarHTTPMethod   = http.MethodGet
 		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
+		formFiles            []formFile
 		localVarReturnValue  []Endpoint
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "EndpointApiService.ListEndpoints")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/endpoint/list"
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -395,7 +389,7 @@ func (a *EndpointApiService) ListEndpointsExecute(r ApiListEndpointsRequest) ([]
 			}
 		}
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -405,15 +399,15 @@ func (a *EndpointApiService) ListEndpointsExecute(r ApiListEndpointsRequest) ([]
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -422,7 +416,7 @@ func (a *EndpointApiService) ListEndpointsExecute(r ApiListEndpointsRequest) ([]
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -433,7 +427,7 @@ func (a *EndpointApiService) ListEndpointsExecute(r ApiListEndpointsRequest) ([]
 }
 
 type ApiSetEndpointRequest struct {
-	ctx _context.Context
+	ctx context.Context
 	ApiService *EndpointApiService
 	endpoint *Endpoint
 }
@@ -443,7 +437,7 @@ func (r ApiSetEndpointRequest) Endpoint(endpoint Endpoint) ApiSetEndpointRequest
 	return r
 }
 
-func (r ApiSetEndpointRequest) Execute() (Endpoint, *_nethttp.Response, error) {
+func (r ApiSetEndpointRequest) Execute() (*Endpoint, *http.Response, error) {
 	return r.ApiService.SetEndpointExecute(r)
 }
 
@@ -464,10 +458,10 @@ Only `path`, `project_id`, and `version` are required if **updating** an `endpoi
 
 `Cost: 0 Credit` (Free) (<a href="#section/Pricing">See Pricing</a>)
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiSetEndpointRequest
 */
-func (a *EndpointApiService) SetEndpoint(ctx _context.Context) ApiSetEndpointRequest {
+func (a *EndpointApiService) SetEndpoint(ctx context.Context) ApiSetEndpointRequest {
 	return ApiSetEndpointRequest{
 		ApiService: a,
 		ctx: ctx,
@@ -476,26 +470,24 @@ func (a *EndpointApiService) SetEndpoint(ctx _context.Context) ApiSetEndpointReq
 
 // Execute executes the request
 //  @return Endpoint
-func (a *EndpointApiService) SetEndpointExecute(r ApiSetEndpointRequest) (Endpoint, *_nethttp.Response, error) {
+func (a *EndpointApiService) SetEndpointExecute(r ApiSetEndpointRequest) (*Endpoint, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodPost
+		localVarHTTPMethod   = http.MethodPost
 		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  Endpoint
+		formFiles            []formFile
+		localVarReturnValue  *Endpoint
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "EndpointApiService.SetEndpoint")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/endpoint"
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{"application/json"}
@@ -544,7 +536,7 @@ func (a *EndpointApiService) SetEndpointExecute(r ApiSetEndpointRequest) (Endpoi
 			}
 		}
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -554,15 +546,15 @@ func (a *EndpointApiService) SetEndpointExecute(r ApiSetEndpointRequest) (Endpoi
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -571,7 +563,7 @@ func (a *EndpointApiService) SetEndpointExecute(r ApiSetEndpointRequest) (Endpoi
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}

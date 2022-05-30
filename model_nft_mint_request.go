@@ -17,19 +17,23 @@ import (
 
 // NFTMintRequest struct for NFTMintRequest
 type NFTMintRequest struct {
-	Wallet Wallet `json:"wallet"`
+	Wallet *Wallet `json:"wallet,omitempty"`
+	// If `true`, the transaction to mint the NFT will not be submitted or signed. It will be returned to you in a raw form that you can then sign with a wallet (e.g., Phantom) or code. No `wallet` authentication information is required (thus, you do you have to supply a seed phrase or private key). See a Python example [here](https://github.com/BL0CK-X/blockchain-api/blob/main/third-party-api-examples/me-buy-sell.py). If `false` (the default option), then `wallet` is required. We sign and submit the transaction for you, which uses your wallet to mint the NFT. No further action is required on your part, and the NFT is minted. Read more on security [here](#section/Security). 
+	ReturnCompiledTransaction *bool `json:"return_compiled_transaction,omitempty"`
 	// The name of the token. Limited to 32 characters. Stored on the blockchain.
-	NftName *string `json:"nft_name,omitempty"`
+	Name *string `json:"name,omitempty"`
 	// The symbol of the token. Limited to 10 characters. Stored on the blockchain.
-	NftSymbol *string `json:"nft_symbol,omitempty"`
-	// The description of the token. Limited to 2000 characters. Not stored on the blockchain.  This is stored in S3 in a bucket we own, and the link to that file is stored on the blockchain.  If you provide your own link, the link is also stored in that S3 file, which is publicly accessible. However, if you choose the NFT upload method \"LINK\" instead of \"S3\", then we upload the link you  provide for nft_url directly to the blockchain, and S3 is not used at all. Thus, when you provide the \"LINK\" option, the value nft_description is ignored and not used. The Metaplex API does not provide functionality to store any data about your NFT besides a URL. 
-	NftDescription *string `json:"nft_description,omitempty"`
-	// The URL you provided. Limited to 200 characters. This does not need to be a valid URL. Whether or not this is  stored on the blockchain depends on which upload method you choose. If you choose LINK, then this is stored on the  blockchain directly. If you choose S3, then this link is embedded in a public S3 text file that also contains the metadata, the name,  the symbol, and the description of the NFT. 
-	NftUrl *string `json:"nft_url,omitempty"`
-	// Any data you provide. Must be a string and properly encoded json. Will be viewable on S3. Limited to 2000 bytes. Not stored on the blockchain.  This is stored in S3 in a bucket we own, and the link to that file is stored on the blockchain.  If you provide your own link, the link is also stored in that S3 file, which is publicly accessible. However, if you choose the NFT upload method \"LINK\" instead of \"S3\", then we upload the link you  provide for nft_url directly to the blockchain, and S3 is not used at all. Thus, when you provide the \"LINK\" option, the value nft_metadata is ignored and not used. The Metaplex API does not provide functionality to store any data about your NFT besides a URL. 
-	NftMetadata *string `json:"nft_metadata,omitempty"`
-	// When you choose S3, all of the nft_description, nft_name, nft_symbol, nft_metadata, and nft_url are put into a json dictionary and uploaded to S3 as a text file.  This is uploaded to an AWS S3 bucket we own, and is an option we provide at no charge. The S3 link to this file is stored on the NFT on the blockchain.   When you choose LINK, the nft_url you provide is stored on the blockchain, and the nft_metadata and nft_description are ignored and not stored anywhere. S3 is then NOT used. 
-	NftUploadMethod *string `json:"nft_upload_method,omitempty"`
+	Symbol *string `json:"symbol,omitempty"`
+	// The description of the NFT. Limited to 2000 characters. Not stored on the blockchain.         If you are providing your own `uri` (see above), then you do not need to provide this.  If you are not providing your own `uri` and you do not provide this, then there wills simply be no description.  Only provide a value for `description` if the `upload_method` is set to `S3` (see the description for `upload_method` above).
+	Description *string `json:"description,omitempty"`
+	// When you choose `S3`, all of the `name`, `description`, `symbol`, `uri_metadata`, and `image_url` are put into a JSON dictionary and uploaded to S3 as a JSON file.  This is uploaded to an AWS S3 bucket we own, and is an option we provide at no charge. The S3 link to this file is stored in the NFT's account on the blockchain. Learn more  <a href=\"https://blockchainapi.com/2022/01/18/how-to-format-off-chain-nft-metadata.html\" target=\"_blank\">here</a>.  When you choose `URI`, the `uri` you provide is stored on the blockchain, and the `uri_metadata`, `description`, and `image_url` are ignored and not stored anywhere. `S3` is NOT involved in this case.   An example of a `uri` you would provide is an Arweave URL, like this: `https://arweave.net/_Y8tETU3FbAFZSM1wXNeWPweWwrW9K6oSF1SYi_bH9A`.
+	UploadMethod *string `json:"upload_method,omitempty"`
+	// The `uri` you provide is stored on the blockchain, and the `uri_metadata`, `description`, and `image_url` are ignored and not stored anywhere. `S3` is NOT involved in this case.   Read more <a href=\"https://blockchainapi.com/2022/01/18/how-to-format-off-chain-nft-metadata.html\" target=\"_blank\">here</a>.  An example of a `uri` you would provide is an Arweave URL, like this: `https://arweave.net/_Y8tETU3FbAFZSM1wXNeWPweWwrW9K6oSF1SYi_bH9A`.  Only provide a value for `uri` if the `upload_method` is set to `URI` (see the description for `upload_method` above).
+	Uri *string `json:"uri,omitempty"`
+	// The URL of the image of the NFT.         If you are providing your own `uri` (see above), then you do not need to provide this.  If you are not providing your own `uri` and you do not provide this, then there wills simply be no image.  Only provide a value for `image_url` if the `upload_method` is set to `S3` (see the description for `upload_method` above).
+	ImageUrl *string `json:"image_url,omitempty"`
+	// The off-chain metadata.        If you are providing your own `uri` (see above), then you do not need to provide this.  If you are not providing your own `uri` and you do not provide this, then there wills simply be no image.  Only provide a value for `uri_metadata` if the `upload_method` is set to `S3` (see the description for `upload_method` above).  Learn more about how to format this metadata <a href=\"https://blockchainapi.com/2022/01/18/how-to-format-off-chain-nft-metadata.html\" target=\"_blank\">here</a>.
+	UriMetadata map[string]interface{} `json:"uri_metadata,omitempty"`
 	// Indicates whether or not the NFT created is mutable. If mutable, the NFT can be updated later. Once set to immutable, the NFT is unable to be changed. 
 	IsMutable *bool `json:"is_mutable,omitempty"`
 	// Whether or not the NFT is a master edition NFT. Saves about 0.001 SOL in transaction costs when set to false. 
@@ -37,9 +41,9 @@ type NFTMintRequest struct {
 	// Valid values from 0 to 10000. Must be an integer.  Represents the number of basis points that the seller receives as a fee upon sale.  E.g., 100 indicates a 1% seller fee. Seller does not receive a fee when \"primary_sale_has_happened\" is set to true.  Will be set to false after first sale has occurred. 
 	SellerFeeBasisPoints *float32 `json:"seller_fee_basis_points,omitempty"`
 	// A JSON encoded string representing an array / list.  The designated creators of the NFT. Length of the creator list must match length of the list of share.  Valid lengths of the list range from 1 to 5. Each item in the list must be a valid public key address.    Only the public key corresponding to the seed phrase provided will be marked as verified. Any other creators supplied will be marked as unverified. 
-	Creators *[]string `json:"creators,omitempty"`
-	// A JSON encoded string representing an array / list.  The share of the royalty that each creator gets. Valid values range from 0 to 100.  Sum of the values must equal 100.  Only integer value accepted. Length of the share list must match length of the list of creators. 
-	Share *[]int32 `json:"share,omitempty"`
+	Creators []string `json:"creators,omitempty"`
+	// A JSON encoded string representing an array / list.  The share of the royalty that each creator gets. Valid values range from 0 to 100. Sum of the values must equal 100.  Only integer value accepted. Length of the share list must match length of the list of creators. 
+	Share []int32 `json:"share,omitempty"`
 	// Assign ownership of the NFT to the public key address given by `mint_to_public_key` 
 	MintToPublicKey *string `json:"mint_to_public_key,omitempty"`
 	// This determines which network you choose to run the API calls on. We recommend first testing on the devnet, because minting an NFT costs a little above 0.01 SOL, which is about $1.60 at the time of this writing.  When you run on the mainnet-beta, each successful call will deduct approximately that much. When you run on the devnet, that amount is deducted from a simulated amount, so you are not paying with real SOL. To get SOL on the devnet,   airdrop SOL to this address using the CLI. Keep in mind that you can only do this every so often. If you are rate-limited, consider using a VPN and trying again, or just waiting. To get SOL on the mainnet-beta, you    must transfer real SOL to this account from another wallet (e.g., from another wallet you own, from an exchange, etc.). We hope to make this process easier in the future, and if you have any suggestions, please add them    as an issue on our <a href=\"https://github.com/BL0CK-X/the-blockchain-api\" target=\"_blank\">GitHub repository</a> for the API. To get a fee estimate, make a GET requests to the <a href=\"#tag/Solana-NFT/paths/~1solana~1nft~1mint~1fee/get\">v1/solana/nft/mint/fee endpoint</a> (details in sidebar). 
@@ -50,21 +54,22 @@ type NFTMintRequest struct {
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewNFTMintRequest(wallet Wallet) *NFTMintRequest {
+func NewNFTMintRequest() *NFTMintRequest {
 	this := NFTMintRequest{}
-	this.Wallet = wallet
-	var nftName string = ""
-	this.NftName = &nftName
-	var nftSymbol string = ""
-	this.NftSymbol = &nftSymbol
-	var nftDescription string = ""
-	this.NftDescription = &nftDescription
-	var nftUrl string = ""
-	this.NftUrl = &nftUrl
-	var nftMetadata string = "{}"
-	this.NftMetadata = &nftMetadata
-	var nftUploadMethod string = "S3"
-	this.NftUploadMethod = &nftUploadMethod
+	var returnCompiledTransaction bool = false
+	this.ReturnCompiledTransaction = &returnCompiledTransaction
+	var name string = ""
+	this.Name = &name
+	var symbol string = ""
+	this.Symbol = &symbol
+	var description string = ""
+	this.Description = &description
+	var uploadMethod string = "S3"
+	this.UploadMethod = &uploadMethod
+	var uri string = ""
+	this.Uri = &uri
+	var imageUrl string = ""
+	this.ImageUrl = &imageUrl
 	var isMutable bool = true
 	this.IsMutable = &isMutable
 	var isMasterEdition bool = true
@@ -83,18 +88,20 @@ func NewNFTMintRequest(wallet Wallet) *NFTMintRequest {
 // but it doesn't guarantee that properties required by API are set
 func NewNFTMintRequestWithDefaults() *NFTMintRequest {
 	this := NFTMintRequest{}
-	var nftName string = ""
-	this.NftName = &nftName
-	var nftSymbol string = ""
-	this.NftSymbol = &nftSymbol
-	var nftDescription string = ""
-	this.NftDescription = &nftDescription
-	var nftUrl string = ""
-	this.NftUrl = &nftUrl
-	var nftMetadata string = "{}"
-	this.NftMetadata = &nftMetadata
-	var nftUploadMethod string = "S3"
-	this.NftUploadMethod = &nftUploadMethod
+	var returnCompiledTransaction bool = false
+	this.ReturnCompiledTransaction = &returnCompiledTransaction
+	var name string = ""
+	this.Name = &name
+	var symbol string = ""
+	this.Symbol = &symbol
+	var description string = ""
+	this.Description = &description
+	var uploadMethod string = "S3"
+	this.UploadMethod = &uploadMethod
+	var uri string = ""
+	this.Uri = &uri
+	var imageUrl string = ""
+	this.ImageUrl = &imageUrl
 	var isMutable bool = true
 	this.IsMutable = &isMutable
 	var isMasterEdition bool = true
@@ -108,220 +115,292 @@ func NewNFTMintRequestWithDefaults() *NFTMintRequest {
 	return &this
 }
 
-// GetWallet returns the Wallet field value
+// GetWallet returns the Wallet field value if set, zero value otherwise.
 func (o *NFTMintRequest) GetWallet() Wallet {
-	if o == nil {
+	if o == nil || o.Wallet == nil {
 		var ret Wallet
 		return ret
 	}
-
-	return o.Wallet
+	return *o.Wallet
 }
 
-// GetWalletOk returns a tuple with the Wallet field value
+// GetWalletOk returns a tuple with the Wallet field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *NFTMintRequest) GetWalletOk() (*Wallet, bool) {
-	if o == nil  {
+	if o == nil || o.Wallet == nil {
 		return nil, false
 	}
-	return &o.Wallet, true
+	return o.Wallet, true
 }
 
-// SetWallet sets field value
+// HasWallet returns a boolean if a field has been set.
+func (o *NFTMintRequest) HasWallet() bool {
+	if o != nil && o.Wallet != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetWallet gets a reference to the given Wallet and assigns it to the Wallet field.
 func (o *NFTMintRequest) SetWallet(v Wallet) {
-	o.Wallet = v
+	o.Wallet = &v
 }
 
-// GetNftName returns the NftName field value if set, zero value otherwise.
-func (o *NFTMintRequest) GetNftName() string {
-	if o == nil || o.NftName == nil {
-		var ret string
+// GetReturnCompiledTransaction returns the ReturnCompiledTransaction field value if set, zero value otherwise.
+func (o *NFTMintRequest) GetReturnCompiledTransaction() bool {
+	if o == nil || o.ReturnCompiledTransaction == nil {
+		var ret bool
 		return ret
 	}
-	return *o.NftName
+	return *o.ReturnCompiledTransaction
 }
 
-// GetNftNameOk returns a tuple with the NftName field value if set, nil otherwise
+// GetReturnCompiledTransactionOk returns a tuple with the ReturnCompiledTransaction field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *NFTMintRequest) GetNftNameOk() (*string, bool) {
-	if o == nil || o.NftName == nil {
+func (o *NFTMintRequest) GetReturnCompiledTransactionOk() (*bool, bool) {
+	if o == nil || o.ReturnCompiledTransaction == nil {
 		return nil, false
 	}
-	return o.NftName, true
+	return o.ReturnCompiledTransaction, true
 }
 
-// HasNftName returns a boolean if a field has been set.
-func (o *NFTMintRequest) HasNftName() bool {
-	if o != nil && o.NftName != nil {
+// HasReturnCompiledTransaction returns a boolean if a field has been set.
+func (o *NFTMintRequest) HasReturnCompiledTransaction() bool {
+	if o != nil && o.ReturnCompiledTransaction != nil {
 		return true
 	}
 
 	return false
 }
 
-// SetNftName gets a reference to the given string and assigns it to the NftName field.
-func (o *NFTMintRequest) SetNftName(v string) {
-	o.NftName = &v
+// SetReturnCompiledTransaction gets a reference to the given bool and assigns it to the ReturnCompiledTransaction field.
+func (o *NFTMintRequest) SetReturnCompiledTransaction(v bool) {
+	o.ReturnCompiledTransaction = &v
 }
 
-// GetNftSymbol returns the NftSymbol field value if set, zero value otherwise.
-func (o *NFTMintRequest) GetNftSymbol() string {
-	if o == nil || o.NftSymbol == nil {
+// GetName returns the Name field value if set, zero value otherwise.
+func (o *NFTMintRequest) GetName() string {
+	if o == nil || o.Name == nil {
 		var ret string
 		return ret
 	}
-	return *o.NftSymbol
+	return *o.Name
 }
 
-// GetNftSymbolOk returns a tuple with the NftSymbol field value if set, nil otherwise
+// GetNameOk returns a tuple with the Name field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *NFTMintRequest) GetNftSymbolOk() (*string, bool) {
-	if o == nil || o.NftSymbol == nil {
+func (o *NFTMintRequest) GetNameOk() (*string, bool) {
+	if o == nil || o.Name == nil {
 		return nil, false
 	}
-	return o.NftSymbol, true
+	return o.Name, true
 }
 
-// HasNftSymbol returns a boolean if a field has been set.
-func (o *NFTMintRequest) HasNftSymbol() bool {
-	if o != nil && o.NftSymbol != nil {
+// HasName returns a boolean if a field has been set.
+func (o *NFTMintRequest) HasName() bool {
+	if o != nil && o.Name != nil {
 		return true
 	}
 
 	return false
 }
 
-// SetNftSymbol gets a reference to the given string and assigns it to the NftSymbol field.
-func (o *NFTMintRequest) SetNftSymbol(v string) {
-	o.NftSymbol = &v
+// SetName gets a reference to the given string and assigns it to the Name field.
+func (o *NFTMintRequest) SetName(v string) {
+	o.Name = &v
 }
 
-// GetNftDescription returns the NftDescription field value if set, zero value otherwise.
-func (o *NFTMintRequest) GetNftDescription() string {
-	if o == nil || o.NftDescription == nil {
+// GetSymbol returns the Symbol field value if set, zero value otherwise.
+func (o *NFTMintRequest) GetSymbol() string {
+	if o == nil || o.Symbol == nil {
 		var ret string
 		return ret
 	}
-	return *o.NftDescription
+	return *o.Symbol
 }
 
-// GetNftDescriptionOk returns a tuple with the NftDescription field value if set, nil otherwise
+// GetSymbolOk returns a tuple with the Symbol field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *NFTMintRequest) GetNftDescriptionOk() (*string, bool) {
-	if o == nil || o.NftDescription == nil {
+func (o *NFTMintRequest) GetSymbolOk() (*string, bool) {
+	if o == nil || o.Symbol == nil {
 		return nil, false
 	}
-	return o.NftDescription, true
+	return o.Symbol, true
 }
 
-// HasNftDescription returns a boolean if a field has been set.
-func (o *NFTMintRequest) HasNftDescription() bool {
-	if o != nil && o.NftDescription != nil {
+// HasSymbol returns a boolean if a field has been set.
+func (o *NFTMintRequest) HasSymbol() bool {
+	if o != nil && o.Symbol != nil {
 		return true
 	}
 
 	return false
 }
 
-// SetNftDescription gets a reference to the given string and assigns it to the NftDescription field.
-func (o *NFTMintRequest) SetNftDescription(v string) {
-	o.NftDescription = &v
+// SetSymbol gets a reference to the given string and assigns it to the Symbol field.
+func (o *NFTMintRequest) SetSymbol(v string) {
+	o.Symbol = &v
 }
 
-// GetNftUrl returns the NftUrl field value if set, zero value otherwise.
-func (o *NFTMintRequest) GetNftUrl() string {
-	if o == nil || o.NftUrl == nil {
+// GetDescription returns the Description field value if set, zero value otherwise.
+func (o *NFTMintRequest) GetDescription() string {
+	if o == nil || o.Description == nil {
 		var ret string
 		return ret
 	}
-	return *o.NftUrl
+	return *o.Description
 }
 
-// GetNftUrlOk returns a tuple with the NftUrl field value if set, nil otherwise
+// GetDescriptionOk returns a tuple with the Description field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *NFTMintRequest) GetNftUrlOk() (*string, bool) {
-	if o == nil || o.NftUrl == nil {
+func (o *NFTMintRequest) GetDescriptionOk() (*string, bool) {
+	if o == nil || o.Description == nil {
 		return nil, false
 	}
-	return o.NftUrl, true
+	return o.Description, true
 }
 
-// HasNftUrl returns a boolean if a field has been set.
-func (o *NFTMintRequest) HasNftUrl() bool {
-	if o != nil && o.NftUrl != nil {
+// HasDescription returns a boolean if a field has been set.
+func (o *NFTMintRequest) HasDescription() bool {
+	if o != nil && o.Description != nil {
 		return true
 	}
 
 	return false
 }
 
-// SetNftUrl gets a reference to the given string and assigns it to the NftUrl field.
-func (o *NFTMintRequest) SetNftUrl(v string) {
-	o.NftUrl = &v
+// SetDescription gets a reference to the given string and assigns it to the Description field.
+func (o *NFTMintRequest) SetDescription(v string) {
+	o.Description = &v
 }
 
-// GetNftMetadata returns the NftMetadata field value if set, zero value otherwise.
-func (o *NFTMintRequest) GetNftMetadata() string {
-	if o == nil || o.NftMetadata == nil {
+// GetUploadMethod returns the UploadMethod field value if set, zero value otherwise.
+func (o *NFTMintRequest) GetUploadMethod() string {
+	if o == nil || o.UploadMethod == nil {
 		var ret string
 		return ret
 	}
-	return *o.NftMetadata
+	return *o.UploadMethod
 }
 
-// GetNftMetadataOk returns a tuple with the NftMetadata field value if set, nil otherwise
+// GetUploadMethodOk returns a tuple with the UploadMethod field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *NFTMintRequest) GetNftMetadataOk() (*string, bool) {
-	if o == nil || o.NftMetadata == nil {
+func (o *NFTMintRequest) GetUploadMethodOk() (*string, bool) {
+	if o == nil || o.UploadMethod == nil {
 		return nil, false
 	}
-	return o.NftMetadata, true
+	return o.UploadMethod, true
 }
 
-// HasNftMetadata returns a boolean if a field has been set.
-func (o *NFTMintRequest) HasNftMetadata() bool {
-	if o != nil && o.NftMetadata != nil {
+// HasUploadMethod returns a boolean if a field has been set.
+func (o *NFTMintRequest) HasUploadMethod() bool {
+	if o != nil && o.UploadMethod != nil {
 		return true
 	}
 
 	return false
 }
 
-// SetNftMetadata gets a reference to the given string and assigns it to the NftMetadata field.
-func (o *NFTMintRequest) SetNftMetadata(v string) {
-	o.NftMetadata = &v
+// SetUploadMethod gets a reference to the given string and assigns it to the UploadMethod field.
+func (o *NFTMintRequest) SetUploadMethod(v string) {
+	o.UploadMethod = &v
 }
 
-// GetNftUploadMethod returns the NftUploadMethod field value if set, zero value otherwise.
-func (o *NFTMintRequest) GetNftUploadMethod() string {
-	if o == nil || o.NftUploadMethod == nil {
+// GetUri returns the Uri field value if set, zero value otherwise.
+func (o *NFTMintRequest) GetUri() string {
+	if o == nil || o.Uri == nil {
 		var ret string
 		return ret
 	}
-	return *o.NftUploadMethod
+	return *o.Uri
 }
 
-// GetNftUploadMethodOk returns a tuple with the NftUploadMethod field value if set, nil otherwise
+// GetUriOk returns a tuple with the Uri field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *NFTMintRequest) GetNftUploadMethodOk() (*string, bool) {
-	if o == nil || o.NftUploadMethod == nil {
+func (o *NFTMintRequest) GetUriOk() (*string, bool) {
+	if o == nil || o.Uri == nil {
 		return nil, false
 	}
-	return o.NftUploadMethod, true
+	return o.Uri, true
 }
 
-// HasNftUploadMethod returns a boolean if a field has been set.
-func (o *NFTMintRequest) HasNftUploadMethod() bool {
-	if o != nil && o.NftUploadMethod != nil {
+// HasUri returns a boolean if a field has been set.
+func (o *NFTMintRequest) HasUri() bool {
+	if o != nil && o.Uri != nil {
 		return true
 	}
 
 	return false
 }
 
-// SetNftUploadMethod gets a reference to the given string and assigns it to the NftUploadMethod field.
-func (o *NFTMintRequest) SetNftUploadMethod(v string) {
-	o.NftUploadMethod = &v
+// SetUri gets a reference to the given string and assigns it to the Uri field.
+func (o *NFTMintRequest) SetUri(v string) {
+	o.Uri = &v
+}
+
+// GetImageUrl returns the ImageUrl field value if set, zero value otherwise.
+func (o *NFTMintRequest) GetImageUrl() string {
+	if o == nil || o.ImageUrl == nil {
+		var ret string
+		return ret
+	}
+	return *o.ImageUrl
+}
+
+// GetImageUrlOk returns a tuple with the ImageUrl field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *NFTMintRequest) GetImageUrlOk() (*string, bool) {
+	if o == nil || o.ImageUrl == nil {
+		return nil, false
+	}
+	return o.ImageUrl, true
+}
+
+// HasImageUrl returns a boolean if a field has been set.
+func (o *NFTMintRequest) HasImageUrl() bool {
+	if o != nil && o.ImageUrl != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetImageUrl gets a reference to the given string and assigns it to the ImageUrl field.
+func (o *NFTMintRequest) SetImageUrl(v string) {
+	o.ImageUrl = &v
+}
+
+// GetUriMetadata returns the UriMetadata field value if set, zero value otherwise.
+func (o *NFTMintRequest) GetUriMetadata() map[string]interface{} {
+	if o == nil || o.UriMetadata == nil {
+		var ret map[string]interface{}
+		return ret
+	}
+	return o.UriMetadata
+}
+
+// GetUriMetadataOk returns a tuple with the UriMetadata field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *NFTMintRequest) GetUriMetadataOk() (map[string]interface{}, bool) {
+	if o == nil || o.UriMetadata == nil {
+		return nil, false
+	}
+	return o.UriMetadata, true
+}
+
+// HasUriMetadata returns a boolean if a field has been set.
+func (o *NFTMintRequest) HasUriMetadata() bool {
+	if o != nil && o.UriMetadata != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetUriMetadata gets a reference to the given map[string]interface{} and assigns it to the UriMetadata field.
+func (o *NFTMintRequest) SetUriMetadata(v map[string]interface{}) {
+	o.UriMetadata = v
 }
 
 // GetIsMutable returns the IsMutable field value if set, zero value otherwise.
@@ -426,12 +505,12 @@ func (o *NFTMintRequest) GetCreators() []string {
 		var ret []string
 		return ret
 	}
-	return *o.Creators
+	return o.Creators
 }
 
 // GetCreatorsOk returns a tuple with the Creators field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *NFTMintRequest) GetCreatorsOk() (*[]string, bool) {
+func (o *NFTMintRequest) GetCreatorsOk() ([]string, bool) {
 	if o == nil || o.Creators == nil {
 		return nil, false
 	}
@@ -449,7 +528,7 @@ func (o *NFTMintRequest) HasCreators() bool {
 
 // SetCreators gets a reference to the given []string and assigns it to the Creators field.
 func (o *NFTMintRequest) SetCreators(v []string) {
-	o.Creators = &v
+	o.Creators = v
 }
 
 // GetShare returns the Share field value if set, zero value otherwise.
@@ -458,12 +537,12 @@ func (o *NFTMintRequest) GetShare() []int32 {
 		var ret []int32
 		return ret
 	}
-	return *o.Share
+	return o.Share
 }
 
 // GetShareOk returns a tuple with the Share field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *NFTMintRequest) GetShareOk() (*[]int32, bool) {
+func (o *NFTMintRequest) GetShareOk() ([]int32, bool) {
 	if o == nil || o.Share == nil {
 		return nil, false
 	}
@@ -481,7 +560,7 @@ func (o *NFTMintRequest) HasShare() bool {
 
 // SetShare gets a reference to the given []int32 and assigns it to the Share field.
 func (o *NFTMintRequest) SetShare(v []int32) {
-	o.Share = &v
+	o.Share = v
 }
 
 // GetMintToPublicKey returns the MintToPublicKey field value if set, zero value otherwise.
@@ -550,26 +629,32 @@ func (o *NFTMintRequest) SetNetwork(v string) {
 
 func (o NFTMintRequest) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
-	if true {
+	if o.Wallet != nil {
 		toSerialize["wallet"] = o.Wallet
 	}
-	if o.NftName != nil {
-		toSerialize["nft_name"] = o.NftName
+	if o.ReturnCompiledTransaction != nil {
+		toSerialize["return_compiled_transaction"] = o.ReturnCompiledTransaction
 	}
-	if o.NftSymbol != nil {
-		toSerialize["nft_symbol"] = o.NftSymbol
+	if o.Name != nil {
+		toSerialize["name"] = o.Name
 	}
-	if o.NftDescription != nil {
-		toSerialize["nft_description"] = o.NftDescription
+	if o.Symbol != nil {
+		toSerialize["symbol"] = o.Symbol
 	}
-	if o.NftUrl != nil {
-		toSerialize["nft_url"] = o.NftUrl
+	if o.Description != nil {
+		toSerialize["description"] = o.Description
 	}
-	if o.NftMetadata != nil {
-		toSerialize["nft_metadata"] = o.NftMetadata
+	if o.UploadMethod != nil {
+		toSerialize["upload_method"] = o.UploadMethod
 	}
-	if o.NftUploadMethod != nil {
-		toSerialize["nft_upload_method"] = o.NftUploadMethod
+	if o.Uri != nil {
+		toSerialize["uri"] = o.Uri
+	}
+	if o.ImageUrl != nil {
+		toSerialize["image_url"] = o.ImageUrl
+	}
+	if o.UriMetadata != nil {
+		toSerialize["uri_metadata"] = o.UriMetadata
 	}
 	if o.IsMutable != nil {
 		toSerialize["is_mutable"] = o.IsMutable

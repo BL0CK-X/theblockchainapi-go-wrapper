@@ -13,30 +13,30 @@ package openapi
 
 import (
 	"bytes"
-	_context "context"
-	_ioutil "io/ioutil"
-	_nethttp "net/http"
-	_neturl "net/url"
+	"context"
+	"io/ioutil"
+	"net/http"
+	"net/url"
 	"strings"
 )
 
 // Linger please
 var (
-	_ _context.Context
+	_ context.Context
 )
 
 // SolanaWalletApiService SolanaWalletApi service
 type SolanaWalletApiService service
 
 type ApiSolanaDeriveAssociatedTokenAccountAddressRequest struct {
-	ctx _context.Context
+	ctx context.Context
 	ApiService *SolanaWalletApiService
 	publicKey string
 	mintAddress string
 }
 
 
-func (r ApiSolanaDeriveAssociatedTokenAccountAddressRequest) Execute() (ATAResponse, *_nethttp.Response, error) {
+func (r ApiSolanaDeriveAssociatedTokenAccountAddressRequest) Execute() (*ATAResponse, *http.Response, error) {
 	return r.ApiService.SolanaDeriveAssociatedTokenAccountAddressExecute(r)
 }
 
@@ -49,12 +49,12 @@ SolanaDeriveAssociatedTokenAccountAddress Derive an associated token account add
 
 `Cost: 0 Credit` (Free) (<a href="#section/Pricing">See Pricing</a>)
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param publicKey The public key of the wallet
  @param mintAddress The mint address of the token (either SPL or NFT)
  @return ApiSolanaDeriveAssociatedTokenAccountAddressRequest
 */
-func (a *SolanaWalletApiService) SolanaDeriveAssociatedTokenAccountAddress(ctx _context.Context, publicKey string, mintAddress string) ApiSolanaDeriveAssociatedTokenAccountAddressRequest {
+func (a *SolanaWalletApiService) SolanaDeriveAssociatedTokenAccountAddress(ctx context.Context, publicKey string, mintAddress string) ApiSolanaDeriveAssociatedTokenAccountAddressRequest {
 	return ApiSolanaDeriveAssociatedTokenAccountAddressRequest{
 		ApiService: a,
 		ctx: ctx,
@@ -65,28 +65,26 @@ func (a *SolanaWalletApiService) SolanaDeriveAssociatedTokenAccountAddress(ctx _
 
 // Execute executes the request
 //  @return ATAResponse
-func (a *SolanaWalletApiService) SolanaDeriveAssociatedTokenAccountAddressExecute(r ApiSolanaDeriveAssociatedTokenAccountAddressRequest) (ATAResponse, *_nethttp.Response, error) {
+func (a *SolanaWalletApiService) SolanaDeriveAssociatedTokenAccountAddressExecute(r ApiSolanaDeriveAssociatedTokenAccountAddressRequest) (*ATAResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodGet
+		localVarHTTPMethod   = http.MethodGet
 		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  ATAResponse
+		formFiles            []formFile
+		localVarReturnValue  *ATAResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "SolanaWalletApiService.SolanaDeriveAssociatedTokenAccountAddress")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/solana/wallet/{public_key}/associated_token_account/{mint_address}"
-	localVarPath = strings.Replace(localVarPath, "{"+"public_key"+"}", _neturl.PathEscape(parameterToString(r.publicKey, "")), -1)
-	localVarPath = strings.Replace(localVarPath, "{"+"mint_address"+"}", _neturl.PathEscape(parameterToString(r.mintAddress, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"public_key"+"}", url.PathEscape(parameterToString(r.publicKey, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"mint_address"+"}", url.PathEscape(parameterToString(r.mintAddress, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -133,7 +131,7 @@ func (a *SolanaWalletApiService) SolanaDeriveAssociatedTokenAccountAddressExecut
 			}
 		}
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -143,15 +141,15 @@ func (a *SolanaWalletApiService) SolanaDeriveAssociatedTokenAccountAddressExecut
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -160,7 +158,7 @@ func (a *SolanaWalletApiService) SolanaDeriveAssociatedTokenAccountAddressExecut
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -171,7 +169,7 @@ func (a *SolanaWalletApiService) SolanaDeriveAssociatedTokenAccountAddressExecut
 }
 
 type ApiSolanaDerivePrivateKeyRequest struct {
-	ctx _context.Context
+	ctx context.Context
 	ApiService *SolanaWalletApiService
 	getPublicKeyRequest *GetPublicKeyRequest
 }
@@ -181,7 +179,7 @@ func (r ApiSolanaDerivePrivateKeyRequest) GetPublicKeyRequest(getPublicKeyReques
 	return r
 }
 
-func (r ApiSolanaDerivePrivateKeyRequest) Execute() (GeneratePrivateKey, *_nethttp.Response, error) {
+func (r ApiSolanaDerivePrivateKeyRequest) Execute() (*GeneratePrivateKey, *http.Response, error) {
 	return r.ApiService.SolanaDerivePrivateKeyExecute(r)
 }
 
@@ -201,10 +199,10 @@ with a single secret recovery phrase, you can generate many public keys. If you 
 
 `Cost: 0 Credit` (Free) (<a href="#section/Pricing">See Pricing</a>)
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiSolanaDerivePrivateKeyRequest
 */
-func (a *SolanaWalletApiService) SolanaDerivePrivateKey(ctx _context.Context) ApiSolanaDerivePrivateKeyRequest {
+func (a *SolanaWalletApiService) SolanaDerivePrivateKey(ctx context.Context) ApiSolanaDerivePrivateKeyRequest {
 	return ApiSolanaDerivePrivateKeyRequest{
 		ApiService: a,
 		ctx: ctx,
@@ -213,26 +211,24 @@ func (a *SolanaWalletApiService) SolanaDerivePrivateKey(ctx _context.Context) Ap
 
 // Execute executes the request
 //  @return GeneratePrivateKey
-func (a *SolanaWalletApiService) SolanaDerivePrivateKeyExecute(r ApiSolanaDerivePrivateKeyRequest) (GeneratePrivateKey, *_nethttp.Response, error) {
+func (a *SolanaWalletApiService) SolanaDerivePrivateKeyExecute(r ApiSolanaDerivePrivateKeyRequest) (*GeneratePrivateKey, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodPost
+		localVarHTTPMethod   = http.MethodPost
 		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  GeneratePrivateKey
+		formFiles            []formFile
+		localVarReturnValue  *GeneratePrivateKey
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "SolanaWalletApiService.SolanaDerivePrivateKey")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/solana/wallet/private_key"
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 	if r.getPublicKeyRequest == nil {
 		return localVarReturnValue, nil, reportError("getPublicKeyRequest is required and must be specified")
 	}
@@ -284,7 +280,7 @@ func (a *SolanaWalletApiService) SolanaDerivePrivateKeyExecute(r ApiSolanaDerive
 			}
 		}
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -294,15 +290,15 @@ func (a *SolanaWalletApiService) SolanaDerivePrivateKeyExecute(r ApiSolanaDerive
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -311,7 +307,7 @@ func (a *SolanaWalletApiService) SolanaDerivePrivateKeyExecute(r ApiSolanaDerive
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -322,7 +318,7 @@ func (a *SolanaWalletApiService) SolanaDerivePrivateKeyExecute(r ApiSolanaDerive
 }
 
 type ApiSolanaDerivePublicKeyRequest struct {
-	ctx _context.Context
+	ctx context.Context
 	ApiService *SolanaWalletApiService
 	getPublicKeyRequest *GetPublicKeyRequest
 }
@@ -332,7 +328,7 @@ func (r ApiSolanaDerivePublicKeyRequest) GetPublicKeyRequest(getPublicKeyRequest
 	return r
 }
 
-func (r ApiSolanaDerivePublicKeyRequest) Execute() (PublicKey, *_nethttp.Response, error) {
+func (r ApiSolanaDerivePublicKeyRequest) Execute() (*PublicKey, *http.Response, error) {
 	return r.ApiService.SolanaDerivePublicKeyExecute(r)
 }
 
@@ -354,10 +350,10 @@ with a single secret recovery phrase, you can generate many public keys; however
 
 `Cost: 0 Credit` (Free) (<a href="#section/Pricing">See Pricing</a>)
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiSolanaDerivePublicKeyRequest
 */
-func (a *SolanaWalletApiService) SolanaDerivePublicKey(ctx _context.Context) ApiSolanaDerivePublicKeyRequest {
+func (a *SolanaWalletApiService) SolanaDerivePublicKey(ctx context.Context) ApiSolanaDerivePublicKeyRequest {
 	return ApiSolanaDerivePublicKeyRequest{
 		ApiService: a,
 		ctx: ctx,
@@ -366,26 +362,24 @@ func (a *SolanaWalletApiService) SolanaDerivePublicKey(ctx _context.Context) Api
 
 // Execute executes the request
 //  @return PublicKey
-func (a *SolanaWalletApiService) SolanaDerivePublicKeyExecute(r ApiSolanaDerivePublicKeyRequest) (PublicKey, *_nethttp.Response, error) {
+func (a *SolanaWalletApiService) SolanaDerivePublicKeyExecute(r ApiSolanaDerivePublicKeyRequest) (*PublicKey, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodPost
+		localVarHTTPMethod   = http.MethodPost
 		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  PublicKey
+		formFiles            []formFile
+		localVarReturnValue  *PublicKey
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "SolanaWalletApiService.SolanaDerivePublicKey")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/solana/wallet/public_key"
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 	if r.getPublicKeyRequest == nil {
 		return localVarReturnValue, nil, reportError("getPublicKeyRequest is required and must be specified")
 	}
@@ -437,7 +431,7 @@ func (a *SolanaWalletApiService) SolanaDerivePublicKeyExecute(r ApiSolanaDeriveP
 			}
 		}
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -447,15 +441,15 @@ func (a *SolanaWalletApiService) SolanaDerivePublicKeyExecute(r ApiSolanaDeriveP
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -464,7 +458,7 @@ func (a *SolanaWalletApiService) SolanaDerivePublicKeyExecute(r ApiSolanaDeriveP
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -475,12 +469,12 @@ func (a *SolanaWalletApiService) SolanaDerivePublicKeyExecute(r ApiSolanaDeriveP
 }
 
 type ApiSolanaGeneratePrivateKeyRequest struct {
-	ctx _context.Context
+	ctx context.Context
 	ApiService *SolanaWalletApiService
 }
 
 
-func (r ApiSolanaGeneratePrivateKeyRequest) Execute() (GeneratePrivateKey, *_nethttp.Response, error) {
+func (r ApiSolanaGeneratePrivateKeyRequest) Execute() (*GeneratePrivateKey, *http.Response, error) {
 	return r.ApiService.SolanaGeneratePrivateKeyExecute(r)
 }
 
@@ -493,10 +487,10 @@ Use this endpoint to securely and randomly generate a private key for a Solana w
 
 `Cost: 0 Credit` (Free) (<a href="#section/Pricing">See Pricing</a>)
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiSolanaGeneratePrivateKeyRequest
 */
-func (a *SolanaWalletApiService) SolanaGeneratePrivateKey(ctx _context.Context) ApiSolanaGeneratePrivateKeyRequest {
+func (a *SolanaWalletApiService) SolanaGeneratePrivateKey(ctx context.Context) ApiSolanaGeneratePrivateKeyRequest {
 	return ApiSolanaGeneratePrivateKeyRequest{
 		ApiService: a,
 		ctx: ctx,
@@ -505,26 +499,24 @@ func (a *SolanaWalletApiService) SolanaGeneratePrivateKey(ctx _context.Context) 
 
 // Execute executes the request
 //  @return GeneratePrivateKey
-func (a *SolanaWalletApiService) SolanaGeneratePrivateKeyExecute(r ApiSolanaGeneratePrivateKeyRequest) (GeneratePrivateKey, *_nethttp.Response, error) {
+func (a *SolanaWalletApiService) SolanaGeneratePrivateKeyExecute(r ApiSolanaGeneratePrivateKeyRequest) (*GeneratePrivateKey, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodPost
+		localVarHTTPMethod   = http.MethodPost
 		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  GeneratePrivateKey
+		formFiles            []formFile
+		localVarReturnValue  *GeneratePrivateKey
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "SolanaWalletApiService.SolanaGeneratePrivateKey")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/solana/wallet/generate/private_key"
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -571,7 +563,7 @@ func (a *SolanaWalletApiService) SolanaGeneratePrivateKeyExecute(r ApiSolanaGene
 			}
 		}
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -581,15 +573,15 @@ func (a *SolanaWalletApiService) SolanaGeneratePrivateKeyExecute(r ApiSolanaGene
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -598,7 +590,7 @@ func (a *SolanaWalletApiService) SolanaGeneratePrivateKeyExecute(r ApiSolanaGene
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -609,12 +601,12 @@ func (a *SolanaWalletApiService) SolanaGeneratePrivateKeyExecute(r ApiSolanaGene
 }
 
 type ApiSolanaGenerateSecretRecoveryPhraseRequest struct {
-	ctx _context.Context
+	ctx context.Context
 	ApiService *SolanaWalletApiService
 }
 
 
-func (r ApiSolanaGenerateSecretRecoveryPhraseRequest) Execute() (SecretPhrase, *_nethttp.Response, error) {
+func (r ApiSolanaGenerateSecretRecoveryPhraseRequest) Execute() (*SecretPhrase, *http.Response, error) {
 	return r.ApiService.SolanaGenerateSecretRecoveryPhraseExecute(r)
 }
 
@@ -627,10 +619,10 @@ Use this endpoint to securely and randomly generate a secret recovery phrase for
 
 `Cost: 0 Credit` (Free) (<a href="#section/Pricing">See Pricing</a>)
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiSolanaGenerateSecretRecoveryPhraseRequest
 */
-func (a *SolanaWalletApiService) SolanaGenerateSecretRecoveryPhrase(ctx _context.Context) ApiSolanaGenerateSecretRecoveryPhraseRequest {
+func (a *SolanaWalletApiService) SolanaGenerateSecretRecoveryPhrase(ctx context.Context) ApiSolanaGenerateSecretRecoveryPhraseRequest {
 	return ApiSolanaGenerateSecretRecoveryPhraseRequest{
 		ApiService: a,
 		ctx: ctx,
@@ -639,26 +631,24 @@ func (a *SolanaWalletApiService) SolanaGenerateSecretRecoveryPhrase(ctx _context
 
 // Execute executes the request
 //  @return SecretPhrase
-func (a *SolanaWalletApiService) SolanaGenerateSecretRecoveryPhraseExecute(r ApiSolanaGenerateSecretRecoveryPhraseRequest) (SecretPhrase, *_nethttp.Response, error) {
+func (a *SolanaWalletApiService) SolanaGenerateSecretRecoveryPhraseExecute(r ApiSolanaGenerateSecretRecoveryPhraseRequest) (*SecretPhrase, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodPost
+		localVarHTTPMethod   = http.MethodPost
 		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  SecretPhrase
+		formFiles            []formFile
+		localVarReturnValue  *SecretPhrase
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "SolanaWalletApiService.SolanaGenerateSecretRecoveryPhrase")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/solana/wallet/generate/secret_recovery_phrase"
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -705,7 +695,7 @@ func (a *SolanaWalletApiService) SolanaGenerateSecretRecoveryPhraseExecute(r Api
 			}
 		}
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -715,15 +705,15 @@ func (a *SolanaWalletApiService) SolanaGenerateSecretRecoveryPhraseExecute(r Api
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -732,7 +722,7 @@ func (a *SolanaWalletApiService) SolanaGenerateSecretRecoveryPhraseExecute(r Api
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -743,7 +733,7 @@ func (a *SolanaWalletApiService) SolanaGenerateSecretRecoveryPhraseExecute(r Api
 }
 
 type ApiSolanaGetAirdropRequest struct {
-	ctx _context.Context
+	ctx context.Context
 	ApiService *SolanaWalletApiService
 	airdropRequest *AirdropRequest
 }
@@ -753,7 +743,7 @@ func (r ApiSolanaGetAirdropRequest) AirdropRequest(airdropRequest AirdropRequest
 	return r
 }
 
-func (r ApiSolanaGetAirdropRequest) Execute() (TransferResponse, *_nethttp.Response, error) {
+func (r ApiSolanaGetAirdropRequest) Execute() (*TransferResponse, *http.Response, error) {
 	return r.ApiService.SolanaGetAirdropExecute(r)
 }
 
@@ -767,10 +757,10 @@ which is the minimum amount of SOL you need to mint a Metaplex NFT and then tran
 
 `Cost: 0 Credit` (Free) (<a href="#section/Pricing">See Pricing</a>)
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiSolanaGetAirdropRequest
 */
-func (a *SolanaWalletApiService) SolanaGetAirdrop(ctx _context.Context) ApiSolanaGetAirdropRequest {
+func (a *SolanaWalletApiService) SolanaGetAirdrop(ctx context.Context) ApiSolanaGetAirdropRequest {
 	return ApiSolanaGetAirdropRequest{
 		ApiService: a,
 		ctx: ctx,
@@ -779,26 +769,24 @@ func (a *SolanaWalletApiService) SolanaGetAirdrop(ctx _context.Context) ApiSolan
 
 // Execute executes the request
 //  @return TransferResponse
-func (a *SolanaWalletApiService) SolanaGetAirdropExecute(r ApiSolanaGetAirdropRequest) (TransferResponse, *_nethttp.Response, error) {
+func (a *SolanaWalletApiService) SolanaGetAirdropExecute(r ApiSolanaGetAirdropRequest) (*TransferResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodPost
+		localVarHTTPMethod   = http.MethodPost
 		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  TransferResponse
+		formFiles            []formFile
+		localVarReturnValue  *TransferResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "SolanaWalletApiService.SolanaGetAirdrop")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/solana/wallet/airdrop"
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{"application/json"}
@@ -847,7 +835,7 @@ func (a *SolanaWalletApiService) SolanaGetAirdropExecute(r ApiSolanaGetAirdropRe
 			}
 		}
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -857,15 +845,15 @@ func (a *SolanaWalletApiService) SolanaGetAirdropExecute(r ApiSolanaGetAirdropRe
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -874,7 +862,7 @@ func (a *SolanaWalletApiService) SolanaGetAirdropExecute(r ApiSolanaGetAirdropRe
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -885,7 +873,7 @@ func (a *SolanaWalletApiService) SolanaGetAirdropExecute(r ApiSolanaGetAirdropRe
 }
 
 type ApiSolanaGetBalanceRequest struct {
-	ctx _context.Context
+	ctx context.Context
 	ApiService *SolanaWalletApiService
 	balanceRequest *BalanceRequest
 }
@@ -895,7 +883,7 @@ func (r ApiSolanaGetBalanceRequest) BalanceRequest(balanceRequest BalanceRequest
 	return r
 }
 
-func (r ApiSolanaGetBalanceRequest) Execute() (BalanceResponse, *_nethttp.Response, error) {
+func (r ApiSolanaGetBalanceRequest) Execute() (*BalanceResponse, *http.Response, error) {
 	return r.ApiService.SolanaGetBalanceExecute(r)
 }
 
@@ -912,10 +900,10 @@ You can also use this endpoint to see whether or not a person owns an NFT. Just 
 
 `Cost: 0.25 Credit` (<a href="#section/Pricing">See Pricing</a>)
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiSolanaGetBalanceRequest
 */
-func (a *SolanaWalletApiService) SolanaGetBalance(ctx _context.Context) ApiSolanaGetBalanceRequest {
+func (a *SolanaWalletApiService) SolanaGetBalance(ctx context.Context) ApiSolanaGetBalanceRequest {
 	return ApiSolanaGetBalanceRequest{
 		ApiService: a,
 		ctx: ctx,
@@ -924,26 +912,24 @@ func (a *SolanaWalletApiService) SolanaGetBalance(ctx _context.Context) ApiSolan
 
 // Execute executes the request
 //  @return BalanceResponse
-func (a *SolanaWalletApiService) SolanaGetBalanceExecute(r ApiSolanaGetBalanceRequest) (BalanceResponse, *_nethttp.Response, error) {
+func (a *SolanaWalletApiService) SolanaGetBalanceExecute(r ApiSolanaGetBalanceRequest) (*BalanceResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodPost
+		localVarHTTPMethod   = http.MethodPost
 		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  BalanceResponse
+		formFiles            []formFile
+		localVarReturnValue  *BalanceResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "SolanaWalletApiService.SolanaGetBalance")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/solana/wallet/balance"
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{"application/json"}
@@ -992,7 +978,7 @@ func (a *SolanaWalletApiService) SolanaGetBalanceExecute(r ApiSolanaGetBalanceRe
 			}
 		}
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -1002,15 +988,15 @@ func (a *SolanaWalletApiService) SolanaGetBalanceExecute(r ApiSolanaGetBalanceRe
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -1019,7 +1005,7 @@ func (a *SolanaWalletApiService) SolanaGetBalanceExecute(r ApiSolanaGetBalanceRe
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -1030,14 +1016,14 @@ func (a *SolanaWalletApiService) SolanaGetBalanceExecute(r ApiSolanaGetBalanceRe
 }
 
 type ApiSolanaGetNFTsBelongingToWalletRequest struct {
-	ctx _context.Context
+	ctx context.Context
 	ApiService *SolanaWalletApiService
 	network string
 	publicKey string
 }
 
 
-func (r ApiSolanaGetNFTsBelongingToWalletRequest) Execute() (ListNFTsResponse, *_nethttp.Response, error) {
+func (r ApiSolanaGetNFTsBelongingToWalletRequest) Execute() (*ListNFTsResponse, *http.Response, error) {
 	return r.ApiService.SolanaGetNFTsBelongingToWalletExecute(r)
 }
 
@@ -1050,12 +1036,12 @@ See the NFTs that belong to a given public key address
 
 `Cost: 3 Credits` (<a href="#section/Pricing">See Pricing</a>)
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param network The network ID (devnet, mainnet-beta)
  @param publicKey The public key of the account whose list of owned NFTs you want to get
  @return ApiSolanaGetNFTsBelongingToWalletRequest
 */
-func (a *SolanaWalletApiService) SolanaGetNFTsBelongingToWallet(ctx _context.Context, network string, publicKey string) ApiSolanaGetNFTsBelongingToWalletRequest {
+func (a *SolanaWalletApiService) SolanaGetNFTsBelongingToWallet(ctx context.Context, network string, publicKey string) ApiSolanaGetNFTsBelongingToWalletRequest {
 	return ApiSolanaGetNFTsBelongingToWalletRequest{
 		ApiService: a,
 		ctx: ctx,
@@ -1066,28 +1052,26 @@ func (a *SolanaWalletApiService) SolanaGetNFTsBelongingToWallet(ctx _context.Con
 
 // Execute executes the request
 //  @return ListNFTsResponse
-func (a *SolanaWalletApiService) SolanaGetNFTsBelongingToWalletExecute(r ApiSolanaGetNFTsBelongingToWalletRequest) (ListNFTsResponse, *_nethttp.Response, error) {
+func (a *SolanaWalletApiService) SolanaGetNFTsBelongingToWalletExecute(r ApiSolanaGetNFTsBelongingToWalletRequest) (*ListNFTsResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodGet
+		localVarHTTPMethod   = http.MethodGet
 		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  ListNFTsResponse
+		formFiles            []formFile
+		localVarReturnValue  *ListNFTsResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "SolanaWalletApiService.SolanaGetNFTsBelongingToWallet")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/solana/wallet/{network}/{public_key}/nfts"
-	localVarPath = strings.Replace(localVarPath, "{"+"network"+"}", _neturl.PathEscape(parameterToString(r.network, "")), -1)
-	localVarPath = strings.Replace(localVarPath, "{"+"public_key"+"}", _neturl.PathEscape(parameterToString(r.publicKey, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"network"+"}", url.PathEscape(parameterToString(r.network, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"public_key"+"}", url.PathEscape(parameterToString(r.publicKey, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -1134,7 +1118,7 @@ func (a *SolanaWalletApiService) SolanaGetNFTsBelongingToWalletExecute(r ApiSola
 			}
 		}
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -1144,15 +1128,15 @@ func (a *SolanaWalletApiService) SolanaGetNFTsBelongingToWalletExecute(r ApiSola
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -1161,7 +1145,7 @@ func (a *SolanaWalletApiService) SolanaGetNFTsBelongingToWalletExecute(r ApiSola
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -1172,7 +1156,7 @@ func (a *SolanaWalletApiService) SolanaGetNFTsBelongingToWalletExecute(r ApiSola
 }
 
 type ApiSolanaGetTokensBelongingToWalletRequest struct {
-	ctx _context.Context
+	ctx context.Context
 	ApiService *SolanaWalletApiService
 	network string
 	publicKey string
@@ -1191,7 +1175,7 @@ func (r ApiSolanaGetTokensBelongingToWalletRequest) IncludeZeroBalanceHoldings(i
 	return r
 }
 
-func (r ApiSolanaGetTokensBelongingToWalletRequest) Execute() ([]map[string]interface{}, *_nethttp.Response, error) {
+func (r ApiSolanaGetTokensBelongingToWalletRequest) Execute() ([]map[string]interface{}, *http.Response, error) {
 	return r.ApiService.SolanaGetTokensBelongingToWalletExecute(r)
 }
 
@@ -1204,12 +1188,12 @@ See the token holdings of a given public key address
 
 `Cost: 2 Credits` (<a href="#section/Pricing">See Pricing</a>)
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param network The network ID (devnet, mainnet-beta)
  @param publicKey The public key of the account whose list of owned NFTs you want to get
  @return ApiSolanaGetTokensBelongingToWalletRequest
 */
-func (a *SolanaWalletApiService) SolanaGetTokensBelongingToWallet(ctx _context.Context, network string, publicKey string) ApiSolanaGetTokensBelongingToWalletRequest {
+func (a *SolanaWalletApiService) SolanaGetTokensBelongingToWallet(ctx context.Context, network string, publicKey string) ApiSolanaGetTokensBelongingToWalletRequest {
 	return ApiSolanaGetTokensBelongingToWalletRequest{
 		ApiService: a,
 		ctx: ctx,
@@ -1220,28 +1204,26 @@ func (a *SolanaWalletApiService) SolanaGetTokensBelongingToWallet(ctx _context.C
 
 // Execute executes the request
 //  @return []map[string]interface{}
-func (a *SolanaWalletApiService) SolanaGetTokensBelongingToWalletExecute(r ApiSolanaGetTokensBelongingToWalletRequest) ([]map[string]interface{}, *_nethttp.Response, error) {
+func (a *SolanaWalletApiService) SolanaGetTokensBelongingToWalletExecute(r ApiSolanaGetTokensBelongingToWalletRequest) ([]map[string]interface{}, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodGet
+		localVarHTTPMethod   = http.MethodGet
 		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
+		formFiles            []formFile
 		localVarReturnValue  []map[string]interface{}
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "SolanaWalletApiService.SolanaGetTokensBelongingToWallet")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/solana/wallet/{network}/{public_key}/tokens"
-	localVarPath = strings.Replace(localVarPath, "{"+"network"+"}", _neturl.PathEscape(parameterToString(r.network, "")), -1)
-	localVarPath = strings.Replace(localVarPath, "{"+"public_key"+"}", _neturl.PathEscape(parameterToString(r.publicKey, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"network"+"}", url.PathEscape(parameterToString(r.network, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"public_key"+"}", url.PathEscape(parameterToString(r.publicKey, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	if r.includeNfts != nil {
 		localVarQueryParams.Add("include_nfts", parameterToString(*r.includeNfts, ""))
@@ -1294,7 +1276,7 @@ func (a *SolanaWalletApiService) SolanaGetTokensBelongingToWalletExecute(r ApiSo
 			}
 		}
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -1304,15 +1286,15 @@ func (a *SolanaWalletApiService) SolanaGetTokensBelongingToWalletExecute(r ApiSo
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -1321,7 +1303,7 @@ func (a *SolanaWalletApiService) SolanaGetTokensBelongingToWalletExecute(r ApiSo
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -1332,14 +1314,14 @@ func (a *SolanaWalletApiService) SolanaGetTokensBelongingToWalletExecute(r ApiSo
 }
 
 type ApiSolanaGetWalletTransactionsRequest struct {
-	ctx _context.Context
+	ctx context.Context
 	ApiService *SolanaWalletApiService
 	network string
 	publicKey string
 }
 
 
-func (r ApiSolanaGetWalletTransactionsRequest) Execute() ([]string, *_nethttp.Response, error) {
+func (r ApiSolanaGetWalletTransactionsRequest) Execute() ([]string, *http.Response, error) {
 	return r.ApiService.SolanaGetWalletTransactionsExecute(r)
 }
 
@@ -1352,12 +1334,12 @@ See the transaction signatures of a given public key address
 
 `Cost: 1 Credits` (<a href="#section/Pricing">See Pricing</a>)
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param network The network ID (devnet, mainnet-beta)
  @param publicKey The public key of the account whose list of signatures you want to get
  @return ApiSolanaGetWalletTransactionsRequest
 */
-func (a *SolanaWalletApiService) SolanaGetWalletTransactions(ctx _context.Context, network string, publicKey string) ApiSolanaGetWalletTransactionsRequest {
+func (a *SolanaWalletApiService) SolanaGetWalletTransactions(ctx context.Context, network string, publicKey string) ApiSolanaGetWalletTransactionsRequest {
 	return ApiSolanaGetWalletTransactionsRequest{
 		ApiService: a,
 		ctx: ctx,
@@ -1368,28 +1350,26 @@ func (a *SolanaWalletApiService) SolanaGetWalletTransactions(ctx _context.Contex
 
 // Execute executes the request
 //  @return []string
-func (a *SolanaWalletApiService) SolanaGetWalletTransactionsExecute(r ApiSolanaGetWalletTransactionsRequest) ([]string, *_nethttp.Response, error) {
+func (a *SolanaWalletApiService) SolanaGetWalletTransactionsExecute(r ApiSolanaGetWalletTransactionsRequest) ([]string, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodGet
+		localVarHTTPMethod   = http.MethodGet
 		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
+		formFiles            []formFile
 		localVarReturnValue  []string
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "SolanaWalletApiService.SolanaGetWalletTransactions")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/solana/wallet/{network}/{public_key}/transactions"
-	localVarPath = strings.Replace(localVarPath, "{"+"network"+"}", _neturl.PathEscape(parameterToString(r.network, "")), -1)
-	localVarPath = strings.Replace(localVarPath, "{"+"public_key"+"}", _neturl.PathEscape(parameterToString(r.publicKey, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"network"+"}", url.PathEscape(parameterToString(r.network, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"public_key"+"}", url.PathEscape(parameterToString(r.publicKey, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -1436,7 +1416,7 @@ func (a *SolanaWalletApiService) SolanaGetWalletTransactionsExecute(r ApiSolanaG
 			}
 		}
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -1446,15 +1426,15 @@ func (a *SolanaWalletApiService) SolanaGetWalletTransactionsExecute(r ApiSolanaG
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -1463,7 +1443,7 @@ func (a *SolanaWalletApiService) SolanaGetWalletTransactionsExecute(r ApiSolanaG
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -1474,7 +1454,7 @@ func (a *SolanaWalletApiService) SolanaGetWalletTransactionsExecute(r ApiSolanaG
 }
 
 type ApiSolanaTransferRequest struct {
-	ctx _context.Context
+	ctx context.Context
 	ApiService *SolanaWalletApiService
 	transferRequest *TransferRequest
 }
@@ -1484,7 +1464,7 @@ func (r ApiSolanaTransferRequest) TransferRequest(transferRequest TransferReques
 	return r
 }
 
-func (r ApiSolanaTransferRequest) Execute() (DoubleTransferResponse, *_nethttp.Response, error) {
+func (r ApiSolanaTransferRequest) Execute() (*DoubleTransferResponse, *http.Response, error) {
 	return r.ApiService.SolanaTransferExecute(r)
 }
 
@@ -1509,10 +1489,10 @@ If you're transfering a token, supply the token address found on the explorer (e
 
 `Cost: 2 Credit` (<a href="#section/Pricing">See Pricing</a>)
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiSolanaTransferRequest
 */
-func (a *SolanaWalletApiService) SolanaTransfer(ctx _context.Context) ApiSolanaTransferRequest {
+func (a *SolanaWalletApiService) SolanaTransfer(ctx context.Context) ApiSolanaTransferRequest {
 	return ApiSolanaTransferRequest{
 		ApiService: a,
 		ctx: ctx,
@@ -1521,26 +1501,24 @@ func (a *SolanaWalletApiService) SolanaTransfer(ctx _context.Context) ApiSolanaT
 
 // Execute executes the request
 //  @return DoubleTransferResponse
-func (a *SolanaWalletApiService) SolanaTransferExecute(r ApiSolanaTransferRequest) (DoubleTransferResponse, *_nethttp.Response, error) {
+func (a *SolanaWalletApiService) SolanaTransferExecute(r ApiSolanaTransferRequest) (*DoubleTransferResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodPost
+		localVarHTTPMethod   = http.MethodPost
 		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  DoubleTransferResponse
+		formFiles            []formFile
+		localVarReturnValue  *DoubleTransferResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "SolanaWalletApiService.SolanaTransfer")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/solana/wallet/transfer"
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{"application/json"}
@@ -1589,7 +1567,7 @@ func (a *SolanaWalletApiService) SolanaTransferExecute(r ApiSolanaTransferReques
 			}
 		}
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -1599,15 +1577,15 @@ func (a *SolanaWalletApiService) SolanaTransferExecute(r ApiSolanaTransferReques
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -1616,7 +1594,7 @@ func (a *SolanaWalletApiService) SolanaTransferExecute(r ApiSolanaTransferReques
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}

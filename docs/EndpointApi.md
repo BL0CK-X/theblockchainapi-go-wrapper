@@ -35,8 +35,8 @@ func main() {
     endpointReference := *openapiclient.NewEndpointReference("ProjectId_example", "Version_example", "Path_example") // EndpointReference |  (optional)
 
     configuration := openapiclient.NewConfiguration()
-    api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.EndpointApi.DeleteEndpoint(context.Background()).EndpointReference(endpointReference).Execute()
+    apiClient := openapiclient.NewAPIClient(configuration)
+    resp, r, err := apiClient.EndpointApi.DeleteEndpoint(context.Background()).EndpointReference(endpointReference).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `EndpointApi.DeleteEndpoint``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -99,8 +99,8 @@ func main() {
     endpointReference := *openapiclient.NewEndpointReference("ProjectId_example", "Version_example", "Path_example") // EndpointReference |  (optional)
 
     configuration := openapiclient.NewConfiguration()
-    api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.EndpointApi.GetEndpoint(context.Background()).EndpointReference(endpointReference).Execute()
+    apiClient := openapiclient.NewAPIClient(configuration)
+    resp, r, err := apiClient.EndpointApi.GetEndpoint(context.Background()).EndpointReference(endpointReference).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `EndpointApi.GetEndpoint``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -164,8 +164,8 @@ import (
 func main() {
 
     configuration := openapiclient.NewConfiguration()
-    api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.EndpointApi.ListEndpoints(context.Background()).Execute()
+    apiClient := openapiclient.NewAPIClient(configuration)
+    resp, r, err := apiClient.EndpointApi.ListEndpoints(context.Background()).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `EndpointApi.ListEndpoints``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -226,8 +226,8 @@ func main() {
     endpoint := *openapiclient.NewEndpoint("ProjectId_example", "Version_example", "Path_example", "OperationId_example", "ReadableName_example", float32(123), []openapiclient.ParameterSpecification{*openapiclient.NewParameterSpecification()}, map[string]interface{}(123), []openapiclient.ParameterSpecification{*openapiclient.NewParameterSpecification()}, map[string]interface{}(123)) // Endpoint |  (optional)
 
     configuration := openapiclient.NewConfiguration()
-    api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.EndpointApi.SetEndpoint(context.Background()).Endpoint(endpoint).Execute()
+    apiClient := openapiclient.NewAPIClient(configuration)
+    resp, r, err := apiClient.EndpointApi.SetEndpoint(context.Background()).Endpoint(endpoint).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `EndpointApi.SetEndpoint``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)

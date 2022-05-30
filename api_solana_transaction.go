@@ -13,30 +13,30 @@ package openapi
 
 import (
 	"bytes"
-	_context "context"
-	_ioutil "io/ioutil"
-	_nethttp "net/http"
-	_neturl "net/url"
+	"context"
+	"io/ioutil"
+	"net/http"
+	"net/url"
 	"strings"
 )
 
 // Linger please
 var (
-	_ _context.Context
+	_ context.Context
 )
 
 // SolanaTransactionApiService SolanaTransactionApi service
 type SolanaTransactionApiService service
 
 type ApiSolanaGetTransactionRequest struct {
-	ctx _context.Context
+	ctx context.Context
 	ApiService *SolanaTransactionApiService
 	network string
 	txSignature string
 }
 
 
-func (r ApiSolanaGetTransactionRequest) Execute() (Transaction, *_nethttp.Response, error) {
+func (r ApiSolanaGetTransactionRequest) Execute() (*Transaction, *http.Response, error) {
 	return r.ApiService.SolanaGetTransactionExecute(r)
 }
 
@@ -49,12 +49,12 @@ Get the details of a transaction made on Solana.
 
 `Cost: 0.25 Credit` (<a href="#section/Pricing">See Pricing</a>)
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param network The network ID (devnet, mainnet-beta)
  @param txSignature The transaction signature of the transaction
  @return ApiSolanaGetTransactionRequest
 */
-func (a *SolanaTransactionApiService) SolanaGetTransaction(ctx _context.Context, network string, txSignature string) ApiSolanaGetTransactionRequest {
+func (a *SolanaTransactionApiService) SolanaGetTransaction(ctx context.Context, network string, txSignature string) ApiSolanaGetTransactionRequest {
 	return ApiSolanaGetTransactionRequest{
 		ApiService: a,
 		ctx: ctx,
@@ -65,28 +65,26 @@ func (a *SolanaTransactionApiService) SolanaGetTransaction(ctx _context.Context,
 
 // Execute executes the request
 //  @return Transaction
-func (a *SolanaTransactionApiService) SolanaGetTransactionExecute(r ApiSolanaGetTransactionRequest) (Transaction, *_nethttp.Response, error) {
+func (a *SolanaTransactionApiService) SolanaGetTransactionExecute(r ApiSolanaGetTransactionRequest) (*Transaction, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodGet
+		localVarHTTPMethod   = http.MethodGet
 		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  Transaction
+		formFiles            []formFile
+		localVarReturnValue  *Transaction
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "SolanaTransactionApiService.SolanaGetTransaction")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/solana/transaction/{network}/{tx_signature}"
-	localVarPath = strings.Replace(localVarPath, "{"+"network"+"}", _neturl.PathEscape(parameterToString(r.network, "")), -1)
-	localVarPath = strings.Replace(localVarPath, "{"+"tx_signature"+"}", _neturl.PathEscape(parameterToString(r.txSignature, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"network"+"}", url.PathEscape(parameterToString(r.network, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"tx_signature"+"}", url.PathEscape(parameterToString(r.txSignature, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -133,7 +131,7 @@ func (a *SolanaTransactionApiService) SolanaGetTransactionExecute(r ApiSolanaGet
 			}
 		}
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -143,15 +141,15 @@ func (a *SolanaTransactionApiService) SolanaGetTransactionExecute(r ApiSolanaGet
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -160,7 +158,7 @@ func (a *SolanaTransactionApiService) SolanaGetTransactionExecute(r ApiSolanaGet
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}

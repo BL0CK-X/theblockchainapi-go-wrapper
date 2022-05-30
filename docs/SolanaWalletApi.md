@@ -43,8 +43,8 @@ func main() {
     mintAddress := "7EWJNaNYfPYMaqzdAAa4ps5kpqW95B7VHsjhW1kr18sj" // string | The mint address of the token (either SPL or NFT)
 
     configuration := openapiclient.NewConfiguration()
-    api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.SolanaWalletApi.SolanaDeriveAssociatedTokenAccountAddress(context.Background(), publicKey, mintAddress).Execute()
+    apiClient := openapiclient.NewAPIClient(configuration)
+    resp, r, err := apiClient.SolanaWalletApi.SolanaDeriveAssociatedTokenAccountAddress(context.Background(), publicKey, mintAddress).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `SolanaWalletApi.SolanaDeriveAssociatedTokenAccountAddress``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -115,8 +115,8 @@ func main() {
     getPublicKeyRequest := *openapiclient.NewGetPublicKeyRequest(openapiclient.Wallet{B58PrivateKey: openapiclient.NewB58PrivateKey("B58PrivateKey_example")}) // GetPublicKeyRequest | 
 
     configuration := openapiclient.NewConfiguration()
-    api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.SolanaWalletApi.SolanaDerivePrivateKey(context.Background()).GetPublicKeyRequest(getPublicKeyRequest).Execute()
+    apiClient := openapiclient.NewAPIClient(configuration)
+    resp, r, err := apiClient.SolanaWalletApi.SolanaDerivePrivateKey(context.Background()).GetPublicKeyRequest(getPublicKeyRequest).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `SolanaWalletApi.SolanaDerivePrivateKey``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -181,8 +181,8 @@ func main() {
     getPublicKeyRequest := *openapiclient.NewGetPublicKeyRequest(openapiclient.Wallet{B58PrivateKey: openapiclient.NewB58PrivateKey("B58PrivateKey_example")}) // GetPublicKeyRequest | 
 
     configuration := openapiclient.NewConfiguration()
-    api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.SolanaWalletApi.SolanaDerivePublicKey(context.Background()).GetPublicKeyRequest(getPublicKeyRequest).Execute()
+    apiClient := openapiclient.NewAPIClient(configuration)
+    resp, r, err := apiClient.SolanaWalletApi.SolanaDerivePublicKey(context.Background()).GetPublicKeyRequest(getPublicKeyRequest).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `SolanaWalletApi.SolanaDerivePublicKey``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -246,8 +246,8 @@ import (
 func main() {
 
     configuration := openapiclient.NewConfiguration()
-    api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.SolanaWalletApi.SolanaGeneratePrivateKey(context.Background()).Execute()
+    apiClient := openapiclient.NewAPIClient(configuration)
+    resp, r, err := apiClient.SolanaWalletApi.SolanaGeneratePrivateKey(context.Background()).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `SolanaWalletApi.SolanaGeneratePrivateKey``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -307,8 +307,8 @@ import (
 func main() {
 
     configuration := openapiclient.NewConfiguration()
-    api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.SolanaWalletApi.SolanaGenerateSecretRecoveryPhrase(context.Background()).Execute()
+    apiClient := openapiclient.NewAPIClient(configuration)
+    resp, r, err := apiClient.SolanaWalletApi.SolanaGenerateSecretRecoveryPhrase(context.Background()).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `SolanaWalletApi.SolanaGenerateSecretRecoveryPhrase``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -369,8 +369,8 @@ func main() {
     airdropRequest := *openapiclient.NewAirdropRequest("RecipientAddress_example") // AirdropRequest |  (optional)
 
     configuration := openapiclient.NewConfiguration()
-    api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.SolanaWalletApi.SolanaGetAirdrop(context.Background()).AirdropRequest(airdropRequest).Execute()
+    apiClient := openapiclient.NewAPIClient(configuration)
+    resp, r, err := apiClient.SolanaWalletApi.SolanaGetAirdrop(context.Background()).AirdropRequest(airdropRequest).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `SolanaWalletApi.SolanaGetAirdrop``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -435,8 +435,8 @@ func main() {
     balanceRequest := *openapiclient.NewBalanceRequest("PublicKey_example") // BalanceRequest |  (optional)
 
     configuration := openapiclient.NewConfiguration()
-    api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.SolanaWalletApi.SolanaGetBalance(context.Background()).BalanceRequest(balanceRequest).Execute()
+    apiClient := openapiclient.NewAPIClient(configuration)
+    resp, r, err := apiClient.SolanaWalletApi.SolanaGetBalance(context.Background()).BalanceRequest(balanceRequest).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `SolanaWalletApi.SolanaGetBalance``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -502,8 +502,8 @@ func main() {
     publicKey := "HE3ZYk4aWfKD7R9EmFQbxjj75JdgHuDztNAsseKVan82" // string | The public key of the account whose list of owned NFTs you want to get
 
     configuration := openapiclient.NewConfiguration()
-    api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.SolanaWalletApi.SolanaGetNFTsBelongingToWallet(context.Background(), network, publicKey).Execute()
+    apiClient := openapiclient.NewAPIClient(configuration)
+    resp, r, err := apiClient.SolanaWalletApi.SolanaGetNFTsBelongingToWallet(context.Background(), network, publicKey).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `SolanaWalletApi.SolanaGetNFTsBelongingToWallet``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -577,8 +577,8 @@ func main() {
     includeZeroBalanceHoldings := false // bool | Whether or not to include holdings that have zero balance. This indicates that the wallet held this token or NFT in the past, but no longer holds it. (optional) (default to false)
 
     configuration := openapiclient.NewConfiguration()
-    api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.SolanaWalletApi.SolanaGetTokensBelongingToWallet(context.Background(), network, publicKey).IncludeNfts(includeNfts).IncludeZeroBalanceHoldings(includeZeroBalanceHoldings).Execute()
+    apiClient := openapiclient.NewAPIClient(configuration)
+    resp, r, err := apiClient.SolanaWalletApi.SolanaGetTokensBelongingToWallet(context.Background(), network, publicKey).IncludeNfts(includeNfts).IncludeZeroBalanceHoldings(includeZeroBalanceHoldings).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `SolanaWalletApi.SolanaGetTokensBelongingToWallet``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -652,8 +652,8 @@ func main() {
     publicKey := "GKNcUmNacSJo4S2Kq3DuYRYRGw3sNUfJ4tyqd198t6vQ" // string | The public key of the account whose list of signatures you want to get
 
     configuration := openapiclient.NewConfiguration()
-    api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.SolanaWalletApi.SolanaGetWalletTransactions(context.Background(), network, publicKey).Execute()
+    apiClient := openapiclient.NewAPIClient(configuration)
+    resp, r, err := apiClient.SolanaWalletApi.SolanaGetWalletTransactions(context.Background(), network, publicKey).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `SolanaWalletApi.SolanaGetWalletTransactions``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -724,8 +724,8 @@ func main() {
     transferRequest := *openapiclient.NewTransferRequest("RecipientAddress_example") // TransferRequest |  (optional)
 
     configuration := openapiclient.NewConfiguration()
-    api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.SolanaWalletApi.SolanaTransfer(context.Background()).TransferRequest(transferRequest).Execute()
+    apiClient := openapiclient.NewAPIClient(configuration)
+    resp, r, err := apiClient.SolanaWalletApi.SolanaTransfer(context.Background()).TransferRequest(transferRequest).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `SolanaWalletApi.SolanaTransfer``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)

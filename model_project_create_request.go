@@ -24,7 +24,7 @@ type ProjectCreateRequest struct {
 	// The email where users of your mini-API can contact you. This will be shown at the top of the mini-API's documentation. 
 	ContactEmail *string `json:"contact_email,omitempty"`
 	// A list of groups. A section contains groups, and groups contain API endpoints.  
-	Groups *[]Group `json:"groups,omitempty"`
+	Groups []Group `json:"groups,omitempty"`
 }
 
 // NewProjectCreateRequest instantiates a new ProjectCreateRequest object
@@ -146,12 +146,12 @@ func (o *ProjectCreateRequest) GetGroups() []Group {
 		var ret []Group
 		return ret
 	}
-	return *o.Groups
+	return o.Groups
 }
 
 // GetGroupsOk returns a tuple with the Groups field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *ProjectCreateRequest) GetGroupsOk() (*[]Group, bool) {
+func (o *ProjectCreateRequest) GetGroupsOk() ([]Group, bool) {
 	if o == nil || o.Groups == nil {
 		return nil, false
 	}
@@ -169,7 +169,7 @@ func (o *ProjectCreateRequest) HasGroups() bool {
 
 // SetGroups gets a reference to the given []Group and assigns it to the Groups field.
 func (o *ProjectCreateRequest) SetGroups(v []Group) {
-	o.Groups = &v
+	o.Groups = v
 }
 
 func (o ProjectCreateRequest) MarshalJSON() ([]byte, error) {

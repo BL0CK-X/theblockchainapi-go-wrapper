@@ -25,17 +25,23 @@ type FeePayerWallet struct {
 
 // B58PrivateKeyAsFeePayerWallet is a convenience function that returns B58PrivateKey wrapped in FeePayerWallet
 func B58PrivateKeyAsFeePayerWallet(v *B58PrivateKey) FeePayerWallet {
-	return FeePayerWallet{ B58PrivateKey: v}
+	return FeePayerWallet{
+		B58PrivateKey: v,
+	}
 }
 
 // PrivateKeyAsFeePayerWallet is a convenience function that returns PrivateKey wrapped in FeePayerWallet
 func PrivateKeyAsFeePayerWallet(v *PrivateKey) FeePayerWallet {
-	return FeePayerWallet{ PrivateKey: v}
+	return FeePayerWallet{
+		PrivateKey: v,
+	}
 }
 
 // SecretRecoveryPhraseAsFeePayerWallet is a convenience function that returns SecretRecoveryPhrase wrapped in FeePayerWallet
 func SecretRecoveryPhraseAsFeePayerWallet(v *SecretRecoveryPhrase) FeePayerWallet {
-	return FeePayerWallet{ SecretRecoveryPhrase: v}
+	return FeePayerWallet{
+		SecretRecoveryPhrase: v,
+	}
 }
 
 
@@ -44,7 +50,7 @@ func (dst *FeePayerWallet) UnmarshalJSON(data []byte) error {
 	var err error
 	match := 0
 	// try to unmarshal data into B58PrivateKey
-	err = json.Unmarshal(data, &dst.B58PrivateKey)
+	err = newStrictDecoder(data).Decode(&dst.B58PrivateKey)
 	if err == nil {
 		jsonB58PrivateKey, _ := json.Marshal(dst.B58PrivateKey)
 		if string(jsonB58PrivateKey) == "{}" { // empty struct
@@ -57,7 +63,7 @@ func (dst *FeePayerWallet) UnmarshalJSON(data []byte) error {
 	}
 
 	// try to unmarshal data into PrivateKey
-	err = json.Unmarshal(data, &dst.PrivateKey)
+	err = newStrictDecoder(data).Decode(&dst.PrivateKey)
 	if err == nil {
 		jsonPrivateKey, _ := json.Marshal(dst.PrivateKey)
 		if string(jsonPrivateKey) == "{}" { // empty struct
@@ -70,7 +76,7 @@ func (dst *FeePayerWallet) UnmarshalJSON(data []byte) error {
 	}
 
 	// try to unmarshal data into SecretRecoveryPhrase
-	err = json.Unmarshal(data, &dst.SecretRecoveryPhrase)
+	err = newStrictDecoder(data).Decode(&dst.SecretRecoveryPhrase)
 	if err == nil {
 		jsonSecretRecoveryPhrase, _ := json.Marshal(dst.SecretRecoveryPhrase)
 		if string(jsonSecretRecoveryPhrase) == "{}" { // empty struct
@@ -115,6 +121,9 @@ func (src FeePayerWallet) MarshalJSON() ([]byte, error) {
 
 // Get the actual instance
 func (obj *FeePayerWallet) GetActualInstance() (interface{}) {
+	if obj == nil {
+		return nil
+	}
 	if obj.B58PrivateKey != nil {
 		return obj.B58PrivateKey
 	}

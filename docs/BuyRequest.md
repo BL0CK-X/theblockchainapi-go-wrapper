@@ -5,6 +5,8 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Wallet** | [**Wallet**](Wallet.md) |  | 
+**SkipChecks** | Pointer to **bool** | Whether or not to skip the provided checks (e.g., Is this NFT not listed? Is this NFT listed for a different price than you set?) and proceed with the transaction.  | [optional] [default to false]
+**SellerPublicKey** | Pointer to **string** | The public key of the seller. Only required if providing &#x60;skip_checks&#x60;. Otherwise, don&#39;t provide it.  | [optional] [default to "null"]
 **NftPrice** | **float32** | The number of lamports you are expecting to purchase the NFT for. We check the price of the NFT before  purchasing it to ensure that it matches your expectation. There are 1e9 (1 billion) Lamports in a SOL.  | 
 
 ## Methods
@@ -45,6 +47,56 @@ and a boolean to check if the value has been set.
 
 SetWallet sets Wallet field to given value.
 
+
+### GetSkipChecks
+
+`func (o *BuyRequest) GetSkipChecks() bool`
+
+GetSkipChecks returns the SkipChecks field if non-nil, zero value otherwise.
+
+### GetSkipChecksOk
+
+`func (o *BuyRequest) GetSkipChecksOk() (*bool, bool)`
+
+GetSkipChecksOk returns a tuple with the SkipChecks field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetSkipChecks
+
+`func (o *BuyRequest) SetSkipChecks(v bool)`
+
+SetSkipChecks sets SkipChecks field to given value.
+
+### HasSkipChecks
+
+`func (o *BuyRequest) HasSkipChecks() bool`
+
+HasSkipChecks returns a boolean if a field has been set.
+
+### GetSellerPublicKey
+
+`func (o *BuyRequest) GetSellerPublicKey() string`
+
+GetSellerPublicKey returns the SellerPublicKey field if non-nil, zero value otherwise.
+
+### GetSellerPublicKeyOk
+
+`func (o *BuyRequest) GetSellerPublicKeyOk() (*string, bool)`
+
+GetSellerPublicKeyOk returns a tuple with the SellerPublicKey field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetSellerPublicKey
+
+`func (o *BuyRequest) SetSellerPublicKey(v string)`
+
+SetSellerPublicKey sets SellerPublicKey field to given value.
+
+### HasSellerPublicKey
+
+`func (o *BuyRequest) HasSellerPublicKey() bool`
+
+HasSellerPublicKey returns a boolean if a field has been set.
 
 ### GetNftPrice
 

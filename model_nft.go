@@ -27,6 +27,12 @@ type NFT struct {
 	SellerFeeBasisPoints *float32 `json:"seller_fee_basis_points,omitempty"`
 	MintSecretRecoveryPhrase *string `json:"mint_secret_recovery_phrase,omitempty"`
 	ExplorerUrl *string `json:"explorer_url,omitempty"`
+	// The metadata account of the NFT 
+	MetadataAccount *string `json:"metadata_account,omitempty"`
+	EditionNonce *float32 `json:"edition_nonce,omitempty"`
+	TokenStandard *float32 `json:"token_standard,omitempty"`
+	Collection *NFTCollection `json:"collection,omitempty"`
+	Uses *float32 `json:"uses,omitempty"`
 }
 
 // NewNFT instantiates a new NFT object
@@ -302,6 +308,166 @@ func (o *NFT) SetExplorerUrl(v string) {
 	o.ExplorerUrl = &v
 }
 
+// GetMetadataAccount returns the MetadataAccount field value if set, zero value otherwise.
+func (o *NFT) GetMetadataAccount() string {
+	if o == nil || o.MetadataAccount == nil {
+		var ret string
+		return ret
+	}
+	return *o.MetadataAccount
+}
+
+// GetMetadataAccountOk returns a tuple with the MetadataAccount field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *NFT) GetMetadataAccountOk() (*string, bool) {
+	if o == nil || o.MetadataAccount == nil {
+		return nil, false
+	}
+	return o.MetadataAccount, true
+}
+
+// HasMetadataAccount returns a boolean if a field has been set.
+func (o *NFT) HasMetadataAccount() bool {
+	if o != nil && o.MetadataAccount != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetMetadataAccount gets a reference to the given string and assigns it to the MetadataAccount field.
+func (o *NFT) SetMetadataAccount(v string) {
+	o.MetadataAccount = &v
+}
+
+// GetEditionNonce returns the EditionNonce field value if set, zero value otherwise.
+func (o *NFT) GetEditionNonce() float32 {
+	if o == nil || o.EditionNonce == nil {
+		var ret float32
+		return ret
+	}
+	return *o.EditionNonce
+}
+
+// GetEditionNonceOk returns a tuple with the EditionNonce field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *NFT) GetEditionNonceOk() (*float32, bool) {
+	if o == nil || o.EditionNonce == nil {
+		return nil, false
+	}
+	return o.EditionNonce, true
+}
+
+// HasEditionNonce returns a boolean if a field has been set.
+func (o *NFT) HasEditionNonce() bool {
+	if o != nil && o.EditionNonce != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetEditionNonce gets a reference to the given float32 and assigns it to the EditionNonce field.
+func (o *NFT) SetEditionNonce(v float32) {
+	o.EditionNonce = &v
+}
+
+// GetTokenStandard returns the TokenStandard field value if set, zero value otherwise.
+func (o *NFT) GetTokenStandard() float32 {
+	if o == nil || o.TokenStandard == nil {
+		var ret float32
+		return ret
+	}
+	return *o.TokenStandard
+}
+
+// GetTokenStandardOk returns a tuple with the TokenStandard field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *NFT) GetTokenStandardOk() (*float32, bool) {
+	if o == nil || o.TokenStandard == nil {
+		return nil, false
+	}
+	return o.TokenStandard, true
+}
+
+// HasTokenStandard returns a boolean if a field has been set.
+func (o *NFT) HasTokenStandard() bool {
+	if o != nil && o.TokenStandard != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetTokenStandard gets a reference to the given float32 and assigns it to the TokenStandard field.
+func (o *NFT) SetTokenStandard(v float32) {
+	o.TokenStandard = &v
+}
+
+// GetCollection returns the Collection field value if set, zero value otherwise.
+func (o *NFT) GetCollection() NFTCollection {
+	if o == nil || o.Collection == nil {
+		var ret NFTCollection
+		return ret
+	}
+	return *o.Collection
+}
+
+// GetCollectionOk returns a tuple with the Collection field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *NFT) GetCollectionOk() (*NFTCollection, bool) {
+	if o == nil || o.Collection == nil {
+		return nil, false
+	}
+	return o.Collection, true
+}
+
+// HasCollection returns a boolean if a field has been set.
+func (o *NFT) HasCollection() bool {
+	if o != nil && o.Collection != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetCollection gets a reference to the given NFTCollection and assigns it to the Collection field.
+func (o *NFT) SetCollection(v NFTCollection) {
+	o.Collection = &v
+}
+
+// GetUses returns the Uses field value if set, zero value otherwise.
+func (o *NFT) GetUses() float32 {
+	if o == nil || o.Uses == nil {
+		var ret float32
+		return ret
+	}
+	return *o.Uses
+}
+
+// GetUsesOk returns a tuple with the Uses field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *NFT) GetUsesOk() (*float32, bool) {
+	if o == nil || o.Uses == nil {
+		return nil, false
+	}
+	return o.Uses, true
+}
+
+// HasUses returns a boolean if a field has been set.
+func (o *NFT) HasUses() bool {
+	if o != nil && o.Uses != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetUses gets a reference to the given float32 and assigns it to the Uses field.
+func (o *NFT) SetUses(v float32) {
+	o.Uses = &v
+}
+
 func (o NFT) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
 	if o.Data != nil {
@@ -327,6 +493,21 @@ func (o NFT) MarshalJSON() ([]byte, error) {
 	}
 	if o.ExplorerUrl != nil {
 		toSerialize["explorer_url"] = o.ExplorerUrl
+	}
+	if o.MetadataAccount != nil {
+		toSerialize["metadata_account"] = o.MetadataAccount
+	}
+	if o.EditionNonce != nil {
+		toSerialize["edition_nonce"] = o.EditionNonce
+	}
+	if o.TokenStandard != nil {
+		toSerialize["token_standard"] = o.TokenStandard
+	}
+	if o.Collection != nil {
+		toSerialize["collection"] = o.Collection
+	}
+	if o.Uses != nil {
+		toSerialize["uses"] = o.Uses
 	}
 	return json.Marshal(toSerialize)
 }

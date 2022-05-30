@@ -12,6 +12,11 @@ Name | Type | Description | Notes
 **SellerFeeBasisPoints** | Pointer to **float32** |  | [optional] 
 **MintSecretRecoveryPhrase** | Pointer to **string** |  | [optional] 
 **ExplorerUrl** | Pointer to **string** |  | [optional] 
+**MetadataAccount** | Pointer to **string** | The metadata account of the NFT  | [optional] 
+**EditionNonce** | Pointer to **float32** |  | [optional] 
+**TokenStandard** | Pointer to **float32** |  | [optional] 
+**Collection** | Pointer to [**NFTCollection**](NFTCollection.md) |  | [optional] 
+**Uses** | Pointer to **float32** |  | [optional] 
 
 ## Methods
 
@@ -231,6 +236,131 @@ SetExplorerUrl sets ExplorerUrl field to given value.
 `func (o *NFT) HasExplorerUrl() bool`
 
 HasExplorerUrl returns a boolean if a field has been set.
+
+### GetMetadataAccount
+
+`func (o *NFT) GetMetadataAccount() string`
+
+GetMetadataAccount returns the MetadataAccount field if non-nil, zero value otherwise.
+
+### GetMetadataAccountOk
+
+`func (o *NFT) GetMetadataAccountOk() (*string, bool)`
+
+GetMetadataAccountOk returns a tuple with the MetadataAccount field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetMetadataAccount
+
+`func (o *NFT) SetMetadataAccount(v string)`
+
+SetMetadataAccount sets MetadataAccount field to given value.
+
+### HasMetadataAccount
+
+`func (o *NFT) HasMetadataAccount() bool`
+
+HasMetadataAccount returns a boolean if a field has been set.
+
+### GetEditionNonce
+
+`func (o *NFT) GetEditionNonce() float32`
+
+GetEditionNonce returns the EditionNonce field if non-nil, zero value otherwise.
+
+### GetEditionNonceOk
+
+`func (o *NFT) GetEditionNonceOk() (*float32, bool)`
+
+GetEditionNonceOk returns a tuple with the EditionNonce field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetEditionNonce
+
+`func (o *NFT) SetEditionNonce(v float32)`
+
+SetEditionNonce sets EditionNonce field to given value.
+
+### HasEditionNonce
+
+`func (o *NFT) HasEditionNonce() bool`
+
+HasEditionNonce returns a boolean if a field has been set.
+
+### GetTokenStandard
+
+`func (o *NFT) GetTokenStandard() float32`
+
+GetTokenStandard returns the TokenStandard field if non-nil, zero value otherwise.
+
+### GetTokenStandardOk
+
+`func (o *NFT) GetTokenStandardOk() (*float32, bool)`
+
+GetTokenStandardOk returns a tuple with the TokenStandard field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetTokenStandard
+
+`func (o *NFT) SetTokenStandard(v float32)`
+
+SetTokenStandard sets TokenStandard field to given value.
+
+### HasTokenStandard
+
+`func (o *NFT) HasTokenStandard() bool`
+
+HasTokenStandard returns a boolean if a field has been set.
+
+### GetCollection
+
+`func (o *NFT) GetCollection() NFTCollection`
+
+GetCollection returns the Collection field if non-nil, zero value otherwise.
+
+### GetCollectionOk
+
+`func (o *NFT) GetCollectionOk() (*NFTCollection, bool)`
+
+GetCollectionOk returns a tuple with the Collection field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetCollection
+
+`func (o *NFT) SetCollection(v NFTCollection)`
+
+SetCollection sets Collection field to given value.
+
+### HasCollection
+
+`func (o *NFT) HasCollection() bool`
+
+HasCollection returns a boolean if a field has been set.
+
+### GetUses
+
+`func (o *NFT) GetUses() float32`
+
+GetUses returns the Uses field if non-nil, zero value otherwise.
+
+### GetUsesOk
+
+`func (o *NFT) GetUsesOk() (*float32, bool)`
+
+GetUsesOk returns a tuple with the Uses field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetUses
+
+`func (o *NFT) SetUses(v float32)`
+
+SetUses sets Uses field to given value.
+
+### HasUses
+
+`func (o *NFT) HasUses() bool`
+
+HasUses returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

@@ -13,23 +13,23 @@ package openapi
 
 import (
 	"bytes"
-	_context "context"
-	_ioutil "io/ioutil"
-	_nethttp "net/http"
-	_neturl "net/url"
+	"context"
+	"io/ioutil"
+	"net/http"
+	"net/url"
 	"strings"
 )
 
 // Linger please
 var (
-	_ _context.Context
+	_ context.Context
 )
 
 // ProjectApiService ProjectApi service
 type ProjectApiService service
 
 type ApiCreateProjectRequest struct {
-	ctx _context.Context
+	ctx context.Context
 	ApiService *ProjectApiService
 	projectCreateRequest *ProjectCreateRequest
 }
@@ -39,7 +39,7 @@ func (r ApiCreateProjectRequest) ProjectCreateRequest(projectCreateRequest Proje
 	return r
 }
 
-func (r ApiCreateProjectRequest) Execute() (Project, *_nethttp.Response, error) {
+func (r ApiCreateProjectRequest) Execute() (*Project, *http.Response, error) {
 	return r.ApiService.CreateProjectExecute(r)
 }
 
@@ -56,10 +56,10 @@ After initialization, you can <a href="#operation/createEndpoint">add endpoints<
 
 `Cost: 0 Credit` (Free) (<a href="#section/Pricing">See Pricing</a>)
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiCreateProjectRequest
 */
-func (a *ProjectApiService) CreateProject(ctx _context.Context) ApiCreateProjectRequest {
+func (a *ProjectApiService) CreateProject(ctx context.Context) ApiCreateProjectRequest {
 	return ApiCreateProjectRequest{
 		ApiService: a,
 		ctx: ctx,
@@ -68,26 +68,24 @@ func (a *ProjectApiService) CreateProject(ctx _context.Context) ApiCreateProject
 
 // Execute executes the request
 //  @return Project
-func (a *ProjectApiService) CreateProjectExecute(r ApiCreateProjectRequest) (Project, *_nethttp.Response, error) {
+func (a *ProjectApiService) CreateProjectExecute(r ApiCreateProjectRequest) (*Project, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodPost
+		localVarHTTPMethod   = http.MethodPost
 		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  Project
+		formFiles            []formFile
+		localVarReturnValue  *Project
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ProjectApiService.CreateProject")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/project"
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{"application/json"}
@@ -136,7 +134,7 @@ func (a *ProjectApiService) CreateProjectExecute(r ApiCreateProjectRequest) (Pro
 			}
 		}
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -146,15 +144,15 @@ func (a *ProjectApiService) CreateProjectExecute(r ApiCreateProjectRequest) (Pro
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -163,7 +161,7 @@ func (a *ProjectApiService) CreateProjectExecute(r ApiCreateProjectRequest) (Pro
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -174,14 +172,14 @@ func (a *ProjectApiService) CreateProjectExecute(r ApiCreateProjectRequest) (Pro
 }
 
 type ApiCreateProjectVersionRequest struct {
-	ctx _context.Context
+	ctx context.Context
 	ApiService *ProjectApiService
 	projectId string
 	version string
 }
 
 
-func (r ApiCreateProjectVersionRequest) Execute() (Project, *_nethttp.Response, error) {
+func (r ApiCreateProjectVersionRequest) Execute() (*Project, *http.Response, error) {
 	return r.ApiService.CreateProjectVersionExecute(r)
 }
 
@@ -196,12 +194,12 @@ When a project is first created, it uses the default "0.0.1" version.
 
 `Cost: 0 Credit` (Free) (<a href="#section/Pricing">See Pricing</a>)
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param projectId The ID of the project. Created and returned when a project is created.
  @param version The version of the project.
  @return ApiCreateProjectVersionRequest
 */
-func (a *ProjectApiService) CreateProjectVersion(ctx _context.Context, projectId string, version string) ApiCreateProjectVersionRequest {
+func (a *ProjectApiService) CreateProjectVersion(ctx context.Context, projectId string, version string) ApiCreateProjectVersionRequest {
 	return ApiCreateProjectVersionRequest{
 		ApiService: a,
 		ctx: ctx,
@@ -212,28 +210,26 @@ func (a *ProjectApiService) CreateProjectVersion(ctx _context.Context, projectId
 
 // Execute executes the request
 //  @return Project
-func (a *ProjectApiService) CreateProjectVersionExecute(r ApiCreateProjectVersionRequest) (Project, *_nethttp.Response, error) {
+func (a *ProjectApiService) CreateProjectVersionExecute(r ApiCreateProjectVersionRequest) (*Project, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodPost
+		localVarHTTPMethod   = http.MethodPost
 		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  Project
+		formFiles            []formFile
+		localVarReturnValue  *Project
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ProjectApiService.CreateProjectVersion")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/project/{project_id}/{version}"
-	localVarPath = strings.Replace(localVarPath, "{"+"project_id"+"}", _neturl.PathEscape(parameterToString(r.projectId, "")), -1)
-	localVarPath = strings.Replace(localVarPath, "{"+"version"+"}", _neturl.PathEscape(parameterToString(r.version, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"project_id"+"}", url.PathEscape(parameterToString(r.projectId, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"version"+"}", url.PathEscape(parameterToString(r.version, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -280,7 +276,7 @@ func (a *ProjectApiService) CreateProjectVersionExecute(r ApiCreateProjectVersio
 			}
 		}
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -290,15 +286,15 @@ func (a *ProjectApiService) CreateProjectVersionExecute(r ApiCreateProjectVersio
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -307,7 +303,7 @@ func (a *ProjectApiService) CreateProjectVersionExecute(r ApiCreateProjectVersio
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -318,13 +314,13 @@ func (a *ProjectApiService) CreateProjectVersionExecute(r ApiCreateProjectVersio
 }
 
 type ApiDeleteProjectRequest struct {
-	ctx _context.Context
+	ctx context.Context
 	ApiService *ProjectApiService
 	projectId string
 }
 
 
-func (r ApiDeleteProjectRequest) Execute() (*_nethttp.Response, error) {
+func (r ApiDeleteProjectRequest) Execute() (*http.Response, error) {
 	return r.ApiService.DeleteProjectExecute(r)
 }
 
@@ -337,11 +333,11 @@ Deletes a project. This will remove the mini-API entirely from our system.
 
 `Cost: 0 Credit` (Free) (<a href="#section/Pricing">See Pricing</a>)
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param projectId The ID of the project. Created and returned when a project is created.
  @return ApiDeleteProjectRequest
 */
-func (a *ProjectApiService) DeleteProject(ctx _context.Context, projectId string) ApiDeleteProjectRequest {
+func (a *ProjectApiService) DeleteProject(ctx context.Context, projectId string) ApiDeleteProjectRequest {
 	return ApiDeleteProjectRequest{
 		ApiService: a,
 		ctx: ctx,
@@ -350,26 +346,24 @@ func (a *ProjectApiService) DeleteProject(ctx _context.Context, projectId string
 }
 
 // Execute executes the request
-func (a *ProjectApiService) DeleteProjectExecute(r ApiDeleteProjectRequest) (*_nethttp.Response, error) {
+func (a *ProjectApiService) DeleteProjectExecute(r ApiDeleteProjectRequest) (*http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodDelete
+		localVarHTTPMethod   = http.MethodDelete
 		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
+		formFiles            []formFile
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ProjectApiService.DeleteProject")
 	if err != nil {
-		return nil, GenericOpenAPIError{error: err.Error()}
+		return nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/project/{project_id}"
-	localVarPath = strings.Replace(localVarPath, "{"+"project_id"+"}", _neturl.PathEscape(parameterToString(r.projectId, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"project_id"+"}", url.PathEscape(parameterToString(r.projectId, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -416,7 +410,7 @@ func (a *ProjectApiService) DeleteProjectExecute(r ApiDeleteProjectRequest) (*_n
 			}
 		}
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return nil, err
 	}
@@ -426,15 +420,15 @@ func (a *ProjectApiService) DeleteProjectExecute(r ApiDeleteProjectRequest) (*_n
 		return localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -445,14 +439,14 @@ func (a *ProjectApiService) DeleteProjectExecute(r ApiDeleteProjectRequest) (*_n
 }
 
 type ApiDeleteProjectVersionRequest struct {
-	ctx _context.Context
+	ctx context.Context
 	ApiService *ProjectApiService
 	projectId string
 	version string
 }
 
 
-func (r ApiDeleteProjectVersionRequest) Execute() (Project, *_nethttp.Response, error) {
+func (r ApiDeleteProjectVersionRequest) Execute() (*Project, *http.Response, error) {
 	return r.ApiService.DeleteProjectVersionExecute(r)
 }
 
@@ -465,12 +459,12 @@ Delete a version for the project. There must always be at least one version depl
 
 `Cost: 0 Credit` (Free) (<a href="#section/Pricing">See Pricing</a>)
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param projectId The ID of the project. Created and returned when a project is created.
  @param version The version of the project.
  @return ApiDeleteProjectVersionRequest
 */
-func (a *ProjectApiService) DeleteProjectVersion(ctx _context.Context, projectId string, version string) ApiDeleteProjectVersionRequest {
+func (a *ProjectApiService) DeleteProjectVersion(ctx context.Context, projectId string, version string) ApiDeleteProjectVersionRequest {
 	return ApiDeleteProjectVersionRequest{
 		ApiService: a,
 		ctx: ctx,
@@ -481,28 +475,26 @@ func (a *ProjectApiService) DeleteProjectVersion(ctx _context.Context, projectId
 
 // Execute executes the request
 //  @return Project
-func (a *ProjectApiService) DeleteProjectVersionExecute(r ApiDeleteProjectVersionRequest) (Project, *_nethttp.Response, error) {
+func (a *ProjectApiService) DeleteProjectVersionExecute(r ApiDeleteProjectVersionRequest) (*Project, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodDelete
+		localVarHTTPMethod   = http.MethodDelete
 		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  Project
+		formFiles            []formFile
+		localVarReturnValue  *Project
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ProjectApiService.DeleteProjectVersion")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/project/{project_id}/{version}"
-	localVarPath = strings.Replace(localVarPath, "{"+"project_id"+"}", _neturl.PathEscape(parameterToString(r.projectId, "")), -1)
-	localVarPath = strings.Replace(localVarPath, "{"+"version"+"}", _neturl.PathEscape(parameterToString(r.version, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"project_id"+"}", url.PathEscape(parameterToString(r.projectId, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"version"+"}", url.PathEscape(parameterToString(r.version, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -549,7 +541,7 @@ func (a *ProjectApiService) DeleteProjectVersionExecute(r ApiDeleteProjectVersio
 			}
 		}
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -559,15 +551,15 @@ func (a *ProjectApiService) DeleteProjectVersionExecute(r ApiDeleteProjectVersio
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -576,7 +568,7 @@ func (a *ProjectApiService) DeleteProjectVersionExecute(r ApiDeleteProjectVersio
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -587,13 +579,13 @@ func (a *ProjectApiService) DeleteProjectVersionExecute(r ApiDeleteProjectVersio
 }
 
 type ApiGetProjectRequest struct {
-	ctx _context.Context
+	ctx context.Context
 	ApiService *ProjectApiService
 	projectId string
 }
 
 
-func (r ApiGetProjectRequest) Execute() (Project, *_nethttp.Response, error) {
+func (r ApiGetProjectRequest) Execute() (*Project, *http.Response, error) {
 	return r.ApiService.GetProjectExecute(r)
 }
 
@@ -606,11 +598,11 @@ Update your project's metadata. None of these parameters are required. Just prov
 
 `Cost: 0 Credit` (Free) (<a href="#section/Pricing">See Pricing</a>)
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param projectId The ID of the project. Created and returned when a project is created.
  @return ApiGetProjectRequest
 */
-func (a *ProjectApiService) GetProject(ctx _context.Context, projectId string) ApiGetProjectRequest {
+func (a *ProjectApiService) GetProject(ctx context.Context, projectId string) ApiGetProjectRequest {
 	return ApiGetProjectRequest{
 		ApiService: a,
 		ctx: ctx,
@@ -620,27 +612,25 @@ func (a *ProjectApiService) GetProject(ctx _context.Context, projectId string) A
 
 // Execute executes the request
 //  @return Project
-func (a *ProjectApiService) GetProjectExecute(r ApiGetProjectRequest) (Project, *_nethttp.Response, error) {
+func (a *ProjectApiService) GetProjectExecute(r ApiGetProjectRequest) (*Project, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodGet
+		localVarHTTPMethod   = http.MethodGet
 		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  Project
+		formFiles            []formFile
+		localVarReturnValue  *Project
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ProjectApiService.GetProject")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/project/{project_id}"
-	localVarPath = strings.Replace(localVarPath, "{"+"project_id"+"}", _neturl.PathEscape(parameterToString(r.projectId, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"project_id"+"}", url.PathEscape(parameterToString(r.projectId, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -687,7 +677,7 @@ func (a *ProjectApiService) GetProjectExecute(r ApiGetProjectRequest) (Project, 
 			}
 		}
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -697,15 +687,15 @@ func (a *ProjectApiService) GetProjectExecute(r ApiGetProjectRequest) (Project, 
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -714,7 +704,7 @@ func (a *ProjectApiService) GetProjectExecute(r ApiGetProjectRequest) (Project, 
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -725,13 +715,13 @@ func (a *ProjectApiService) GetProjectExecute(r ApiGetProjectRequest) (Project, 
 }
 
 type ApiGetProjectDeploymentStatusRequest struct {
-	ctx _context.Context
+	ctx context.Context
 	ApiService *ProjectApiService
 	projectId string
 }
 
 
-func (r ApiGetProjectDeploymentStatusRequest) Execute() (interface{}, *_nethttp.Response, error) {
+func (r ApiGetProjectDeploymentStatusRequest) Execute() (interface{}, *http.Response, error) {
 	return r.ApiService.GetProjectDeploymentStatusExecute(r)
 }
 
@@ -746,11 +736,11 @@ After it is `DEPLOYED`, you can then make requests to your API.
 
 `Cost: 0 Credit` (Free) (<a href="#section/Pricing">See Pricing</a>)
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param projectId The ID of the project. Created and returned when a project is created.
  @return ApiGetProjectDeploymentStatusRequest
 */
-func (a *ProjectApiService) GetProjectDeploymentStatus(ctx _context.Context, projectId string) ApiGetProjectDeploymentStatusRequest {
+func (a *ProjectApiService) GetProjectDeploymentStatus(ctx context.Context, projectId string) ApiGetProjectDeploymentStatusRequest {
 	return ApiGetProjectDeploymentStatusRequest{
 		ApiService: a,
 		ctx: ctx,
@@ -760,27 +750,25 @@ func (a *ProjectApiService) GetProjectDeploymentStatus(ctx _context.Context, pro
 
 // Execute executes the request
 //  @return interface{}
-func (a *ProjectApiService) GetProjectDeploymentStatusExecute(r ApiGetProjectDeploymentStatusRequest) (interface{}, *_nethttp.Response, error) {
+func (a *ProjectApiService) GetProjectDeploymentStatusExecute(r ApiGetProjectDeploymentStatusRequest) (interface{}, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodPost
+		localVarHTTPMethod   = http.MethodPost
 		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
+		formFiles            []formFile
 		localVarReturnValue  interface{}
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ProjectApiService.GetProjectDeploymentStatus")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/project/{project_id}/deploy/status"
-	localVarPath = strings.Replace(localVarPath, "{"+"project_id"+"}", _neturl.PathEscape(parameterToString(r.projectId, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"project_id"+"}", url.PathEscape(parameterToString(r.projectId, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -827,7 +815,7 @@ func (a *ProjectApiService) GetProjectDeploymentStatusExecute(r ApiGetProjectDep
 			}
 		}
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -837,15 +825,15 @@ func (a *ProjectApiService) GetProjectDeploymentStatusExecute(r ApiGetProjectDep
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -854,7 +842,7 @@ func (a *ProjectApiService) GetProjectDeploymentStatusExecute(r ApiGetProjectDep
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -865,7 +853,7 @@ func (a *ProjectApiService) GetProjectDeploymentStatusExecute(r ApiGetProjectDep
 }
 
 type ApiGetProjectDeploymentURLRequest struct {
-	ctx _context.Context
+	ctx context.Context
 	ApiService *ProjectApiService
 	projectId string
 	inlineObject *InlineObject
@@ -876,7 +864,7 @@ func (r ApiGetProjectDeploymentURLRequest) InlineObject(inlineObject InlineObjec
 	return r
 }
 
-func (r ApiGetProjectDeploymentURLRequest) Execute() (ProjectDeploymentURL, *_nethttp.Response, error) {
+func (r ApiGetProjectDeploymentURLRequest) Execute() (*ProjectDeploymentURL, *http.Response, error) {
 	return r.ApiService.GetProjectDeploymentURLExecute(r)
 }
 
@@ -889,11 +877,11 @@ Get the deployment URL for the project.
 
 `Cost: 0 Credit` (Free) (<a href="#section/Pricing">See Pricing</a>)
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param projectId The ID of the project. Created and returned when a project is created.
  @return ApiGetProjectDeploymentURLRequest
 */
-func (a *ProjectApiService) GetProjectDeploymentURL(ctx _context.Context, projectId string) ApiGetProjectDeploymentURLRequest {
+func (a *ProjectApiService) GetProjectDeploymentURL(ctx context.Context, projectId string) ApiGetProjectDeploymentURLRequest {
 	return ApiGetProjectDeploymentURLRequest{
 		ApiService: a,
 		ctx: ctx,
@@ -903,27 +891,25 @@ func (a *ProjectApiService) GetProjectDeploymentURL(ctx _context.Context, projec
 
 // Execute executes the request
 //  @return ProjectDeploymentURL
-func (a *ProjectApiService) GetProjectDeploymentURLExecute(r ApiGetProjectDeploymentURLRequest) (ProjectDeploymentURL, *_nethttp.Response, error) {
+func (a *ProjectApiService) GetProjectDeploymentURLExecute(r ApiGetProjectDeploymentURLRequest) (*ProjectDeploymentURL, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodPost
+		localVarHTTPMethod   = http.MethodPost
 		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  ProjectDeploymentURL
+		formFiles            []formFile
+		localVarReturnValue  *ProjectDeploymentURL
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ProjectApiService.GetProjectDeploymentURL")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/project/{project_id}/deploy/url"
-	localVarPath = strings.Replace(localVarPath, "{"+"project_id"+"}", _neturl.PathEscape(parameterToString(r.projectId, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"project_id"+"}", url.PathEscape(parameterToString(r.projectId, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{"application/json"}
@@ -972,7 +958,7 @@ func (a *ProjectApiService) GetProjectDeploymentURLExecute(r ApiGetProjectDeploy
 			}
 		}
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -982,15 +968,15 @@ func (a *ProjectApiService) GetProjectDeploymentURLExecute(r ApiGetProjectDeploy
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -999,7 +985,7 @@ func (a *ProjectApiService) GetProjectDeploymentURLExecute(r ApiGetProjectDeploy
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -1010,13 +996,13 @@ func (a *ProjectApiService) GetProjectDeploymentURLExecute(r ApiGetProjectDeploy
 }
 
 type ApiGetProjectStatsRequest struct {
-	ctx _context.Context
+	ctx context.Context
 	ApiService *ProjectApiService
 	projectId string
 }
 
 
-func (r ApiGetProjectStatsRequest) Execute() ([]StatItem, *_nethttp.Response, error) {
+func (r ApiGetProjectStatsRequest) Execute() ([]StatItem, *http.Response, error) {
 	return r.ApiService.GetProjectStatsExecute(r)
 }
 
@@ -1029,11 +1015,11 @@ Get the usage stats for your mini-API.
 
 `Cost: 0 Credit` (Free) (<a href="#section/Pricing">See Pricing</a>)
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param projectId The ID of the project. Created and returned when a project is created.
  @return ApiGetProjectStatsRequest
 */
-func (a *ProjectApiService) GetProjectStats(ctx _context.Context, projectId string) ApiGetProjectStatsRequest {
+func (a *ProjectApiService) GetProjectStats(ctx context.Context, projectId string) ApiGetProjectStatsRequest {
 	return ApiGetProjectStatsRequest{
 		ApiService: a,
 		ctx: ctx,
@@ -1043,27 +1029,25 @@ func (a *ProjectApiService) GetProjectStats(ctx _context.Context, projectId stri
 
 // Execute executes the request
 //  @return []StatItem
-func (a *ProjectApiService) GetProjectStatsExecute(r ApiGetProjectStatsRequest) ([]StatItem, *_nethttp.Response, error) {
+func (a *ProjectApiService) GetProjectStatsExecute(r ApiGetProjectStatsRequest) ([]StatItem, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodGet
+		localVarHTTPMethod   = http.MethodGet
 		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
+		formFiles            []formFile
 		localVarReturnValue  []StatItem
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ProjectApiService.GetProjectStats")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/project/{project_id}/stats"
-	localVarPath = strings.Replace(localVarPath, "{"+"project_id"+"}", _neturl.PathEscape(parameterToString(r.projectId, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"project_id"+"}", url.PathEscape(parameterToString(r.projectId, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -1110,7 +1094,7 @@ func (a *ProjectApiService) GetProjectStatsExecute(r ApiGetProjectStatsRequest) 
 			}
 		}
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -1120,15 +1104,15 @@ func (a *ProjectApiService) GetProjectStatsExecute(r ApiGetProjectStatsRequest) 
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -1137,7 +1121,7 @@ func (a *ProjectApiService) GetProjectStatsExecute(r ApiGetProjectStatsRequest) 
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -1148,12 +1132,12 @@ func (a *ProjectApiService) GetProjectStatsExecute(r ApiGetProjectStatsRequest) 
 }
 
 type ApiListProjectsRequest struct {
-	ctx _context.Context
+	ctx context.Context
 	ApiService *ProjectApiService
 }
 
 
-func (r ApiListProjectsRequest) Execute() ([]Project, *_nethttp.Response, error) {
+func (r ApiListProjectsRequest) Execute() ([]Project, *http.Response, error) {
 	return r.ApiService.ListProjectsExecute(r)
 }
 
@@ -1166,10 +1150,10 @@ List all projects associated with your account.
 
 `Cost: 0 Credit` (Free) (<a href="#section/Pricing">See Pricing</a>)
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiListProjectsRequest
 */
-func (a *ProjectApiService) ListProjects(ctx _context.Context) ApiListProjectsRequest {
+func (a *ProjectApiService) ListProjects(ctx context.Context) ApiListProjectsRequest {
 	return ApiListProjectsRequest{
 		ApiService: a,
 		ctx: ctx,
@@ -1178,26 +1162,24 @@ func (a *ProjectApiService) ListProjects(ctx _context.Context) ApiListProjectsRe
 
 // Execute executes the request
 //  @return []Project
-func (a *ProjectApiService) ListProjectsExecute(r ApiListProjectsRequest) ([]Project, *_nethttp.Response, error) {
+func (a *ProjectApiService) ListProjectsExecute(r ApiListProjectsRequest) ([]Project, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodGet
+		localVarHTTPMethod   = http.MethodGet
 		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
+		formFiles            []formFile
 		localVarReturnValue  []Project
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ProjectApiService.ListProjects")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/project/list"
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -1244,7 +1226,7 @@ func (a *ProjectApiService) ListProjectsExecute(r ApiListProjectsRequest) ([]Pro
 			}
 		}
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -1254,15 +1236,15 @@ func (a *ProjectApiService) ListProjectsExecute(r ApiListProjectsRequest) ([]Pro
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -1271,7 +1253,7 @@ func (a *ProjectApiService) ListProjectsExecute(r ApiListProjectsRequest) ([]Pro
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -1282,7 +1264,7 @@ func (a *ProjectApiService) ListProjectsExecute(r ApiListProjectsRequest) ([]Pro
 }
 
 type ApiUpdateProjectRequest struct {
-	ctx _context.Context
+	ctx context.Context
 	ApiService *ProjectApiService
 	projectId string
 	projectCreateRequest *ProjectCreateRequest
@@ -1293,7 +1275,7 @@ func (r ApiUpdateProjectRequest) ProjectCreateRequest(projectCreateRequest Proje
 	return r
 }
 
-func (r ApiUpdateProjectRequest) Execute() (Project, *_nethttp.Response, error) {
+func (r ApiUpdateProjectRequest) Execute() (*Project, *http.Response, error) {
 	return r.ApiService.UpdateProjectExecute(r)
 }
 
@@ -1306,11 +1288,11 @@ Update your project's metadata. None of these parameters are required. Just prov
 
 `Cost: 0 Credit` (Free) (<a href="#section/Pricing">See Pricing</a>)
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param projectId The ID of the project. Created and returned when a project is created.
  @return ApiUpdateProjectRequest
 */
-func (a *ProjectApiService) UpdateProject(ctx _context.Context, projectId string) ApiUpdateProjectRequest {
+func (a *ProjectApiService) UpdateProject(ctx context.Context, projectId string) ApiUpdateProjectRequest {
 	return ApiUpdateProjectRequest{
 		ApiService: a,
 		ctx: ctx,
@@ -1320,27 +1302,25 @@ func (a *ProjectApiService) UpdateProject(ctx _context.Context, projectId string
 
 // Execute executes the request
 //  @return Project
-func (a *ProjectApiService) UpdateProjectExecute(r ApiUpdateProjectRequest) (Project, *_nethttp.Response, error) {
+func (a *ProjectApiService) UpdateProjectExecute(r ApiUpdateProjectRequest) (*Project, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodPost
+		localVarHTTPMethod   = http.MethodPost
 		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  Project
+		formFiles            []formFile
+		localVarReturnValue  *Project
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ProjectApiService.UpdateProject")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/project/{project_id}"
-	localVarPath = strings.Replace(localVarPath, "{"+"project_id"+"}", _neturl.PathEscape(parameterToString(r.projectId, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"project_id"+"}", url.PathEscape(parameterToString(r.projectId, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{"application/json"}
@@ -1389,7 +1369,7 @@ func (a *ProjectApiService) UpdateProjectExecute(r ApiUpdateProjectRequest) (Pro
 			}
 		}
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -1399,15 +1379,15 @@ func (a *ProjectApiService) UpdateProjectExecute(r ApiUpdateProjectRequest) (Pro
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -1416,7 +1396,7 @@ func (a *ProjectApiService) UpdateProjectExecute(r ApiUpdateProjectRequest) (Pro
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -1427,14 +1407,14 @@ func (a *ProjectApiService) UpdateProjectExecute(r ApiUpdateProjectRequest) (Pro
 }
 
 type ApiUpdateProjectDocumentationRequest struct {
-	ctx _context.Context
+	ctx context.Context
 	ApiService *ProjectApiService
 	projectId string
 	version string
 }
 
 
-func (r ApiUpdateProjectDocumentationRequest) Execute() (Project, *_nethttp.Response, error) {
+func (r ApiUpdateProjectDocumentationRequest) Execute() (*Project, *http.Response, error) {
 	return r.ApiService.UpdateProjectDocumentationExecute(r)
 }
 
@@ -1451,12 +1431,12 @@ Thus, when you call this, the `current_documentation_version` attribute of your 
 
 `Cost: 0 Credit` (Free) (<a href="#section/Pricing">See Pricing</a>)
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param projectId The ID of the project. Created and returned when a project is created.
  @param version The version of the project.
  @return ApiUpdateProjectDocumentationRequest
 */
-func (a *ProjectApiService) UpdateProjectDocumentation(ctx _context.Context, projectId string, version string) ApiUpdateProjectDocumentationRequest {
+func (a *ProjectApiService) UpdateProjectDocumentation(ctx context.Context, projectId string, version string) ApiUpdateProjectDocumentationRequest {
 	return ApiUpdateProjectDocumentationRequest{
 		ApiService: a,
 		ctx: ctx,
@@ -1467,28 +1447,26 @@ func (a *ProjectApiService) UpdateProjectDocumentation(ctx _context.Context, pro
 
 // Execute executes the request
 //  @return Project
-func (a *ProjectApiService) UpdateProjectDocumentationExecute(r ApiUpdateProjectDocumentationRequest) (Project, *_nethttp.Response, error) {
+func (a *ProjectApiService) UpdateProjectDocumentationExecute(r ApiUpdateProjectDocumentationRequest) (*Project, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodPost
+		localVarHTTPMethod   = http.MethodPost
 		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  Project
+		formFiles            []formFile
+		localVarReturnValue  *Project
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ProjectApiService.UpdateProjectDocumentation")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/project/{project_id}/{version}/documentation"
-	localVarPath = strings.Replace(localVarPath, "{"+"project_id"+"}", _neturl.PathEscape(parameterToString(r.projectId, "")), -1)
-	localVarPath = strings.Replace(localVarPath, "{"+"version"+"}", _neturl.PathEscape(parameterToString(r.version, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"project_id"+"}", url.PathEscape(parameterToString(r.projectId, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"version"+"}", url.PathEscape(parameterToString(r.version, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -1535,7 +1513,7 @@ func (a *ProjectApiService) UpdateProjectDocumentationExecute(r ApiUpdateProject
 			}
 		}
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -1545,15 +1523,15 @@ func (a *ProjectApiService) UpdateProjectDocumentationExecute(r ApiUpdateProject
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -1562,7 +1540,7 @@ func (a *ProjectApiService) UpdateProjectDocumentationExecute(r ApiUpdateProject
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}

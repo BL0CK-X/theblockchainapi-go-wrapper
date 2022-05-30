@@ -18,11 +18,11 @@ import (
 // GetAllNFTsResponse struct for GetAllNFTsResponse
 type GetAllNFTsResponse struct {
 	// The minted NFTs. Only filled in for `v1` candy machines. Left empty for `v2`.
-	MintedNfts *[]GetAllNFTsResponseMintedNfts `json:"minted_nfts,omitempty"`
+	MintedNfts []GetAllNFTsResponseMintedNfts `json:"minted_nfts,omitempty"`
 	// The unminted NFTs. Only filled in for `v1` candy machines. Left empty for `v2`.
-	UnmintedNfts *[]GetAllNFTsResponseUnmintedNfts `json:"unminted_nfts,omitempty"`
+	UnmintedNfts []GetAllNFTsResponseUnmintedNfts `json:"unminted_nfts,omitempty"`
 	// The list of all NFTs. Filled in for both `v1` and `v2` NFTs.
-	AllNfts *[]GetAllNFTsResponseUnmintedNfts `json:"all_nfts,omitempty"`
+	AllNfts []GetAllNFTsResponseUnmintedNfts `json:"all_nfts,omitempty"`
 	// Whether or not the division of NFTs among minted and unminted is accurate. If it is not accurate, then it is possible that NFTs have been included in the `minted` list that are not actually minted. If it is accurate, then the split of  minted and unminted is correct. `v1` candy machines always return a correct minted/unminted split.  
 	Accurate *bool `json:"accurate,omitempty"`
 }
@@ -50,12 +50,12 @@ func (o *GetAllNFTsResponse) GetMintedNfts() []GetAllNFTsResponseMintedNfts {
 		var ret []GetAllNFTsResponseMintedNfts
 		return ret
 	}
-	return *o.MintedNfts
+	return o.MintedNfts
 }
 
 // GetMintedNftsOk returns a tuple with the MintedNfts field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *GetAllNFTsResponse) GetMintedNftsOk() (*[]GetAllNFTsResponseMintedNfts, bool) {
+func (o *GetAllNFTsResponse) GetMintedNftsOk() ([]GetAllNFTsResponseMintedNfts, bool) {
 	if o == nil || o.MintedNfts == nil {
 		return nil, false
 	}
@@ -73,7 +73,7 @@ func (o *GetAllNFTsResponse) HasMintedNfts() bool {
 
 // SetMintedNfts gets a reference to the given []GetAllNFTsResponseMintedNfts and assigns it to the MintedNfts field.
 func (o *GetAllNFTsResponse) SetMintedNfts(v []GetAllNFTsResponseMintedNfts) {
-	o.MintedNfts = &v
+	o.MintedNfts = v
 }
 
 // GetUnmintedNfts returns the UnmintedNfts field value if set, zero value otherwise.
@@ -82,12 +82,12 @@ func (o *GetAllNFTsResponse) GetUnmintedNfts() []GetAllNFTsResponseUnmintedNfts 
 		var ret []GetAllNFTsResponseUnmintedNfts
 		return ret
 	}
-	return *o.UnmintedNfts
+	return o.UnmintedNfts
 }
 
 // GetUnmintedNftsOk returns a tuple with the UnmintedNfts field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *GetAllNFTsResponse) GetUnmintedNftsOk() (*[]GetAllNFTsResponseUnmintedNfts, bool) {
+func (o *GetAllNFTsResponse) GetUnmintedNftsOk() ([]GetAllNFTsResponseUnmintedNfts, bool) {
 	if o == nil || o.UnmintedNfts == nil {
 		return nil, false
 	}
@@ -105,7 +105,7 @@ func (o *GetAllNFTsResponse) HasUnmintedNfts() bool {
 
 // SetUnmintedNfts gets a reference to the given []GetAllNFTsResponseUnmintedNfts and assigns it to the UnmintedNfts field.
 func (o *GetAllNFTsResponse) SetUnmintedNfts(v []GetAllNFTsResponseUnmintedNfts) {
-	o.UnmintedNfts = &v
+	o.UnmintedNfts = v
 }
 
 // GetAllNfts returns the AllNfts field value if set, zero value otherwise.
@@ -114,12 +114,12 @@ func (o *GetAllNFTsResponse) GetAllNfts() []GetAllNFTsResponseUnmintedNfts {
 		var ret []GetAllNFTsResponseUnmintedNfts
 		return ret
 	}
-	return *o.AllNfts
+	return o.AllNfts
 }
 
 // GetAllNftsOk returns a tuple with the AllNfts field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *GetAllNFTsResponse) GetAllNftsOk() (*[]GetAllNFTsResponseUnmintedNfts, bool) {
+func (o *GetAllNFTsResponse) GetAllNftsOk() ([]GetAllNFTsResponseUnmintedNfts, bool) {
 	if o == nil || o.AllNfts == nil {
 		return nil, false
 	}
@@ -137,7 +137,7 @@ func (o *GetAllNFTsResponse) HasAllNfts() bool {
 
 // SetAllNfts gets a reference to the given []GetAllNFTsResponseUnmintedNfts and assigns it to the AllNfts field.
 func (o *GetAllNFTsResponse) SetAllNfts(v []GetAllNFTsResponseUnmintedNfts) {
-	o.AllNfts = &v
+	o.AllNfts = v
 }
 
 // GetAccurate returns the Accurate field value if set, zero value otherwise.
