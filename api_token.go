@@ -211,7 +211,7 @@ func (a *TokenApiService) ListAllTokens(ctx context.Context, blockchain string, 
 //  @return []TokenMetadataResponse
 func (a *TokenApiService) ListAllTokensExecute(r ApiListAllTokensRequest) ([]TokenMetadataResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodPost
+		localVarHTTPMethod   = http.MethodGet
 		localVarPostBody     interface{}
 		formFiles            []formFile
 		localVarReturnValue  []TokenMetadataResponse

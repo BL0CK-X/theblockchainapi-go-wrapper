@@ -182,7 +182,6 @@ type ApiGetNameForBlockchainIdentifierRequest struct {
 	ApiService *NameServiceApiService
 	blockchain string
 	network string
-	blockchainIdentifier string
 	inputBlockchainIdentifier *InputBlockchainIdentifier
 }
 
@@ -209,16 +208,14 @@ e.g., Input `0xd8dA6BF26964aF9D7eEd9e03E53415D37aA96045` and output `vitalik.eth
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param blockchain The blockchain you want to use 
  @param network The network of the blockchain you selected  - Solana: `devnet`, `mainnet-beta` - Ethereum: `ropsten`, `mainnet`  Defaults when not provided (not applicable to path parameters): - Solana: `devnet` - Ethereum: `ropsten`
- @param blockchainIdentifier The identifier of the token (e.g., `mint_address` on `Solana` or `token_address` on `Ethereum`) 
  @return ApiGetNameForBlockchainIdentifierRequest
 */
-func (a *NameServiceApiService) GetNameForBlockchainIdentifier(ctx context.Context, blockchain string, network string, blockchainIdentifier string) ApiGetNameForBlockchainIdentifierRequest {
+func (a *NameServiceApiService) GetNameForBlockchainIdentifier(ctx context.Context, blockchain string, network string) ApiGetNameForBlockchainIdentifierRequest {
 	return ApiGetNameForBlockchainIdentifierRequest{
 		ApiService: a,
 		ctx: ctx,
 		blockchain: blockchain,
 		network: network,
-		blockchainIdentifier: blockchainIdentifier,
 	}
 }
 
@@ -240,7 +237,6 @@ func (a *NameServiceApiService) GetNameForBlockchainIdentifierExecute(r ApiGetNa
 	localVarPath := localBasePath + "/{blockchain}/{network}/name_service/blockchain_identifier_to_name"
 	localVarPath = strings.Replace(localVarPath, "{"+"blockchain"+"}", url.PathEscape(parameterToString(r.blockchain, "")), -1)
 	localVarPath = strings.Replace(localVarPath, "{"+"network"+"}", url.PathEscape(parameterToString(r.network, "")), -1)
-	localVarPath = strings.Replace(localVarPath, "{"+"blockchain_identifier"+"}", url.PathEscape(parameterToString(r.blockchainIdentifier, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}

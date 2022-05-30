@@ -86,7 +86,7 @@ Name | Type | Description  | Notes
 
 ## GetNameForBlockchainIdentifier
 
-> InputName GetNameForBlockchainIdentifier(ctx, blockchain, network, blockchainIdentifier).InputBlockchainIdentifier(inputBlockchainIdentifier).Execute()
+> InputName GetNameForBlockchainIdentifier(ctx, blockchain, network).InputBlockchainIdentifier(inputBlockchainIdentifier).Execute()
 
 Get the name
 
@@ -107,12 +107,11 @@ import (
 func main() {
     blockchain := "blockchain_example" // string | The blockchain you want to use 
     network := "ropsten" // string | The network of the blockchain you selected  - Solana: `devnet`, `mainnet-beta` - Ethereum: `ropsten`, `mainnet`  Defaults when not provided (not applicable to path parameters): - Solana: `devnet` - Ethereum: `ropsten`
-    blockchainIdentifier := "blockchainIdentifier_example" // string | The identifier of the token (e.g., `mint_address` on `Solana` or `token_address` on `Ethereum`) 
     inputBlockchainIdentifier := *openapiclient.NewInputBlockchainIdentifier() // InputBlockchainIdentifier |  (optional)
 
     configuration := openapiclient.NewConfiguration()
     apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.NameServiceApi.GetNameForBlockchainIdentifier(context.Background(), blockchain, network, blockchainIdentifier).InputBlockchainIdentifier(inputBlockchainIdentifier).Execute()
+    resp, r, err := apiClient.NameServiceApi.GetNameForBlockchainIdentifier(context.Background(), blockchain, network).InputBlockchainIdentifier(inputBlockchainIdentifier).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `NameServiceApi.GetNameForBlockchainIdentifier``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -130,7 +129,6 @@ Name | Type | Description  | Notes
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
 **blockchain** | **string** | The blockchain you want to use  | 
 **network** | **string** | The network of the blockchain you selected  - Solana: &#x60;devnet&#x60;, &#x60;mainnet-beta&#x60; - Ethereum: &#x60;ropsten&#x60;, &#x60;mainnet&#x60;  Defaults when not provided (not applicable to path parameters): - Solana: &#x60;devnet&#x60; - Ethereum: &#x60;ropsten&#x60; | 
-**blockchainIdentifier** | **string** | The identifier of the token (e.g., &#x60;mint_address&#x60; on &#x60;Solana&#x60; or &#x60;token_address&#x60; on &#x60;Ethereum&#x60;)  | 
 
 ### Other Parameters
 
@@ -139,7 +137,6 @@ Other parameters are passed through a pointer to a apiGetNameForBlockchainIdenti
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
-
 
 
  **inputBlockchainIdentifier** | [**InputBlockchainIdentifier**](InputBlockchainIdentifier.md) |  | 

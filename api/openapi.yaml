@@ -682,18 +682,6 @@ paths:
         schema:
           type: string
         style: simple
-      - description: |
-          The identifier of the token (e.g., `mint_address` on `Solana` or `token_address` on `Ethereum`)
-        explode: false
-        in: path
-        name: blockchain_identifier
-        required: true
-        schema:
-          enum:
-          - ethereum
-          - solana
-          type: string
-        style: simple
       requestBody:
         content:
           application/json:
@@ -795,7 +783,7 @@ paths:
       tags:
       - Token
   /{blockchain}/{network}/all_tokens:
-    post:
+    get:
       description: "<a href=\"https://github.com/BL0CK-X/blockchain-api\" target=\"\
         _blank\">See examples (Python, JavaScript) [Coming Soon]</a>.\n    \nList\
         \ all tokens.\n\n`Cost: 1 Credit` (<a href=\"#section/Pricing\">See Pricing</a>)"
@@ -5074,7 +5062,7 @@ components:
             \ 0 to 100.\nSum of the values must equal 100. \nOnly integer value accepted.\
             \ Length of the share list must match length of the list of creators.\n"
           items:
-            type: integer
+            type: number
           type: array
         mint_to_public_key:
           default: The public key of the wallet provided
