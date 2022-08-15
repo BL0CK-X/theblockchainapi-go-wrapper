@@ -4,8 +4,8 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
+**WaitForConfirmation** | Pointer to **bool** | Whether to wait for the NFT mint to be confirmed on the blockchain or simply be processed.  Processed means that our node has picked up the transaction request, but not that it was confirmed by the Solana cluster.   Confirmed means that the cluster voted on your transaction and approved it. To be completely sure that the NFT was minted, you can either set &#x60;wait_for_confirmation&#x3D;True&#x60; (call takes 20 seconds with True; about 4 seconds for processed) or you can [get the metadata](/#tag/Solana-NFT/operation/solanaGetNFT) from the mint returned. Once it returns the NFT metadata, then the NFT should have been successfully minted.  | [optional] [default to true]
 **Wallet** | Pointer to [**Wallet**](Wallet.md) |  | [optional] 
-**ReturnCompiledTransaction** | Pointer to **bool** | If &#x60;true&#x60;, the transaction to mint the NFT will not be submitted or signed. It will be returned to you in a raw form that you can then sign with a wallet (e.g., Phantom) or code. No &#x60;wallet&#x60; authentication information is required (thus, you do you have to supply a seed phrase or private key). See a Python example [here](https://github.com/BL0CK-X/blockchain-api/blob/main/third-party-api-examples/me-buy-sell.py). If &#x60;false&#x60; (the default option), then &#x60;wallet&#x60; is required. We sign and submit the transaction for you, which uses your wallet to mint the NFT. No further action is required on your part, and the NFT is minted. Read more on security [here](#section/Security).  | [optional] [default to false]
 **Name** | Pointer to **string** | The name of the token. Limited to 32 characters. Stored on the blockchain. | [optional] [default to ""]
 **Symbol** | Pointer to **string** | The symbol of the token. Limited to 10 characters. Stored on the blockchain. | [optional] [default to ""]
 **Description** | Pointer to **string** | The description of the NFT. Limited to 2000 characters. Not stored on the blockchain.         If you are providing your own &#x60;uri&#x60; (see above), then you do not need to provide this.  If you are not providing your own &#x60;uri&#x60; and you do not provide this, then there wills simply be no description.  Only provide a value for &#x60;description&#x60; if the &#x60;upload_method&#x60; is set to &#x60;S3&#x60; (see the description for &#x60;upload_method&#x60; above). | [optional] [default to ""]
@@ -40,6 +40,31 @@ NewNFTMintRequestWithDefaults instantiates a new NFTMintRequest object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
 
+### GetWaitForConfirmation
+
+`func (o *NFTMintRequest) GetWaitForConfirmation() bool`
+
+GetWaitForConfirmation returns the WaitForConfirmation field if non-nil, zero value otherwise.
+
+### GetWaitForConfirmationOk
+
+`func (o *NFTMintRequest) GetWaitForConfirmationOk() (*bool, bool)`
+
+GetWaitForConfirmationOk returns a tuple with the WaitForConfirmation field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetWaitForConfirmation
+
+`func (o *NFTMintRequest) SetWaitForConfirmation(v bool)`
+
+SetWaitForConfirmation sets WaitForConfirmation field to given value.
+
+### HasWaitForConfirmation
+
+`func (o *NFTMintRequest) HasWaitForConfirmation() bool`
+
+HasWaitForConfirmation returns a boolean if a field has been set.
+
 ### GetWallet
 
 `func (o *NFTMintRequest) GetWallet() Wallet`
@@ -64,31 +89,6 @@ SetWallet sets Wallet field to given value.
 `func (o *NFTMintRequest) HasWallet() bool`
 
 HasWallet returns a boolean if a field has been set.
-
-### GetReturnCompiledTransaction
-
-`func (o *NFTMintRequest) GetReturnCompiledTransaction() bool`
-
-GetReturnCompiledTransaction returns the ReturnCompiledTransaction field if non-nil, zero value otherwise.
-
-### GetReturnCompiledTransactionOk
-
-`func (o *NFTMintRequest) GetReturnCompiledTransactionOk() (*bool, bool)`
-
-GetReturnCompiledTransactionOk returns a tuple with the ReturnCompiledTransaction field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetReturnCompiledTransaction
-
-`func (o *NFTMintRequest) SetReturnCompiledTransaction(v bool)`
-
-SetReturnCompiledTransaction sets ReturnCompiledTransaction field to given value.
-
-### HasReturnCompiledTransaction
-
-`func (o *NFTMintRequest) HasReturnCompiledTransaction() bool`
-
-HasReturnCompiledTransaction returns a boolean if a field has been set.
 
 ### GetName
 

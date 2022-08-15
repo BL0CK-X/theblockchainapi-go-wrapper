@@ -4,6 +4,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
+**Confirmed** | Pointer to **bool** | Whether or not the NFT mint was confirmed or simply submitted for processing. The status depends on your input for &#x60;wait_for_confirmation&#x60;. This only is returned when you are minting an NFT, not when searching or retrieving the metadata. | [optional] 
 **Data** | Pointer to [**NFTData**](NFTData.md) |  | [optional] 
 **IsMutable** | Pointer to **bool** |  | [optional] 
 **Mint** | Pointer to **string** | The public key address of the NFT  | [optional] 
@@ -36,6 +37,31 @@ will change when the set of required properties is changed
 NewNFTWithDefaults instantiates a new NFT object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
+
+### GetConfirmed
+
+`func (o *NFT) GetConfirmed() bool`
+
+GetConfirmed returns the Confirmed field if non-nil, zero value otherwise.
+
+### GetConfirmedOk
+
+`func (o *NFT) GetConfirmedOk() (*bool, bool)`
+
+GetConfirmedOk returns a tuple with the Confirmed field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetConfirmed
+
+`func (o *NFT) SetConfirmed(v bool)`
+
+SetConfirmed sets Confirmed field to given value.
+
+### HasConfirmed
+
+`func (o *NFT) HasConfirmed() bool`
+
+HasConfirmed returns a boolean if a field has been set.
 
 ### GetData
 

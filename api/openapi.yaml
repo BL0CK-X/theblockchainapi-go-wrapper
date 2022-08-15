@@ -24,7 +24,7 @@ info:
     >\n    <figure>\n        <img \n            width=\"40px\"\n            height=\"\
     40px\" \n            src=\"https://theblockchainapi-docs.s3.amazonaws.com/icons/discord.svg\"\
     \n        />\n        <figcaption style=\"textAlign:center;\">Join our Discord</figcaption>\n\
-    \    </figure>\n</a> <a href=\"https://twitter.com/_BlockX_\" target=\"_blank\"\
+    \    </figure>\n</a> <a href=\"https://twitter.com/BlockchainAP1\" target=\"_blank\"\
     >\n    <figure>\n        <img \n            width=\"40px\"\n            height=\"\
     40px\" \n            src=\"https://theblockchainapi-docs.s3.amazonaws.com/icons/twitter.svg\"\
     \n        />\n         <figcaption style=\"textAlign:center;\">Follow us on Twitter</figcaption>\n\
@@ -54,21 +54,19 @@ info:
     >here</a>.) Such harrassment and threats are not only harmful, but they are also\
     \ illegal, and we will report offenders. Do not harrass us. Rather, feel free\
     \ to discuss your concerns with us and we will be more than happy to work with\
-    \ you to come up with a solution.\n\n# Pricing\n\n<b>Each user receives 100 free\
-    \ credits. Each user can call endpoints that cost 0 credits up to 50 requests/min\
-    \ before being rate-limited.</b> Thereafter, they can upgrade to have a higher\
-    \ rate limit. The purpose of this is to act like a free trial -- not to function\
-    \ like a freemium model where one can stay on the free tier indefinitely.\n\n\
-    You can learn more about our pricing <a href=\"https://dashboard.blockchainapi.com/billing\"\
-    \ target=\"_blank\">here</a>. \n\nWe frequently do custom plans. If our pricing\
-    \ doesn't work for you, <a href=\"#section/Contact\">contact us</a>.\n\nIf you\
-    \ have questions, concerns, feedback, or ideas, <a href=\"#section/Contact\">contact\
-    \ us</a>.\n\n# SDKs / API Wrappers\n\nWe have examples using both our <a href=\"\
-    https://github.com/BL0CK-X/the-blockchain-api/tree/main/examples\" target=\"_blank\"\
-    >Python wrapper and our JavaScript wrapper here</a>.\n\nWe have built a custom\
-    \ <a href=\"https://github.com/BL0CK-X/the-blockchain-api-python-wrapper\" target=\"\
-    _blank\">Python wrapper</a>.\n\n`pip install theblockchainapi`\n\nWe also have\
-    \ published a <a href=\"https://github.com/BL0CK-X/theblockchainapi-javascript-wrapper\"\
+    \ you to come up with a solution.\n\n# Pricing\n\n<b>Each user receives 50,000\
+    \ free credits each month.</b> Each endpoint costs a certain amount credits. Scroll\
+    \ below to any endpoint (i.e., function) to see how much each endpoint costs.\
+    \ (Or CMD+F `Cost: 0 Credit`, for example)\n\nYou can learn more about our pricing\
+    \ <a href=\"https://dashboard.blockchainapi.com/billing\" target=\"_blank\">here</a>.\
+    \ \n\nWe frequently do custom plans. If our pricing doesn't work for you, <a href=\"\
+    #section/Contact\">contact us</a>.\n\nIf you have questions, concerns, feedback,\
+    \ or ideas, <a href=\"#section/Contact\">contact us</a>.\n\n# SDKs / API Wrappers\n\
+    \nWe have examples using both our <a href=\"https://github.com/BL0CK-X/the-blockchain-api/tree/main/examples\"\
+    \ target=\"_blank\">Python wrapper and our JavaScript wrapper here</a>.\n\nWe\
+    \ have built a custom <a href=\"https://github.com/BL0CK-X/the-blockchain-api-python-wrapper\"\
+    \ target=\"_blank\">Python wrapper</a>.\n\n`pip install theblockchainapi`\n\n\
+    We also have published a <a href=\"https://github.com/BL0CK-X/theblockchainapi-javascript-wrapper\"\
     \ target=\"_blank\">JavaScript Wrapper</a>.\n\n`npm install theblockchainapi`\n\
     \nWe also have auto-generated wrappers for the following languages:\n- <a href=\"\
     https://github.com/BL0CK-X/theblockchainapi-go-wrapper\" target = \"_blank\">Go</a>\n\
@@ -110,9 +108,6 @@ tags:
 - description: |
     Easily create a Solana NFT and see related fees for creating an NFT.
   name: Solana NFT
-- description: |
-    List, de-list, and buy NFTs from Solana NFT marketplaces.
-  name: Solana NFT Marketplaces
 - description: |
     Interact with the Metaplex Candy Machine smart contract on Solana.
   name: Solana Candy Machine
@@ -580,11 +575,11 @@ paths:
       - Transaction
   /{blockchain}/{network}/name_service/name_to_blockchain_identifier:
     post:
-      description: "<a href=\"https://github.com/BL0CK-X/blockchain-api\" target=\"\
-        _blank\">See examples (Python, JavaScript) [Coming Soon]</a>.\n    \nGet the\
-        \ blockchain identifier from a name.\n\ne.g., Input `vitalik.eth` and output\
-        \ `0xd8dA6BF26964aF9D7eEd9e03E53415D37aA96045`\n\n`Cost: 0.25 Credit` (<a\
-        \ href=\"#section/Pricing\">See Pricing</a>)"
+      description: "<a href=\"https://github.com/BL0CK-X/blockchain-api/tree/main/examples/name-service/name-to-blockchain-identifier\"\
+        \ target=\"_blank\">See examples (Python, JavaScript) [Coming Soon]</a>.\n\
+        \    \nGet the blockchain identifier from a name.\n\ne.g., Input `vitalik.eth`\
+        \ and output `0xd8dA6BF26964aF9D7eEd9e03E53415D37aA96045`\n\n`Cost: 0.25 Credit`\
+        \ (<a href=\"#section/Pricing\">See Pricing</a>)"
       operationId: getBlockchainIdentifierFromName
       parameters:
       - description: |
@@ -646,9 +641,9 @@ paths:
       - Name Service
   /{blockchain}/{network}/name_service/blockchain_identifier_to_name:
     post:
-      description: "<a href=\"https://github.com/BL0CK-X/blockchain-api\" target=\"\
-        _blank\">See examples (Python, JavaScript) [Coming Soon]</a>.\n    \nGet the\
-        \ name from a blockchain identifier.\n\ne.g., Input `0xd8dA6BF26964aF9D7eEd9e03E53415D37aA96045`\
+      description: "<a href=\"https://github.com/BL0CK-X/blockchain-api/tree/main/examples/name-service/blockchain-identifier-to-name\"\
+        \ target=\"_blank\">See examples (Python, JavaScript) [Coming Soon]</a>.\n\
+        \    \nGet the name from a blockchain identifier.\n\ne.g., Input `0xd8dA6BF26964aF9D7eEd9e03E53415D37aA96045`\
         \ and output `vitalik.eth`\n\n`Cost: 0.25 Credit` (<a href=\"#section/Pricing\"\
         >See Pricing</a>)"
       operationId: getNameForBlockchainIdentifier
@@ -712,9 +707,9 @@ paths:
       - Name Service
   /{blockchain}/{network}/token/{token_blockchain_identifier}:
     get:
-      description: "<a href=\"https://github.com/BL0CK-X/blockchain-api\" target=\"\
-        _blank\">See examples (Python, JavaScript) [Coming Soon]</a>.\n    \nGet the\
-        \ metadata of a token.\n\n`Cost: 0.25 Credit` (<a href=\"#section/Pricing\"\
+      description: "<a href=\"https://github.com/BL0CK-X/blockchain-api/tree/main/examples/tokens/get-token-metadata\"\
+        \ target=\"_blank\">See examples (Python, JavaScript) [Coming Soon]</a>.\n\
+        \    \nGet the metadata of a token.\n\n`Cost: 0.25 Credit` (<a href=\"#section/Pricing\"\
         >See Pricing</a>)"
       operationId: getTokenMetadata
       parameters:
@@ -784,9 +779,10 @@ paths:
       - Token
   /{blockchain}/{network}/all_tokens:
     get:
-      description: "<a href=\"https://github.com/BL0CK-X/blockchain-api\" target=\"\
-        _blank\">See examples (Python, JavaScript) [Coming Soon]</a>.\n    \nList\
-        \ all tokens.\n\n`Cost: 1 Credit` (<a href=\"#section/Pricing\">See Pricing</a>)"
+      description: "<a href=\"https://github.com/BL0CK-X/blockchain-api/tree/main/examples/tokens/get-all-tokens\"\
+        \ target=\"_blank\">See examples (Python, JavaScript) [Coming Soon]</a>.\n\
+        \    \nList all tokens.\n\n`Cost: 1 Credit` (<a href=\"#section/Pricing\"\
+        >See Pricing</a>)"
       operationId: listAllTokens
       parameters:
       - description: |
@@ -1781,6 +1777,86 @@ paths:
       summary: Get owner of an NFT
       tags:
       - Solana NFT
+  /solana/nft/{network}/{mint_address}/owner_advanced:
+    get:
+      description: "<a href=\"https://github.com/BL0CK-X/the-blockchain-api/tree/main/examples/solana-nft/get-nft-owner\"\
+        \ target=\"_blank\">See examples (Python, JavaScript)</a>. \n    \nGet the\
+        \ owner, state, listed price, and listed marketplace (if any) of an NFT. \n\
+        \nHere's are a couple of example responses:\n```\n{\n    'contract': {\n \
+        \       'contract_blockchain_identifier': 'M2mx93ekt1fmXSVkTrUL9xVFHkmME8HTUi5Cyc5aF7K',\
+        \ \n        'contract_id': 'magic-eden-v2', \n        'contract_name': 'Magic\
+        \ Eden v2', \n        'contract_type': 'marketplace'\n    }, \n    'owner':\
+        \ '25UJMR3FiMM6noQtPEaCJ6eDU2YQ7myDhikVQXmMuSRW', \n    'price': 50000000,\
+        \ \n    'state': 'listing'\n}\n```\n\n```\n{\n    'contract': null, \n   \
+        \ 'owner': 'C37PJiJU8WTgoUoFqmB1Maw8hkuENDZoGDQA1pm54Fdd', \n    'price':\
+        \ null, \n    'state': 'holding'\n}\n```\n\nThis function will return whether\
+        \ the NFT is `listed`, `loaned` (Yawww NFT loans), `otc`, `staked`, `burned`,\
+        \ or `held`.\n\nIf listed, it will return the contract, the readable name\
+        \ of the contract (e.g., Magic Eden, OpenSea), the contract ID (if any; e.g.,\
+        \ open-sea), the owner, and the listed price. From this, you can get the floor\
+        \ of a collection. We currently support Magic Eden (v1, v2), Exchange.Art\
+        \ (auction, singles), CoralCube, Solanart (v1, v2), Yawww Loans, Yawww OTC,\
+        \ OpenSea, Fractal, SolSea, and AlphaArt. \n\nIf loaned, it will return the\
+        \ loan requester as the owner, the loan amount, and the loan contract. We\
+        \ only support the Yawww loaning contract.\n\nIf listed on an OTC marketplace,\
+        \ it will return the same information as `listed`. OTC is used to distinguish\
+        \ between marketplaces that respect royalties (OTC) and those that don't (normal\
+        \ ones). The only `OTC` contract we track is Yawwww, at the moment. We do\
+        \ not yet track Solanart v3.\n\nIf staked, it will return the owner and the\
+        \ staking contract public key.\n\nIf burned, it will return the `burner` as\
+        \ the `owner`.\n\nIf held, it will simply return the owner.\n\nIf you want\
+        \ to get the literal owner, which may or may not be the same as the owner\
+        \ returned here, call the simplified [get NFT owner function](/#tag/Solana-NFT/operation/solanaGetNFTOwner).\
+        \ For example, Bob might own the NFT, but if it is listed on Magic Eden, then\
+        \ the NFT is held in escrow and \"owned\" by Magic Eden. The simplified function\
+        \ will return Magic Eden as the owner (the literal owner). This advanced function\
+        \ will tell you the implied owner, which would be Bob.\n\n`Cost: 1.0 Credit`\
+        \ (<a href=\"#section/Pricing\">See Pricing</a>)"
+      operationId: solanaGetNFTOwnerAdvanced
+      parameters:
+      - description: The network ID
+        example: devnet
+        explode: false
+        in: path
+        name: network
+        required: true
+        schema:
+          enum:
+          - devnet
+          - mainnet-beta
+          type: string
+        style: simple
+      - description: The mint address of the NFT
+        example: 4zH3Rwm1QXdfTSUqsYmeUBY4QqQmQEXJVbv4ErSK736Q
+        explode: false
+        in: path
+        name: mint_address
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NFTOwnerAdvancedResponse'
+          description: Successful Response
+        "400":
+          description: Bad request (check response message)
+        "401":
+          description: Invalid API key pair in headers
+        "402":
+          description: Payment required. Occurs when you run out of API requests.
+            Upgrade <a href="https://dashboard.theblockchainapi.com/billing" target="_blank">here</a>.
+        "404":
+          description: The doesn't exist
+      security:
+      - APIKeyID: []
+        APISecretKey: []
+      summary: Get owner of an NFT (advanced)
+      tags:
+      - Solana NFT
   /solana/nft/mint/fee:
     get:
       description: "<a href=\"https://github.com/BL0CK-X/the-blockchain-api/tree/main/examples/solana-nft/get-nft-mint-fee\"\
@@ -1845,303 +1921,6 @@ paths:
         Get the ID of the candy machine of an NFT
       tags:
       - Solana NFT
-  /solana/nft/marketplaces/listing/{network}/{mint_address}:
-    get:
-      description: |-
-        <a href="https://github.com/BL0CK-X/blockchain-api/tree/main/examples/solana-nft-marketplaces/get-nft-listing" target="_blank">See examples (Python, JavaScript)</a>.
-
-        Get the Marketplace listing of a Solana NFT.
-
-        Currently checks the following Solana NFT martketplaces: SolSea, Magic Eden, Solanart, Alpha Art, Digital Eyes, Exchange.art
-
-        `Cost: 1 Credits`, (<a href="#section/Pricing">See Pricing</a>)
-      operationId: solanaGetNFTListing
-      parameters:
-      - description: The network ID
-        example: devnet
-        explode: false
-        in: path
-        name: network
-        required: true
-        schema:
-          enum:
-          - devnet
-          - mainnet-beta
-          type: string
-        style: simple
-      - description: The mint address of the NFT you want to buy
-        example: 7GA16mQup7ESJbaD6n49VCwVG9kRkyQDzWKhBSLjbYqr
-        explode: false
-        in: path
-        name: mint_address
-        required: true
-        schema:
-          type: string
-        style: simple
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/GetNFTListingResponse'
-          description: Successful Response
-        "400":
-          description: Bad request (check response message)
-        "401":
-          description: Invalid API key pair in headers
-        "402":
-          description: Payment required. Occurs when you run out of API requests.
-            Upgrade <a href="https://dashboard.theblockchainapi.com/billing" target="_blank">here</a>.
-        "403":
-          description: |
-            Our API will throw a 403 if you are providing a body in the GET request.  Such requests are insecure and rejected. The solution is not to provide any sort of body in any GET request.
-        "404":
-          description: No marketplace listing found for this NFT.
-      security:
-      - APIKeyID: []
-        APISecretKey: []
-      summary: Get NFT Listing
-      tags:
-      - Solana NFT Marketplaces
-  /solana/nft/marketplaces/{exchange}/buy/{network}/{mint_address}:
-    post:
-      description: |-
-        <a href="https://github.com/BL0CK-X/blockchain-api/tree/main/examples/solana-nft-marketplaces/buy-nft" target="_blank">See examples (Python, JavaScript)</a>.
-
-        Buy an NFT on a Solana Exchange.
-
-        Exchanges supported: SolSea, Magic Eden
-
-        `Cost: 25 Credits`, `Cost: 3 Credits on Devnet` (<a href="#section/Pricing">See Pricing</a>)
-      operationId: solanaBuyNFT
-      parameters:
-      - description: The network ID
-        example: devnet
-        explode: false
-        in: path
-        name: network
-        required: true
-        schema:
-          enum:
-          - devnet
-          - mainnet-beta
-          type: string
-        style: simple
-      - description: The NFT exchange to interact with
-        example: magic-eden
-        explode: false
-        in: path
-        name: exchange
-        required: true
-        schema:
-          enum:
-          - magic-eden
-          type: string
-        style: simple
-      - description: The mint address of the NFT you want to buy
-        example: 7GA16mQup7ESJbaD6n49VCwVG9kRkyQDzWKhBSLjbYqr
-        explode: false
-        in: path
-        name: mint_address
-        required: true
-        schema:
-          type: string
-        style: simple
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/BuyRequest'
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/BuyResponse'
-          description: Successful Response
-        "400":
-          description: Bad request (check response message)
-        "401":
-          description: Invalid API key pair in headers
-        "402":
-          description: Payment required. Occurs when you run out of API requests.
-            Upgrade <a href="https://dashboard.theblockchainapi.com/billing" target="_blank">here</a>.
-      security:
-      - APIKeyID: []
-        APISecretKey: []
-      summary: Buy
-      tags:
-      - Solana NFT Marketplaces
-  /solana/nft/marketplaces/{exchange}/list/{network}/{mint_address}:
-    post:
-      description: |-
-        <a href="https://github.com/BL0CK-X/blockchain-api/tree/main/examples/solana-nft-marketplaces/list-nft" target="_blank">See examples (Python, JavaScript)</a>.
-
-        List an NFT on a Solana Exchange.
-
-        Exchanges supported: SolSea, Magic Eden
-
-        `Cost: 12 Credits`, `Cost: 3 Credits on Devnet` (<a href="#section/Pricing">See Pricing</a>)
-      operationId: solanaListNFT
-      parameters:
-      - description: The network ID
-        example: devnet
-        explode: false
-        in: path
-        name: network
-        required: true
-        schema:
-          enum:
-          - devnet
-          - mainnet-beta
-          type: string
-        style: simple
-      - description: The NFT exchange to interact with
-        example: magic-eden
-        explode: false
-        in: path
-        name: exchange
-        required: true
-        schema:
-          enum:
-          - magic-eden
-          type: string
-        style: simple
-      - description: The mint address of the NFT you want to buy
-        example: 7GA16mQup7ESJbaD6n49VCwVG9kRkyQDzWKhBSLjbYqr
-        explode: false
-        in: path
-        name: mint_address
-        required: true
-        schema:
-          type: string
-        style: simple
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/ListRequest'
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ListResponse'
-          description: Successful Response
-        "400":
-          description: Bad request (check response message)
-        "401":
-          description: Invalid API key pair in headers
-        "402":
-          description: Payment required. Occurs when you run out of API requests.
-            Upgrade <a href="https://dashboard.theblockchainapi.com/billing" target="_blank">here</a>.
-      security:
-      - APIKeyID: []
-        APISecretKey: []
-      summary: List
-      tags:
-      - Solana NFT Marketplaces
-  /solana/nft/marketplaces/{exchange}/delist/{network}/{mint_address}:
-    post:
-      description: |-
-        <a href="https://github.com/BL0CK-X/blockchain-api/tree/main/examples/solana-nft-marketplaces/delist-nft" target="_blank">See examples (Python, JavaScript)</a>.
-
-        Delist an NFT from a Solana Exchange.
-
-        Exchanges supported: SolSea, Magic Eden
-
-        `Cost: 8 Credits`, `Cost: 3 Credits on Devnet` (<a href="#section/Pricing">See Pricing</a>)
-      operationId: solanaDelistNFT
-      parameters:
-      - description: The network ID
-        example: devnet
-        explode: false
-        in: path
-        name: network
-        required: true
-        schema:
-          enum:
-          - devnet
-          - mainnet-beta
-          type: string
-        style: simple
-      - description: The NFT exchange to interact with
-        example: magic-eden
-        explode: false
-        in: path
-        name: exchange
-        required: true
-        schema:
-          enum:
-          - magic-eden
-          type: string
-        style: simple
-      - description: The mint address of the NFT you want to buy
-        example: 7GA16mQup7ESJbaD6n49VCwVG9kRkyQDzWKhBSLjbYqr
-        explode: false
-        in: path
-        name: mint_address
-        required: true
-        schema:
-          type: string
-        style: simple
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/DelistRequest'
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/DelistResponse'
-          description: Successful Response
-        "400":
-          description: Bad request (check response message)
-        "401":
-          description: Invalid API key pair in headers
-        "402":
-          description: Payment required. Occurs when you run out of API requests.
-            Upgrade <a href="https://dashboard.theblockchainapi.com/billing" target="_blank">here</a>.
-      security:
-      - APIKeyID: []
-        APISecretKey: []
-      summary: Delist
-      tags:
-      - Solana NFT Marketplaces
-  /solana/nft/candy_machine:
-    post:
-      description: "<a href=\"https://github.com/BL0CK-X/the-blockchain-api/tree/main/examples/solana-candy-machine/create-test-candy-machine\"\
-        \ target=\"_blank\">See examples (Python, JavaScript)</a>.\n \nUse this endpoint\
-        \ to create a test candy machine so that you can test your minting bot.\n\n\
-        `Cost: 1 Credit` (<a href=\"#section/Pricing\">See Pricing</a>)"
-      operationId: solanaCreateTestCandyMachine
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/CreateTestCandyMachineRequest'
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/CreateTestCandyMachineResponse'
-          description: Successful Response
-        "400":
-          description: Bad request (check response message)
-        "401":
-          description: Invalid API key pair in headers
-        "402":
-          description: Payment required. Occurs when you run out of API requests.
-            Upgrade <a href="https://dashboard.theblockchainapi.com/billing" target="_blank">here</a>.
-      security:
-      - APIKeyID: []
-        APISecretKey: []
-      summary: Create a test CM
-      tags:
-      - Solana Candy Machine
   /solana/nft/candy_machine/search:
     post:
       description: |-
@@ -2380,114 +2159,53 @@ paths:
         Get a CM's metadata
       tags:
       - Solana Candy Machine
-  /solana/nft/candy_machine/mint:
-    post:
-      description: "<a href=\"https://github.com/BL0CK-X/the-blockchain-api/tree/main/examples/solana-candy-machine/mint-from-candy-machine\"\
-        \ target=\"_blank\">See examples (Python, JavaScript)</a>.\n\nUse this endpoint\
-        \ to mint an NFT from a metaplex candy machine as soon as it drops.\n\nThis\
-        \ only works for `v1` and `v2` candy machines, and does not work for candy\
-        \ machines of any other type such as Magic Eden candy machines.\n\nIn order\
-        \ to achieve speed, this endpoint sends the transaction without checking whether\
-        \ or not it confirmed. It could still fail, for example, because the candy\
-        \ machine ran out of available mints. You should check the status of the transaction\
-        \ using our <a href=\"#operation/solanaGetTransaction\">getTransaction</a>\
-        \ endpoint. <a href=\"https://gist.github.com/joshwolff1/298e8251e43ff9b4815028683b1ca17d\"\
-        \ target=\"_blank\">Here's an example</a> of how to do this.\n\nMint transactions\
-        \ for candy machines that have capatcha/Civic enabled will fail. There is\
-        \ a gatekeeper functionality where you must manually verify through Civic\
-        \ and captcha in order to mint from a candy machine. In this functionality,\
-        \ Civic signs the transaction. Therefore, if the gatekeeper functionality\
-        \ is enabled, our “Mint from candy machine” endpoint will fail because it\
-        \ is missing a signer. If it is not enabled, then our “Mint from candy machine”\
-        \ endpoint will succeed. One caveat is the attribute “expireOnUse”. If this\
-        \ is True, then you have to solve a captcha each time. In this case, the “\
-        Mint from candy machine” endpoint will fail. If this is False, then your first\
-        \ verification is sufficient for further mints. In which case, after verifying\
-        \ manually the first time, you can use our endpoint thereafter. \n\nYou can\
-        \ check if the gatekeeper functionality is enabled with this <a href=\"#operation/solanaGetCandyMachineMetadata\"\
-        >endpoint</a>.\n\n\n`Cost: 8 Credits` (<a href=\"#section/Pricing\">See Pricing</a>)"
-      operationId: solanaMintFromCandyMachine
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/MintNFTRequest'
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/MintNFTResponse'
-          description: |
-            Successful Response.
-        "400":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/MintNFTErrorResponse'
-          description: Bad request (check response message)
-        "401":
-          description: Invalid API key pair in headers
-        "402":
-          description: Payment required. Occurs when you run out of API requests.
-            Upgrade <a href="https://dashboard.theblockchainapi.com/billing" target="_blank">here</a>.
-      security:
-      - APIKeyID: []
-        APISecretKey: []
-      summary: Mint from a CM
-      tags:
-      - Solana Candy Machine
-  /project:
+  /checkout/v1/project:
     post:
       description: |-
-        A complete example and walkthrough of the program can be found <a href="https://github.com/BL0CK-X/api-developer-program" target="_blank">here</a>.
+        A project represents that project or company that is accepting payments.
 
-        A project is an entire mini-API.
+        A project can have products, which can have multiple plans (prices) each.
 
-        When you create a project, this initializes the project in our database and the API documentation for the project.
-
-        After initialization, you can <a href="#operation/createEndpoint">add endpoints</a> to the documentation and deploy the project's mini-API to our servers. Learn more <a href="https://github.com/BL0CK-X/api-developer-program" target="_blank">here</a>.
+        To create a project, you just need to supply a name and a Solana public key to receive payments.
 
         `Cost: 0 Credit` (Free) (<a href="#section/Pricing">See Pricing</a>)
-      operationId: createProject
+      operationId: createCCProject
       requestBody:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/ProjectCreateRequest'
+              $ref: '#/components/schemas/CCProjectCreateRequest'
       responses:
         "200":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Project'
+                $ref: '#/components/schemas/CCProject'
           description: Successful Response
         "400":
           description: Bad request (check response message)
         "401":
           description: Invalid API key pair in headers
-        "402":
-          description: Payment required. Occurs when you run out of API requests.
-            Upgrade <a href="https://dashboard.theblockchainapi.com/billing" target="_blank">here</a>.
+        "429":
+          description: Rate limited
       security:
       - APIKeyID: []
         APISecretKey: []
       summary: |
         Create a project
       tags:
-      - Project
-  /project/{project_id}:
+      - CC Project
+  /checkout/v1/project/{project_id}:
     delete:
-      description: "A complete example and walkthrough of the program can be found\
-        \ <a href=\"https://github.com/BL0CK-X/api-developer-program\" target=\"_blank\"\
-        >here</a>.\n\nDeletes a project. This will remove the mini-API entirely from\
-        \ our system. \n\n`Cost: 0 Credit` (Free) (<a href=\"#section/Pricing\">See\
-        \ Pricing</a>)"
-      operationId: deleteProject
+      description: |-
+        Delete a project.
+
+        `Cost: 0 Credit` (Free) (<a href="#section/Pricing">See Pricing</a>)
+      operationId: deleteCCProject
       parameters:
       - description: The ID of the project. Created and returned when a project is
           created.
-        example: L3cPm0cJlf5MeDXzGLQJJ4vlzndJCC
+        example: project_WDQskRIfHQxj53N5mk5K
         explode: false
         in: path
         name: project_id
@@ -2497,34 +2215,30 @@ paths:
         style: simple
       responses:
         "200":
-          description: |
-            Successful Response.
+          description: Successful Response
         "400":
           description: Bad request (check response message)
         "401":
           description: Invalid API key pair in headers
-        "402":
-          description: Payment required. Occurs when you run out of API requests.
-            Upgrade <a href="https://dashboard.theblockchainapi.com/billing" target="_blank">here</a>.
+        "429":
+          description: Rate limited
       security:
       - APIKeyID: []
         APISecretKey: []
       summary: |
         Delete a project
       tags:
-      - Project
+      - CC Project
     get:
       description: |-
-        A complete example and walkthrough of the program can be found <a href="https://github.com/BL0CK-X/api-developer-program" target="_blank">here</a>.
-
-        Update your project's metadata. None of these parameters are required. Just provide the parameters that you would like to update.
+        Retrieve a project.
 
         `Cost: 0 Credit` (Free) (<a href="#section/Pricing">See Pricing</a>)
-      operationId: getProject
+      operationId: getCCProject
       parameters:
       - description: The ID of the project. Created and returned when a project is
           created.
-        example: L3cPm0cJlf5MeDXzGLQJJ4vlzndJCC
+        example: project_WDQskRIfHQxj53N5mk5K
         explode: false
         in: path
         name: project_id
@@ -2537,34 +2251,31 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Project'
+                $ref: '#/components/schemas/CCProject'
           description: Successful Response
         "400":
           description: Bad request (check response message)
         "401":
           description: Invalid API key pair in headers
-        "402":
-          description: Payment required. Occurs when you run out of API requests.
-            Upgrade <a href="https://dashboard.theblockchainapi.com/billing" target="_blank">here</a>.
+        "429":
+          description: Rate limited
       security:
       - APIKeyID: []
         APISecretKey: []
       summary: |
-        Get a project's metadata
+        Get a project
       tags:
-      - Project
-    post:
+      - CC Project
+    put:
       description: |-
-        A complete example and walkthrough of the program can be found <a href="https://github.com/BL0CK-X/api-developer-program" target="_blank">here</a>.
-
-        Update your project's metadata. None of these parameters are required. Just provide the parameters that you would like to update.
+        Retrieve a project.
 
         `Cost: 0 Credit` (Free) (<a href="#section/Pricing">See Pricing</a>)
-      operationId: updateProject
+      operationId: updateCCProject
       parameters:
       - description: The ID of the project. Created and returned when a project is
           created.
-        example: L3cPm0cJlf5MeDXzGLQJJ4vlzndJCC
+        example: project_WDQskRIfHQxj53N5mk5K
         explode: false
         in: path
         name: project_id
@@ -2576,337 +2287,67 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/ProjectCreateRequest'
+              $ref: '#/components/schemas/CCProject'
       responses:
         "200":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Project'
+                $ref: '#/components/schemas/CCProject'
           description: Successful Response
         "400":
           description: Bad request (check response message)
         "401":
           description: Invalid API key pair in headers
-        "402":
-          description: Payment required. Occurs when you run out of API requests.
-            Upgrade <a href="https://dashboard.theblockchainapi.com/billing" target="_blank">here</a>.
+        "429":
+          description: Rate limited
       security:
       - APIKeyID: []
         APISecretKey: []
       summary: |
         Update a project
       tags:
-      - Project
-  /project/{project_id}/{version}:
-    delete:
-      description: |-
-        A complete example and walkthrough of the program can be found <a href="https://github.com/BL0CK-X/api-developer-program" target="_blank">here</a>.
-
-        Delete a version for the project. There must always be at least one version deployed, so you cannot delete the last remaining version of the project. This will auto-deploy the project and update its documentation, if necessary.
-
-        `Cost: 0 Credit` (Free) (<a href="#section/Pricing">See Pricing</a>)
-      operationId: deleteProjectVersion
-      parameters:
-      - description: The ID of the project. Created and returned when a project is
-          created.
-        example: L3cPm0cJlf5MeDXzGLQJJ4vlzndJCC
-        explode: false
-        in: path
-        name: project_id
-        required: true
-        schema:
-          type: string
-        style: simple
-      - description: The version of the project.
-        example: 2
-        explode: false
-        in: path
-        name: version
-        required: true
-        schema:
-          type: string
-        style: simple
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Project'
-          description: |
-            Successful Response.
-        "400":
-          description: Bad request (check response message)
-        "401":
-          description: Invalid API key pair in headers
-        "402":
-          description: Payment required. Occurs when you run out of API requests.
-            Upgrade <a href="https://dashboard.theblockchainapi.com/billing" target="_blank">here</a>.
-      security:
-      - APIKeyID: []
-        APISecretKey: []
-      summary: |
-        Delete a project version
-      tags:
-      - Project
-    post:
-      description: |-
-        A complete example and walkthrough of the program can be found <a href="https://github.com/BL0CK-X/api-developer-program" target="_blank">here</a>.
-
-        Create a new version for the project. The version must be higher than all existing versions. This will duplicate the existing project's latest version and auto-deploy it. To update these endpoints, simply redeploy on this project's versions.
-
-        When a project is first created, it uses the default "0.0.1" version.
-
-        `Cost: 0 Credit` (Free) (<a href="#section/Pricing">See Pricing</a>)
-      operationId: createProjectVersion
-      parameters:
-      - description: The ID of the project. Created and returned when a project is
-          created.
-        example: L3cPm0cJlf5MeDXzGLQJJ4vlzndJCC
-        explode: false
-        in: path
-        name: project_id
-        required: true
-        schema:
-          type: string
-        style: simple
-      - description: The version of the project.
-        example: 2
-        explode: false
-        in: path
-        name: version
-        required: true
-        schema:
-          type: string
-        style: simple
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Project'
-          description: |
-            Successful Response.
-        "400":
-          description: Bad request (check response message)
-        "401":
-          description: Invalid API key pair in headers
-        "402":
-          description: Payment required. Occurs when you run out of API requests.
-            Upgrade <a href="https://dashboard.theblockchainapi.com/billing" target="_blank">here</a>.
-      security:
-      - APIKeyID: []
-        APISecretKey: []
-      summary: |
-        Create a new project version
-      tags:
-      - Project
-  /project/{project_id}/deploy/url:
-    post:
-      description: |-
-        A complete example and walkthrough of the program can be found <a href="https://github.com/BL0CK-X/api-developer-program" target="_blank">here</a>.
-
-        Get the deployment URL for the project.
-
-        `Cost: 0 Credit` (Free) (<a href="#section/Pricing">See Pricing</a>)
-      operationId: getProjectDeploymentURL
-      parameters:
-      - description: The ID of the project. Created and returned when a project is
-          created.
-        example: L3cPm0cJlf5MeDXzGLQJJ4vlzndJCC
-        explode: false
-        in: path
-        name: project_id
-        required: true
-        schema:
-          type: string
-        style: simple
-      requestBody:
-        $ref: '#/components/requestBodies/inline_object'
-        content:
-          application/json:
-            schema:
-              example:
-                platform: Windows
-              properties:
-                platform:
-                  description: The platform for which the binary was compiled. Note
-                    that Darwin = Mac.
-                  enum:
-                  - Darwin
-                  - Linux
-                  - Windows
-                  type: string
-              type: object
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ProjectDeploymentURL'
-          description: Successful Response.
-        "400":
-          description: Bad request (check response message)
-        "401":
-          description: Invalid API key pair in headers
-        "402":
-          description: Payment required. Occurs when you run out of API requests.
-            Upgrade <a href="https://dashboard.theblockchainapi.com/billing" target="_blank">here</a>.
-      security:
-      - APIKeyID: []
-        APISecretKey: []
-      summary: |
-        Get the deployment URL
-      tags:
-      - Project
-  /project/{project_id}/deploy/status:
-    post:
-      description: |-
-        A complete example and walkthrough of the program can be found <a href="https://github.com/BL0CK-X/api-developer-program" target="_blank">here</a>.
-
-        Get the deployment status for the project after uploading the binary. Will be: `DEPLOYED` or NOT `DEPLOYED`.
-
-        After it is `DEPLOYED`, you can then make requests to your API.
-
-        `Cost: 0 Credit` (Free) (<a href="#section/Pricing">See Pricing</a>)
-      operationId: getProjectDeploymentStatus
-      parameters:
-      - description: The ID of the project. Created and returned when a project is
-          created.
-        example: L3cPm0cJlf5MeDXzGLQJJ4vlzndJCC
-        explode: false
-        in: path
-        name: project_id
-        required: true
-        schema:
-          type: string
-        style: simple
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                properties:
-                  status:
-                    description: Whether or not the binary was successfully deployed
-                      and can now be called via the API
-                    enum:
-                    - DEPLOYED
-                    - NOT DEPLOYED
-                    type: string
-                  status_code:
-                    description: '`1` corresponds to `DEPLOYED`. `-1` corresponds
-                      to `NOT DEPLOYED`.'
-                    enum:
-                    - 1
-                    - -1
-                    type: number
-          description: Successful Response.
-        "400":
-          description: Bad request (check response message)
-        "401":
-          description: Invalid API key pair in headers
-        "402":
-          description: Payment required. Occurs when you run out of API requests.
-            Upgrade <a href="https://dashboard.theblockchainapi.com/billing" target="_blank">here</a>.
-      security:
-      - APIKeyID: []
-        APISecretKey: []
-      summary: |
-        Get deployment status
-      tags:
-      - Project
-  /project/{project_id}/stats:
+      - CC Project
+  /checkout/v1/projects:
     get:
       description: |-
-        A complete example and walkthrough of the program can be found <a href="https://github.com/BL0CK-X/api-developer-program" target="_blank">here</a>.
-
-        Get the usage stats for your mini-API.
+        List all projects associated with an account.
 
         `Cost: 0 Credit` (Free) (<a href="#section/Pricing">See Pricing</a>)
-      operationId: getProjectStats
-      parameters:
-      - description: The ID of the project. Created and returned when a project is
-          created.
-        example: L3cPm0cJlf5MeDXzGLQJJ4vlzndJCC
-        explode: false
-        in: path
-        name: project_id
-        required: true
-        schema:
-          type: string
-        style: simple
+      operationId: listCCProjects
       responses:
         "200":
           content:
             application/json:
               schema:
                 items:
-                  $ref: '#/components/schemas/StatItem'
+                  $ref: '#/components/schemas/CCProject'
                 type: array
-          description: |
-            Successful Response.
+          description: Successful Response
         "400":
           description: Bad request (check response message)
         "401":
           description: Invalid API key pair in headers
-        "402":
-          description: Payment required. Occurs when you run out of API requests.
-            Upgrade <a href="https://dashboard.theblockchainapi.com/billing" target="_blank">here</a>.
-      security:
-      - APIKeyID: []
-        APISecretKey: []
-      summary: |
-        Get a project's stats
-      tags:
-      - Project
-  /project/list:
-    get:
-      description: |-
-        A complete example and walkthrough of the program can be found <a href="https://github.com/BL0CK-X/api-developer-program" target="_blank">here</a>.
-
-        List all projects associated with your account.
-
-        `Cost: 0 Credit` (Free) (<a href="#section/Pricing">See Pricing</a>)
-      operationId: listProjects
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                items:
-                  $ref: '#/components/schemas/Project'
-                type: array
-          description: |
-            Successful Response.
-        "400":
-          description: Bad request (check response message)
-        "401":
-          description: Invalid API key pair in headers
-        "402":
-          description: Payment required. Occurs when you run out of API requests.
-            Upgrade <a href="https://dashboard.theblockchainapi.com/billing" target="_blank">here</a>.
+        "429":
+          description: Rate limited
       security:
       - APIKeyID: []
         APISecretKey: []
       summary: |
         List projects
       tags:
-      - Project
-  /project/{project_id}/{version}/documentation:
-    post:
-      description: "A complete example and walkthrough of the program can be found\
-        \ <a href=\"https://github.com/BL0CK-X/api-developer-program\" target=\"_blank\"\
-        >here</a>.\n\nUpdate your project's documentation. \n\nYour project's documentation\
-        \ can only represent *one* version of your API.\n\nThus, when you call this,\
-        \ the `current_documentation_version` attribute of your project is set to\
-        \ the version supplied in the call.\n\n`Cost: 0 Credit` (Free) (<a href=\"\
-        #section/Pricing\">See Pricing</a>)"
-      operationId: updateProjectDocumentation
+      - CC Project
+  /checkout/v1/project/{project_id}/payment/{payment_identifier}:
+    get:
+      description: |-
+        Retrieve a specific payment, either by its `payment_id` or `payment_validation_code`.
+
+        `Cost: 0 Credit` (Free) (<a href="#section/Pricing">See Pricing</a>)
+      operationId: getCCPayment
       parameters:
       - description: The ID of the project. Created and returned when a project is
           created.
-        example: L3cPm0cJlf5MeDXzGLQJJ4vlzndJCC
+        example: project_WDQskRIfHQxj53N5mk5K
         explode: false
         in: path
         name: project_id
@@ -2914,11 +2355,15 @@ paths:
         schema:
           type: string
         style: simple
-      - description: The version of the project.
-        example: 2
+      - description: |-
+          You can supply either `payment_id` or `payment_validation_code`.
+
+          The `payment_id` is only visible by you and uniquely identifies a payment.  The `payment_validation_code` is shown exclusively to the customer and the owner of the project. It can be used to redeem a payment. You can verify a payment by pulling the payment with the `payment_validation_code`.
+        example:
+        - payment_97jA1szpVjrSI5EvOb5zxNQFq5CfrC
         explode: false
         in: path
-        name: version
+        name: payment_identifier
         required: true
         schema:
           type: string
@@ -2928,169 +2373,234 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Project'
-          description: |
-            Successful Response.
+                $ref: '#/components/schemas/CCPayment'
+          description: Successful Response
         "400":
           description: Bad request (check response message)
         "401":
           description: Invalid API key pair in headers
-        "402":
-          description: Payment required. Occurs when you run out of API requests.
-            Upgrade <a href="https://dashboard.theblockchainapi.com/billing" target="_blank">here</a>.
+        "429":
+          description: Rate limited
       security:
       - APIKeyID: []
         APISecretKey: []
       summary: |
-        Update the project's documentation
+        Get a payment
       tags:
-      - Project
-  /endpoint:
-    post:
-      description: "A complete example and walkthrough of the program can be found\
-        \ <a href=\"https://github.com/BL0CK-X/api-developer-program\" target=\"_blank\"\
-        >here</a>.\n\nCreate or update an `endpoint` for a `project`. \n\nAn `endpoint`\
-        \ is a function that is a part of a mini-API `project`.\n\nThis endpoint adds\
-        \ the `endpoint` to the `project`'s documentation. However, this does not\
-        \ deploy the `endpoint`. To do so, you must <a href=\"#operation/deployProject\"\
-        >deploy the project</a>.\n\nAll attributes except `group_name` are required\
-        \ if **creating** an `endpoint`.\n\nOnly `path`, `project_id`, and `version`\
-        \ are required if **updating** an `endpoint`.\n\n`Cost: 0 Credit` (Free) (<a\
-        \ href=\"#section/Pricing\">See Pricing</a>)"
-      operationId: setEndpoint
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/Endpoint'
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Endpoint'
-          description: |
-            Successful Response.
-        "400":
-          description: Bad request (check response message)
-        "401":
-          description: Invalid API key pair in headers
-        "402":
-          description: Payment required. Occurs when you run out of API requests.
-            Upgrade <a href="https://dashboard.theblockchainapi.com/billing" target="_blank">here</a>.
-      security:
-      - APIKeyID: []
-        APISecretKey: []
-      summary: |
-        Create / update an endpoint
-      tags:
-      - Endpoint
-  /endpoint/metadata:
-    post:
-      description: "A complete example and walkthrough of the program can be found\
-        \ <a href=\"https://github.com/BL0CK-X/api-developer-program\" target=\"_blank\"\
-        >here</a>.\n\nGet an endpoint's metadata from a project. \n\n`Cost: 0 Credit`\
-        \ (Free) (<a href=\"#section/Pricing\">See Pricing</a>)"
-      operationId: getEndpoint
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/EndpointReference'
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Endpoint'
-          description: |
-            Successful Response.
-        "400":
-          description: Bad request (check response message)
-        "401":
-          description: Invalid API key pair in headers
-        "402":
-          description: Payment required. Occurs when you run out of API requests.
-            Upgrade <a href="https://dashboard.theblockchainapi.com/billing" target="_blank">here</a>.
-      security:
-      - APIKeyID: []
-        APISecretKey: []
-      summary: |
-        Get an endpoint's metadata
-      tags:
-      - Endpoint
-  /endpoint/delete:
-    post:
-      description: |-
-        A complete example and walkthrough of the program can be found <a href="https://github.com/BL0CK-X/api-developer-program" target="_blank">here</a>.
-
-        Deletes an endpoint from a project. This endpoint removes the endpoint from the project's documentation. However, this does un-deploy the endpoint. To do so, you must <a href="#operation/deployProject">deploy the project</a>.
-
-        `Cost: 0 Credit` (Free) (<a href="#section/Pricing">See Pricing</a>)
-      operationId: deleteEndpoint
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/EndpointReference'
-      responses:
-        "200":
-          description: |
-            Successful Response.
-        "400":
-          description: Bad request (check response message)
-        "401":
-          description: Invalid API key pair in headers
-        "402":
-          description: Payment required. Occurs when you run out of API requests.
-            Upgrade <a href="https://dashboard.theblockchainapi.com/billing" target="_blank">here</a>.
-      security:
-      - APIKeyID: []
-        APISecretKey: []
-      summary: |
-        Delete an endpoint
-      tags:
-      - Endpoint
-  /endpoint/list:
+      - CC Payment
+  /checkout/v1/project/{project_id}/payments:
     get:
       description: |-
-        A complete example and walkthrough of the program can be found <a href="https://github.com/BL0CK-X/api-developer-program" target="_blank">here</a>.
-
-        List all endpoints that you have added under your account.
+        List all payments associated with a project.
 
         `Cost: 0 Credit` (Free) (<a href="#section/Pricing">See Pricing</a>)
-      operationId: listEndpoints
+      operationId: listCCProjectPayments
+      parameters:
+      - description: The ID of the project. Created and returned when a project is
+          created.
+        example: project_WDQskRIfHQxj53N5mk5K
+        explode: false
+        in: path
+        name: project_id
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: |
+          Filter payments by a user's wallet identifier (i.e., Solana public key)
+        explode: true
+        in: query
+        name: blockchain_identifier
+        required: false
+        style: form
       responses:
         "200":
           content:
             application/json:
               schema:
                 items:
-                  $ref: '#/components/schemas/Endpoint'
+                  $ref: '#/components/schemas/CCPayment'
                 type: array
-          description: |
-            Successful Response.
+          description: Successful Response
         "400":
           description: Bad request (check response message)
         "401":
           description: Invalid API key pair in headers
-        "402":
-          description: Payment required. Occurs when you run out of API requests.
-            Upgrade <a href="https://dashboard.theblockchainapi.com/billing" target="_blank">here</a>.
+        "429":
+          description: Rate limited
       security:
       - APIKeyID: []
         APISecretKey: []
       summary: |
-        List all endpoints
+        List a project's payments
       tags:
-      - Endpoint
+      - CC Payment
+  /checkout/v1/payments:
+    get:
+      description: |-
+        List all payments associated with your account (across all projects).
+
+        `Cost: 0 Credit` (Free) (<a href="#section/Pricing">See Pricing</a>)
+      operationId: listAllCCPayments
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/CCPayment'
+                type: array
+          description: Successful Response
+        "400":
+          description: Bad request (check response message)
+        "401":
+          description: Invalid API key pair in headers
+        "429":
+          description: Rate limited
+      security:
+      - APIKeyID: []
+        APISecretKey: []
+      summary: "List all payments \n"
+      tags:
+      - CC Payment
+  /webhook/v1/project/{project_id}/webhook/{webhook_identifier}:
+    post:
+      description: |-
+        Retrieve the details of a webhook sent to you.
+
+        `Cost: 0 Credit` (Free) (<a href="#section/Pricing">See Pricing</a>)
+      operationId: getCCWebhook
+      parameters:
+      - description: The ID of the project. Created and returned when a project is
+          created.
+        example: project_WDQskRIfHQxj53N5mk5K
+        explode: false
+        in: path
+        name: project_id
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: The ID of the webhook. Created and returned when a webhook is
+          sent.
+        example: webhook/payment.received/payment_EyfDL6CsvFinpUnXgBXaUuqq3hCXa0
+        explode: false
+        in: path
+        name: webhook_identifier
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CCWebhook'
+          description: Successful Response
+        "400":
+          description: Bad request (check response message)
+        "401":
+          description: Invalid API key pair in headers
+        "429":
+          description: Rate limited
+      security:
+      - APIKeyID: []
+        APISecretKey: []
+      summary: |
+        Get a webhook
+      tags:
+      - CC Webhook
+  /webhook/v1/project/{project_id}/webhooks:
+    post:
+      description: |-
+        List all webhooks sent to you and their respective responses from your server.
+
+        `Cost: 0 Credit` (Free) (<a href="#section/Pricing">See Pricing</a>)
+      operationId: listCCProjectWebhooks
+      parameters:
+      - description: The ID of the project. Created and returned when a project is
+          created.
+        example: project_WDQskRIfHQxj53N5mk5K
+        explode: false
+        in: path
+        name: project_id
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/CCWebhook'
+                type: array
+          description: Successful Response
+        "400":
+          description: Bad request (check response message)
+        "401":
+          description: Invalid API key pair in headers
+        "429":
+          description: Rate limited
+      security:
+      - APIKeyID: []
+        APISecretKey: []
+      summary: |
+        List project's webhooks
+      tags:
+      - CC Webhook
+  /webhook/v1/project/{project_id}/webhook/{webhook_identifier}/validate:
+    post:
+      description: |-
+        Validate whether a webhook you received was actually sent from us.
+
+        `Cost: 0 Credit` (Free) (<a href="#section/Pricing">See Pricing</a>)
+      operationId: validateCCWebhook
+      parameters:
+      - description: The ID of the project. Created and returned when a project is
+          created.
+        example: project_WDQskRIfHQxj53N5mk5K
+        explode: false
+        in: path
+        name: project_id
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: The ID of the webhook. Created and returned when a webhook is
+          sent.
+        example: webhook/payment.received/payment_EyfDL6CsvFinpUnXgBXaUuqq3hCXa0
+        explode: false
+        in: path
+        name: webhook_identifier
+        required: true
+        schema:
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CCWebhookValidateRequest'
+      responses:
+        "200":
+          description: Valid Webhook
+        "400":
+          description: Bad request / invalid webhook (check response message)
+        "401":
+          description: Invalid API key pair in headers
+        "429":
+          description: Rate limited
+      security:
+      - APIKeyID: []
+        APISecretKey: []
+      summary: |
+        Validate a webhook
+      tags:
+      - CC Webhook
 components:
-  requestBodies:
-    inline_object:
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/inline_object'
   schemas:
     GenerateSeedPhraseRequest:
       example:
@@ -4389,6 +3899,11 @@ components:
             foam gossip window once
         token_address: CK1LHEANTu7RFqN3XMzo2AnZhyus2W1vue1njrxLEM1d
       properties:
+        wait_for_confirmation:
+          default: true
+          description: |
+            Whether to wait for the transaction to be confirmed on the blockchain or simply be processed.  Processed means that our node has picked up the transaction request, but not that it was confirmed by the Solana cluster.  Confirmed means that the cluster voted on your transaction and approved it. To be completely sure that the transaction succeeded, you can either set `wait_for_confirmation=True` (call takes 20 seconds with True; about 4 seconds for processed) or you can [get the transaction metadata](/#tag/Solana-Transaction/operation/solanaGetTransaction) using the signature in the response returned. Once it returns the metadata, then the transaction should have succeeded.
+          type: boolean
         recipient_address:
           description: The public key address of the recipient to whom you want to
             send a token or NFT
@@ -4435,10 +3950,17 @@ components:
     TransferResponse:
       example:
         transaction_signature: 38jivwh89t38hkN4dS2M585NZFRHbsGfmnuFb2MVDwrfTXdvYBamQPRo7QQNGdx8mfYahfkUV6s822nH3K7ej5nj
+        confirmed: true
       properties:
         transaction_signature:
           description: The signature of the transaction
           type: string
+        confirmed:
+          description: Whether or not the transaction was confirmed or simply submitted
+            for processing. The status depends on your input for `wait_for_confirmation`.
+            This only is returned when you are submitting a transaction, not when
+            retrieving signatures for a public key, for example.
+          type: boolean
       type: object
     TransferResponseCompiled:
       example:
@@ -4801,6 +4323,7 @@ components:
       type: array
     NFT:
       example:
+        confirmed: true
         data:
           creators:
           - HuAiZg55P557gdjr5jkq79YdMe9sbdHuPj5UN21XuSyK
@@ -4827,6 +4350,12 @@ components:
           key: "11111111111111111111111111111111"
         uses: 0
       properties:
+        confirmed:
+          description: Whether or not the NFT mint was confirmed or simply submitted
+            for processing. The status depends on your input for `wait_for_confirmation`.
+            This only is returned when you are minting an NFT, not when searching
+            or retrieving the metadata.
+          type: boolean
         data:
           $ref: '#/components/schemas/NFT_data'
         is_mutable:
@@ -4920,6 +4449,7 @@ components:
       type: object
     NFTMintRequest:
       example:
+        wait_for_confirmation: true
         wallet:
           secret_recovery_phrase: fire owner display success half rescue pledge oval
             foam gossip window once
@@ -4947,14 +4477,20 @@ components:
         - 60
         network: devnet
       properties:
+        wait_for_confirmation:
+          default: true
+          description: "Whether to wait for the NFT mint to be confirmed on the blockchain\
+            \ or simply be processed.  Processed means that our node has picked up\
+            \ the transaction request, but not that it was confirmed by the Solana\
+            \ cluster. \n Confirmed means that the cluster voted on your transaction\
+            \ and approved it.\nTo be completely sure that the NFT was minted, you\
+            \ can either set `wait_for_confirmation=True` (call takes 20 seconds with\
+            \ True; about 4 seconds for processed) or you can [get the metadata](/#tag/Solana-NFT/operation/solanaGetNFT)\
+            \ from the mint returned. Once it returns the NFT metadata, then the NFT\
+            \ should have been successfully minted.\n"
+          type: boolean
         wallet:
           $ref: '#/components/schemas/Wallet'
-        return_compiled_transaction:
-          default: false
-          description: |
-            If `true`, the transaction to mint the NFT will not be submitted or signed. It will be returned to you in a raw form that you can then sign with a wallet (e.g., Phantom) or code. No `wallet` authentication information is required (thus, you do you have to supply a seed phrase or private key). See a Python example [here](https://github.com/BL0CK-X/blockchain-api/blob/main/third-party-api-examples/me-buy-sell.py).
-            If `false` (the default option), then `wallet` is required. We sign and submit the transaction for you, which uses your wallet to mint the NFT. No further action is required on your part, and the NFT is minted. Read more on security [here](#section/Security).
-          type: boolean
         name:
           default: ""
           description: The name of the token. Limited to 32 characters. Stored on
@@ -5241,6 +4777,37 @@ components:
       required:
       - nft_owner
       type: object
+    NFTOwnerAdvancedResponse:
+      example:
+        contract:
+          contract_blockchain_identifier: M2mx93ekt1fmXSVkTrUL9xVFHkmME8HTUi5Cyc5aF7K
+          contract_id: magic-eden-v2
+          contract_name: Magic Eden v2
+          contract_type: marketplace
+        owner: 25UJMR3FiMM6noQtPEaCJ6eDU2YQ7myDhikVQXmMuSRW
+        price: 50000000
+        state: listing
+      properties:
+        contract:
+          $ref: '#/components/schemas/NFTOwnerAdvancedResponse_contract'
+        owner:
+          description: |
+            The public key of the wallet that has true ownership over the provided NFT. If listed, it is the lister. If placed on a loan, it is the loanee. If staked, it is the staker. If burned, it is the burner. Etc. Returns `null` in the edge case that we were unable to find the true owner. If this happens, please report it to us and we will try to adapt for this edge case.
+          type: string
+        price:
+          description: The price of the NFT, if listed or loaned. If held, staked,
+            or burned, this is null.
+          type: number
+        state:
+          description: The state of the NFT
+          enum:
+          - loaning
+          - listing
+          - staking
+          - holding
+          - burned
+          type: string
+      type: object
     NFTMintFee:
       example:
         description: "We calculated the fee as follows: 10000000 + 1461600 + 534600\
@@ -5296,158 +4863,6 @@ components:
           - v2
           - magic-eden-v1
           type: string
-      type: object
-    GetNFTListingResponse:
-      example:
-        exchange: solsea
-        exchange_readable: SolSea
-        listing_transaction_signature: 4qXMwWbrftjt33Rz7kqnUjGc76rokHdHYxFV89UwQLVYV7RvYzEraAo1Ly4Ra4QHnXqfPCsToKQzC2tGmDYrUYqY
-        mint_address: 7GA16mQup7ESJbaD6n49VCwVG9kRkyQDzWKhBSLjbYqr
-        price: 1000000000
-        seller: 2FuQEmss657G89eJBe5mKX724qi1rfu6bUeUvGZQB2Jj
-      properties:
-        exchange:
-          description: |
-            The ID of the exchange where the NFT is listed
-          enum:
-          - solsea
-          type: string
-        exchange_readable:
-          description: |
-            A readable version of the exchange ID
-          type: string
-        listing_transaction_signature:
-          description: |
-            The signature of the listing transaction
-          type: string
-        mint_address:
-          description: |
-            The mint address of the NFT
-          type: string
-        price:
-          description: The price of the NFT in Lamports. Represented as an integer.
-          type: number
-        seller:
-          description: The public key of the seller
-          type: string
-      type: object
-    BuyRequest:
-      example:
-        skip_checks: false
-        seller_public_key: "null"
-        nft_price: 10000000
-      properties:
-        wallet:
-          $ref: '#/components/schemas/Wallet'
-        skip_checks:
-          default: false
-          description: |
-            Whether or not to skip the provided checks (e.g., Is this NFT not listed? Is this NFT listed for a different price than you set?) and proceed with the transaction.
-          type: boolean
-        seller_public_key:
-          default: "null"
-          description: |
-            The public key of the seller. Only required if providing `skip_checks`. Otherwise, don't provide it.
-          type: string
-        nft_price:
-          description: |
-            The number of lamports you are expecting to purchase the NFT for. We check the price of the NFT before  purchasing it to ensure that it matches your expectation.
-            There are 1e9 (1 billion) Lamports in a SOL.
-          example: 10000000
-          type: number
-      required:
-      - nft_price
-      - wallet
-    BuyResponse:
-      example:
-        transaction_signature: 4r5LZb3u1gnwpw7RrposJL3iic5emt2rx9468xNvAeJKeQC2HAuCGvSwaSbVgWGmoa9BS2KJnQRMHZrfuTLrY8k9
-      properties:
-        transaction_signature:
-          description: |
-            The signature of the `buy` transaction
-          type: string
-      type: object
-    ListRequest:
-      example:
-        nft_price: 10000000
-      properties:
-        wallet:
-          $ref: '#/components/schemas/Wallet'
-        nft_price:
-          description: " The number of lamports you are expecting to sell the NFT\
-            \ for. \nThere are 1e9 (1 billion) Lamports in a SOL. \n\n Min price:\
-            \ 1\n\n Max price: 18446744073709551615 "
-          example: 10000000
-          type: number
-      required:
-      - nft_price
-      - wallet
-    ListResponse:
-      example:
-        transaction_signature: 4qXMwWbrftjt33Rz7kqnUjGc76rokHdHYxFV89UwQLVYV7RvYzEraAo1Ly4Ra4QHnXqfPCsToKQzC2tGmDYrUYqY
-      properties:
-        transaction_signature:
-          description: |
-            The signature of the `list` transaction
-          type: string
-      type: object
-    DelistRequest:
-      example: {}
-      properties:
-        wallet:
-          $ref: '#/components/schemas/Wallet'
-      required:
-      - wallet
-    DelistResponse:
-      example:
-        transaction_signature: 5Vv8sYgdYS9pDh4AgzspthR1mf1AfZkh4urm9emKywTiHS3N4Q3TikKkh3x9aAGJAGnxrHjx9TK1zaaBmA9NZxMr
-      properties:
-        transaction_signature:
-          description: |
-            The signature of the `delist` transaction
-          type: string
-      type: object
-    CreateTestCandyMachineRequest:
-      example:
-        wallet:
-          secret_recovery_phrase: fire owner display success half rescue pledge oval
-            foam gossip window once
-          derivation_path: m/44/501/0/0
-          passphrase: ""
-        network: devnet
-      properties:
-        wallet:
-          $ref: '#/components/schemas/Wallet'
-        network:
-          default: devnet
-          enum:
-          - devnet
-          - mainnet-beta
-          type: string
-        candy_machine_contract_version:
-          default: v2
-          description: |
-            The contract you want to use to create the candy machine. Note: Metaplex disabled the creation of `v1` candy machines on their smart contract, and so we no longer support the creation of `v1` test candy machines.
-          enum:
-          - v2
-          type: string
-        include_gatekeeper:
-          default: false
-          description: Whether or not to include a gatekeeper for testing purposes.
-            Only applies to v2 candy machines.
-          type: boolean
-      required:
-      - wallet
-      type: object
-    CreateTestCandyMachineResponse:
-      example:
-        candy_machine_id: G9CFGuYBeyyrpKBeRikFrZF5SiTKEU6PifA3Yh4a2huq
-      properties:
-        candy_machine_id:
-          description: The ID of the candy machine created
-          type: string
-      required:
-      - candy_machine_id
       type: object
     CandyMachineSearchRequest:
       example:
@@ -5700,382 +5115,262 @@ components:
       properties:
         error:
           type: string
-    MintNFTRequest:
-      example:
-        wallet:
-          secret_recovery_phrase: fire owner display success half rescue pledge oval
-            foam gossip window once
-          derivation_path: m/44/501/0/0
-          passphrase: ""
-        network: devnet
-        config_address: 9zK91gUYTcdnqDa9iEnjz2ZNEPbQkCgBrx2JM9tfNMtt
-        candy_machine_contract_version: v2
-      properties:
-        wallet:
-          $ref: '#/components/schemas/Wallet'
-        config_address:
-          description: |
-            The config address of the candy machine. You can retrieve this if you have the candy machine ID using <a href="#operation/solanaGetCandyMachineDetails">this endpoint</a> and retrieving the `config_address` from the response.  A candy machine ID is the same thing as a configuration address for v2 candy machines.
-          type: string
-        network:
-          default: devnet
-          enum:
-          - devnet
-          - mainnet-beta
-          type: string
-        candy_machine_contract_version:
-          default: v1
-          description: |
-            The candy machine contract of the candy machine from which you're minting.
-            If you are minting from a `v1` candy machine ID, set this to `v1`. If you are minting from a `v2` candy machine ID, set this to `v2`.
-            If you don't know which the version of your candy machine, check out <a href="#operation/solanaGetAccountIsCandyMachine">this endpoint</a>.
-          enum:
-          - v1
-          - v2
-          type: string
-      required:
-      - config_address
-      - wallet
-      type: object
-    MintNFTResponse:
-      example:
-        transaction_signature: 5ag74sGQJTpPFtsSPt4ZCBXCx6c1d3Y46wgadLHgrmXdsduyAE7KzZ5HePbqGi1gD84KHXwdcCge6GTH5TmA2opr
-      properties:
-        transaction_signature:
-          description: "The signature of the transaction. Just because this is returned\
-            \ does not mean it was successful. \nTo determine if the mint was successful,\
-            \ use this Gist: https://gist.github.com/joshwolff1/298e8251e43ff9b4815028683b1ca17d\n"
-          type: string
-      type: object
-    MintNFTErrorResponse:
-      example:
-        error: "Unknown error. Possible issues: \n  - No more minting available.\n\
-          \  - Your address doesn't have enough SOL for the transactions.\n  - You\
-          \ gave an invalid candy machine ID.\n"
-      properties:
-        error:
-          type: string
-    Group:
-      description: |
-        A group is a group of endpoints.
-      properties:
-        section_name:
-          description: |
-            The name of the section under which this group is listed. A section contains several groups.
-          type: string
-        group_name:
-          description: |
-            The name of the group
-          type: string
-        group_description:
-          description: |
-            The description of the group
-          type: string
-    ProjectCreateRequest:
+    CCProjectCreateRequest:
       description: |
         You can change any of these parameters after creating the project. None of these parameters are required.
       example:
-        project_name: Serum Market Insights
-        project_description: |
-          This API provides several insights into serum markets including prices, momentum, and other activity.
-        contact_email: info@blockchainapi.com
-        groups:
-        - section_header: Trading
-          group_name: Price Routing
-          group_description: |
-            This API returns the best price routes for your swap.
+        customer_id_to_collect:
+          description: You must enter the email associated with your BlockchainAPI
+            account in order to for your payment to be properly processed.
+          id_type: email
+          name: Email
+          required: true
+        description: We make coding with blockchains easy with a simple API.
+        discord_webhook: https://discord.com/api/webhooks/147825713467889122/RflXcTfqnScxmnGXvwbgBoMTw96I_41-dpc8nSsdvlMGgVAlvXNokP2-KfcXZwLwqXVw
+        logo_url: https://dashboard.blockchainapi.com/favicon.ico
+        name: The Blockchain API
+        payout_method:
+          blockchain_identifier: APipLFSda8yjUaSMk69m8yA1KT6RE5MR1Ltso4ciirzW
+        success_url: https://dashboard.blockchainapi.com/#billing
+        uid: YqCnvufBkZRzjNQj7YlZLP9ByHJ3
+        webhook: https://api.blockchainapi.com/webhook/crypto
+        website: https://blockchainapi.com/
       properties:
-        project_name:
+        name:
           description: |
-            The name of the mini-API. This will be shown at the top of the mini-API's documentation.
+            The name of the project. This is shown to your users and should identify your company or organization.
           type: string
-        project_description:
+        description:
           description: |
-            The description of the mini-API. This will be shown at the top of the mini-API's documentation, below the title.
+            The description of your project / company.
           type: string
-        contact_email:
+        webhook:
           description: |
-            The email where users of your mini-API can contact you. This will be shown at the top of the mini-API's documentation.
+            A URL that identifies where we should make an API request to notify you of a new payment (e.g., api.myproject.com/crypto_payments/webhook). Learn more [here](#tag/CC-Webhook/operation/getCCWebhook).
           type: string
-        groups:
-          description: "A list of groups. A section contains groups, and groups contain\
-            \ API endpoints. \n"
-          items:
-            $ref: '#/components/schemas/Group'
-          type: array
+        website:
+          description: |
+            The website of your project / company.
+          type: string
+        discord_webhook:
+          description: |
+            A Discord webhook. We will send a message to this channel to notify of payment. Learn more [here]().
+          type: string
+        logo_url:
+          description: |
+            A URL of your logo.
+          type: string
+        customer_id_to_collect:
+          $ref: '#/components/schemas/CCProjectCreateRequest_customer_id_to_collect'
+        success_url:
+          description: |
+            Where to redirect customers after payment. If not supplied, customers will be redirected to checkout.blockchainapi.com/me to view their subscriptions.
+          type: string
+        payout_method:
+          $ref: '#/components/schemas/CCProjectCreateRequest_payout_method'
+      required:
+      - name
       type: object
-    ParameterSpecification:
+    CCProject:
+      description: |
+        You can change any of these parameters after creating the project. None of these parameters are required.
       example:
-        type: string
-        name: mint_address
-        description: The mint address of the NFT
-        required: true
+        customer_id_to_collect:
+          description: You must enter the email associated with your BlockchainAPI
+            account in order to for your payment to be properly processed.
+          id_type: email
+          name: Email
+          required: true
+        description: We make coding with blockchains easy with a simple API.
+        discord_webhook: https://discord.com/api/webhooks/147825713467889122/RflXcTfqnScxmnGXvwbgBoMTw96I_41-dpc8nSsdvlMGgVAlvXNokP2-KfcXZwLwqXVw
+        logo_url: https://dashboard.blockchainapi.com/favicon.ico
+        name: The Blockchain API
+        payout_method:
+          blockchain_identifier: APipLFSda8yjUaSMk69m8yA1KT6RE5MR1Ltso4ciirzW
+        project_id: project_3ePEqqiRJXr8RZ2zIjwi
+        success_url: https://dashboard.blockchainapi.com/#billing
+        uid: YqCnvufBkZRzjNQj7YlZLP9ByHJ3
+        webhook: https://api.blockchainapi.com/webhook/crypto
+        website: https://blockchainapi.com/
       properties:
-        type:
-          description: The type of the parameter
-          enum:
-          - string
-          - number
-          - boolean
-          - array
+        project_id:
+          description: |
+            The ID of the project. This is auto-generated upon project creation and cannot currently be changed.
           type: string
         name:
-          description: The name of the parameter
-          type: string
-        description:
-          description: The name of the parameter
-          type: string
-        required:
-          description: Whether or not this parameter is required
-          type: boolean
-    Endpoint:
-      example:
-        readable_name: Get an NFT's rarity
-        version: 1.0.3
-        operation_id: getNFTRarity
-        path: nft/rarity
-        project_id: L3cPm0cJlf5MeDXzGLQJJ4vlzndJCC
-        summary: Get rarity
-        description: This endpoint allows you to get the rarity of an NFT. It will
-          automatically determine the collection and calculate the rarity based off
-          of its attributes.
-        credits: 5
-        input_specification:
-        - type: string
-          name: mint_address
-          description: The mint address of the NFT
-          required: true
-        input_examples:
-        - mint_address: D1NLfN6kfks5KRHAE66ti2qgmAtq9wqxwWdWdpbwm6p3
-        output_specification:
-        - type: string
-          name: rarity
-          description: The rarity of the NFT given the collection
-          required: true
-        output_examples:
-        - rarity: 0.01
-        group_name: NFT Rarity
-      properties:
-        project_id:
           description: |
-            The ID of the project. This is auto-generated upon project creation and cannot currently be changed.
-          type: string
-        version:
-          description: |
-            The project version under which the endpoint exists
-          type: string
-        path:
-          description: |
-            The path of the endpoint
-          type: string
-        operation_id:
-          description: |
-            The operation ID of the endpoint.
-          type: string
-        readable_name:
-          description: |
-            The name of the endpoint formatted in a readable way (e.g., Get Endpoint Metadata).
-          type: string
-        summary:
-          description: |
-            The summary of the endpoint to be displayed in the sidebar on the left of the mini-API's documentation
+            The name of the project. This is shown to your users and should identify your company or organization.
           type: string
         description:
           description: |
-            A description of what the endpoint does. This will be shown in the mini-API documentation.
+            The description of your project / company.
           type: string
-        credits:
+        webhook:
           description: |
-            The price of the endpoint. Valid values are integers from 1 to 100.
-          type: number
-        group_name:
-          description: |
-            The name of the group of endpoints that the endpoint comes from
+            A URL that identifies where we should make an API request to notify you of a new payment (e.g., api.myproject.com/crypto_payments/webhook). Learn more [here](#tag/CC-Webhook/operation/getCCWebhook).
           type: string
-        input_specification:
-          description: A list of dictionaries. Each dictionary describes one parameter
-            for the input, including the name, type, required boolean, and description
-            values of that parameter.
-          items:
-            $ref: '#/components/schemas/ParameterSpecification'
-          type: array
-        input_examples:
+        website:
           description: |
-            An example of the JSON input that a user might send. Limited to one example currently.
-          type: object
-        output_specification:
-          description: A list of dictionaries. Each dictionary describes one parameter
-            for the input, including the name, type, required boolean, and description
-            values of that parameter.
-          items:
-            $ref: '#/components/schemas/ParameterSpecification'
-          type: array
-        output_examples:
+            The website of your project / company.
+          type: string
+        discord_webhook:
           description: |
-            An example of the JSON output that a user might send. Limited to one example currently.
-          type: object
+            A Discord webhook. We will send a message to this channel to notify of payment. Learn more [here]().
+          type: string
+        logo_url:
+          description: |
+            A URL of your logo.
+          type: string
+        customer_id_to_collect:
+          $ref: '#/components/schemas/CCProjectCreateRequest_customer_id_to_collect'
+        success_url:
+          description: |
+            Where to redirect customers after payment. If not supplied, customers will be redirected to checkout.blockchainapi.com/me to view their subscriptions.
+          type: string
+        payout_method:
+          $ref: '#/components/schemas/CCProjectCreateRequest_payout_method'
       required:
-      - credits
-      - input_examples
-      - input_specification
-      - operation_id
-      - output_examples
-      - output_specification
-      - path
+      - name
       - project_id
-      - readable_name
-      - version
-    Project:
+      type: object
+    CCPayment:
       example:
-        project_id: L3cPm0cJlf5MeDXzGLQJJ4vlzndJCC
-        project_name: Serum Market Insights
-        project_description: |
-          This API provides several insights into serum markets including prices, momentum, and other activity.
-        contact_email: info@blockchainapi.com
-        groups:
-        - section_header: Trading
-          group_name: Price Routing
-          group_description: |
-            This API returns the best price routes for your swap.
-        versions:
-        - 0.0.1
-        endpoints: []
-        current_documentation_version: 0.0.1
+        project_id: project_xpZ3NwHmqUvwmTzjpqgO
+        product_id: product_L4zD4ZXlNM3Z2Qt
+        plan_id: plan_htuCevhEjKNip3u
+        payment_id: payment_97jA1szpVjrSI5EvOb5zxNQFq5CfrC
+        blockchain_identifier: 31LKs29pjT5oj6fxjC3F76dHWf9489asCthmgj8wu7pj
+        blockchain_payment_details:
+          chain: solana
+          fee_amount: "900"
+          payout_amount: "89100"
+          token_blockchain_identifier: EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v
+          total_paid: "90000"
+          transaction_signature: 2DNiQrMh4vRj39PWUdB8aXtybkKoSaCzzfwJSo4wmxoFNQ3CrvGJp9v58ScrG5hyth7LqNssScZX3PMFSy9QA5cu
+        customer_id: customeremail@gmail.com
+        payment_validation_code: jtTp8vX79l0MWK2zp9JuHDEn4tUCwR
+        period_end: 1653538683
+        period_start: 1650946683
+        transaction_blockchain_identifier: 2DNiQrMh4vRj39PWUdB8aXtybkKoSaCzzfwJSo4wmxoFNQ3CrvGJp9v58ScrG5hyth7LqNssScZX3PMFSy9QA5cu
       properties:
         project_id:
           description: |
-            The ID of the project. This is auto-generated upon project creation and cannot currently be changed.
+            The ID of the project
           type: string
-        project_name:
+        product_id:
           description: |
-            The name of the mini-API. This will be shown at the top of the mini-API's documentation.
+            The ID of the associated product
           type: string
-        project_description:
+        plan_id:
           description: |
-            The description of the mini-API. This will be shown at the top of the mini-API's documentation, below the title.
+            The ID of the respective plan
           type: string
-        contact_email:
+        payment_id:
           description: |
-            The email where users of your mini-API can contact you. This will be shown at the top of the mini-API's documentation.
+            The unique ID of the payment
           type: string
-        current_documentation_version:
+        blockchain_identifier:
           description: |
-            The version of the API that the documentation is updated for. You can set the documentation version to any valid version. To see how to format the version string, see the description for `versions`.
+            The unique identifier of the wallet from which the payment was made.
           type: string
-        versions:
-          description: |-
-            The live versions of the project. An array of strings. We use Python's `version` package to see if it's a valid version and to compare versions (to see which is higher).
-
-            Read more about this Python package <a href="https://packaging.pypa.io/en/latest/version.html#packaging.version.parse" target="_blank">here</a>.
-          items:
-            description: Version of the project.
-            type: string
-          type: array
-        groups:
-          description: "A list of groups. A section contains groups, and groups contain\
-            \ API endpoints. \n"
-          items:
-            $ref: '#/components/schemas/Group'
-          type: array
-        endpoints:
-          description: "A list of groups. A section contains groups, and groups contain\
-            \ API endpoints. \n"
-          items:
-            $ref: '#/components/schemas/Endpoint'
-          type: array
+        blockchain_payment_details:
+          $ref: '#/components/schemas/CCPayment_blockchain_payment_details'
+        customer_id:
+          description: |
+            The ID of the customer
+          type: string
+        payment_validation_code:
+          description: |
+            The validation code shown to the customer. This is only visible to the customer who paid. They can use this code to redeem their subscription to their product.
+          type: string
+        period_end:
+          description: |
+            A UNIX time stamp, in seconds, that identifies the end of the period of the subscription
+          type: number
+        period_start:
+          description: |
+            A UNIX time stamp, in seconds, that identifies the start of the period of the subscription
+          type: number
+        transaction_blockchain_identifier:
+          description: |
+            The string that uniquely identifies the blockchain transaction
+          type: string
       type: object
-    ProjectDeploymentURL:
+    CCWebhook:
       example:
-        url: https://blockchain-api-third-party-project-binaries-unencrypted.s3.amazonaws.com/
-        deployment_version: "1"
-        fields:
-          AWSAccessKeyId: TOPATIPH2VUYQ6OLXK4M
-          key: AgoxbzME8A1TRgrbnglM
-          policy: eyJleHBpcmF0aW9uIjogIjIwMjItMDMtMTFUMjA6MjQ6NTlaIiwgImNvbmRpdGlvbnMiOiBbWyJjb250ZW50LWxlbmd0aC1yYW5nZSIsIDEsIDUyNDI4ODAwMF0sIFsiZXEiLCAiJHgtYW16LW1ldGEtdmVyc2lvbiIsICIxIl0sIFsiZXEiLCAiJHgtYW16LW1ldGEtcGxhdGZvcm0iLCAiV2luZG93cyJdLCBbImVxIiwgIiR4LWFtei1tZXRhLWlkIiwgIkFnb3hiek1FOEExVFJncmJuZ2xNIl0sIHsiYnVja2V0IjogImJsb2NrY2hhaW4tYXBpLXRoaXJkLXBhcnR5LXByb2plY3QtYmluYXJpZXMtdW5lbmNyeXB0ZWQifSwgeyJrZXkiOiAiQWdveGJ6TUU4QTFUUmdyYm5nbE0ifV19
-          signature: iJgfQd9zveVYWEE94GRJNe/apk8=
-          x-amz-meta-id: AgoxbzME8A1TRgrbnglM
-          x-amz-meta-platform: Windows
-          x-amz-meta-version: "1"
+        time_sent: 1651018365
+        data:
+          project_id: project_xpZ3NwHmqUvwmTzjpqgO
+          product_id: product_L4zD4ZXlNM3Z2Qt
+          plan_id: plan_htuCevhEjKNip3u
+          payment_id: payment_97jA1szpVjrSI5EvOb5zxNQFq5CfrC
+          blockchain_identifier: 31LKs29pjT5oj6fxjC3F76dHWf9489asCthmgj8wu7pj
+          blockchain_payment_details:
+            chain: solana
+            fee_amount: "900"
+            payout_amount: "89100"
+            token_blockchain_identifier: EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v
+            total_paid: "90000"
+            transaction_signature: 2DNiQrMh4vRj39PWUdB8aXtybkKoSaCzzfwJSo4wmxoFNQ3CrvGJp9v58ScrG5hyth7LqNssScZX3PMFSy9QA5cu
+          customer_id: customeremail@gmail.com
+          payment_validation_code: jtTp8vX79l0MWK2zp9JuHDEn4tUCwR
+          period_end: 1653538683
+          period_start: 1650946683
+          transaction_blockchain_identifier: 2DNiQrMh4vRj39PWUdB8aXtybkKoSaCzzfwJSo4wmxoFNQ3CrvGJp9v58ScrG5hyth7LqNssScZX3PMFSy9QA5cu
+        webhook_id: webhook/payment.received/payment_2nFvUIGAsczBHSgiIz5JMenEiiJZet
+        signature:
+        - 68
+        - 112
       properties:
-        url:
+        webhook_id:
           description: |
-            The URL of the bucket where you will upload your binary
+            The unique identifier of the webhook
+          example: webhook/payment.received/payment_2nFvUIGAsczBHSgiIz5JMenEiiJZet
           type: string
-        deployment_version:
+        signature:
           description: |
-            An internal version tracking the version of the binary uploaded
-          type: string
-        fields:
-          description: |
-            Information necessary to sign the upload URL
+            A signature from the Blockchain API that verifies the webhook is from us. An array of integers.
+          example:
+          - 68
+          - 112
           type: object
+        time_sent:
+          description: |
+            The time we sent the webhook
+          example: 1651018365
+          type: number
+        data:
+          $ref: '#/components/schemas/CCPayment'
       type: object
-    StatItem:
+    CCWebhookValidateRequest:
       example:
-        time_stamp: 1642491000
-        uid: aPzh80wU3oaiTh2esdIk7NqdIYs1
-        endpoint_id: POST:/L3cPm0cJlf5MeDXzGLQJJ4vlzndJCC/v1.0.3/nft/rarity
-        api_calls: 11
-        version: 1.0.3
-        path: nft/rarity
+        time_sent: 1651018365
+        webhook_id: webhook/payment.received/payment_2nFvUIGAsczBHSgiIz5JMenEiiJZet
+        webhook_signature:
+        - 68
+        - 112
       properties:
-        uid:
+        webhook_id:
           description: |
-            The anonymous ID of the user who called your endpoint
+            The unique identifier of the webhook.
+          example: webhook/payment.received/payment_2nFvUIGAsczBHSgiIz5JMenEiiJZet
           type: string
-        time_stamp:
+        webhook_signature:
           description: |
-            The time stamp of the ten-minute interval
+            The signature we inluded in the webhook. The signature is from the Blockchain API and it ensures that the webhook is from us and not a malicioius actor.
+          example:
+          - 68
+          - 112
+          type: object
+        time_sent:
+          description: |
+            The time the webhook was sent.
+          example: 1651018365
           type: number
-        endpoint_id:
-          description: |
-            The full path of the endpoint (e.g., `project_id`/`version`/`path`)
-          type: string
-        api_calls:
-          description: |
-            The number of API calls by this user to this endpoint for the ten-minute interval
-          type: number
-        version:
-          description: The version of the endpoint
-          type: string
-        path:
-          description: The path of the endpoint (not inclusive of the `version` or
-            `project_id`)
-          type: string
-    EndpointReference:
-      example:
-        version: 1.0.3
-        project_id: L3cPm0cJlf5MeDXzGLQJJ4vlzndJCC
-        path: nft/rarity
-      properties:
-        project_id:
-          description: |
-            The ID of the project. This is auto-generated upon project creation and cannot currently be changed.
-          type: string
-        version:
-          description: |
-            The project version under which the endpoint exists
-          type: string
-        path:
-          description: |
-            The path of the endpoint
-          type: string
       required:
-      - path
-      - project_id
-      - version
-    inline_object:
-      example:
-        platform: Windows
-      properties:
-        platform:
-          description: The platform for which the binary was compiled. Note that Darwin
-            = Mac.
-          enum:
-          - Darwin
-          - Linux
-          - Windows
-          type: string
+      - time_sent
+      - webhook_id
+      - webhook_signature
       type: object
     Account_context:
       properties:
@@ -6159,6 +5454,30 @@ components:
             Otherwise it will return the `collection_id`, which is a public key representing the verified Metaplex collection. See more [here](https://collections.metaplex.com).
           type: string
       type: object
+    NFTOwnerAdvancedResponse_contract:
+      description: |
+        The contract the NFT interacted with most recently. If there is none, this is null.
+      properties:
+        contract_type:
+          description: The type of the contract that it last interacted with
+          enum:
+          - marketplace
+          - otc
+          - loan
+          - staking
+          - burned
+          type: string
+        contract_id:
+          description: The string identifier (not the public key) that we denote the
+            contract with.
+          type: string
+        contract_blockchain_identifier:
+          description: The public key of the contract
+          type: string
+        contract_name:
+          description: The readable name of the contract (e.g., Magic Eden)
+          type: string
+      type: object
     GetAllNFTsResponse_minted_nfts:
       properties:
         nft_metadata:
@@ -6184,6 +5503,78 @@ components:
         share:
           description: The share of the royalty that each creator receives
           type: number
+      type: object
+    CCProjectCreateRequest_customer_id_to_collect:
+      description: |
+        The customer ID to collect during checkout. This could be a Twitter handle, a Telegram handle -- anything you use to identify your customers. We will collect it before they pay and link the payment to this ID.
+        If you do not provide this, we will only be able to link the payment through either the customer's payment validation code, or their wallet's public key. If the users are signing in with their wallet in your application, then you can simply check whether they have paid through that.
+      properties:
+        id_type:
+          description: "What type of identifier you are collecting, either an \"email\"\
+            \ or \"misc\"ellanous. Miscellanous simply means you are collecting something\
+            \ other than an email. \n"
+          enum:
+          - misc
+          - email
+          type: string
+        name:
+          description: |
+            The name of the customer ID input presented to the user
+          type: string
+        description:
+          default: ""
+          description: |
+            The description / stated purpose of the customer ID input presented to the user
+          type: string
+        required:
+          default: false
+          description: |
+            Whether to require the customer ID
+          type: boolean
+      required:
+      - id_type
+      - name
+      type: object
+    CCProjectCreateRequest_payout_method:
+      description: |
+        The method by which we pay out earnings to you. Currently, we only support paying out directly to your Solana wallet. In the future, we will support other wallets and support bank payouts.
+      properties:
+        blockchain_identifier:
+          description: "The identifier of the wallet that will receive the payments.\
+            \ On Solana, this is your wallet's public key. \n"
+          type: string
+      required:
+      - blockchain_identifier
+      type: object
+    CCPayment_blockchain_payment_details:
+      description: "The information necessary to verify the payment. \n"
+      properties:
+        chain:
+          description: |
+            The chain on which the payment was made.
+          enum:
+          - solana
+          type: string
+        fee_amount:
+          description: |
+            The fee taken by the blockchain API. This is shown in integer form.
+          type: string
+        payout_amount:
+          description: |
+            The amount paid to the project's payout wallet (the recipient of the payment). This is shown in integer form.
+          type: string
+        token_blockchain_identifier:
+          description: |
+            The blockchain identifier of the token used to pay. Currently, we only support payments in USDC.
+          type: string
+        total_paid:
+          description: |
+            The total paid by the user when making the payment. This should match the amount set in the respective plan.
+          type: string
+        transaction_signature:
+          description: |
+            The transaction signature which you can use to manually or automatically verify the transaction on the blockchain.
+          type: string
       type: object
   securitySchemes:
     APIKeyID:
@@ -6219,7 +5610,3 @@ x-tagGroups:
   - CC Plan
   - CC Payment
   - CC Webhook
-- name: API Developer Program
-  tags:
-  - Project
-  - Endpoint

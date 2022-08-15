@@ -4,79 +4,11 @@ All URIs are relative to *https://api.blockchainapi.com/v1*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**SolanaCreateTestCandyMachine**](SolanaCandyMachineApi.md#SolanaCreateTestCandyMachine) | **Post** /solana/nft/candy_machine | Create a test CM
 [**SolanaGetAllNFTsFromCandyMachine**](SolanaCandyMachineApi.md#SolanaGetAllNFTsFromCandyMachine) | **Get** /solana/nft/candy_machine/{network}/{candy_machine_id}/nfts | Get CM&#39;s NFTs  
 [**SolanaGetCandyMachineMetadata**](SolanaCandyMachineApi.md#SolanaGetCandyMachineMetadata) | **Post** /solana/nft/candy_machine/metadata | Get a CM&#39;s metadata 
 [**SolanaListAllCandyMachines**](SolanaCandyMachineApi.md#SolanaListAllCandyMachines) | **Get** /solana/nft/candy_machine/list | List all CMs
-[**SolanaMintFromCandyMachine**](SolanaCandyMachineApi.md#SolanaMintFromCandyMachine) | **Post** /solana/nft/candy_machine/mint | Mint from a CM
 [**SolanaSearchCandyMachines**](SolanaCandyMachineApi.md#SolanaSearchCandyMachines) | **Post** /solana/nft/candy_machine/search | Search CMs
 
-
-
-## SolanaCreateTestCandyMachine
-
-> CreateTestCandyMachineResponse SolanaCreateTestCandyMachine(ctx).CreateTestCandyMachineRequest(createTestCandyMachineRequest).Execute()
-
-Create a test CM
-
-
-
-### Example
-
-```go
-package main
-
-import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "./openapi"
-)
-
-func main() {
-    createTestCandyMachineRequest := *openapiclient.NewCreateTestCandyMachineRequest(openapiclient.Wallet{B58PrivateKey: openapiclient.NewB58PrivateKey("B58PrivateKey_example")}) // CreateTestCandyMachineRequest |  (optional)
-
-    configuration := openapiclient.NewConfiguration()
-    apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.SolanaCandyMachineApi.SolanaCreateTestCandyMachine(context.Background()).CreateTestCandyMachineRequest(createTestCandyMachineRequest).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `SolanaCandyMachineApi.SolanaCreateTestCandyMachine``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `SolanaCreateTestCandyMachine`: CreateTestCandyMachineResponse
-    fmt.Fprintf(os.Stdout, "Response from `SolanaCandyMachineApi.SolanaCreateTestCandyMachine`: %v\n", resp)
-}
-```
-
-### Path Parameters
-
-
-
-### Other Parameters
-
-Other parameters are passed through a pointer to a apiSolanaCreateTestCandyMachineRequest struct via the builder pattern
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **createTestCandyMachineRequest** | [**CreateTestCandyMachineRequest**](CreateTestCandyMachineRequest.md) |  | 
-
-### Return type
-
-[**CreateTestCandyMachineResponse**](CreateTestCandyMachineResponse.md)
-
-### Authorization
-
-[APIKeyID](../README.md#APIKeyID), [APISecretKey](../README.md#APISecretKey)
-
-### HTTP request headers
-
-- **Content-Type**: application/json
-- **Accept**: application/json
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
-[[Back to Model list]](../README.md#documentation-for-models)
-[[Back to README]](../README.md)
 
 
 ## SolanaGetAllNFTsFromCandyMachine
@@ -272,72 +204,6 @@ Other parameters are passed through a pointer to a apiSolanaListAllCandyMachines
 ### HTTP request headers
 
 - **Content-Type**: Not defined
-- **Accept**: application/json
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
-[[Back to Model list]](../README.md#documentation-for-models)
-[[Back to README]](../README.md)
-
-
-## SolanaMintFromCandyMachine
-
-> MintNFTResponse SolanaMintFromCandyMachine(ctx).MintNFTRequest(mintNFTRequest).Execute()
-
-Mint from a CM
-
-
-
-### Example
-
-```go
-package main
-
-import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "./openapi"
-)
-
-func main() {
-    mintNFTRequest := *openapiclient.NewMintNFTRequest(openapiclient.Wallet{B58PrivateKey: openapiclient.NewB58PrivateKey("B58PrivateKey_example")}, "ConfigAddress_example") // MintNFTRequest |  (optional)
-
-    configuration := openapiclient.NewConfiguration()
-    apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.SolanaCandyMachineApi.SolanaMintFromCandyMachine(context.Background()).MintNFTRequest(mintNFTRequest).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `SolanaCandyMachineApi.SolanaMintFromCandyMachine``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `SolanaMintFromCandyMachine`: MintNFTResponse
-    fmt.Fprintf(os.Stdout, "Response from `SolanaCandyMachineApi.SolanaMintFromCandyMachine`: %v\n", resp)
-}
-```
-
-### Path Parameters
-
-
-
-### Other Parameters
-
-Other parameters are passed through a pointer to a apiSolanaMintFromCandyMachineRequest struct via the builder pattern
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **mintNFTRequest** | [**MintNFTRequest**](MintNFTRequest.md) |  | 
-
-### Return type
-
-[**MintNFTResponse**](MintNFTResponse.md)
-
-### Authorization
-
-[APIKeyID](../README.md#APIKeyID), [APISecretKey](../README.md#APISecretKey)
-
-### HTTP request headers
-
-- **Content-Type**: application/json
 - **Accept**: application/json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)

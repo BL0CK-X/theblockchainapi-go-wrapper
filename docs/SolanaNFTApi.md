@@ -8,6 +8,7 @@ Method | HTTP request | Description
 [**SolanaGetNFT**](SolanaNFTApi.md#SolanaGetNFT) | **Get** /solana/nft/{network}/{mint_address} | Get an NFT&#39;s metadata
 [**SolanaGetNFTMintFee**](SolanaNFTApi.md#SolanaGetNFTMintFee) | **Get** /solana/nft/mint/fee | Get the NFT mint fee
 [**SolanaGetNFTOwner**](SolanaNFTApi.md#SolanaGetNFTOwner) | **Get** /solana/nft/{network}/{mint_address}/owner | Get owner of an NFT
+[**SolanaGetNFTOwnerAdvanced**](SolanaNFTApi.md#SolanaGetNFTOwnerAdvanced) | **Get** /solana/nft/{network}/{mint_address}/owner_advanced | Get owner of an NFT (advanced)
 [**SolanaGetNFTsCandyMachineId**](SolanaNFTApi.md#SolanaGetNFTsCandyMachineId) | **Post** /solana/nft/candy_machine_id | Get the ID of the candy machine of an NFT 
 [**SolanaSearchNFTs**](SolanaNFTApi.md#SolanaSearchNFTs) | **Post** /solana/nft/search | Search NFTs on Solana
 
@@ -271,6 +272,79 @@ Name | Type | Description  | Notes
 ### Return type
 
 [**NFTOwnerResponse**](NFTOwnerResponse.md)
+
+### Authorization
+
+[APIKeyID](../README.md#APIKeyID), [APISecretKey](../README.md#APISecretKey)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## SolanaGetNFTOwnerAdvanced
+
+> NFTOwnerAdvancedResponse SolanaGetNFTOwnerAdvanced(ctx, network, mintAddress).Execute()
+
+Get owner of an NFT (advanced)
+
+
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+    network := "devnet" // string | The network ID
+    mintAddress := "4zH3Rwm1QXdfTSUqsYmeUBY4QqQmQEXJVbv4ErSK736Q" // string | The mint address of the NFT
+
+    configuration := openapiclient.NewConfiguration()
+    apiClient := openapiclient.NewAPIClient(configuration)
+    resp, r, err := apiClient.SolanaNFTApi.SolanaGetNFTOwnerAdvanced(context.Background(), network, mintAddress).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `SolanaNFTApi.SolanaGetNFTOwnerAdvanced``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `SolanaGetNFTOwnerAdvanced`: NFTOwnerAdvancedResponse
+    fmt.Fprintf(os.Stdout, "Response from `SolanaNFTApi.SolanaGetNFTOwnerAdvanced`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**network** | **string** | The network ID | 
+**mintAddress** | **string** | The mint address of the NFT | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiSolanaGetNFTOwnerAdvancedRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+
+### Return type
+
+[**NFTOwnerAdvancedResponse**](NFTOwnerAdvancedResponse.md)
 
 ### Authorization
 

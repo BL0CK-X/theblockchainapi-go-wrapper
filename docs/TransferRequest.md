@@ -4,6 +4,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
+**WaitForConfirmation** | Pointer to **bool** | Whether to wait for the transaction to be confirmed on the blockchain or simply be processed.  Processed means that our node has picked up the transaction request, but not that it was confirmed by the Solana cluster.  Confirmed means that the cluster voted on your transaction and approved it. To be completely sure that the transaction succeeded, you can either set &#x60;wait_for_confirmation&#x3D;True&#x60; (call takes 20 seconds with True; about 4 seconds for processed) or you can [get the transaction metadata](/#tag/Solana-Transaction/operation/solanaGetTransaction) using the signature in the response returned. Once it returns the metadata, then the transaction should have succeeded.  | [optional] [default to true]
 **RecipientAddress** | **string** | The public key address of the recipient to whom you want to send a token or NFT | 
 **Wallet** | Pointer to [**Wallet**](Wallet.md) |  | [optional] 
 **TokenAddress** | Pointer to **string** | If you&#39;re transfering an NFT, supply the &#x60;mint&#x60; (the address of the mint) for the &#x60;token_address&#x60;. If you&#39;re transfering a token, supply the token address found on the explorer (e.g., see &#x60;SRMuApVNdxXokk5GT7XD5cUUgXMBCoAz2LHeuAoKWRt&#x60; for &lt;a href&#x3D;\&quot;https://explorer.solana.com/address/SRMuApVNdxXokk5GT7XD5cUUgXMBCoAz2LHeuAoKWRt\&quot; target&#x3D;\&quot;_blank\&quot;&gt;Serum Token&lt;/a&gt;) for the &#x60;token_address&#x60;. If you&#39;re transferring SOL, do not supply a value for &#x60;token_address&#x60;.  | [optional] 
@@ -31,6 +32,31 @@ will change when the set of required properties is changed
 NewTransferRequestWithDefaults instantiates a new TransferRequest object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
+
+### GetWaitForConfirmation
+
+`func (o *TransferRequest) GetWaitForConfirmation() bool`
+
+GetWaitForConfirmation returns the WaitForConfirmation field if non-nil, zero value otherwise.
+
+### GetWaitForConfirmationOk
+
+`func (o *TransferRequest) GetWaitForConfirmationOk() (*bool, bool)`
+
+GetWaitForConfirmationOk returns a tuple with the WaitForConfirmation field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetWaitForConfirmation
+
+`func (o *TransferRequest) SetWaitForConfirmation(v bool)`
+
+SetWaitForConfirmation sets WaitForConfirmation field to given value.
+
+### HasWaitForConfirmation
+
+`func (o *TransferRequest) HasWaitForConfirmation() bool`
+
+HasWaitForConfirmation returns a boolean if a field has been set.
 
 ### GetRecipientAddress
 
